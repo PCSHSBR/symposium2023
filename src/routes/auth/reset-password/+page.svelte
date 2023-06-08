@@ -46,8 +46,12 @@
 				<span>{$errors.email ?? form?.message}</span>
 			</div>
 		{/if}
-		<button class="btn btn-primary">
-			{isLoading ? '...' : 'รีเซ็ต'} <span class="loading" />
+		<button class="btn btn-primary" disabled={isLoading}>
+			{#if isLoading}
+				<span class="loading loading-" />
+				{:else}
+				รีเซ็ตรหัสผ่าน
+			{/if}
 		</button>
 		<a class="w-full" href="">กลับหน้าหลัก</a>
 	</form>
