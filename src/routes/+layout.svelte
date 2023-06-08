@@ -2,7 +2,8 @@
 	import '../app.postcss';
 	import { invalidate } from '$app/navigation'
 	import { onMount } from 'svelte'
-  
+	import '@fontsource-variable/anuphan';
+
 	export let data
   
 	let { supabase, session } = data
