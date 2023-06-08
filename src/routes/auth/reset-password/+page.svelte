@@ -53,6 +53,6 @@
 				รีเซ็ตรหัสผ่าน
 			{/if}
 		</button>
-		<a class="w-full" href="">กลับหน้าหลัก</a>
+		<a class="w-full" href="/login">กลับหน้าหลัก</a>
 	</form>
 </div>
