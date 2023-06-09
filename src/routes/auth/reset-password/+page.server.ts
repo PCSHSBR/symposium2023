@@ -2,6 +2,8 @@ import { z } from 'zod';
 import { fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms/server';
 
+export const ssr = false;
+
 export let actions = {
   default: async ({ request,url,locals: { supabase } }) => {
     let formData = await superValidate(request,schema);
@@ -10,6 +12,7 @@ export let actions = {
       return fail(500,{ formData });
     }
     let result = await supabase.auth.resetPasswordForEmail(formData.data.email,{ redirectTo: `${url.origin}/auth/callback` });
+    console.log(result);
     if(result.error){
       console.log(result);
       return fail(500,{message: result.error.message });
@@ -19,7 +22,6 @@ export let actions = {
 }
 
 const schema = z.object({
-  name: z.string().default('Hello world!'),
   email: z.string().email({message: 'Please enter a valid email address.'}),
 });
 
