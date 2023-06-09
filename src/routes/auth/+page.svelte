@@ -18,10 +18,17 @@
 	};
 </script>
 
-<button class="btn btn-error" on:click={handleSignOut} disabled={isLogginout}>
-	{#if isLogginout}
-		<span class="loading loading-spinner" />
-	{:else}
-		ออกจากระบบ
-	{/if}</button
->
+<div class="h-screen flex justify-center items-center">
+	<div class="flex flex-wrap flex-col">
+		<p class="max-w-[400px] overflow-y-scroll">{JSON.stringify(data.session) ?? "คุณยังไม่เข้าสู่ระบบโปรดเข้าสู่ระบบ"}</p>
+		<button class="btn btn-error" on:click={handleSignOut} disabled={isLogginout}>
+			{#if isLogginout && data.session}
+				<span class="loading loading-spinner" />
+				{:else if !data.session}
+				เข้าสู่ระบบ
+			{:else}
+				ออกจากระบบ
+			{/if}</button
+		>
+	</div>
+</div>
