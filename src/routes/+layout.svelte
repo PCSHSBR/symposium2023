@@ -4,6 +4,8 @@
 	import { onMount } from 'svelte'
 	import '@fontsource-variable/anuphan';
 
+	import Navbar from '$lib/componant/Navbar.svelte';
+
 	export let data
   
 	let { supabase, session } = data
@@ -22,6 +24,4 @@
 	});
 </script>
 
-<main class="min-h-screen">
-	<slot />
-</main>
+<slot />
