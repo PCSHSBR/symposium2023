@@ -2,6 +2,8 @@ import { fail } from '@sveltejs/kit'
 import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
 
+export const ssr = false;
+
 export const actions = {
     default: async ({ request, url, locals: { supabase } }) => {
       const formData = await request.formData()

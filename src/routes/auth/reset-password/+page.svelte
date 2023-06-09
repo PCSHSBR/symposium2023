@@ -48,11 +48,11 @@
 		{/if}
 		<button class="btn btn-primary" disabled={isLoading}>
 			{#if isLoading}
-				<span class="loading loading-" />
+				<span class="loading loading-spinner" />
 				{:else}
 				รีเซ็ตรหัสผ่าน
 			{/if}
 		</button>
-		<a class="w-full" href="/login">กลับหน้าหลัก</a>
+		<a class="w-full link" href="/login">กลับหน้าหลัก</a>
 	</form>
 </div>

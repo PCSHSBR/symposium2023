@@ -5,20 +5,23 @@
 	let { supabase } = data;
 	$: ({ supabase } = data);
 
-	let email: string;
-	let password: string;
-
-	const handleSignIn = async () => {
-		await supabase.auth.signInWithPassword({
-			email,
-			password
-		});
-	};
+	let isLogginout = false;
 
 	const handleSignOut = async () => {
-		await supabase.auth.signOut();
+		isLogginout = true;
+		let result = await supabase.auth.signOut();
+		if (result.error){
+			alert(result.error.message)
+		}
+		isLogginout = false;
+		goto('/login')
 	};
 </script>
 
-<button class="btn btn-primary" on:click={handleSignIn}>Sign in</button>
-<button class="btn btn-error" on:click={handleSignOut}>Sign out</button>
+<button class="btn btn-error" on:click={handleSignOut} disabled={isLogginout}>
+	{#if isLogginout}
+		<span class="loading loading-spinner" />
+	{:else}
+		ออกจากระบบ
+	{/if}</button
+>
