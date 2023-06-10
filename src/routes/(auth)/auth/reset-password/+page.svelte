@@ -10,7 +10,7 @@
 	let isLoading: boolean = false;
 </script>
 
-<div class="h-screen flex justify-center align-middle items-center text-center">
+<div class="flex h-screen items-center justify-center text-center align-middle">
 	<form
 		method="post"
 		use:enhance={({ formElement, formData, action, cancel, submitter }) => {
@@ -20,11 +20,11 @@
 				update({ result });
 			};
 		}}
-		class="flex flex-col w-[400px] gap-4"
+		class="flex w-[400px] flex-col gap-4"
 	>
 		<h1 class="text-4xl">รีเซ็ตรหัสผ่าน</h1>
 		<input
-			class="input input-bordered w-[100%]"
+			class="input-bordered input w-[100%]"
 			placeholder="Email"
 			name="email"
 			value={$sForm.email ?? ''}
@@ -33,7 +33,7 @@
 			<div class="alert alert-error justify-start">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="stroke-current shrink-0 h-6 w-6"
+					class="h-6 w-6 shrink-0 stroke-current"
 					fill="none"
 					viewBox="0 0 24 24"
 					><path
@@ -46,14 +46,17 @@
 				<span>{$errors.email ?? form?.message}</span>
 			</div>
 		{/if}
-		<button class="btn btn-primary" disabled={isLoading}>
+		<button class="btn-primary btn" disabled={isLoading}>
 			{#if isLoading}
 				<span class="loading loading-spinner" />
-				{:else}
+			{:else}
 				รีเซ็ตรหัสผ่าน
 			{/if}
 		</button>
-		<a class="w-full link" href="/login">กลับหน้าหลัก</a>
-		<p class="text-sm opacity-50 italic">เมื่อกดรีเซ็ตรหัสผ่านแล้วจะมี email ส่งไปให้ยังที่อยู่ email ที่คุณกรอกลงไปถ้าหากไม่ขึ้นแสดงว่าที่อยู่ email นี้ไม่มีอยู่ในระบบ</p>
+		<a class="link w-full" href="/login">กลับหน้าหลัก</a>
+		<p class="text-sm italic opacity-50">
+			เมื่อกดรีเซ็ตรหัสผ่านแล้วจะมี email ส่งไปให้ยังที่อยู่ email
+			ที่คุณกรอกลงไปถ้าหากไม่ขึ้นแสดงว่าที่อยู่ email นี้ไม่มีอยู่ในระบบ
+		</p>
 	</form>
 </div>

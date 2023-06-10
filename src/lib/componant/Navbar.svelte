@@ -7,34 +7,69 @@
 	let isMenu: boolean;
 </script>
 
-<nav class="navbar absolute border-neutral backdrop-blur-sm bg-base-100/70 justify-between z-[100]">
+<nav class="navbar absolute z-[100] justify-between border-neutral bg-base-100/70 backdrop-blur-sm">
 	<div>
-		<label class="btn btn-square btn-ghost swap swap-rotate md:hidden">
+		<label class="swap btn-ghost swap-rotate btn-square btn md:hidden">
 			<input type="checkbox" bind:checked={isMenu} />
-			<Icon icon="material-symbols:menu" class="text-2xl swap-off" />
-			<Icon icon="material-symbols:close" class="text-2xl swap-on" />
+			<Icon icon="material-symbols:menu" class="swap-off text-2xl" />
+			<Icon icon="material-symbols:close" class="swap-on text-2xl" />
 		</label>
-		<a class="btn btn-ghost normal-case text-xl" href="/">Symp2023</a>
-		<ul class="menu menu-horizontal px-1 hidden md:flex flex-row">
-            <li><a href="/" on:click={()=>{isMenu=!isMenu}}>หน้าแรก</a></li>
-            <li>
-                <details>
-                    <summary>ข้อมูลงาน</summary>
-                    <ul>
-                        <li><a href="/" on:click={()=>{isMenu=!isMenu}}>แผนที่งาน</a></li>
-                        <li><a href="/" on:click={()=>{isMenu=!isMenu}}>ตารางงาน</a></li>
-                    </ul>
-                </details>
-            </li>
-            <li><a href="/" on:click={()=>{isMenu=!isMenu}}>ช่องทางติดต่อ</a></li>
-            <li><a href="/" on:click={()=>{isMenu=!isMenu}}>FAQ</a></li>
+		<a class="btn-ghost btn text-xl normal-case" href="/">Symp2023</a>
+		<ul class="menu menu-horizontal hidden flex-row px-1 md:flex">
+			<li>
+				<a
+					href="/"
+					on:click={() => {
+						isMenu = !isMenu;
+					}}>หน้าแรก</a
+				>
+			</li>
+			<li>
+				<details>
+					<summary>ข้อมูลงาน</summary>
+					<ul>
+						<li>
+							<a
+								href="/"
+								on:click={() => {
+									isMenu = !isMenu;
+								}}>แผนที่งาน</a
+							>
+						</li>
+						<li>
+							<a
+								href="/"
+								on:click={() => {
+									isMenu = !isMenu;
+								}}>ตารางงาน</a
+							>
+						</li>
+					</ul>
+				</details>
+			</li>
+			<li>
+				<a
+					href="/"
+					on:click={() => {
+						isMenu = !isMenu;
+					}}>ช่องทางติดต่อ</a
+				>
+			</li>
+			<li>
+				<a
+					href="/"
+					on:click={() => {
+						isMenu = !isMenu;
+					}}>FAQ</a
+				>
+			</li>
 		</ul>
 	</div>
 	<div>
 		{#if data.session}
-			<a class="btn btn-primary" href="/auth">แดร์ชบอร์ด</a>
+			<a class="btn-primary btn" href="/auth">แดร์ชบอร์ด</a>
 		{:else}
-			<a class="btn btn-primary" href="/login">เข้าสู่ระบบ</a>
+			<a class="btn-primary btn" href="/login">เข้าสู่ระบบ</a>
 		{/if}
 	</div>
 </nav>
@@ -45,21 +80,56 @@
 		transition:slide={{ duration: 500 }}
 	>
 		<div
-			class="sidemenu left-0 top-[4rem] absolute h-[calc(100vh-4rem)] w-screen md:w-[300px] shadow-xl bg-base-200 z-[101]"
+			class="sidemenu absolute left-0 top-[4rem] z-[101] h-[calc(100vh-4rem)] w-screen bg-base-200 shadow-xl md:w-[300px]"
 		>
-			<ul class="menu px-1 w-full">
-				<li><a href="/" on:click={()=>{isMenu=!isMenu}}>หน้าแรก</a></li>
-                <li>
-                    <details>
-                        <summary>ข้อมูลงาน</summary>
-                        <ul>
-                            <li><a href="/" on:click={()=>{isMenu=!isMenu}}>แผนที่งาน</a></li>
-                            <li><a href="/" on:click={()=>{isMenu=!isMenu}}>ตารางงาน</a></li>
-                        </ul>
-                    </details>
-                </li>
-                <li><a href="/" on:click={()=>{isMenu=!isMenu}}>ช่องทางติดต่อ</a></li>
-                <li><a href="/" on:click={()=>{isMenu=!isMenu}}>FAQ</a></li>
+			<ul class="menu w-full px-1">
+				<li>
+					<a
+						href="/"
+						on:click={() => {
+							isMenu = !isMenu;
+						}}>หน้าแรก</a
+					>
+				</li>
+				<li>
+					<details>
+						<summary>ข้อมูลงาน</summary>
+						<ul>
+							<li>
+								<a
+									href="/"
+									on:click={() => {
+										isMenu = !isMenu;
+									}}>แผนที่งาน</a
+								>
+							</li>
+							<li>
+								<a
+									href="/"
+									on:click={() => {
+										isMenu = !isMenu;
+									}}>ตารางงาน</a
+								>
+							</li>
+						</ul>
+					</details>
+				</li>
+				<li>
+					<a
+						href="/"
+						on:click={() => {
+							isMenu = !isMenu;
+						}}>ช่องทางติดต่อ</a
+					>
+				</li>
+				<li>
+					<a
+						href="/"
+						on:click={() => {
+							isMenu = !isMenu;
+						}}>FAQ</a
+					>
+				</li>
 			</ul>
 		</div>
 	</div>
