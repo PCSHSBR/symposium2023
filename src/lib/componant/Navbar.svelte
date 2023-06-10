@@ -7,7 +7,10 @@
 	let isMenu: boolean;
 </script>
 
-<nav class="navbar absolute z-[100] justify-between border-neutral bg-base-100/70 backdrop-blur-sm">
+<nav
+	class="navbar absolute z-20
+ justify-between border-neutral bg-base-100/70 backdrop-blur-sm"
+>
 	<div>
 		<label class="swap btn-ghost swap-rotate btn-square btn md:hidden">
 			<input type="checkbox" bind:checked={isMenu} />

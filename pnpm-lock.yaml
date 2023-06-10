@@ -4,6 +4,9 @@ dependencies:
   '@fontsource-variable/anuphan':
     specifier: ^5.0.2
     version: 5.0.2
+  '@fontsource/noto-sans-thai-looped':
+    specifier: ^5.0.3
+    version: 5.0.3
   '@supabase/auth-helpers-sveltekit':
     specifier: ^0.10.1
     version: 0.10.1(@supabase/supabase-js@2.24.0)(@sveltejs/kit@1.20.2)
@@ -307,6 +310,10 @@ packages:
 
   /@fontsource-variable/anuphan@5.0.2:
     resolution: {integrity: sha512-6SIit4oN5D3BhcGEgedazmZhzuwKtnechitIJS7BMRK/OVfHyQgJ4QT1iQLxQBd9H57dQ1POO1uVcLWvyMWtlA==}
+    dev: false
+
+  /@fontsource/noto-sans-thai-looped@5.0.3:
+    resolution: {integrity: sha512-+E99PbfEXz7TfhhF15qHvJGJVqflH/nt9F/jJBbAQhOYBfEP1E9b12LbvlbFByzumLhDK59P1+0JdxE2NsDKfg==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.10:

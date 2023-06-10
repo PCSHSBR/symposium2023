@@ -40,6 +40,7 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource-variable/anuphan": "^5.0.2",
+		"@fontsource/noto-sans-thai-looped": "^5.0.3",
 		"@supabase/auth-helpers-sveltekit": "^0.10.1",
 		"@supabase/supabase-js": "^2.24.0"
 	}

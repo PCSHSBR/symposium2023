@@ -5,7 +5,14 @@
 	export let data: PageData;
 </script>
 
-<main class="min-h-screen">
-	<Navbar {data} />
+<svelte:head>
+	<meta
+		name="keywords"
+		content="PCSHS, PCSHSBR, Science Symposium, Symposium 2023, Thailand, Princess Chulabhorn Science High School, Princess Chulabhorn Science High School Buriram"
+	/>
+</svelte:head>
+
+<Navbar {data} />
+<main>
 	<slot />
 </main>

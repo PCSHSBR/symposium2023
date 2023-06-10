@@ -3,7 +3,6 @@
 
 	export let data;
 	let { supabase } = data;
-	$: ({ supabase } = data);
 
 	let isLogginout = false;
 
@@ -20,8 +19,8 @@
 
 <div class="flex h-screen items-center justify-center">
 	<div class="flex flex-col flex-wrap">
-		<p class="max-w-[400px] overflow-y-scroll">
-			{JSON.stringify(data.session) ?? 'คุณยังไม่เข้าสู่ระบบโปรดเข้าสู่ระบบ'}
+		<p class="max-w-md overflow-y-auto">
+			{JSON.stringify(data.session) ?? 'คุณยังไม่เข้าสู่ระบบ โปรดเข้าสู่ระบบ'}
 		</p>
 		<button class="btn-error btn" on:click={handleSignOut} disabled={isLogginout}>
 			{#if isLogginout && data.session}

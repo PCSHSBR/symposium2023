@@ -1,13 +1,13 @@
 <!-- // src/routes/login/+page.svelte -->
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { fromJSON } from 'postcss';
-	import type { PageData } from './$types.js';
+	import type { PageData, ActionData } from './$types';
 	import { goto } from '$app/navigation';
 	import { superForm } from 'sveltekit-superforms/client';
 	import Icon from '@iconify/svelte';
+	import { textListFormatter, toThai } from '$lib/langUtils';
 
-	export let form: FormData;
+	export let form: ActionData;
 	export let data: PageData;
 
 	const { form: sForm, errors, constraints } = superForm(data.form);
@@ -24,7 +24,7 @@
 	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 
-<section class="m-auto max-w-[calc(100%-32px)]">
+<section class="m-auto">
 	<div class="flex h-screen items-center justify-center text-center align-middle">
 		<form
 			method="post"
@@ -35,26 +35,36 @@
 					update({ reset: false });
 				};
 			}}
-			class="flex w-[400px] flex-col gap-4"
+			class="flex w-full max-w-md flex-col gap-4"
 		>
-			<h1 class="text-4xl">เข้าสู่ระบบ</h1>
+			<h1 class="mb-3 text-4xl">เข้าสู่ระบบ</h1>
 			<input
-				class="input-bordered input w-[100%]"
-				placeholder="Email"
+				class="input-bordered input w-full"
+				placeholder="อีเมล"
 				name="email"
+				autocomplete="email"
+				data-invalid={$errors.email ?? false}
+				{...$constraints.email}
 				value={$sForm.email ?? ''}
 			/>
 			<input
-				class="input-bordered input w-[100%]"
-				placeholder="Password"
+				class="input-bordered input w-full"
+				placeholder="รหัสผ่าน"
 				type="password"
 				name="password"
+				autocomplete="current-password"
+				data-invalid={$errors.password ?? false}
+				{...$constraints.password}
 				required
 			/>
-			{#if ($errors && $errors.email) || form?.message}
+			{#if $errors.email || $errors.password || form?.message}
 				<div class="alert alert-error justify-start">
 					<Icon icon="mdi:error" class="swap-on text-2xl" />
-					<span>{$errors.email ?? $errors.password ?? form?.message}</span>
+					<span
+						>{textListFormatter($errors.email) ||
+							textListFormatter($errors.password) ||
+							toThai(form?.message)}</span
+					>
 				</div>
 			{/if}
 			<button class="btn-primary btn" disabled={isLoading}>

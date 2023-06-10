@@ -1,8 +1,19 @@
 import { fail } from '@sveltejs/kit';
 import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
+import type { Actions, PageServerLoad } from './$types';
 
 export const ssr = false;
+
+const schema = z.object({
+	email: z.string().email({ message: 'โปรดใส่ที่อยู่อีเมลที่ถูกต้อง' }),
+	password: z.string()
+});
+
+export const load = (async () => {
+	const form = await superValidate(schema);
+	return { form };
+}) satisfies PageServerLoad;
 
 export const actions = {
 	default: async ({ request, url, locals: { supabase } }) => {
@@ -10,7 +21,7 @@ export const actions = {
 		console.log(formData);
 		if (!formData.valid) {
 			console.log('not valid');
-			return fail(500, { formData, success: false });
+			return fail(500, { formData, success: false, message: 'โปรดตรวจสอบข้อมูลที่กรอก' });
 		}
 		const result = await supabase.auth.signInWithPassword({
 			email: formData.data.email,
@@ -23,14 +34,4 @@ export const actions = {
 		}
 		return { formData, success: true };
 	}
-};
-
-const schema = z.object({
-	email: z.string().email({ message: 'Please enter a valid email address.' }),
-	password: z.string()
-});
-
-export const load = async () => {
-	const form = await superValidate(schema);
-	return { form };
-};
+} satisfies Actions;
