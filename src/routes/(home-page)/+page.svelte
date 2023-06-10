@@ -1,3 +1,6 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-<a href="/login" class="btn btn-primary">Login</a>
+<section class="pt-[4rem]">
+	<h1>Welcome to SvelteKit</h1>
+	<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+	<a href="/login" class="btn btn-primary">Login</a>
+</section>
+
