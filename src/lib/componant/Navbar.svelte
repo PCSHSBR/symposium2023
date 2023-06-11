@@ -9,7 +9,7 @@
 
 <nav
 	class="navbar absolute z-20
- justify-between border-neutral bg-base-100/70 backdrop-blur-sm"
+ justify-between border-neutral {isMenu?"bg-transparent":"bg-base-100/70"} backdrop-blur-sm"
 >
 	<div>
 		<label class="swap btn-ghost swap-rotate btn-square btn md:hidden">
@@ -79,7 +79,7 @@
 
 {#if isMenu}
 	<div
-		class="absolute h-screen w-screen bg-black/50 md:hidden"
+		class="absolute h-screen w-screen bg-base-200 md:hidden"
 		transition:slide={{ duration: 500 }}
 	>
 		<div

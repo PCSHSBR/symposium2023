@@ -74,7 +74,7 @@
 					เข้าสู่ระบบ
 				{/if}</button
 			>
-			<a class="link w-full" href="/auth/reset-password">ลืมรหัสผ่าน</a>
+			<a class="link w-full" href="/reset-password">ลืมรหัสผ่าน</a>
 		</form>
 	</div>
 </section>
