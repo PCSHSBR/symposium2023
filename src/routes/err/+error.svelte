@@ -6,6 +6,7 @@
 		[key: number]: string;
 	}
 
+
 	const locals: LocalErrorMessage = {
 		400: 'คุณส่งอะไรมาเนีย!',
 		401: 'คุณไม่มีสิทธิ์เข้าถึงหน้านี้',
@@ -21,6 +22,12 @@
 		501: 'ยังไม่ได้ทำ',
 		504: 'เกตเวย์หมดเวลา'
 	};
+
+	const errmsg_locals = [
+		"ทำไมเรายังไม่วาร์ปคุณปรารีส",
+		"พวกเราอภัยครับตอนนี้แมวนอนทับคีย์เบอร์ดอยู่",
+		"มีข้อผิดพลาดเกิดขึ้น"
+	]
 </script>
 
 <svelte:head>
@@ -33,9 +40,9 @@
 		<div class="flex flex-wrap items-center gap-4">
 			<h1 class="text-8xl">{error.status}</h1>
 			<div class="text-left">
-				<h2 class="text-2xl font-bold">Mr.Paris, Why aren't we warp!</h2>
+				<h2 class="text-2xl font-bold">{errmsg_locals[Math.floor(Math.random() * errmsg_locals.length)]}</h2>
 				<h2>{locals[error.status] ?? error.error?.message}</h2>
-				<p />
+				<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{error.status}" class="link pt-4">อะไรคือ {error.status}?</a>
 			</div>
 		</div>
 	</div>
