@@ -5,12 +5,8 @@
 	export let data: LayoutData;
 </script>
 
-<svelte:head>
-	<!-- prevent all crowler to crowling auth modules -->
-	<meta name="robots" content="noindex" />
-</svelte:head>
-
-<Navbar {data} />
-<main class="">
-	<slot />
+<Navbar data={data}/>
+<main class="min-h-screen">
+<slot />
 </main>
+
