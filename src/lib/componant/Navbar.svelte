@@ -60,7 +60,7 @@
 			</li>
 			<li>
 				<a
-					href="/"
+					href="/faq"
 					on:click={() => {
 						isMenu = !isMenu;
 					}}>FAQ</a
@@ -127,7 +127,7 @@
 				</li>
 				<li>
 					<a
-						href="/"
+						href="/faq"
 						on:click={() => {
 							isMenu = !isMenu;
 						}}>FAQ</a

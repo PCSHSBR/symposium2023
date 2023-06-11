@@ -1,5 +1,6 @@
 export const sentencesMap = new Map([
-	['fetch failed', 'ไม่สามารถเข้าถึงเซิร์ฟเวอร์ได้ โปรดตรวจสอบการเชื่อมต่ออินเตอร์เน็ต']
+	['fetch failed', 'ไม่สามารถเข้าถึงเซิร์ฟเวอร์ได้ โปรดตรวจสอบการเชื่อมต่ออินเตอร์เน็ต'],
+	['Invalid login credentials', 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'],
 ]);
 
 export function toThai(message: string | undefined) {

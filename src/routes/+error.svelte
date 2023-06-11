@@ -28,7 +28,7 @@
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-<section class="m-auto max-w-md">
+<section class="m-auto max-w-md px-10">
 	<div class="flex h-screen items-center justify-center text-center align-middle">
 		<div class="flex flex-wrap items-center gap-4">
 			<h1 class="text-8xl">{error.status}</h1>

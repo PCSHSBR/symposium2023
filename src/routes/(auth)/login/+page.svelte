@@ -14,7 +14,7 @@
 
 	let isLoading = false;
 
-	if (data.session) {
+	$  : if (data.session) {
 		goto('/auth');
 	}
 </script>
@@ -24,7 +24,7 @@
 	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 
-<section class="m-auto">
+<section class="m-auto w-[calc(100%-64px)]">
 	<div class="flex h-screen items-center justify-center text-center align-middle">
 		<form
 			method="post"
