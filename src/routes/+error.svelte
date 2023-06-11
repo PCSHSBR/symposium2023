@@ -1,9 +1,12 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/stores';
-	import { message } from 'sveltekit-superforms/server';
 	let error = $page;
 
-	let locals = {
+	interface LocalErrorMessage {
+		[key: number]: string;
+	}
+
+	const locals: LocalErrorMessage = {
 		400: 'คุณส่งอะไรมาเนีย!',
 		401: 'คุณไม่มีสิทธิ์เข้าถึงหน้านี้',
 		403: 'เขตหวงห้ามเด้อ',
@@ -20,13 +23,18 @@
 	};
 </script>
 
-<section class="m-auto max-w-[calc(100%-64px)]">
+<svelte:head>
+	<title>{error.status} - {error.error?.message}</title>
+	<meta name="robots" content="noindex" />
+</svelte:head>
+
+<section class="m-auto max-w-md">
 	<div class="flex h-screen items-center justify-center text-center align-middle">
 		<div class="flex flex-wrap items-center gap-4">
 			<h1 class="text-8xl">{error.status}</h1>
 			<div class="text-left">
 				<h2 class="text-2xl font-bold">Mr.Paris, Why aren't we warp!</h2>
-				<h2>{locals[parseInt(error.status)] ?? error.error?.message}</h2>
+				<h2>{locals[error.status] ?? error.error?.message}</h2>
 				<p />
 			</div>
 		</div>
