@@ -8,8 +8,8 @@
 	export let data: PageData;
 	export let form: ActionData;
 	let isLoading: boolean = false;
-
-	if (!data.session) goto('/err/403');
+	let new_passowrd: string = '';
+	let conf_password: string = '';
 </script>
 
 <svelte:head>
@@ -36,6 +36,7 @@
 					placeholder="รหัสผ่านใหม่"
 					name="password"
 					id="new-passwd"
+					bind:value={new_passowrd}
 					type="password"
 					autocomplete="new-password"
 				/>
@@ -48,9 +49,34 @@
 					name="password-conf"
 					type="password"
 					id="confirm-passwd"
+					bind:value={conf_password}
 					autocomplete="new-password"
 				/>
 			</div>
+
+			{#if new_passowrd.length > 7}
+				<p class="flex items-center text-left">
+					<Icon icon="mdi:check" class="mr-5" />
+					รหัสผ่านอย่างน้อย 8 ตัวอักษร
+				</p>
+			{:else}
+				<p class="flex items-center text-left">
+					<Icon icon="mdi:close" class="mr-5" />
+					รหัสผ่านอย่างน้อย 8 ตัวอักษร
+				</p>
+			{/if}
+			{#if new_passowrd === conf_password && new_passowrd.length > 7}
+				<p class="flex items-center text-left">
+					<Icon icon="mdi:check" class="mr-5" />
+					รหัสผ่านตรงกัน
+				</p>
+			{:else}
+				<p class="flex items-center text-left">
+					<Icon icon="mdi:close" class="mr-5" />
+					รหัสผ่านตรงกัน
+				</p>
+			{/if}
+
 			{#if form?.ok && form?.message}
 				<div class="item-start just alert alert-success flex flex-row">
 					<Icon icon="mdi:success-bold" width={25} height={25} />
