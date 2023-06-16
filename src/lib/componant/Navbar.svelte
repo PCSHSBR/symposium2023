@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
+	import postcss from 'postcss';
 	import { slide, fade } from 'svelte/transition';
 
 	export let data;
@@ -137,3 +138,9 @@
 		</div>
 	</div>
 {/if}
+
+<style lang="postcss">
+	.sidemenu a,.sidemenu summary{
+		@apply text-base h-16 flex justify-between;
+	}
+</style>

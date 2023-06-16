@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head>
-	<title>รีเซ็ตรหัสผ่านใหม่</title>
+	<title>ตั่งค่ารหัสผ่านใหม่</title>
 </svelte:head>
 <section class="m-auto w-[calc(100%-64px)]">
 	<div class="flex h-screen items-center justify-center text-center align-middle">
