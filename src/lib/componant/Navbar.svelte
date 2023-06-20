@@ -2,15 +2,21 @@
 	import Icon from '@iconify/svelte';
 	import postcss from 'postcss';
 	import { slide, fade } from 'svelte/transition';
+	import { onMount } from 'svelte';
+	import type { PageData } from './$types';
+	import { page } from '$app/stores';
 
-	export let data;
+	export let data: PageData;
+
+	let isNotShowLogin = ['/login', '/controls/dashboard'].includes($page.url.pathname);
+	console.log(isNotShowLogin);
 
 	let isMenu: boolean;
 </script>
 
 <nav
 	class="navbar absolute z-20
- justify-between border-neutral {isMenu?"bg-transparent":"bg-base-100/70"} backdrop-blur-sm"
+ justify-between border-neutral {isMenu ? 'bg-transparent' : 'bg-base-100/70'} backdrop-blur-sm"
 >
 	<div>
 		<label class="swap btn-ghost swap-rotate btn-square btn md:hidden">
@@ -70,10 +76,12 @@
 		</ul>
 	</div>
 	<div>
-		{#if data.session}
-			<a class="btn-primary btn" href="/auth">แดร์ชบอร์ด</a>
-		{:else}
-			<a class="btn-primary btn" href="/login">เข้าสู่ระบบ</a>
+		{#if !isNotShowLogin}
+			{#if data.session}
+				<a class="btn-primary btn" href="/auth">แดร์ชบอร์ด</a>
+			{:else}
+				<a class="btn-primary btn" href="/login">เข้าสู่ระบบ</a>
+			{/if}
 		{/if}
 	</div>
 </nav>
@@ -140,7 +148,8 @@
 {/if}
 
 <style lang="postcss">
-	.sidemenu a,.sidemenu summary{
-		@apply text-base h-16 flex justify-between;
+	.sidemenu a,
+	.sidemenu summary {
+		@apply flex h-16 justify-between text-base;
 	}
 </style>
