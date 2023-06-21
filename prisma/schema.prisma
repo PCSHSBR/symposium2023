@@ -92,6 +92,7 @@ model mfa_challenges {
   ip_address  String      @db.Inet
   mfa_factors mfa_factors @relation(fields: [factor_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "mfa_challenges_auth_factor_id_fkey")
 
+  @@index([created_at(sort: Desc)], map: "mfa_challenge_created_at_idx")
   @@schema("auth")
 }
 
@@ -197,6 +198,7 @@ model sessions {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model sso_domains {
   id              String        @id @db.Uuid
   sso_provider_id String        @db.Uuid
@@ -211,6 +213,7 @@ model sso_domains {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model sso_providers {
   id                String              @id @db.Uuid
   resource_id       String?
@@ -225,6 +228,7 @@ model sso_providers {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model users {
   instance_id                 String?       @db.Uuid
   id                          String        @id @db.Uuid
@@ -263,9 +267,7 @@ model users {
   identities                  identities[]
   mfa_factors                 mfa_factors[]
   sessions                    sessions[]
-  project                     project[]
-  student                     student[]
-  teacher                     teacher[]
+  projects                    projects[]
   user_role                   user_role[]
 
   @@index([instance_id])
@@ -275,35 +277,12 @@ model users {
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model presentation_type {
-  id                                                   BigInt    @id @default(autoincrement())
-  type                                                 String
-  description                                          String?
-  is_onsite                                            Boolean
-  field                                                field[]
-  project_project_presentation_typeTopresentation_type project[] @relation("project_presentation_typeTopresentation_type")
-
-  @@schema("public")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model project {
-  id                                                             BigInt             @id @default(autoincrement())
-  created_at                                                     DateTime?          @default(now()) @db.Timestamptz(6)
-  code                                                           String?            @unique
-  field                                                          BigInt?
-  title                                                          String?
-  school                                                         BigInt?
-  team_contact                                                   String?            @db.Uuid
-  presentation_type                                              BigInt?
-  special_advisor                                                Json[]
-  project_field                                                  field?             @relation(fields: [field], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  presentation_type_project_presentation_typeTopresentation_type presentation_type? @relation("project_presentation_typeTopresentation_type", fields: [presentation_type], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  school_project_schoolToschool                                  school?            @relation("project_schoolToschool", fields: [school], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users                                                          users?             @relation(fields: [team_contact], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  project_student_project_student_projectToproject               project_student[]  @relation("project_student_projectToproject")
-  project_teacher_project_teacher_projectToproject               project_teacher[]  @relation("project_teacher_projectToproject")
-  student                                                        student[]
+  id                                                     BigInt     @id @default(autoincrement())
+  type                                                   String
+  description                                            String?
+  is_onsite                                              Boolean
+  field                                                  field[]
+  projects_projects_presentation_typeTopresentation_type projects[] @relation("projects_presentation_typeTopresentation_type")
 
   @@schema("public")
 }
@@ -313,19 +292,7 @@ model project {
 model role {
   ref                            String      @id @unique(map: "role_name_key")
   display                        String?
-  teacher_teacher_roleTorole     teacher[]   @relation("teacher_roleTorole")
   user_role_user_role_roleTorole user_role[] @relation("user_role_roleTorole")
-
-  @@schema("public")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model school {
-  id       BigInt    @id @unique @default(autoincrement())
-  province String
-  ref      String    @unique
-  projects project[] @relation("project_schoolToschool")
 
   @@schema("public")
 }
@@ -345,67 +312,102 @@ model user_role {
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model field {
-  id                   BigInt            @id(map: "project_field_pkey") @default(autoincrement())
-  name                 String
-  description          String?           @default("")
-  presentation_type_id BigInt
-  presentation_type    presentation_type @relation(fields: [presentation_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  project              project[]
+  id                             BigInt            @id(map: "project_field_pkey") @default(autoincrement())
+  name                           String
+  description                    String?           @default("")
+  presentation_type_id           BigInt
+  presentation_type              presentation_type @relation(fields: [presentation_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  projects_projects_fieldTofield projects[]        @relation("projects_fieldTofield")
 
   @@schema("public")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model project_student {
-  id                                       BigInt   @id @default(autoincrement())
-  student                                  BigInt?
-  project                                  BigInt?
-  project_project_student_projectToproject project? @relation("project_student_projectToproject", fields: [project], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  student_project_student_studentTostudent student? @relation("project_student_studentTostudent", fields: [student], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model special_advisors {
+  id             BigInt    @id @default(autoincrement())
+  created_at     DateTime? @default(now()) @db.Timestamptz(6)
+  prefix         String?
+  firstname      String?
+  lastname       String?
+  academic_title String?
+  address        String?
+  email          String?
+  project        BigInt?
+  projects       projects? @relation(fields: [project], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@schema("public")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model project_teacher {
-  id                                       BigInt   @id @default(autoincrement())
-  project                                  BigInt?
-  teacher                                  BigInt?
-  project_project_teacher_projectToproject project? @relation("project_teacher_projectToproject", fields: [project], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  teacher_project_teacher_teacherToteacher teacher? @relation("project_teacher_teacherToteacher", fields: [teacher], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model projects {
+  id                                                              BigInt             @id(map: "project_pkey") @default(autoincrement())
+  created_at                                                      DateTime?          @default(now()) @db.Timestamptz(6)
+  code                                                            String?            @unique(map: "project_code_key")
+  field                                                           BigInt?
+  title_th                                                        String?
+  school                                                          BigInt?
+  team_contact                                                    String?            @db.Uuid
+  presentation_type                                               BigInt?
+  special_advisor                                                 Json[]
+  title_en                                                        String?
+  field_projects_fieldTofield                                     field?             @relation("projects_fieldTofield", fields: [field], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  presentation_type_projects_presentation_typeTopresentation_type presentation_type? @relation("projects_presentation_typeTopresentation_type", fields: [presentation_type], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  schools                                                         schools?           @relation(fields: [school], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users                                                           users?             @relation(fields: [team_contact], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  special_advisors                                                special_advisors[]
+  students_students_projectToprojects                             students[]         @relation("students_projectToprojects")
+  students_students_schoolToprojects                              students[]         @relation("students_schoolToprojects")
+  teachers_teachers_projectToprojects                             teachers[]         @relation("teachers_projectToprojects")
+  teachers_teachers_schoolToprojects                              teachers[]         @relation("teachers_schoolToprojects")
 
   @@schema("public")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model student {
-  id                                               BigInt            @id(map: "srudent_pkey") @default(autoincrement())
-  created_at                                       DateTime?         @default(now()) @db.Timestamptz(6)
-  prefix                                           String?
-  firstname                                        String?
-  lastname                                         String?
-  school                                           BigInt?
-  user                                             String?           @db.Uuid
-  project_student_project_student_studentTostudent project_student[] @relation("project_student_studentTostudent")
-  project                                          project?          @relation(fields: [school], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users                                            users?            @relation(fields: [user], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model schools {
+  id       BigInt     @id(map: "school_pkey") @unique(map: "school_id_key") @default(autoincrement())
+  province String
+  ref      String     @unique(map: "school_ref_key")
+  projects projects[]
 
   @@schema("public")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model teacher {
-  id                                               BigInt            @id @default(autoincrement())
-  created_at                                       DateTime?         @default(now()) @db.Timestamptz(6)
-  role                                             String?
-  user                                             String?           @db.Uuid
-  project_teacher_project_teacher_teacherToteacher project_teacher[] @relation("project_teacher_teacherToteacher")
-  role_teacher_roleTorole                          role?             @relation("teacher_roleTorole", fields: [role], references: [ref], onDelete: NoAction, onUpdate: NoAction)
-  users                                            users?            @relation(fields: [user], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model students {
+  id                                  BigInt    @id(map: "srudent_pkey") @default(autoincrement())
+  created_at                          DateTime? @default(now()) @db.Timestamptz(6)
+  prefix                              String?
+  firstname                           String?
+  lastname                            String?
+  school                              BigInt?
+  phone                               String?
+  email                               String?
+  project                             BigInt?
+  projects_students_projectToprojects projects? @relation("students_projectToprojects", fields: [project], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  projects_students_schoolToprojects  projects? @relation("students_schoolToprojects", fields: [school], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@schema("public")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model teachers {
+  id                                  BigInt    @id(map: "teacher_2_pkey") @default(autoincrement())
+  created_at                          DateTime? @default(now()) @db.Timestamptz(6)
+  prefix                              String?
+  firstname                           String?
+  lastname                            String?
+  school                              BigInt?
+  phone                               String?
+  email                               String?
+  project                             BigInt?
+  projects_teachers_projectToprojects projects? @relation("teachers_projectToprojects", fields: [project], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  projects_teachers_schoolToprojects  projects? @relation("teachers_schoolToprojects", fields: [school], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@schema("public")
 }
