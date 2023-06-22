@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import type { SupabaseClient } from '@supabase/supabase-js';
 	import Icon from '@iconify/svelte';
+	import { d } from '$lib/langUtils.js';
 
 	export let data;
 	let { supabase } = data;
@@ -29,12 +29,16 @@
 			<p class="text-2xl">
 				<b> {data.session ? `ยินดีต้อนรับ` : 'คุณยังไม่เข้าสู่ระบบ โปรดเข้าสู่ระบบ'}</b>
 			</p>
-			<p class="text-xl">{data.session?.user.email ?? 'โปรดเข้าสู่ระบบ'}</p>
+			{#if data.session}
+				<p class="text-xl">
+					{data.session?.user?.user_metadata?.full_name ?? 'โปรดเพิ่มข้อมูลส่วนตัวของคุณ'}
+				</p>
+			{/if}
 		</div>
 		<div>
 			{#if data.session}
 				<a href="/controls/user-infomation" class="btn-primary btn">ข้อมูลส่วนตัว</a>
-				<button class="btn-primary btn" on:click={handleSignOut} disabled={isLogginout}>
+				<button class="btn" on:click={handleSignOut} disabled={isLogginout}>
 					{#if isLogginout}
 						<span class="loading loading-spinner" />
 					{:else}
@@ -54,7 +58,7 @@
 				<Icon icon="mdi:close" class="m-10 text-5xl" />
 				<div class="flex flex-col">
 					<h2 class="text-xl">ยังไม่ส่งโครงงาน</h2>
-					<p class="whitespace-pre-line">สามารถส่งได้ถึง 25/07/2023</p>
+					<p class="whitespace-pre-line">สามารถส่งได้ถึง {d('2023-07-23')}</p>
 				</div>
 			</div>
 			<a href="/send" class="btn-primary btn m-10">ส่งโครงงาน</a>

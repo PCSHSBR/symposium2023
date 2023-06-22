@@ -53,31 +53,29 @@
 			</label>
 			<label class="label relative">
 				<span class="label-text"> รหัสผ่าน </span>
-				<div class="swap absolute bottom-[16px] right-1 flex items-center px-2">
-					<input class="hidden" id="show_password" type="checkbox" />
-					<label class="btn-sm btn cursor-pointer rounded px-2 py-1 text-sm" for="show_password">
-						<Icon
-							icon="mdi:eye"
-							class="swap-on text-2xl"
-							on:click={() => (showPassword = !showPassword)}
-						/>
-						<Icon
-							icon="mdi:hide"
-							class="text-2xl"
-							on:click={() => (showPassword = !showPassword)}
-						/>
-					</label>
-				</div>
 				<input
 					class="input-bordered input w-full"
 					placeholder="รหัสผ่าน"
-					type="password"
+					type={showPassword ? 'text' : 'password'}
 					name="password"
 					autocomplete="current-password"
 					data-invalid={$errors.password ?? false}
 					{...$constraints.password}
 					required
 				/>
+				<div class="absolute bottom-[16px] right-1 flex items-center px-2">
+					<input class="hidden" id="show_password" type="checkbox" bind:checked={showPassword} />
+					<button
+						type="button"
+						class="swap btn-sm btn cursor-pointer rounded px-2 py-1 text-sm"
+						class:swap-active={showPassword}
+						aria-label={showPassword ? 'ซ่อนรหัสผ่าน' : 'แสดงรหัสผ่าน'}
+						on:click|preventDefault={() => (showPassword = !showPassword)}
+					>
+						<Icon icon="mdi:eye" class="swap-on text-2xl" />
+						<Icon icon="mdi:hide" class="swap-off text-2xl" />
+					</button>
+				</div>
 			</label>
 			{#if $errors.email || $errors.password || form?.message}
 				<div class="alert alert-error justify-start">
@@ -89,14 +87,14 @@
 					>
 				</div>
 			{/if}
-			<button class="btn-primary btn" disabled={isLoading}>
+			<button class="btn-primary btn" disabled={isLoading} type="submit">
 				{#if isLoading}
 					<span class="loading loading-spinner" aria-label="กำลังโหลด" />
 				{:else}
 					เข้าสู่ระบบ
 				{/if}</button
 			>
-			<a class="link w-full" href="/reset-password">ลืมรหัสผ่าน</a>
+			<a class="link mt-4 w-full" href="/reset-password">ลืมรหัสผ่าน</a>
 		</form>
 	</div>
 </section>

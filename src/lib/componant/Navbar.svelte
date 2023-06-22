@@ -1,84 +1,74 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
-	import postcss from 'postcss';
 	import { slide, fade } from 'svelte/transition';
-	import { onMount } from 'svelte';
-	import type { PageData } from './$types';
 	import { page } from '$app/stores';
 
-	export let data: PageData;
+	// function to close the menu, for using with use directive
+	function closeMenu(_node?: HTMLElement) {
+		return {
+			destroy() {
+				isMenuOpen = false;
+			}
+		};
+	}
+
+	let data = $page.data;
 
 	let isNotShowLogin = ['/login', '/controls/dashboard'].includes($page.url.pathname);
 	console.log(isNotShowLogin);
 
-	let isMenu: boolean;
+	let isMenuOpen: boolean;
 </script>
 
 <nav
 	class="navbar absolute z-20
- justify-between border-neutral {isMenu ? 'bg-transparent' : 'bg-base-100/70'} backdrop-blur-sm"
+ justify-between border-neutral {isMenuOpen ? 'bg-transparent' : 'bg-base-100/70'} backdrop-blur-sm"
 >
 	<div>
-		<label class="swap btn-ghost swap-rotate btn-square btn md:hidden">
-			<input type="checkbox" bind:checked={isMenu} />
-			<Icon icon="material-symbols:menu" class="swap-off text-2xl" />
-			<Icon icon="material-symbols:close" class="swap-on text-2xl" />
+		<label>
+			<button
+				aria-label="เปิด/ปิดเมนู"
+				type="button"
+				class="swap btn-ghost swap-rotate btn-square btn md:hidden"
+				on:click={() => {
+					isMenuOpen = !isMenuOpen;
+				}}
+			>
+				<input class="hidden" type="checkbox" bind:checked={isMenuOpen} />
+				<Icon icon="mdi:menu" class="swap-off text-2xl" />
+				<Icon icon="mdi:close" class="swap-on text-2xl" />
+			</button>
 		</label>
 		<a class="btn-ghost btn text-xl normal-case" href="/">Symp2023</a>
 		<ul class="menu menu-horizontal hidden flex-row px-1 md:flex">
 			<li>
-				<a
-					href="/"
-					on:click={() => {
-						isMenu = !isMenu;
-					}}>หน้าแรก</a
-				>
+				<a href="/" use:closeMenu>หน้าแรก</a>
 			</li>
 			<li>
 				<details>
 					<summary>ข้อมูลงาน</summary>
 					<ul>
 						<li>
-							<a
-								href="/"
-								on:click={() => {
-									isMenu = !isMenu;
-								}}>แผนที่งาน</a
-							>
+							<a href="/" use:closeMenu>แผนที่งาน</a>
 						</li>
 						<li>
-							<a
-								href="/"
-								on:click={() => {
-									isMenu = !isMenu;
-								}}>ตารางงาน</a
-							>
+							<a href="/" use:closeMenu>ตารางงาน</a>
 						</li>
 					</ul>
 				</details>
 			</li>
 			<li>
-				<a
-					href="/"
-					on:click={() => {
-						isMenu = !isMenu;
-					}}>ช่องทางติดต่อ</a
-				>
+				<a href="/" use:closeMenu>ช่องทางติดต่อ</a>
 			</li>
 			<li>
-				<a
-					href="/faq"
-					on:click={() => {
-						isMenu = !isMenu;
-					}}>FAQ</a
-				>
+				<a href="/faq" use:closeMenu>FAQ</a>
 			</li>
 		</ul>
 	</div>
 	<div>
 		{#if !isNotShowLogin}
 			{#if data.session}
-				<a class="btn-primary btn" href="/auth">แดร์ชบอร์ด</a>
+				<a class="btn-primary btn" href="/auth">แดชบอร์ด</a>
 			{:else}
 				<a class="btn-primary btn" href="/login">เข้าสู่ระบบ</a>
 			{/if}
@@ -86,9 +76,9 @@
 	</div>
 </nav>
 
-{#if isMenu}
+{#if isMenuOpen}
 	<div
-		class="absolute h-screen w-screen bg-base-200 md:hidden"
+		class="absolute z-10 h-screen w-screen bg-base-200 md:hidden"
 		transition:slide|local={{ duration: 500 }}
 	>
 		<div
@@ -96,51 +86,26 @@
 		>
 			<ul class="menu w-full px-1">
 				<li>
-					<a
-						href="/"
-						on:click={() => {
-							isMenu = !isMenu;
-						}}>หน้าแรก</a
-					>
+					<a href="/" use:closeMenu>หน้าแรก</a>
 				</li>
 				<li>
 					<details>
 						<summary>ข้อมูลงาน</summary>
 						<ul>
 							<li>
-								<a
-									href="/"
-									on:click={() => {
-										isMenu = !isMenu;
-									}}>แผนที่งาน</a
-								>
+								<a href="/" use:closeMenu>แผนที่งาน</a>
 							</li>
 							<li>
-								<a
-									href="/"
-									on:click={() => {
-										isMenu = !isMenu;
-									}}>ตารางงาน</a
-								>
+								<a href="/" use:closeMenu>ตารางงาน</a>
 							</li>
 						</ul>
 					</details>
 				</li>
 				<li>
-					<a
-						href="/"
-						on:click={() => {
-							isMenu = !isMenu;
-						}}>ช่องทางติดต่อ</a
-					>
+					<a href="/" use:closeMenu>ช่องทางติดต่อ</a>
 				</li>
 				<li>
-					<a
-						href="/faq"
-						on:click={() => {
-							isMenu = !isMenu;
-						}}>FAQ</a
-					>
+					<a href="/faq" use:closeMenu>FAQ</a>
 				</li>
 			</ul>
 		</div>

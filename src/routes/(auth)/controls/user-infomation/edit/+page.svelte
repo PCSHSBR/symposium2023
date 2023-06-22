@@ -1,13 +1,12 @@
 <!-- // src/routes/login/+page.svelte -->
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { PageData, ActionData } from '../../../user-infomation/$types';
+	import type { PageData } from './$types';
 	import { goto } from '$app/navigation';
 	import { superForm } from 'sveltekit-superforms/client';
 	import Icon from '@iconify/svelte';
 	import { textListFormatter, toThai } from '$lib/langUtils';
 
-	export let form: ActionData;
 	export let data: PageData;
 
 	const { form: sForm, errors, constraints } = superForm(data.form);
@@ -16,7 +15,7 @@
 </script>
 
 <svelte:head>
-	<title>แก้ไข</title>
+	<title>แก้ไขข้อมูลบัญชี</title>
 	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 

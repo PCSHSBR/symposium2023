@@ -21,3 +21,33 @@ export function textListFormatter(texts: string[] | undefined) {
 	});
 	return formatter.format(texts);
 }
+
+/**
+ * Format date into localized string.
+ * @param date date to format
+ * @param options Intl.DateTimeFormatOptions to format date
+ * @returns localized date string
+ * @example new Date() -> วันนี้
+ * @example new Date('2021-01-01') -> 1 มกราคม 2021
+ */
+export function dateFormatter(date: Date | undefined, options?: Intl.DateTimeFormatOptions) {
+	if (typeof date === 'undefined') return undefined;
+	if (options) {
+		return new Intl.DateTimeFormat('th-TH', options).format(date);
+	}
+	return new Intl.DateTimeFormat('th-TH', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric'
+	}).format(date);
+}
+
+/**
+ * Shorthand for dateFormatter. Format date into localized string.
+ * @param date date to format. Must be in ISO 8601 format. {@link https://en.wikipedia.org/wiki/ISO_8601}
+ * @param options Intl.DateTimeFormatOptions to format date
+ * @returns
+ */
+export function d(date: string | undefined, options?: Intl.DateTimeFormatOptions) {
+	return dateFormatter(new Date(date ?? ''), options);
+}

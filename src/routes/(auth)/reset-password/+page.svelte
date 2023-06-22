@@ -29,15 +29,18 @@
 			class="flex max-w-md flex-col gap-4"
 		>
 			<h1 class="mb-3 text-4xl">รีเซ็ตรหัสผ่าน</h1>
-			<input
-				class="input-bordered input w-full"
-				placeholder="ที่อยู่อีเมล"
-				name="email"
-				autocomplete="email"
-				data-invalid={$errors.email}
-				value={$sForm.email ?? ''}
-				{...$constraints.email}
-			/>
+			<label class="label">
+				<span class="label-text"> อีเมล </span>
+				<input
+					class="input-bordered input w-full"
+					placeholder="ที่อยู่อีเมล"
+					name="email"
+					autocomplete="email"
+					data-invalid={$errors.email}
+					value={$sForm.email ?? ''}
+					{...$constraints.email}
+				/>
+			</label>
 			{#if $errors.email ?? form?.message}
 				<div class="alert alert-error">
 					<svg
@@ -61,7 +64,7 @@
 					ส่งลิงก์สำหรับรีเซ็ตรหัสผ่านใหม่เรียบร้อยแล้ว หากที่อยู่อีเมลที่คุณให้มีอยู่จริง
 				</div>
 			{/if}
-			<button class="btn-primary btn" disabled={isLoading}>
+			<button type="submit" class="btn-primary btn" disabled={isLoading}>
 				{#if isLoading}
 					<span class="loading loading-spinner" />
 				{:else}
