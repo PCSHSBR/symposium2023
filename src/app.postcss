@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--btn-text-case: capitalize;
+}
+
 body {
 	font-family: 'Noto Sans Thai Looped', sans-serif;
 }
@@ -24,6 +28,14 @@ main a {
 	@apply link;
 }
 
-.form-control{
-	 @apply text-left;
+.form-control {
+	@apply text-left;
+}
+
+.label {
+	@apply flex flex-col items-start text-left;
+}
+
+.label .label-text {
+	@apply mb-2;
 }

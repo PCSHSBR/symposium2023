@@ -29,7 +29,7 @@
 			<p class="text-2xl">
 				<b> {data.session ? `ยินดีต้อนรับ` : 'คุณยังไม่เข้าสู่ระบบ โปรดเข้าสู่ระบบ'}</b>
 			</p>
-			<p class="text-xl">{data.session?.user.email ?? "โปรดเข้าสู่ระบบ"}</p>
+			<p class="text-xl">{data.session?.user.email ?? 'โปรดเข้าสู่ระบบ'}</p>
 		</div>
 		<div>
 			{#if data.session}
@@ -46,18 +46,18 @@
 			{/if}
 		</div>
 	</div>
-	<div class="mt-5 flex flex-wrap flex-row items-center">
-		<div class="bg-base-200 w-full p-2 shadow-sm rounded-lg flex flex-col align-middle items-center justify-center md:justify-between md:flex-row">
-			<div class="flex items-center flex-col md:flex-row">
-				<Icon icon="mdi:close" class="text-5xl m-10"/>
+	<div class="mt-5 flex flex-row flex-wrap items-center">
+		<div
+			class="flex w-full flex-col items-center justify-center rounded-lg bg-base-200 p-2 align-middle shadow-sm md:flex-row md:justify-between"
+		>
+			<div class="flex flex-col items-center md:flex-row">
+				<Icon icon="mdi:close" class="m-10 text-5xl" />
 				<div class="flex flex-col">
 					<h2 class="text-xl">ยังไม่ส่งโครงงาน</h2>
-					<p class="whitespace-pre-line">
-						สามารถส่งได้ถึง 25/07/2023
-					</p>
+					<p class="whitespace-pre-line">สามารถส่งได้ถึง 25/07/2023</p>
 				</div>
 			</div>
-			<a href="/send" class="btn btn-primary m-10">ส่งโครงงาน</a>
+			<a href="/send" class="btn-primary btn m-10">ส่งโครงงาน</a>
 		</div>
 	</div>
 </section>

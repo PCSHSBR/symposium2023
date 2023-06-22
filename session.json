@@ -1,32 +1,30 @@
 {
-  "expires_at": 1687265589,
-  "expires_in": 3602,
-  "token_type": "bearer",
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjg3MjY1NTg5LCJzdWIiOiJlY2UwYmFlNC01ZmZjLTRhNzAtYTRmNS0yY2UyZDExNTQxZDYiLCJlbWFpbCI6InBodWJlc3Rzcmlrb29uQHBjY2JyLmFjLnRoIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6e30sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoicGFzc3dvcmQiLCJ0aW1lc3RhbXAiOjE2ODcyNjE5ODl9XSwic2Vzc2lvbl9pZCI6ImM4ZTA3NTZmLWFhYjEtNDJhMS05ZjBjLWRhOTYzYzYyZGQyNSJ9.0Htqa7EG42hcAR0DHHaCDWqvCcN9AFpHS3AoQtzeJqw",
-  "refresh_token": "5ypTnH2dzVg3QMrVLJJU-w",
-  "provider_token": null,
-  "provider_refresh_token": null,
-  "user": {
-    "id": "ece0bae4-5ffc-4a70-a4f5-2ce2d11541d6",
-    "factors": null,
-    "aud": "authenticated",
-    "email": "phubestsrikoon@pccbr.ac.th",
-    "phone": "",
-    "app_metadata": {
-      "provider": "email",
-      "providers": [
-        "email"
-      ]
-    },
-    "user_metadata": {},
-    "role": "authenticated",
-    "aal": "aal1",
-    "amr": [
-      {
-        "method": "password",
-        "timestamp": 1687261989
-      }
-    ],
-    "session_id": "c8e0756f-aab1-42a1-9f0c-da963c62dd25"
-  }
+	"expires_at": 1687265589,
+	"expires_in": 3602,
+	"token_type": "bearer",
+	"access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjg3MjY1NTg5LCJzdWIiOiJlY2UwYmFlNC01ZmZjLTRhNzAtYTRmNS0yY2UyZDExNTQxZDYiLCJlbWFpbCI6InBodWJlc3Rzcmlrb29uQHBjY2JyLmFjLnRoIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6e30sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoicGFzc3dvcmQiLCJ0aW1lc3RhbXAiOjE2ODcyNjE5ODl9XSwic2Vzc2lvbl9pZCI6ImM4ZTA3NTZmLWFhYjEtNDJhMS05ZjBjLWRhOTYzYzYyZGQyNSJ9.0Htqa7EG42hcAR0DHHaCDWqvCcN9AFpHS3AoQtzeJqw",
+	"refresh_token": "5ypTnH2dzVg3QMrVLJJU-w",
+	"provider_token": null,
+	"provider_refresh_token": null,
+	"user": {
+		"id": "ece0bae4-5ffc-4a70-a4f5-2ce2d11541d6",
+		"factors": null,
+		"aud": "authenticated",
+		"email": "phubestsrikoon@pccbr.ac.th",
+		"phone": "",
+		"app_metadata": {
+			"provider": "email",
+			"providers": ["email"]
+		},
+		"user_metadata": {},
+		"role": "authenticated",
+		"aal": "aal1",
+		"amr": [
+			{
+				"method": "password",
+				"timestamp": 1687261989
+			}
+		],
+		"session_id": "c8e0756f-aab1-42a1-9f0c-da963c62dd25"
+	}
 }
