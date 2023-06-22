@@ -1,7 +1,7 @@
 <!-- // src/routes/login/+page.svelte -->
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { PageData, ActionData } from '../$types';
+	import type { PageData, ActionData } from '../../../user-infomation/$types';
 	import { goto } from '$app/navigation';
 	import { superForm } from 'sveltekit-superforms/client';
 	import Icon from '@iconify/svelte';
@@ -16,7 +16,7 @@
 </script>
 
 <svelte:head>
-	<title>เข้าสู่ระบบเพื่อดำเนินการต่อ</title>
+	<title>แก้ไข</title>
 	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 
