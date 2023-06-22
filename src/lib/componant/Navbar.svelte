@@ -89,7 +89,7 @@
 {#if isMenu}
 	<div
 		class="absolute h-screen w-screen bg-base-200 md:hidden"
-		transition:slide={{ duration: 500 }}
+		transition:slide|local={{ duration: 500 }}
 	>
 		<div
 			class="sidemenu absolute left-0 top-[4rem] z-[101] h-[calc(100vh-4rem)] w-screen bg-base-200 shadow-xl md:w-[300px]"

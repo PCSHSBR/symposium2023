@@ -1,3 +1,9 @@
 {
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "gitCommitMessageEditor.intelliSense.completion.scopes": [
+    {
+      "scope": "dev-deps",
+      "description": "Dev dependencies"
+    }
+  ]
 }
