@@ -3,8 +3,6 @@
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import '@fontsource-variable/anuphan';
-	import '@fontsource/noto-sans-thai-looped/400.css';
-	import '@fontsource/noto-sans-thai-looped/700.css';
 	export let data;
 
 	let { supabase, session } = data;

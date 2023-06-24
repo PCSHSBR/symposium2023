@@ -42,7 +42,6 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource-variable/anuphan": "^5.0.3",
-		"@fontsource/noto-sans-thai-looped": "^5.0.3",
 		"@prisma/client": "4.16.0",
 		"@supabase/auth-helpers-sveltekit": "^0.10.1",
 		"@supabase/supabase-js": "^2.26.0"

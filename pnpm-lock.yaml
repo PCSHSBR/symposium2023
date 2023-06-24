@@ -8,9 +8,6 @@ dependencies:
   '@fontsource-variable/anuphan':
     specifier: ^5.0.3
     version: 5.0.3
-  '@fontsource/noto-sans-thai-looped':
-    specifier: ^5.0.3
-    version: 5.0.3
   '@prisma/client':
     specifier: 4.16.0
     version: 4.16.0(prisma@4.16.1)
@@ -339,10 +336,6 @@ packages:
 
   /@fontsource-variable/anuphan@5.0.3:
     resolution: {integrity: sha512-NACdzlRy7CMX/nJcVlZzJzVZwgGpAfhD+auI8jhKtnkBs2E05PZZ4jI71FuhsdhNu3oeu0N8I2tRVFNhhNRoKA==}
-    dev: false
-
-  /@fontsource/noto-sans-thai-looped@5.0.3:
-    resolution: {integrity: sha512-+E99PbfEXz7TfhhF15qHvJGJVqflH/nt9F/jJBbAQhOYBfEP1E9b12LbvlbFByzumLhDK59P1+0JdxE2NsDKfg==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.10:
