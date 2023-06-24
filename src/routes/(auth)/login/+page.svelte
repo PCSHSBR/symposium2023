@@ -63,11 +63,11 @@
 					{...$constraints.password}
 					required
 				/>
-				<div class="absolute bottom-[16px] right-1 flex items-center px-2">
+				<div class="absolute bottom-[16px] right-0 flex items-center px-2">
 					<input class="hidden" id="show_password" type="checkbox" bind:checked={showPassword} />
 					<button
 						type="button"
-						class="swap btn-sm btn cursor-pointer rounded px-2 py-1 text-sm"
+						class="swap btn-neutral btn-sm btn cursor-pointer rounded px-2 py-1 text-sm"
 						class:swap-active={showPassword}
 						aria-label={showPassword ? 'ซ่อนรหัสผ่าน' : 'แสดงรหัสผ่าน'}
 						on:click|preventDefault={() => (showPassword = !showPassword)}
