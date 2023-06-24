@@ -77,21 +77,21 @@
     @apply m-8 flex flex-col items-center;
   }
   .custom-step span:first-child {
-    @apply bg-base-200 rounded-[50%] w-[3rem] h-[3rem] absolute flex items-center justify-center text-white left-0 top-0;
+    @apply bg-base-200 rounded-[50%] w-[3rem] h-[3rem] absolute flex items-center justify-center text-base-content left-0 top-0;
   }
   .custom-step span:last-child{
     @apply bg-base-200 h-[100%] w-[8px] absolute left-[1.3rem] -z-[10];
   }
 
   .custom-step-primary span:first-child,.custom-step-primary span:last-child{
-    @apply bg-primary;
+    @apply bg-primary text-primary-content;
   }
 
   .custom-step-last span:last-child{
     @apply hidden;
   }
   .custom-step-onprogress span:first-child{
-    @apply bg-primary;
+    @apply bg-primary text-primary-content;
   }
 
 </style>
