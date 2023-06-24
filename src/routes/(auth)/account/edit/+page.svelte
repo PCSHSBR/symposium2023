@@ -61,15 +61,15 @@
 				placeholder="เบอร์มือถือ"
 				type="number"
 				name="phone"
-        autocomplete="tel"
+				autocomplete="tel"
 				required
 			/>
-      <input
+			<input
 				class="input-bordered input w-full"
 				placeholder="Email"
 				type="email"
 				name="email"
-        autocomplete="email"
+				autocomplete="email"
 				required
 			/>
 			<button class="btn-primary btn" disabled={isLoading}>

@@ -20,6 +20,14 @@ h6 {
 	font-family: 'Anuphan Variable', sans-serif;
 }
 
+h1 {
+	@apply mb-6 mt-3 text-4xl;
+}
+
+h2 {
+	@apply mb-2 mt-4 text-xl;
+}
+
 .alert {
 	@apply flex flex-row items-start justify-start text-left;
 }
@@ -29,11 +37,11 @@ main a {
 }
 
 .form-control {
-	@apply text-left;
+	@apply flex flex-col items-start text-left;
 }
 
 .label {
-	@apply flex flex-col items-start text-left px-0;
+	@apply flex items-start px-0 text-left;
 }
 
 .label .label-text {

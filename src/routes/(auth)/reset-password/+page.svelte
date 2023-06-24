@@ -78,3 +78,9 @@
 		</form>
 	</div>
 </section>
+
+<style lang="postcss">
+	.label {
+		@apply flex-col;
+	}
+</style>

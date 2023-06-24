@@ -5,8 +5,7 @@
 	export let data: LayoutData;
 </script>
 
-<Navbar data={data}/>
+<Navbar {data} />
 <main class="min-h-screen">
-<slot />
+	<slot />
 </main>
-

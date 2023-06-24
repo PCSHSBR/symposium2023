@@ -5,10 +5,14 @@ const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			fontFamily: {
+				display: ['Anuphan', 'sans-serif']
+			}
+		}
 	},
 
-	plugins: [daisyui]
+	plugins: [require('@tailwindcss/line-clamp'), daisyui]
 };
 
 module.exports = config;

@@ -12,15 +12,16 @@
 		};
 	}
 
-	let data = $page.data;
+	export let data = $page.data;
 
 	let isNotShowLogin = ['/login', '/controls/dashboard'].includes($page.url.pathname);
 	let isMenuOpen: boolean;
 </script>
 
 <nav
-	class="navbar absolute z-20
- justify-between border-neutral {isMenuOpen ? 'bg-transparent' : 'bg-base-100/70'} backdrop-blur-sm"
+	class="navbar fixed z-20 h-14 justify-between border-neutral {isMenuOpen
+		? 'bg-transparent'
+		: 'bg-base-100/70'} backdrop-blur-sm"
 >
 	<div>
 		<label>
@@ -66,7 +67,7 @@
 	<div>
 		{#if !isNotShowLogin}
 			{#if data.session}
-				<a class="btn-primary btn" href="/auth">แดชบอร์ด</a>
+				<a class="btn-primary btn" href="/dashboard">แดชบอร์ด</a>
 			{:else}
 				<a class="btn-primary btn" href="/login">เข้าสู่ระบบ</a>
 			{/if}
@@ -76,7 +77,7 @@
 
 {#if isMenuOpen}
 	<div
-		class="absolute z-10 h-screen w-screen bg-base-200 md:hidden"
+		class="fixed z-10 h-screen w-screen bg-base-200 md:hidden"
 		transition:slide|local={{ duration: 500 }}
 	>
 		<div

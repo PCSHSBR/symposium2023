@@ -4,7 +4,7 @@
 	import { d } from '$lib/langUtils.js';
 	import type { PageData } from '$lib/types';
 
-	export let data : PageData;
+	export let data: PageData;
 	let { supabase } = data;
 
 	let isLogginout = false;
@@ -23,8 +23,6 @@
 <svelte:head>
 	<title>แดชบอร์ด</title>
 </svelte:head>
-
-
 
 <section class="m-auto w-[calc(100%-64px)] pt-[calc(6rem)]">
 	<div class="flex w-full flex-row flex-wrap items-center justify-between">
