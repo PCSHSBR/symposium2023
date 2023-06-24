@@ -1,12 +1,13 @@
 <!-- // src/routes/login/+page.svelte -->
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import type { PageData } from './$types';
+	import type { PageData, ActionData } from '../../../user-infomation/$types';
 	import { goto } from '$app/navigation';
 	import { superForm } from 'sveltekit-superforms/client';
 	import Icon from '@iconify/svelte';
 	import { textListFormatter, toThai } from '$lib/langUtils';
 
+	export let form: ActionData;
 	export let data: PageData;
 
 	const { form: sForm, errors, constraints } = superForm(data.form);
@@ -15,7 +16,7 @@
 </script>
 
 <svelte:head>
-	<title>แก้ไขข้อมูลบัญชี</title>
+	<title>แก้ไข</title>
 	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 
@@ -60,15 +61,15 @@
 				placeholder="เบอร์มือถือ"
 				type="number"
 				name="phone"
-				autocomplete="tel"
+        autocomplete="tel"
 				required
 			/>
-			<input
+      <input
 				class="input-bordered input w-full"
 				placeholder="Email"
 				type="email"
 				name="email"
-				autocomplete="email"
+        autocomplete="email"
 				required
 			/>
 			<button class="btn-primary btn" disabled={isLoading}>

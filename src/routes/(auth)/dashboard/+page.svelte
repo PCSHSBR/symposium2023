@@ -2,8 +2,9 @@
 	import { goto } from '$app/navigation';
 	import Icon from '@iconify/svelte';
 	import { d } from '$lib/langUtils.js';
+	import type { PageData } from '$lib/types';
 
-	export let data;
+	export let data : PageData;
 	let { supabase } = data;
 
 	let isLogginout = false;
@@ -22,6 +23,8 @@
 <svelte:head>
 	<title>แดชบอร์ด</title>
 </svelte:head>
+
+
 
 <section class="m-auto w-[calc(100%-64px)] pt-[calc(6rem)]">
 	<div class="flex w-full flex-row flex-wrap items-center justify-between">
@@ -48,20 +51,6 @@
 			{:else}
 				<a href="/login" class="btn-primary btn">เข้าสู่ระบบ</a>
 			{/if}
-		</div>
-	</div>
-	<div class="mt-5 flex flex-row flex-wrap items-center">
-		<div
-			class="flex w-full flex-col items-center justify-center rounded-lg bg-base-200 p-2 align-middle shadow-sm md:flex-row md:justify-between"
-		>
-			<div class="flex flex-col items-center md:flex-row">
-				<Icon icon="mdi:close" class="m-10 text-5xl" />
-				<div class="flex flex-col">
-					<h2 class="text-xl">ยังไม่ส่งโครงงาน</h2>
-					<p class="whitespace-pre-line">สามารถส่งได้ถึง {d('2023-07-23')}</p>
-				</div>
-			</div>
-			<a href="/send" class="btn-primary btn m-10">ส่งโครงงาน</a>
 		</div>
 	</div>
 </section>
