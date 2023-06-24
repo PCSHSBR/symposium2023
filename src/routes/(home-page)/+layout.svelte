@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Navbar from '$lib/componant/Navbar.svelte';
+	import Footer from '$lib/componant/Footer.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -16,3 +17,4 @@
 <main>
 	<slot />
 </main>
+<Footer/>

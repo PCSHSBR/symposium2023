@@ -15,8 +15,6 @@
 	let data = $page.data;
 
 	let isNotShowLogin = ['/login', '/controls/dashboard'].includes($page.url.pathname);
-	console.log(isNotShowLogin);
-
 	let isMenuOpen: boolean;
 </script>
 
