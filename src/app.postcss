@@ -83,6 +83,10 @@ h2 {
 	@apply mb-2 mt-4 text-xl;
 }
 
+b {
+	@apply font-bold;
+}
+
 .alert {
 	@apply flex flex-row items-start justify-start text-left;
 }
@@ -104,6 +108,11 @@ main a {
 }
 
 .input-bordered,
-.select-bordered {
-	@apply rounded-md border border-gray-300/40	focus:border-slate-400  focus:ring-1;
+.select-bordered,
+.textarea-bordered {
+	@apply rounded-md border border-gray-300/40	focus:ring-1;
+}
+
+code {
+	@apply font-mono bg-base-300 rounded-md p-1
 }

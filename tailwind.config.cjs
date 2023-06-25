@@ -8,6 +8,9 @@ const config = {
 		extend: {
 			fontFamily: {
 				display: ['Anuphan', 'sans-serif']
+			},
+			screens: {
+				xs: '400px'
 			}
 		}
 	},

@@ -1,16 +1,33 @@
 <script lang="ts">
+	import DOMPurify from 'isomorphic-dompurify';
 	import { enhance } from '$app/forms';
 	import StudentMember from './StudentMember.svelte';
 	import AdvisorMember from './AdvisorMember.svelte';
 	import SpecialAdvisor from './SpecialAdvisor.svelte';
+	import BottomChevron from '../BottomChevron.svelte';
 	import Icon from '@iconify/svelte';
+	import RenderStyledText from '$lib/componant/RenderStyledText.svelte';
+	let projectName = {
+		th: '',
+		en: ''
+	};
+	let displayProjectName = {
+		th: '',
+		en: ''
+	};
+	$: displayProjectName.th = DOMPurify.sanitize(projectName.th, {
+		ALLOWED_TAGS: ['i', 'b']
+	});
+	$: displayProjectName.en = DOMPurify.sanitize(projectName.en, {
+		ALLOWED_TAGS: ['i', 'b']
+	});
 
 	let numberOfStudent = 1;
 	let numberOfAdvisor = 1;
 	let numberOfSpecialAdvisor = 0;
 </script>
 
-<div class="flex flex-row justify-between gap-5 md:flex-row-reverse md:justify-end">
+<div class="mt-4 flex flex-row justify-between gap-5 md:flex-row-reverse md:justify-end">
 	<h1>แก้ไขข้อมูลโครงงาน</h1>
 	<div>
 		<div
@@ -71,26 +88,44 @@
 	<div class="">
 		<h2>ชื่อโครงงาน</h2>
 		<div class="form-control">
-			<label class="label flex-col" for="thai_project_name">
+			<label class="label mb-0 flex-row justify-between" for="thai_project_name">
 				<span class="label-text">ชื่อโครงงานภาษาไทย</span>
+				<span
+					class="tooltip tooltip-left"
+					data-tip="คุณสามารถใช้ตัวเอียงได้ด้วย <i>ตัวเอียง</i> และตัวหนาด้วย <b>ตัวหนา</b>"
+					><Icon icon="mdi:info" class="h-4 w-4" /></span
+				>
 			</label>
 			<input
 				type="text"
 				class="backlit input-bordered input"
 				id="thai_project_name"
 				name="project_name_th"
+				bind:value={projectName.th}
 			/>
+			<span class="label-text-alt mt-2 {!displayProjectName.th ? 'invisible' : ''}"
+				>แสดงผลเป็น: "<RenderStyledText content={displayProjectName.th} />"</span
+			>
 		</div>
 		<div class="form-control">
-			<label class="label flex-col" for="eng_project_name">
+			<label class="label mb-0 flex-row justify-between" for="eng_project_name">
 				<span class="label-text">ชื่อโครงงานภาษาอังกฤษ</span>
+				<span
+					class="tooltip tooltip-left"
+					data-tip="คุณสามารถใช้ตัวเอียงได้ด้วย <i>ตัวเอียง</i> และตัวหนาด้วย <b>ตัวหนา</b>"
+					><Icon icon="mdi:info" class="h-4 w-4" /></span
+				>
 			</label>
 			<input
 				type="text"
 				class="input-bordered input"
 				id="eng_project_name"
 				name="project_name_en"
+				bind:value={projectName.en}
 			/>
+			<span class="label-text-alt mt-2 {!displayProjectName.en ? 'invisible' : ''}"
+				>แสดงผลเป็น: "<RenderStyledText content={displayProjectName.en} />"</span
+			>
 		</div>
 	</div>
 	<div>
@@ -186,23 +221,15 @@
 	</div>
 
 	<button class="btn-primary btn-block btn mt-5">บันทึก</button>
-
-	<div class="join flex flex-row justify-center mt-5">
-		<a href="/my-project">
-			<button class="join-item btn btn-outline"><Icon icon="mdi:home" /></button>
-		</a>
-		<a href="/my-project/edit/step-3-abstract" class="no-underline">
-			<button
-				class="btn-outline btn-wide join-item btn flex flex-row items-center align-middle no-animation"
-				>อัปโหลดบทคัดย่อ <Icon icon="mdi:chevron-right" class="h-8 w-8" /></button
-			>
-		</a>
-	</div>
+	<BottomChevron nextHref="step-3-abstract" nextPage="บทคัดย่อ" />
 </form>
 
 <style lang="postcss">
 	.label {
 		@apply w-full justify-start;
+	}
+	.label-text {
+		@apply w-full;
 	}
 	.input[type='text'] {
 		@apply w-full;
