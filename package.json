@@ -48,6 +48,7 @@
 		"@prisma/client": "4.16.0",
 		"@supabase/auth-helpers-sveltekit": "^0.10.1",
 		"@supabase/supabase-js": "^2.26.0",
+		"dotenv-vault-core": "^0.7.1",
 		"isomorphic-dompurify": "^1.6.0",
 		"marked": "^5.1.0",
 		"remark-squeeze-paragraphs": "^5.0.1",

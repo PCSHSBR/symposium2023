@@ -17,6 +17,9 @@ dependencies:
   '@supabase/supabase-js':
     specifier: ^2.26.0
     version: 2.26.0
+  dotenv-vault-core:
+    specifier: ^0.7.1
+    version: 0.7.1
   isomorphic-dompurify:
     specifier: ^1.6.0
     version: 1.6.0
@@ -1282,6 +1285,18 @@ packages:
       domelementtype: 2.3.0
       domhandler: 5.0.3
     dev: true
+
+  /dotenv-vault-core@0.7.1:
+    resolution: {integrity: sha512-hmtT/1WXNvgMgysvF+GZX0mBX92+mUJ2V2B8KV2qXl44+M8BBNjiZcTJViZMIqKxLjLfjBtGGyvIodd98JNgMg==}
+    engines: {node: '>=12'}
+    dependencies:
+      dotenv: 16.3.1
+    dev: false
+
+  /dotenv@16.3.1:
+    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /electron-to-chromium@1.4.425:
     resolution: {integrity: sha512-wv1NufHxu11zfDbY4fglYQApMswleE9FL/DSeyOyauVXDZ+Kco96JK/tPfBUaDqfRarYp2WH2hJ/5UnVywp9Jg==}
