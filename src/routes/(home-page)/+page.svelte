@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	let days = 15;
 	let hours = 15;
 	let minutes = 12;
@@ -19,6 +21,11 @@
 			hours = 23;
 		}
 	}, 1000);
+	var isSafari;
+	onMount(() => {
+		isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+		console.log(isSafari);
+	});
 </script>
 
 <svelte:head>
@@ -34,34 +41,30 @@
 	<meta property="og:title" content="The 3rd PCSHS Science Symposium 2023 @PCSHSBR" />
 </svelte:head>
 
-<section class="pt-16">
-	<h1>Welcome to SvelteKit</h1>
-	<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-	<a href="/login" class="btn-primary btn">Login</a>
-	<div class="grid auto-cols-max grid-flow-col gap-5 text-center">
-		<div class="flex flex-col">
-			<span class="countdown font-mono text-5xl">
-				<span style="--value:{days};" />
-			</span>
-			days
-		</div>
-		<div class="flex flex-col">
-			<span class="countdown font-mono text-5xl">
-				<span style="--value:{hours};" />
-			</span>
-			hours
-		</div>
-		<div class="flex flex-col">
-			<span class="countdown font-mono text-5xl">
-				<span style="--value:{minutes};" />
-			</span>
-			min
-		</div>
-		<div class="flex flex-col">
-			<span class="countdown font-mono text-5xl">
-				<span style="--value:{seconds};" />
-			</span>
-			sec
-		</div>
+<section class="banner relative">
+	<div class="h-screen overflow-hidden">
+		{#if isSafari}
+			<img src="Image/BannerPic.png" alt="" class="absolute top-[128px] h-[calc(100vh-8rem)] w-screen object-cover" />
+		{:else}
+			<video
+				loop
+				autoplay
+				muted
+				class="absolute top-[128px] h-[calc(100vh-8rem)] w-screen object-cover"
+			>
+				<source src="video/BannerVid.webm" />
+			</video>
+		{/if}
+	</div>
+	<div class="absolute top-[15%] px-16 md:px-32">
+		<h1
+			class="-leading-[16px] text-4xl font-black mix-blend-difference invert dark:mix-blend-difference dark:invert-0 md:text-6xl"
+		>
+			3rd PCSHS Science Symposium
+		</h1>
+		<p class="mix-blend-difference invert dark:mix-blend-difference dark:invert-0">
+			มาร่วมสัมผัสประสบการณ์การนำเสนอผลงานโครงงานวิทยาศาสตร์ และเทคโนโลยี ระดับชั้นมัธยมศึกษาปีที่ 6
+		</p>
+		<a class="btn-primary btn">ส่งโครงงาน</a>
 	</div>
 </section>
