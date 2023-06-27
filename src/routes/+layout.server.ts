@@ -1,8 +1,8 @@
 // src/routes/+layout.server.ts
-export const load = async ({ locals: { getSession } }) => {
+export const load = async ({ locals: { getSession, role } }) => {
 	const session = await getSession();
 	return {
 		session: session,
-		role: session?.user?.role ?? 'anon'
+		role: await role() || 'anon'
 	};
 };

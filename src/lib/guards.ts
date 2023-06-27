@@ -9,8 +9,7 @@ import type { Roles } from '$lib/types'
  */
 export function roleCheck(session: Session | null, role: Roles, target: string) {
 	if (role === 'anon' && session) throw redirect(303, target);
-	if (role === 'authenticated' && !session) throw redirect(303, target);
 	if (!session) throw redirect(303, target);
-	if (role !== session.user.role) throw redirect(303, target);
+	if (role !== session.user.user_metadata.role) throw redirect(303, target);
   // done check!
 }
