@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { PageData } from './$types';
-
+	import { toThai } from '$lib/langUtils.ts'
 	export let data: PageData;
 	let { supabase } = data;
 
@@ -24,3 +24,10 @@
 </svelte:head>
 
 <h1>ยินดีต้อนรับ</h1>
+<p>คุณกำลังเข้าสู่ระบบในฐานะ {toThai(data.role)}</p>
+<a href="/account">
+	<button class="btn">การตั้งค่าบัญชี</button>
+</a>
+<button class="btn btn-error" on:click={handleSignOut} disabled={isLogginout}>
+	{isLogginout ? 'กำลังออกจากระบบ...' : 'ออกจากระบบ'}
+</button>

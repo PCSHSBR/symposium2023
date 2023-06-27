@@ -1,7 +1,1 @@
-export type Roles =
-	| 'anon'
-	| 'authenticated'
-	| 'staff'
-	| 'teacher'
-	| 'student-team-contact'
-	| 'school-contact';
+export type Roles = 'anon' | 'staff' | 'teacher' | 'student-team-contact' | 'school-contact';
