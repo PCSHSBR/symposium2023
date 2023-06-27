@@ -1,9 +1,8 @@
 <script>
 	import BottomChevron from '../BottomChevron.svelte';
-
 </script>
 
-<div class="flex flex-row mt-4 justify-between gap-5 sm:flex-row-reverse sm:justify-end">
+<div class="mt-4 flex flex-row justify-between gap-5 sm:flex-row-reverse sm:justify-end">
 	<h1>อัปโหลดบทความวิชาการ</h1>
 	<div>
 		<div

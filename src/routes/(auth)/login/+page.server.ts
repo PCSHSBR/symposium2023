@@ -1,4 +1,4 @@
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
 import type { Actions, PageServerLoad } from './$types';
@@ -10,7 +10,9 @@ const schema = z.object({
 	password: z.string()
 });
 
-export const load = (async () => {
+export const load = (async ({ locals: { getSession }, url }) => {
+	const session = await getSession();
+	if (session) throw redirect(303, url.searchParams.redirect || '/auth');
 	const form = await superValidate(schema);
 	return { form };
 }) satisfies PageServerLoad;
@@ -18,9 +20,7 @@ export const load = (async () => {
 export const actions = {
 	default: async ({ request, url, locals: { supabase } }) => {
 		const formData = await superValidate(request, schema);
-		console.log(formData);
 		if (!formData.valid) {
-			console.log('not valid');
 			return fail(500, { formData, success: false, message: 'โปรดตรวจสอบข้อมูลที่กรอก' });
 		}
 		const result = await supabase.auth.signInWithPassword({
@@ -29,7 +29,6 @@ export const actions = {
 		});
 
 		if (result.error) {
-			console.log(result);
 			return fail(500, { formData, message: result.error.message, success: false });
 		}
 		return { formData, success: true };

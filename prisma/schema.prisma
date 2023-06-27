@@ -199,6 +199,7 @@ model sessions {
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model sso_domains {
   id              String        @id @db.Uuid
   sso_provider_id String        @db.Uuid
@@ -214,6 +215,7 @@ model sso_domains {
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model sso_providers {
   id                String              @id @db.Uuid
   resource_id       String?
@@ -228,6 +230,7 @@ model sso_providers {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model users {
   instance_id                 String?       @db.Uuid
@@ -268,7 +271,7 @@ model users {
   mfa_factors                 mfa_factors[]
   sessions                    sessions[]
   projects                    projects[]
-  user_role                   user_role[]
+  user_roles                  user_roles[]
 
   @@index([instance_id])
   @@schema("auth")
@@ -283,28 +286,6 @@ model presentation_type {
   is_onsite                                              Boolean
   field                                                  field[]
   projects_projects_presentation_typeTopresentation_type projects[] @relation("projects_presentation_typeTopresentation_type")
-
-  @@schema("public")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model role {
-  ref                            String      @id @unique(map: "role_name_key")
-  display                        String?
-  user_role_user_role_roleTorole user_role[] @relation("user_role_roleTorole")
-
-  @@schema("public")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model user_role {
-  id                        BigInt @id @default(autoincrement())
-  user                      String @db.Uuid
-  role                      String
-  role_user_role_roleTorole role   @relation("user_role_roleTorole", fields: [role], references: [ref], onDelete: NoAction, onUpdate: NoAction)
-  users                     users  @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@schema("public")
 }
@@ -408,6 +389,28 @@ model teachers {
   project                             BigInt?
   projects_teachers_projectToprojects projects? @relation("teachers_projectToprojects", fields: [project], references: [id], onDelete: NoAction, onUpdate: NoAction)
   projects_teachers_schoolToprojects  projects? @relation("teachers_schoolToprojects", fields: [school], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@schema("public")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model roles {
+  ref        String       @id(map: "role_pkey") @unique(map: "role_name_key")
+  display    String?
+  user_roles user_roles[]
+
+  @@schema("public")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model user_roles {
+  id    BigInt @id(map: "user_role_pkey") @default(autoincrement())
+  user  String @db.Uuid
+  role  String
+  roles roles  @relation(fields: [role], references: [ref], onDelete: NoAction, onUpdate: NoAction)
+  users users  @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@schema("public")
 }

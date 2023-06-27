@@ -1,4 +1,3 @@
-<!-- // src/routes/login/+page.svelte -->
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { PageData, ActionData } from './$types';
@@ -6,6 +5,7 @@
 	import { superForm } from 'sveltekit-superforms/client';
 	import Icon from '@iconify/svelte';
 	import { textListFormatter, toThai } from '$lib/langUtils';
+	import { page } from '$app/stores';
 
 	export let form: ActionData;
 	export let data: PageData;
@@ -16,7 +16,7 @@
 	let showPassword = false;
 
 	$: if (data.session) {
-		goto('/auth');
+		goto($page.url.searchParams.get('redirect') || '/auth');
 	}
 </script>
 
