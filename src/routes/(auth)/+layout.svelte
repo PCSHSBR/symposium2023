@@ -6,6 +6,6 @@
 </script>
 
 <Navbar {data} />
-<main class="mx-auto min-h-screen p-5 pt-16 max-w-2xl">
+<main class="mx-auto min-h-screen max-w-2xl p-5 pt-16">
 	<slot />
 </main>
