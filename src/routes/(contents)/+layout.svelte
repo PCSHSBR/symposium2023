@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Navbar from '$lib/componant/Navbar.svelte';
 	import Footer from '$lib/componant/Footer.svelte';
-	import type { PageData } from './$types';
+	import type { PageData } from '../(content)/$types';
 
 	export let data: PageData;
 </script>

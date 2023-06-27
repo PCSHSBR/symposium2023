@@ -31,11 +31,12 @@
 			bind:value={abstractContent}
 		/>
 		<p class="text-sm text-inherit text-opacity-10">
-			<b>หมายเหตุ:</b> ใช้ <code>&lt;i&gt;ตัวเอียง&lt;/i&gt;</code> รอบข้อความสำหรับ<i>ตัวเอียง</i> และ <code>&lt;b&gt;ตัวหนา&lt;/b&gt;</code> สำหรับ<b>ตัวหนา</b>
+			<b>หมายเหตุ:</b> ใช้ <code>&lt;i&gt;ตัวเอียง&lt;/i&gt;</code> รอบข้อความสำหรับ<i>ตัวเอียง</i>
+			และ <code>&lt;b&gt;ตัวหนา&lt;/b&gt;</code> สำหรับ<b>ตัวหนา</b>
 		</p>
 		<div class="card my-4">
 			<h3 class="card-title">แสดงตัวอย่างข้อความ</h3>
-			<div class="p-3 border border-gray-300 mt-3">
+			<div class="mt-3 border border-gray-300 p-3">
 				<RenderStyledText content={abstractContent} />
 			</div>
 		</div>
