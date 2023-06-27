@@ -13,7 +13,7 @@ declare global {
 		}
 		interface PageData {
 			session: Session | null;
-			role: Roles
+			role: Roles;
 		}
 		// interface Error {}
 		// interface Platform {}

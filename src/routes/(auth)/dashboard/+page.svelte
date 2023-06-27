@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { PageData } from './$types';
-	import { toThai } from '$lib/langUtils.ts'
+	import { toThai } from '$lib/langUtils.ts';
 	export let data: PageData;
 	let { supabase } = data;
 
@@ -28,6 +28,6 @@
 <a href="/account">
 	<button class="btn">การตั้งค่าบัญชี</button>
 </a>
-<button class="btn btn-error" on:click={handleSignOut} disabled={isLogginout}>
+<button class="btn-error btn" on:click={handleSignOut} disabled={isLogginout}>
 	{isLogginout ? 'กำลังออกจากระบบ...' : 'ออกจากระบบ'}
 </button>

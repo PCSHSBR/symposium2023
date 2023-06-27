@@ -1,8 +1,11 @@
-import type { Roles } from '$lib/types'
+import type { Roles } from '$lib/types';
 export const sentencesMap: Map<string | Roles, string> = new Map([
 	['fetch failed', 'ไม่สามารถเข้าถึงเซิร์ฟเวอร์ได้ โปรดตรวจสอบการเชื่อมต่ออินเตอร์เน็ต'],
 	['Invalid login credentials', 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'],
-	['Unable to validate email address: invalid format', 'ไม่สามารถตรวจสอบอีเมลได้: รูปแบบไม่ถูกต้อง'],
+	[
+		'Unable to validate email address: invalid format',
+		'ไม่สามารถตรวจสอบอีเมลได้: รูปแบบไม่ถูกต้อง'
+	],
 	['staff', 'เจ้าหน้าที่']
 ]);
 
