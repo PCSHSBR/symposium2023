@@ -44,7 +44,11 @@
 <section class="banner relative">
 	<div class="h-screen overflow-hidden">
 		{#if isSafari}
-			<img src="Image/BannerPic.png" alt="" class="absolute top-[128px] h-[calc(100vh-8rem)] w-screen object-cover" />
+			<img
+				src="Image/BannerPic.png"
+				alt=""
+				class="absolute top-[128px] h-[calc(100vh-8rem)] w-screen object-cover"
+			/>
 		{:else}
 			<video
 				loop

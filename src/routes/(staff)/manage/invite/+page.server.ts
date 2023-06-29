@@ -43,6 +43,7 @@ export let actions = {
 			return fail(400, {
 				message: result.error?.message || 'เกิดข้อผิดพลาดในการส่งคำเชิญ'
 			});
-		} return { ok: true, message: 'ส่งคำเชิญสำเร็จ' };
+		}
+		return { ok: true, message: 'ส่งคำเชิญสำเร็จ' };
 	}
 } satisfies Actions;

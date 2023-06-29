@@ -2,8 +2,9 @@
 	import type { Session, User } from '@supabase/supabase-js';
 	import type { PageData } from './$types';
 	import { z } from 'zod';
-	import TickCross from './TickCross.svelte';
+	import TickCross from '$lib/components/TickCross.svelte';
 	import type { Roles } from '$lib/types';
+	import PasswordRequirementsBox from '$lib/components/PasswordRequirementsBox.svelte';
 	export let data: PageData;
 
 	(async () => {
@@ -206,16 +207,11 @@
 			autocomplete="new-password"
 			bind:value={editingValue.password2}
 		/>
-		<div class="alert">
-			<div class="w-full">
-				<h3 class="mb-2">เงื่อนไขรหัสผ่าน</h3>
-				<div class="grid grid-cols-[25px_auto] items-center text-sm">
-					{#each Object.entries(isPasswordPassRequirements) as [_, { pass, label }]}
-						<TickCross {pass} {label} />
-					{/each}
-				</div>
-			</div>
-		</div>
+		<PasswordRequirementsBox
+			password={editingValue.password1}
+			confirmPassword={editingValue.password2}
+			bind:isPass={isFieldValid.password}
+		/>
 		{#if errors.password}
 			<div class="alert alert-error">
 				{errors.password}

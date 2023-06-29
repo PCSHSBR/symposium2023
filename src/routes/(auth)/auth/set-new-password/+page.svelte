@@ -1,14 +1,35 @@
 <script lang="ts">
-	import type { PageData, ActionData } from './$types';
-	// export let data: PageData;
+	import { page } from '$app/stores';
+	import PasswordRequirementsBox from '$lib/components/PasswordRequirementsBox.svelte';
+	import Icon from '@iconify/svelte';
+	import type { PageData } from './$types';
+	import { toThai } from '$lib/langUtils';
+	import { goto } from '$app/navigation';
+	export let data: PageData;
 
 	let formValue = {
 		password: '',
 		confirmPassword: ''
 	};
+	let errorMessage: string | undefined;
+	let doneMessage: string | undefined;
+	let isPasswordOK = false;
+	let isLoading = false;
+	const redirect = $page.url.searchParams.get('redirect') || '/login';
 
-	function handleSubmit() {}
-
+	async function handleSubmit() {
+		isLoading = true;
+		if (!isPasswordOK) return;
+		const { error } = await data.supabase.auth.updateUser({
+			password: formValue.password
+		});
+		isLoading = false;
+		if (error) {
+			errorMessage = toThai(`${error.name}: ${error.message}`);
+			return;
+		}
+		doneMessage = `ตั้งค่ารหัสผ่านใหม่สำหรับ ${$page.data.session?.user.email} เรียบร้อยแล้ว`;
+	}
 </script>
 
 <!-- https://symposium2023.vercel.app/
@@ -24,6 +45,10 @@
 </svelte:head>
 
 <h1>ตั้งค่ารหัสผ่านใหม่ของคุณ</h1>
+<div class="alert">
+	<Icon icon="mdi:account" class="mr-2 h-6 w-6" />
+	<span>คุณกำลังตั้งค่ารหัสผ่านในฐานะ {$page.data.session?.user.email}</span>
+</div>
 <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-4">
 	<label class="label flex-col">
 		<span class="label-text">รหัสผ่านใหม่</span>
@@ -43,5 +68,26 @@
 			bind:value={formValue.confirmPassword}
 		/>
 	</label>
-	<button type="submit" class="btn-primary btn-block btn">ตั้งค่ารหัสผ่านใหม่</button>
+	<PasswordRequirementsBox
+		password={formValue.password}
+		confirmPassword={formValue.confirmPassword}
+		bind:isPass={isPasswordOK}
+	/>
+	{#if errorMessage || doneMessage}
+		<div class="alert {doneMessage ? 'alert-success' : 'alert-error'}">
+			{#if doneMessage}
+				<Icon icon="mdi:check" class="h-6 w-6" />
+			{:else}
+				<Icon icon="mdi:alert-circle" class="h-6 w-6" />
+			{/if}
+			<span>{errorMessage || doneMessage}</span>
+		</div>
+	{/if}
+	<button type="submit" class="btn-primary btn-block btn" disabled={!isPasswordOK || isLoading}>
+		{#if isLoading}
+			<span class="loading-spinner" />
+		{:else}
+			ตั้งค่ารหัสผ่านใหม่
+		{/if}
+	</button>
 </form>

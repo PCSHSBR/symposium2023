@@ -42,7 +42,7 @@
 				<button class="btn-primary btn">จัดการโครงงาน</button>
 			</a>
 			<a href="/manage/invite">
-				<button class="btn">เชิญส่งคำเชิญสร้างบัญชีใหม่</button>
+				<button class="btn">ส่งคำเชิญสร้างบัญชีใหม่</button>
 			</a>
 		</div>
 	{/if}
