@@ -1,32 +1,48 @@
 import type { Actions, PageServerLoad } from './$types';
 import { z } from 'zod';
-import { fail } from '@sveltejs/kit';
-import { superValidate } from 'sveltekit-superforms/server';
+import { error, fail } from '@sveltejs/kit';
 
-export const ssr = false;
-
-// Schema and load always come first
-const schema = z.object({
-	email: z.string().email({ message: 'โปรดใส่ที่อยู่อีเมลที่ถูกต้อง' })
-});
-
-export const load = async () => {
-	const form = await superValidate(schema);
-	return { form };
-};
+export const load = (async ({ locals: { role } }) => {
+	if ((await role()) !== 'staff') throw error(403, { message: 'คุณไม่มีสิทธิ์เข้าถึงหน้านี้' });
+}) satisfies PageServerLoad;
 
 export let actions = {
-	default: async ({ request, url, locals: { supabase } }) => {
-		let formData = await superValidate(request, schema);
-		if (!formData.valid) {
-			return fail(500, { formData, ok: false });
-		}
-		let result = await supabase.auth.resetPasswordForEmail(formData.data.email, {
-			redirectTo: `${url.origin}/auth/callback?next=${url.origin}/update-password`
+	default: async ({ request, url, locals: { role, supabase, getSession } }) => {
+		if ((await role()) !== 'staff') throw fail(403, { message: 'คุณไม่มีสิทธิ์เข้าถึงหน้านี้' });
+		const session = await getSession();
+		const formData = await request.formData();
+		const formSchema = z.object({
+			email: z
+				.string({
+					invalid_type_error: 'กรุณากรอกอีเมลให้ถูกต้อง',
+					required_error: 'กรุณากรอกอีเมล'
+				})
+				.email({
+					message: 'โปรดตรวจสอบอีเมลอีกครั้ง'
+				}),
+			role: z
+				.string({
+					invalid_type_error: 'ค่าต้องเป็นตัวอักษร'
+				})
+				.refine(
+					(v) => ['staff', 'teacher', 'student-team-contact', 'school-contact'].includes(v),
+					(val) => ({
+						message: `คุณไม่สามารถเลือกบทบาท ${val} ได้`
+					})
+				)
+		});
+		const parsed = formSchema.safeParse(Object.fromEntries(formData));
+		if (!parsed.success) return fail(400, { ok: false, message: parsed.error.flatten() });
+		const result = await supabase.auth.admin.inviteUserByEmail(parsed.data.email, {
+			data: {
+				role: parsed.data.role,
+				invited_by: session?.user.email
+			}
 		});
 		if (result.error) {
-			return fail(500, { message: result.error.message, ok: false });
-		}
-		return { formData, ok: true };
+			return fail(400, {
+				message: result.error?.message || 'เกิดข้อผิดพลาดในการส่งคำเชิญ'
+			});
+		} return { ok: true, message: 'ส่งคำเชิญสำเร็จ' };
 	}
 } satisfies Actions;

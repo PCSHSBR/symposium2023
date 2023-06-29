@@ -12,7 +12,7 @@ const schema = z.object({
 
 export const load = (async ({ locals: { getSession }, url }) => {
 	const session = await getSession();
-	if (session) throw redirect(303, url.searchParams.redirect || '/auth');
+	if (session) throw redirect(303, url.searchParams.get('redirect') || '/auth');
 	const form = await superValidate(schema);
 	return { form };
 }) satisfies PageServerLoad;

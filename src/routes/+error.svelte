@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import type { PageData } from './$types';
 	let error = $page;
-
 	interface LocalErrorMessage {
 		[key: number]: string;
 	}
+
+	export let data: PageData;
 
 	const locals: LocalErrorMessage = {
 		400: 'คุณส่งอะไรมาเนีย!',
@@ -43,10 +45,19 @@
 					{errmsg_locals[Math.floor(Math.random() * errmsg_locals.length)]}
 				</h2>
 				<h2>{locals[error.status] ?? error.error?.message}</h2>
-				<a
-					href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{error.status}"
-					class="link pt-4">อะไรคือ {error.status}?</a
-				>
+				<div>
+					{#if data.user}
+						<span>เข้าสู่ระบบในฐานะ {data.role}</span>
+						<a href="/auth" class="link">กลับไปหน้าแดชบอร์ด</a>
+					{:else}
+						<span>คุณยังไม่ได้เข้าสู่ระบบ</span>
+						<a href="/login" class="link">เข้าสู่ระบบ</a>
+					{/if}
+					<a
+						href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{error.status}"
+						class="link pt-4">อะไรคือ {error.status}?</a
+					>
+				</div>
 			</div>
 		</div>
 	</div>

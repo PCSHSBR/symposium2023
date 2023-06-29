@@ -23,11 +23,27 @@
 	<title>แดชบอร์ด</title>
 </svelte:head>
 
-<h1>ยินดีต้อนรับ</h1>
-<p>คุณกำลังเข้าสู่ระบบในฐานะ {toThai(data.role)}</p>
-<a href="/account">
-	<button class="btn">การตั้งค่าบัญชี</button>
-</a>
-<button class="btn-error btn" on:click={handleSignOut} disabled={isLogginout}>
-	{isLogginout ? 'กำลังออกจากระบบ...' : 'ออกจากระบบ'}
-</button>
+<section>
+	<h1>ยินดีต้อนรับ</h1>
+	<p>คุณกำลังเข้าสู่ระบบในฐานะ {toThai(data.role)}</p>
+	<a href="/account">
+		<button class="btn">การตั้งค่าบัญชี</button>
+	</a>
+	<button class="btn-error btn" on:click={handleSignOut} disabled={isLogginout}>
+		{isLogginout ? 'กำลังออกจากระบบ...' : 'ออกจากระบบ'}
+	</button>
+</section>
+
+<section class="card">
+	{#if data.role === 'staff'}
+		<h2>เครื่องมือสำหรับเจ้าหน้าที่</h2>
+		<div class="">
+			<a href="/manage">
+				<button class="btn-primary btn">จัดการโครงงาน</button>
+			</a>
+			<a href="/manage/invite">
+				<button class="btn">เชิญส่งคำเชิญสร้างบัญชีใหม่</button>
+			</a>
+		</div>
+	{/if}
+</section>
