@@ -4,7 +4,7 @@
 	import { superForm } from 'sveltekit-superforms/client';
 	import { textListFormatter, toThai } from '$lib/langUtils';
 	import Icon from '@iconify/svelte';
-	import FormMessage from '$lib/componant/FormMessage.svelte';
+	import FormMessage from '$lib/components/FormMessage.svelte';
 
 	export let form: ActionData;
 	let isLoading: boolean = false;

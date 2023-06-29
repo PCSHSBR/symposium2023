@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Navbar from '$lib/componant/Navbar.svelte';
-	import Footer from '$lib/componant/Footer.svelte';
+	import Navbar from '$lib/components/Navbar.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 	import type { PageData } from '../(content)/$types';
 
 	export let data: PageData;

@@ -22,7 +22,7 @@ export let actions = {
 			return fail(500, { formData, ok: false });
 		}
 		let result = await supabase.auth.resetPasswordForEmail(formData.data.email, {
-			redirectTo: `${url.origin}/auth/callback?next=${url.origin}/update-password`
+			redirectTo: `${url.origin}/auth/callback?next=/update-password`
 		});
 		if (result.error) {
 			return fail(500, { message: result.error.message, ok: false });

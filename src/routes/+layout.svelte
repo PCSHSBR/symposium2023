@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.postcss';
-	import { invalidate } from '$app/navigation';
+	import { goto, invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import '@fontsource-variable/anuphan';
 	import { page } from '$app/stores';
@@ -9,8 +9,31 @@
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
 
-	const hashParams = Object.fromEntries(new URLSearchParams($page.url.hash.slice(1)))
-	
+
+	// <!-- http://localhost:3000/
+	// #access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjg3OTc5NzU1LCJpYXQiOjE2ODc5NzYxNTUsInN1YiI6ImFhNjE2NmFhLWE4Y2MtNDc0Ny1hMmI1LTc4OTc5OTA2MDBlYSIsImVtYWlsIjoibWFucGF0c2Fnb3JueStzdGFmZkBnbWFpbC5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7Imludml0ZWRfYnkiOiJtYW5wYXRzYWdvcm55QGdtYWlsLmNvbSIsInJvbGUiOiJzdGFmZiJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6Im90cCIsInRpbWVzdGFtcCI6MTY4Nzk3NjE1NX1dLCJzZXNzaW9uX2lkIjoiNTZmZjkyNjUtMjFhNy00MzRiLWE2MDMtMzIwNjYxNmNlYTFiIn0.p_jPoD0TfyTIY-Yra5Az7xn-YFQKmyegn7nGqkTrJ3o
+	// &expires_in=3600
+	// &refresh_token=uIAHeXoC_Ras21VZUAhJvA
+	// &token_type=bearer
+	// &type=invite -->
+
+	const hashParams = Object.fromEntries(new URLSearchParams($page.url.hash.slice(1)));
+	(async () => {
+		if (!hashParams.access_token || !hashParams.refresh_token || !hashParams.expires_in || !hashParams.type) return
+		const { data, error } = await supabase.auth.setSession({
+			access_token: hashParams.access_token,
+			refresh_token: hashParams.refresh_token
+		});
+
+		if (error) {
+			console.error(error);
+			return;
+		}
+
+		let sendToList = {
+			'invite': '/auth/welcome',
+		}
+	})();
 
 	onMount(() => {
 		const {
@@ -23,8 +46,6 @@
 
 		return () => subscription.unsubscribe();
 	});
-	// get #access_token= from $page.url.hash
-	console.log('access_token', $page.url.hash);
 </script>
 
 {@html `<!--

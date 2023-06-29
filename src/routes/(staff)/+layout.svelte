@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	export let data: PageData;
-	import Navbar from '$lib/componant/Navbar.svelte';
+	import Navbar from '$lib/components/Navbar.svelte';
 </script>
 
 <Navbar {data} />

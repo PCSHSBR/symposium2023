@@ -3,7 +3,7 @@
 	import BottomChevron from '../BottomChevron.svelte';
 	import Upload from '../Upload.svelte';
 	import { textareaAutosizeAction, focusAction } from 'svelte-legos';
-	import RenderStyledText from '$lib/componant/RenderStyledText.svelte';
+	import RenderStyledText from '$lib/components/RenderStyledText.svelte';
 
 	let abstractContent = '';
 </script>

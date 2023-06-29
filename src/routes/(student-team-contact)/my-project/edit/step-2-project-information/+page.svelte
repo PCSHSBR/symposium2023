@@ -6,7 +6,7 @@
 	import SpecialAdvisor from './SpecialAdvisor.svelte';
 	import BottomChevron from '../BottomChevron.svelte';
 	import Icon from '@iconify/svelte';
-	import RenderStyledText from '$lib/componant/RenderStyledText.svelte';
+	import RenderStyledText from '$lib/components/RenderStyledText.svelte';
 	let projectName = {
 		th: '',
 		en: ''
