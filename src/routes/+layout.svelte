@@ -3,10 +3,14 @@
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import '@fontsource-variable/anuphan';
+	import { page } from '$app/stores';
 	export let data;
 
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
+
+	const hashParams = Object.fromEntries(new URLSearchParams($page.url.hash.slice(1)))
+	
 
 	onMount(() => {
 		const {
@@ -19,6 +23,8 @@
 
 		return () => subscription.unsubscribe();
 	});
+	// get #access_token= from $page.url.hash
+	console.log('access_token', $page.url.hash);
 </script>
 
 {@html `<!--
