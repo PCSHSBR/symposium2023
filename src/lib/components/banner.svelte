@@ -19,6 +19,7 @@
 		let z = Math.sin((maxY - clientY * 2) / maxY) * intensity;
 		return new THREE.Vector3(x, 0, z);
 	}
+  export let isHover : boolean = false;
 
 	onMount(() => {
 		let width = window.innerWidth;
@@ -95,14 +96,20 @@
 			composer.setSize(width, height);
 		});
 
+
 		function animation() {
 			requestAnimationFrame(animation);
 			renderer.render(scene, camera);
 			// controls.update();
-			camera.rotation.set(rotation.z, 0.540353936417444 + rotation.x, 0);
+			if (isHover){
+        camera.rotation.set(rotation.z, 0.540353936417444 + rotation.x, 0);
+      }
+      else{
+        camera.rotation.set(Math.sin(new Date().getTime() * 0.0005) * 0.1, 0.540353936417444 + Math.sin(new Date().getTime() * 0.0005) * 0.1, Math.sin(new Date().getTime() * 0.0005) * 0.1);
+      }
 		}
 		animation();
 	});
 </script>
 
-<div class="three-canvas" />
+<div class="three-canvas"/>

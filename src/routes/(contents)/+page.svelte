@@ -7,6 +7,7 @@
 	let minutes = 12;
 	let seconds = 24;
 	let isLoading = true;
+	let isBannerHovered = false;
 
 	setInterval(() => {
 		seconds--;
@@ -43,9 +44,9 @@
 	<meta property="og:title" content="The 3rd PCSHS Science Symposium 2023 @PCSHSBR" />
 </svelte:head>
 
-<section class="banner relative">
+<section class="banner relative" on:mouseenter={()=>{isBannerHovered=true}} on:mouseleave={()=>{isBannerHovered=false}}>
 	<div class="h-screen overflow-hidden">
-		<Banner bind:isLoading={isLoading}/>
+		<Banner bind:isLoading={isLoading} bind:isHover={isBannerHovered}/>
 	</div>
 	<div class="absolute top-[15%] px-16 md:px-32">
 		<h1
