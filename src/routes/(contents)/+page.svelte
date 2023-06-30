@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Banner from '$lib/components/banner.svelte';
 
 	let days = 15;
 	let hours = 15;
@@ -50,14 +51,7 @@
 				class="absolute top-[128px] h-[calc(100vh-8rem)] w-screen object-cover"
 			/>
 		{:else}
-			<video
-				loop
-				autoplay
-				muted
-				class="absolute top-[128px] h-[calc(100vh-8rem)] w-screen object-cover"
-			>
-				<source src="video/BannerVid.webm" />
-			</video>
+			<Banner />
 		{/if}
 	</div>
 	<div class="absolute top-[15%] px-16 md:px-32">
