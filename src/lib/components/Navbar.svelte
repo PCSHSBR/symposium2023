@@ -14,7 +14,7 @@
 
 	export let data = $page.data;
 
-	let isNotShowLogin = ['/login', '/controls/dashboard'].includes($page.url.pathname);
+	let isNotShowLogin = ['/login'].includes($page.url.pathname);
 	let isMenuOpen: boolean;
 </script>
 
@@ -67,7 +67,34 @@
 	<div>
 		{#if !isNotShowLogin}
 			{#if data.session}
-				<a class="btn-primary btn" href="/dashboard">แดชบอร์ด</a>
+				<!-- <a class="btn-primary btn" href="/dashboard">แดชบอร์ด</a> -->
+				<div class="dropdown-end dropdown-hover dropdown">
+					<button tabindex="0" class="btn-primary btn-square btn">
+						<Icon icon="line-md:account" class="h-5 w-5" />
+						<span class="sr-only">เปิดเครื่องมือผู้ใช้</span>
+					</button>
+					<ul class="dropdown-content menu rounded-box w-52 bg-base-200 shadow">
+						<li class="menu-title text-base">ยินดีต้อนรับ</li>
+						<li>
+							<a href="/dashboard" class="hover:bg-base-300">
+								<Icon icon="mdi:view-dashboard" class="h-5 w-5" />
+								แดชบอร์ด
+							</a>
+						</li>
+						<li>
+							<a href="/account">
+								<Icon icon="mdi:account" class="h-5 w-5" />
+								บัญชีของฉัน
+							</a>
+						</li>
+						<li>
+							<a href="/logout" class="btn-error btn-outline">
+								<Icon icon="mdi:logout" class="h-5 w-5" />
+								ออกจากระบบ</a
+							>
+						</li>
+					</ul>
+				</div>
 			{:else}
 				<a class="btn-primary btn" href="/login">เข้าสู่ระบบ</a>
 			{/if}

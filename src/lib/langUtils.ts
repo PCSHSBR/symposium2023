@@ -6,7 +6,11 @@ export const sentencesMap: Map<string | Roles, string> = new Map([
 		'Unable to validate email address: invalid format',
 		'ไม่สามารถตรวจสอบอีเมลได้: รูปแบบไม่ถูกต้อง'
 	],
-	['staff', 'เจ้าหน้าที่']
+	['staff', 'เจ้าหน้าที่'],
+	[
+		'For security purposes, you can only request this once every 60 seconds',
+		'เนื่องด้วยเหตุผลด้านความปลอดภัย คุณสามารถส่งคำขอรีเซ็ตรหัสผ่านได้หนึ่งครั้งทุก ๆ 60 วินาที'
+	]
 ]);
 
 export function toThai(message: string | undefined) {

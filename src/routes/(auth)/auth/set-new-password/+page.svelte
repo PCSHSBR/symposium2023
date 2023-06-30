@@ -45,7 +45,7 @@
 </svelte:head>
 
 <h1>ตั้งค่ารหัสผ่านใหม่ของคุณ</h1>
-<div class="alert">
+<div role="presentation" class="alert">
 	<Icon icon="mdi:account" class="mr-2 h-6 w-6" />
 	<span>คุณกำลังตั้งค่ารหัสผ่านในฐานะ {$page.data.session?.user.email}</span>
 </div>
@@ -74,7 +74,7 @@
 		bind:isPass={isPasswordOK}
 	/>
 	{#if errorMessage || doneMessage}
-		<div class="alert {doneMessage ? 'alert-success' : 'alert-error'}">
+		<div role="alert" class="alert {doneMessage ? 'alert-success' : 'alert-error'}">
 			{#if doneMessage}
 				<Icon icon="mdi:check" class="h-6 w-6" />
 			{:else}
@@ -90,4 +90,5 @@
 			ตั้งค่ารหัสผ่านใหม่
 		{/if}
 	</button>
+	<a href="/dashboard" class="m-auto">กลับหน้าแดชบอร์ด </a>
 </form>

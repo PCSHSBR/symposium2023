@@ -2,7 +2,7 @@
 
 import { SupabaseClient, Session } from '@supabase/supabase-js';
 import { Database } from './DatabaseDefinitions';
-import type { Roles } from '$lib/types';
+import type { Roles, UserMetadata } from '$lib/types';
 
 declare global {
 	namespace App {
@@ -14,6 +14,7 @@ declare global {
 		interface PageData {
 			session: Session | null;
 			role: Roles;
+			user_metadata: UserMetadata;
 		}
 		// interface Error {}
 		// interface Platform {}
