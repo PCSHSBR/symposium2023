@@ -76,7 +76,7 @@
 					<ul class="dropdown-content menu rounded-box w-52 bg-base-200 shadow">
 						<li class="menu-title text-base">ยินดีต้อนรับ</li>
 						<li>
-							<a href="/dashboard" class="hover:bg-base-300">
+							<a href="/dashboard">
 								<Icon icon="mdi:view-dashboard" class="h-5 w-5" />
 								แดชบอร์ด
 							</a>

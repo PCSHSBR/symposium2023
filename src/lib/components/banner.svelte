@@ -105,7 +105,10 @@
         camera.rotation.set(rotation.z, 0.540353936417444 + rotation.x, 0);
       }
       else{
-        camera.rotation.set(Math.sin(new Date().getTime() * 0.0005) * 0.1, 0.540353936417444 + Math.sin(new Date().getTime() * 0.0005) * 0.1, Math.sin(new Date().getTime() * 0.0005) * 0.1);
+        camera.rotation.set(
+          Math.sin(new Date().getTime() * 0.0004) * 0.1 ,
+           0.540353936417444 + Math.sin(new Date().getTime() * 0.0005) * 0.1,
+           Math.sin(new Date().getTime() * 0.0003) * 0.1);
       }
 		}
 		animation();

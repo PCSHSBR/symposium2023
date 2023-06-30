@@ -55,7 +55,7 @@
 			<span class="text-[128px]">3</span><span class="text-xl align-top">rd</span> PCSHS Science Symposium
 		</h1>
 		<p class="mix-blend-difference invert dark:mix-blend-difference dark:invert-0">
-			มาร่วมสัมผัสประสบการณ์การนำเสนอผลงานโครงงานวิทยาศาสตร์ และเทคโนโลยี ระดับชั้นมัธยมศึกษาปีที่ 6
+			มาร่วมสร้างสรรค์นวัตกรรมที่จะเปลี่ยนโลกให้ดีขึ้นผ่านการนำเสนอผลงานโครงงานของคุณกันเถอะ!
 		</p>
 		<a class="btn-primary btn">ส่งโครงงาน</a>
 	</div>
