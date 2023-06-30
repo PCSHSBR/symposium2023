@@ -6,6 +6,7 @@
 	let hours = 15;
 	let minutes = 12;
 	let seconds = 24;
+	let isLoading = true;
 
 	setInterval(() => {
 		seconds--;
@@ -22,7 +23,7 @@
 			hours = 23;
 		}
 	}, 1000);
-	var isSafari;
+	var isSafari : boolean;
 	onMount(() => {
 		isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 		console.log(isSafari);
@@ -44,21 +45,13 @@
 
 <section class="banner relative">
 	<div class="h-screen overflow-hidden">
-		{#if isSafari}
-			<img
-				src="Image/BannerPic.png"
-				alt=""
-				class="absolute top-[128px] h-[calc(100vh-8rem)] w-screen object-cover"
-			/>
-		{:else}
-			<Banner />
-		{/if}
+		<Banner bind:isLoading={isLoading}/>
 	</div>
 	<div class="absolute top-[15%] px-16 md:px-32">
 		<h1
 			class="-leading-[16px] text-4xl font-black mix-blend-difference invert dark:mix-blend-difference dark:invert-0 md:text-6xl"
 		>
-			3rd PCSHS Science Symposium
+			<span class="text-[128px]">3</span><span class="text-xl align-top">rd</span> PCSHS Science Symposium
 		</h1>
 		<p class="mix-blend-difference invert dark:mix-blend-difference dark:invert-0">
 			มาร่วมสัมผัสประสบการณ์การนำเสนอผลงานโครงงานวิทยาศาสตร์ และเทคโนโลยี ระดับชั้นมัธยมศึกษาปีที่ 6
