@@ -42,7 +42,7 @@
 				/>
 			</label>
 			{#if $errors.email ?? form?.message}
-				<div class="alert alert-error">
+				<div role="alert" class="alert alert-error">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="h-6 w-6 shrink-0 stroke-current"
@@ -59,7 +59,7 @@
 				</div>
 			{/if}
 			{#if form?.ok}
-				<div class="item-start just alert alert-success flex flex-row">
+				<div role="alert" class="item-start just alert alert-success flex flex-row">
 					<Icon icon="mdi:success-bold" width={25} height={25} />
 					ส่งลิงก์สำหรับรีเซ็ตรหัสผ่านใหม่เรียบร้อยแล้ว หากที่อยู่อีเมลที่คุณให้มีอยู่จริง
 				</div>

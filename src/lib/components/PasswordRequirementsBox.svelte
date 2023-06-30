@@ -44,7 +44,7 @@
 	}
 </script>
 
-<div class="alert">
+<div class="alert" role="presentation">
 	<div class="w-full">
 		<h3 class="mb-2">เงื่อนไขรหัสผ่าน</h3>
 		<div class="grid grid-cols-[25px_auto] items-center text-sm">

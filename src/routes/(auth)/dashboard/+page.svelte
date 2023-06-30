@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { PageData } from './$types';
-	import { toThai } from '$lib/langUtils.ts';
+	import { toThai } from '$lib/langUtils';
 	export let data: PageData;
 	let { supabase } = data;
 
@@ -25,13 +25,15 @@
 
 <section>
 	<h1>ยินดีต้อนรับ</h1>
-	<p>คุณกำลังเข้าสู่ระบบในฐานะ {toThai(data.role)}</p>
-	<a href="/account">
-		<button class="btn">การตั้งค่าบัญชี</button>
-	</a>
-	<button class="btn-error btn" on:click={handleSignOut} disabled={isLogginout}>
-		{isLogginout ? 'กำลังออกจากระบบ...' : 'ออกจากระบบ'}
-	</button>
+	<p>คุณกำลังเข้าสู่ระบบในฐานะ{toThai(data.role)} ({data.session?.user.email})</p>
+	<div class="flex flex-row flex-wrap gap-2 pt-4">
+		<a href="/account">
+			<button class="btn">การตั้งค่าบัญชี</button>
+		</a>
+		<button class="btn-error btn" on:click={handleSignOut} disabled={isLogginout}>
+			{isLogginout ? 'กำลังออกจากระบบ...' : 'ออกจากระบบ'}
+		</button>
+	</div>
 </section>
 
 <section class="card">

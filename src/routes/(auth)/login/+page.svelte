@@ -78,7 +78,7 @@
 				</div>
 			</label>
 			{#if $errors.email || $errors.password || form?.message}
-				<div class="alert alert-error justify-start">
+				<div role="alert" class="alert alert-error justify-start">
 					<Icon icon="mdi:error" class="swap-on text-2xl" />
 					<span
 						>{textListFormatter($errors.email) ||

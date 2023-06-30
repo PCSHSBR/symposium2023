@@ -1,8 +1,6 @@
 <script lang="ts">
-	import type { Session, User } from '@supabase/supabase-js';
 	import type { PageData } from './$types';
 	import { z } from 'zod';
-	import TickCross from '$lib/components/TickCross.svelte';
 	import type { Roles } from '$lib/types';
 	import PasswordRequirementsBox from '$lib/components/PasswordRequirementsBox.svelte';
 	export let data: PageData;
@@ -10,6 +8,7 @@
 	(async () => {
 		await data.supabase.auth.refreshSession();
 	})();
+
 	const emailSchema = z.string().email();
 
 	let isEditing = {
@@ -109,6 +108,8 @@
 <h1>บัญชีผู้ใช้</h1>
 <h2>ข้อมูลทั่วไป</h2>
 <div class="grid gap-3 rounded-md bg-base-300 p-4 lg:grid-cols-[200px_auto]">
+	<b>อีเมล</b>
+	<span>{data.session?.user.email}</span>
 	<b>บทบาท</b>
 	<div>
 		<span class="rounded bg-base-content px-2 text-base-200"
@@ -116,7 +117,7 @@
 		>
 		<span class="label-text-alt">หากต้องการแก้ไขบทบาท โปรดติดต่อผู้ดูแล</span>
 	</div>
-	<b>เชิญโดย</b>
+	<b>ถูกเชิญโดย</b>
 	<span>{data.session?.user.user_metadata.invited_by}</span>
 </div>
 
@@ -162,12 +163,12 @@
 		</div>
 	{/if}
 	{#if errors.email}
-		<div class="alert alert-error col-span-2">
+		<div role="alert" class="alert alert-error col-span-2">
 			{errors.email}
 		</div>
 	{/if}
 	{#if editingState.email[0]}
-		<div class="alert alert-success col-span-2">
+		<div role="alert" class="alert alert-success col-span-2">
 			{editingState.email[1]}
 		</div>
 	{/if}
@@ -213,12 +214,12 @@
 			bind:isPass={isFieldValid.password}
 		/>
 		{#if errors.password}
-			<div class="alert alert-error">
+			<div role="alert" class="alert alert-error">
 				{errors.password}
 			</div>
 		{/if}
 		{#if editingState.password[0]}
-			<div class="alert alert-success">
+			<div role="alert" class="alert alert-success">
 				{editingState.password[1]}
 			</div>
 		{/if}

@@ -16,7 +16,7 @@
 </script>
 
 {#if message}
-	<div class="alert {ok ? 'alert-success' : 'alert-error'}">
+	<div role="alert" class="alert {ok ? 'alert-success' : 'alert-error'}">
 		{#if ok}
 			<Icon icon="mdi:check-circle" class="h-6 w-6" />
 		{:else}
