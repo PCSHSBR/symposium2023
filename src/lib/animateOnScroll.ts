@@ -79,11 +79,15 @@ function scaledNumber(
 	rangedMin: number = 0,
 	rangedMax: number = 1
 ) {
-	return ((percentage - min) / (max - min) > rangedMax
-		? rangedMax
-		: (percentage - min) / (max - min) < rangedMin
-		? rangedMin
-		: (percentage - min) / (max - min)) * (rangedMax - rangedMin) + rangedMin;
+	return (
+		((percentage - min) / (max - min) > rangedMax
+			? rangedMax
+			: (percentage - min) / (max - min) < rangedMin
+			? rangedMin
+			: (percentage - min) / (max - min)) *
+			(rangedMax - rangedMin) +
+		rangedMin
+	);
 }
 
 export default animator;

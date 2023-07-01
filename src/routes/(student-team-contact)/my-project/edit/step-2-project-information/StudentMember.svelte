@@ -21,7 +21,7 @@
 		<div class="form-control w-full">
 			<label class="label w-full flex-col">
 				<span class="label-text">คำนำหน้า</span>
-				<select class="select-bordered select w-full" name="prefix1">
+				<select class="select-bordered select w-full" name="title1">
 					<option value="" selected>เลือกคำนำหน้า</option>
 					<option value="นางสาว">นางสาว</option>
 					<option value="นาย">นาย</option>
@@ -30,8 +30,8 @@
 		</div>
 		<div class="form-control w-full">
 			<label class="label w-full flex-col">
-				<span class="label-text">Prefix</span>
-				<select class="select-bordered select w-full" name="prefix1">
+				<span class="label-text">title</span>
+				<select class="select-bordered select w-full" name="title1">
 					<option value="" selected>เลือกคำนำหน้า</option>
 					<option value="Miss">Miss</option>
 					<option value="Mr.">Mr.</option>

@@ -1,13 +1,18 @@
 <script lang="ts">
 	import type { Roles, RoleDescription } from '$lib/types';
+	import { thai_titlt_to_en_title } from '$lib/common';
 	import type { ActionData, PageData } from './$types';
 	import TextInput from '../../(student-team-contact)/my-project/edit/step-2-project-information/TextInput.svelte';
 	import Icon from '@iconify/svelte';
 	import PasswordRequirementsBox from '$lib/components/PasswordRequirementsBox.svelte';
 	import { enhance } from '$app/forms';
+	import { superForm } from 'sveltekit-superforms/client';
+	import { goto } from '$app/navigation';
+	// import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 
 	export let data: PageData;
-	// export let form: ActionData;
+	export let form: ActionData;
+	const { form: formStore, errors: formErrors, constraints } = superForm(data.form);
 
 	const roleData: Record<Roles, RoleDescription> = {
 		anon: {
@@ -32,24 +37,11 @@
 		}
 	};
 
-	let formValues = {
-		prefix_th: data.user_metadata?.prefix_th ?? '',
-		firstname_th: data.user_metadata?.prefix_th ?? '',
-		lastname_th: data.user_metadata?.lastname_th ?? '',
-		prefix_en: data.user_metadata?.prefix_en ?? '',
-		firstname_en: data.user_metadata?.firstname_en ?? '',
-		lastname_en: data.user_metadata?.lastname_en ?? '',
-		phone: data.user_metadata?.phone ?? '',
-		password: '',
-		confirmPassword: '',
-		agree: data.user_metadata?.agree ?? false
-	};
-
 	let isFieldValid = {
-		prefix_th: true,
+		title_th: true,
 		firstname_th: true,
 		lastname_th: true,
-		prefix_en: true,
+		title_en: true,
 		firstname_en: true,
 		lastname_en: true,
 		phone: true,
@@ -57,6 +49,12 @@
 	};
 
 	let isSubmitting = false;
+
+	$: if (form?.ok) {
+		setTimeout(() => {
+			goto('/dashboard');
+		}, 3000);
+	}
 </script>
 
 <svelte:head>
@@ -64,6 +62,16 @@
 </svelte:head>
 
 <h1>ยินดีต้อนรับ 👋</h1>
+{#if data.isUserSetupDoneAlready}
+	<div class="alert alert-warning my-5" role="presentation">
+		<Icon icon="mdi:alert-circle-outline" class="mr-2 inline-block h-6 w-6" />
+		<span
+			>คุณตั้งค่าบัญชีเรียบร้อยแล้ว หากต้องการแก้ไขข้อมูลโปรดไปที่<a href="/account"
+				>การตั้งค่าบัญชี</a
+			></span
+		>
+	</div>
+{/if}
 <p>มาตั้งค่าบัญชีของคุณกัน {data.session?.user.email}</p>
 <form
 	class="flex flex-col gap-8"
@@ -97,45 +105,77 @@
 			</div>
 		{/if}
 		<div class="flex flex-col sm:flex-row sm:gap-5">
-			<TextInput
-				label="คำนำหน้า"
-				bottomLeftLabel="ห้ามใช้ตัวย่อ"
-				name="prefix_th"
-				autocomplete="off"
-				required
-				bind:value={formValues.prefix_th}
-			/>
-			<TextInput
-				label="Prefix"
-				autocomplete="off"
-				name="prefix_en"
-				bottomLeftLabel="คำนำหน้าภาษาอังกฤษ ใช้ตัวย่อได้"
-				required
-				bind:value={formValues.prefix_en}
-			/>
+			<div class="form-control w-full">
+				<label class="label w-full flex-col">
+					<span class="label-text">คำนำหน้า</span>
+					<select
+						name="title_th"
+						class="select-bordered select w-full"
+						aria-invalid={$formErrors.title_th ? 'true' : undefined}
+						bind:value={$formStore.title_th}
+						{...$constraints.title_th}
+						on:change={() => {
+							$formStore.title_en = thai_titlt_to_en_title[$formStore.title_th] ?? '';
+						}}
+					>
+						<option value="" selected={!$formStore.title_th} disabled>เลือกคำนำหน้า</option>
+						{#each ['นาย', 'นางสาว', 'นาง'] as name_title}
+							<option value={name_title} selected={name_title === $formStore.title_th}
+								>{name_title}</option
+							>
+						{/each}
+					</select>
+				</label>
+			</div>
+			<div class="form-control w-full">
+				<label class="label w-full flex-col">
+					<span class="label-text">Title</span>
+					<select
+						name="title_en"
+						autocomplete="honorific-prefix"
+						class="select-bordered select w-full"
+						aria-invalid={$formErrors.title_en ? 'true' : undefined}
+						bind:value={$formStore.title_en}
+						{...$constraints.title_en}
+					>
+						<option value="" selected={!$formStore.title_en} disabled>เลือกคำนำหน้า</option>
+						{#each ['Mr.', 'Miss', 'Ms.', 'Mrs.'] as name_title}
+							<option value={name_title} selected={name_title === $formStore.title_en}
+								>{name_title}</option
+							>
+						{/each}
+					</select>
+				</label>
+			</div>
 		</div>
 		<div class="flex flex-col sm:flex-row sm:gap-5">
 			<TextInput
 				label="ชื่อ"
 				name="firstname_th"
-				autocomplete="givenname"
-				bind:value={formValues.firstname_th}
+				autocomplete="given-name"
+				bind:value={$formStore.firstname_th}
+				arai-invalid={$formErrors.firstname_th ? 'true' : undefined}
+				{...$constraints.firstname_th}
 			/>
 			<TextInput
 				label="Firstname"
 				name="firstname_en"
-				autocomplete="givenname"
+				autocomplete="given-name"
 				bottomLeftLabel="ชื่อภาษาอังกฤษ"
 				required
-				bind:value={formValues.firstname_en}
+				bind:value={$formStore.firstname_en}
+				aria-invalid={$formErrors.firstname_en ? 'true' : undefined}
+				{...$constraints.firstname_en}
 			/>
 		</div>
 		<div class="flex flex-col sm:flex-row sm:gap-5">
 			<TextInput
 				label="นามสกุล"
 				name="lastname_th"
-				bind:value={formValues.lastname_th}
+				bind:value={$formStore.lastname_th}
 				autoComplete="family-name"
+				aria-invalid={$formErrors.lastname_th ? 'true' : undefined}
+				{...$constraints.lastname_th}
 			/>
 			<TextInput
 				label="Lastname"
@@ -143,7 +183,9 @@
 				name="lastname_en"
 				bottomLeftLabel="นามสกุลภาษาอังกฤษ"
 				required
-				bind:value={formValues.lastname_en}
+				bind:value={$formStore.lastname_en}
+				aria-invalid={$formErrors.lastname_en ? 'true' : undefined}
+				{...$constraints.lastname_en}
 			/>
 		</div>
 		<TextInput
@@ -152,7 +194,9 @@
 			bottomLeftLabel="เช่น 0812345678"
 			name="phone"
 			required
-			bind:value={formValues.phone}
+			bind:value={$formStore.phone}
+			aria-invalid={$formErrors.phone ? 'true' : undefined}
+			{...$constraints.phone}
 		/>
 		<div class="form-control w-full">
 			<label class="label w-full flex-col">
@@ -180,26 +224,32 @@
 			<TextInput
 				name="password"
 				label="รหัสผ่าน"
+				autocomplete="new-password"
 				required
 				type="password"
-				bind:value={formValues.password}
+				bind:value={$formStore.password}
+				aria-invalid={$formErrors.password ? 'true' : undefined}
+				{...$constraints.password}
 			/>
 			<TextInput
 				label="ยืนยันรหัสผ่าน"
 				type="password"
 				required
-				bind:value={formValues.confirmPassword}
+				autoComplete="new-password"
+				bind:value={$formStore.retype_password}
 				name="retype_password"
+				aria-invalid={$formErrors.retype_password ? 'true' : undefined}
+				{...$constraints.retype_password}
 			/>
 			<PasswordRequirementsBox
-				password={formValues.password}
-				confirmPassword={formValues.confirmPassword}
+				password={$formStore.password}
+				confirmPassword={$formStore.retype_password}
 				bind:isPass={isFieldValid.password}
 			/>
 		</div>
 	</section>
 
-	<section>
+	<!-- <section>
 		<h2>นโยบายความเป็นส่วนตัวและข้อกำหนด</h2>
 		<p>โปรดอ่านและยอมรับนโยบายความเป็นส่วนตัวและข้อกำหนดก่อนดำเนินการต่อ</p>
 		<div class="form-control">
@@ -216,19 +266,41 @@
 				>
 			</label>
 		</div>
-	</section>
+	</section> -->
+
+	<!-- <SuperDebug data={$formStore} /> -->
 
 	<section class="mt-7 text-center">
 		<p>
 			หลังจากบันทึกแล้ว คุณยังสามารถแก้ไขข้อมูลได้ผ่านเมนูผู้ใช้ทางขวาบน และเลือกการตั้งค่าบัญชี
 		</p>
-		<button type="submit" class="btn-primary btn mx-auto mt-5 lg:btn-wide" disabled={isSubmitting}>
+
+		{#if form?.ok}
+			<div class="alert alert-success">
+				<Icon icon="mdi:check" class="alert-icon h-5 w-5" />
+				<span>
+					บันทึกข้อมูลเรียบร้อยแล้ว กำลังพาคุณไปที่แดชบอร์ด
+					<span class="loading loading-dots loading-sm align-middle" />
+				</span>
+			</div>
+		{/if}
+		<button
+			type="submit"
+			class="btn-primary btn mx-auto mt-5 lg:btn-wide"
+			disabled={!isFieldValid.password || isSubmitting}
+		>
 			{#if isSubmitting}
-				<Icon icon="mdi:loading" class="animate-spin" />
-				<span>กำลังบันทึกข้อมูล...</span>
+				<Icon icon="mdi:loading" class="loading loading-spinner" />
 			{:else}
 				<span>บันทึกข้อมูลและไปที่แดชบอร์ด</span>
 			{/if}
 		</button>
 	</section>
 </form>
+
+<!-- <style lang="postcss">
+	input:invalid,
+	[aria-invalid='true'] {
+		@apply border-2 border-red-500;
+	}
+</style> -->

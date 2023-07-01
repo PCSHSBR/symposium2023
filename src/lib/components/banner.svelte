@@ -110,7 +110,7 @@
 				composer.setSize(width, height);
 			});
 			window.addEventListener('scroll', (evn) => {
-				scrollProgress = calculateProgressPercentage(document, window, bannerContainer,1.6,600);
+				scrollProgress = calculateProgressPercentage(document, window, bannerContainer, 1.6, 600);
 				let lerpVector = new THREE.Vector3().lerpVectors(startVector, endVector, scrollProgress);
 				let lerpRotation = new THREE.Vector3().lerpVectors(
 					startRotation,
