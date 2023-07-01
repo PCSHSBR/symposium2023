@@ -16,31 +16,31 @@
 	// &token_type=bearer
 	// &type=invite -->
 
-	const hashParams = Object.fromEntries(new URLSearchParams($page.url.hash.slice(1)));
-	(async () => {
-		if (
-			!hashParams.access_token ||
-			!hashParams.refresh_token ||
-			!hashParams.expires_in ||
-			!hashParams.type
-		)
-			return;
-		const { data, error } = await supabase.auth.setSession({
-			access_token: hashParams.access_token,
-			refresh_token: hashParams.refresh_token
-		});
-
-		if (error) {
-			console.error(error);
-			return;
-		}
-
-		let sendToList = {
-			invite: '/auth/welcome'
-		};
-	})();
-
 	onMount(() => {
+		const hashParams = Object.fromEntries(new URLSearchParams($page.url.hash.slice(1)));
+		(async () => {
+			if (
+				!hashParams.access_token ||
+				!hashParams.refresh_token ||
+				!hashParams.expires_in ||
+				!hashParams.type
+			)
+				return;
+			const { data, error } = await supabase.auth.setSession({
+				access_token: hashParams.access_token,
+				refresh_token: hashParams.refresh_token
+			});
+
+			if (error) {
+				console.error(error);
+				return;
+			}
+
+			let sendToList = {
+				invite: '/auth/welcome'
+			};
+		})();
+
 		const {
 			data: { subscription }
 		} = supabase.auth.onAuthStateChange((event, _session) => {

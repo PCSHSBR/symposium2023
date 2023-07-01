@@ -51,7 +51,7 @@
 		let s1am3 = tl1.add({
 			targets: '.date-range',
 			opacity: [0, 1],
-			delay: 0,
+			delay: 0
 		});
 
 		// text-in-out animation
@@ -111,7 +111,7 @@
 			>
 				<div class="date-range flex flex-row flex-wrap items-center">
 					<span>PCSHSBR</span>
-					<span class="divider w-16 h-1 bg-base-content rounded-sm mx-8" />
+					<span class="divider mx-8 h-1 w-16 rounded-sm bg-base-content" />
 					<span>3 กันยายน - 7 กันยายน 2566</span>
 				</div>
 				<h1 class="main-title text-4xl font-black leading-none md:text-6xl">
@@ -123,7 +123,7 @@
 				</p>
 				<!-- svelte-ignore a11y-missing-attribute -->
 				<a class="send-project btn-primary btn">ส่งโครงงาน</a>
-				<a href="#info" class="btn btn-primary enter-event">เข้างาน</a>
+				<a href="#info" class="enter-event btn-primary btn">เข้างาน</a>
 			</div>
 			<div class="absolute bottom-0 flex h-16 w-full flex-col items-center">
 				<Icon icon="mdi:menu-down" />
@@ -136,7 +136,11 @@
 <div class="info-sticky h-screen" id="info">
 	<section class="symp-description mx-auto p-32">
 		<p class="max-w-sm">
-			"Symposium นั้นเป็นงานที่รวมนวัตกรรมและความคิดของผู้คนหลากหลายความคิดมาไว้ในที่เดียว โดยมีเป้าหมายเพื่อสร้างสรรค์นวัตกรรมที่จะเปลี่ยนโลกให้ดีขึ้น และเป็นการสร้างความรู้ความเข้าใจให้กับผู้คนที่เข้าร่วมงาน โดยเฉพาะนักเรียนที่เข้าร่วมงาน ซึ่งจะได้รับความรู้ความเข้าใจในการสร้างสรรค์นวัตกรรม และการนำเสนอผลงานโครงงาน ซึ่งจะเป็นประโยชน์ต่อการเรียนรู้ในอนาคตของนักเรียนอย่างแน่นอน"
+			"Symposium นั้นเป็นงานที่รวมนวัตกรรมและความคิดของผู้คนหลากหลายความคิดมาไว้ในที่เดียว
+			โดยมีเป้าหมายเพื่อสร้างสรรค์นวัตกรรมที่จะเปลี่ยนโลกให้ดีขึ้น
+			และเป็นการสร้างความรู้ความเข้าใจให้กับผู้คนที่เข้าร่วมงาน โดยเฉพาะนักเรียนที่เข้าร่วมงาน
+			ซึ่งจะได้รับความรู้ความเข้าใจในการสร้างสรรค์นวัตกรรม และการนำเสนอผลงานโครงงาน
+			ซึ่งจะเป็นประโยชน์ต่อการเรียนรู้ในอนาคตของนักเรียนอย่างแน่นอน"
 		</p>
 	</section>
 </div>

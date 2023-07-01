@@ -13,27 +13,27 @@
 		};
 	}
 
-	onMount(()=>{
-		window.addEventListener('scroll',()=>{
-			if(window.scrollY > window.innerHeight*2){
+	onMount(() => {
+		window.addEventListener('scroll', () => {
+			if (window.scrollY > window.innerHeight * 2) {
 				isClearBanner = true;
-			}else{
+			} else {
 				isClearBanner = false;
 			}
-		})
-	})
-	
+		});
+	});
+
 	export let data = $page.data;
-	
+
 	let isNotShowLogin = ['/login'].includes($page.url.pathname);
 	let isMenuOpen: boolean;
-	let isClearBanner : boolean;
+	let isClearBanner: boolean;
 </script>
 
 <nav
 	class="navbar fixed z-20 h-14 justify-between border-neutral {isMenuOpen
 		? 'bg-transparent'
-		: 'bg-base-100/70'} backdrop-blur-sm  {isClearBanner ? 'bg-base-100/70' : 'bg-transparent'}"
+		: 'bg-base-100/70'} backdrop-blur-sm {isClearBanner ? 'bg-base-100/70' : 'bg-transparent'}"
 >
 	<div>
 		<label>

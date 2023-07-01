@@ -10,7 +10,6 @@ export interface UserMetadata {
 	firstname_en: string;
 	lastname_en: string;
 	phone: string;
-	agree: boolean;
 }
 
 export interface RoleDescription {

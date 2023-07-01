@@ -64,11 +64,10 @@ function calculateProgressPercentage(
 	limit: number = 1,
 	offset: number = 0
 ) {
-	return (window.scrollY) >= target.offsetTop
-		? ((window.scrollY)  - (target.offsetTop)) / (target.scrollHeight - window.innerHeight) >
-		  limit
+	return window.scrollY >= target.offsetTop
+		? (window.scrollY - target.offsetTop) / (target.scrollHeight - window.innerHeight) > limit
 			? limit
-			: ((window.scrollY) - (target.offsetTop)) / (target.scrollHeight - window.innerHeight)
+			: (window.scrollY - target.offsetTop) / (target.scrollHeight - window.innerHeight)
 		: 0;
 }
 

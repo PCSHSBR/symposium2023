@@ -3,6 +3,8 @@
 	import { z } from 'zod';
 	import type { Roles } from '$lib/types';
 	import PasswordRequirementsBox from '$lib/components/PasswordRequirementsBox.svelte';
+	import { isPropertyExist } from '$lib/utils';
+	import Icon from '@iconify/svelte';
 	export let data: PageData;
 
 	(async () => {
@@ -10,25 +12,44 @@
 	})();
 
 	const emailSchema = z.string().email();
+	// thai phone number
+	const phoneSchema = z.string().regex(/^0[0-9]{9}$/);
 
 	let isEditing = {
 		email: false,
-		password: false
+		password: false,
+		name_th: false,
+		name_en: false,
+		phone: false
 	};
+
 	let editingValue = {
 		email: '',
 		password1: '',
-		password2: ''
+		password2: '',
+		title_th: '',
+		firstname_th: '',
+		lastname_th: '',
+		title_en: '',
+		firstname_en: '',
+		lastname_en: '',
+		phone: ''
 	};
 
 	let editingState = {
 		email: [false, ''],
-		password: [false, '']
+		password: [false, ''],
+		name_th: [false, ''],
+		name_en: [false, ''],
+		phone: [false, '']
 	};
 
 	let errors = {
 		email: '',
-		password: ''
+		password: '',
+		name_th: '',
+		name_en: '',
+		phone: ''
 	};
 
 	let isFieldValid = {
@@ -65,6 +86,43 @@
 		editingState.password = [true, 'เปลี่ยนรหัสผ่านเรียบร้อยแล้ว'];
 	}
 
+	async function updateNameTh() {
+		const result = await data.supabase.auth.updateUser({
+			data: {
+				title_th: editingValue.title_th,
+				firstname_th: editingValue.firstname_th,
+				lastname_th: editingValue.lastname_th
+			}
+		});
+
+		if (result.error) return (errors.name_th = result.error.message);
+		editingState.name_th = [true, 'อัปเดตชื่อเรียบร้อยแล้ว'];
+	}
+
+	async function updateNameEn() {
+		const result = await data.supabase.auth.updateUser({
+			data: {
+				title_en: editingValue.title_en,
+				firstname_en: editingValue.firstname_en,
+				lastname_en: editingValue.lastname_en
+			}
+		});
+
+		if (result.error) return (errors.name_en = result.error.message);
+		editingState.name_en = [true, 'อัปเดตชื่อเรียบร้อยแล้ว'];
+	}
+
+	async function updatePhone() {
+		const result = await data.supabase.auth.updateUser({
+			data: {
+				phone: editingValue.phone
+			}
+		});
+
+		if (result.error) return (errors.phone = result.error.message);
+		editingState.phone = [true, 'อัปเดตเบอร์โทรศัพท์เรียบร้อยแล้ว'];
+	}
+
 	let isPasswordPassRequirements = {
 		length: {
 			pass: false,
@@ -99,6 +157,16 @@
 		teacher: 'ครูที่ปรึกษาโครงงาน',
 		anon: 'บุคคลทั่วไป'
 	};
+
+	const isUserMetadataAllSet = isPropertyExist(data.user_metadata, [
+		'title_th',
+		'firstname_th',
+		'lastname_th',
+		'title_en',
+		'firstname_en',
+		'lastname_en',
+		'phone'
+	]);
 </script>
 
 <svelte:head>
@@ -108,6 +176,187 @@
 <h1>บัญชีผู้ใช้</h1>
 <h2>ข้อมูลทั่วไป</h2>
 <div class="grid gap-3 rounded-md bg-base-300 p-4 lg:grid-cols-[200px_auto]">
+	{#if !isUserMetadataAllSet}
+		<div class="alert alert-warning" role="alert">
+			<Icon icon="mdi:alert-circle-outline" class="h-6 w-6" />
+			<span>
+				กรุณาเพิ่มข้อมูลของคุณในหน้า <a href="/welcome"> ยินดีต้อนรับ </a>
+			</span>
+		</div>
+	{/if}
+	<b> ชื่อไทย </b>
+	<div>
+		{data.user_metadata?.title_th}{data.user_metadata?.firstname_th}
+		{data.user_metadata?.lastname_th}
+		<button
+			class="btn-ghost btn-secondary btn-xs btn"
+			on:click={() => {
+				editingValue.title_th = data.user_metadata?.title_th ?? '';
+				editingValue.firstname_th = data.user_metadata?.firstname_th ?? '';
+				editingValue.lastname_th = data.user_metadata?.lastname_th ?? '';
+				isEditing.name_th = !isEditing.name_th;
+			}}
+		>
+			{#if isEditing.name_th}ยกเลิกการ{/if}แก้ไข
+		</button>
+		{#if isEditing.name_th}
+			<div class="flex flex-col gap-2">
+				<div class="flex flex-col gap-1">
+					<label for="title_th">คำนำหน้าชื่อ</label>
+					<select id="title_th" class="select" bind:value={editingValue.title_th}>
+						<option value="นาย">นาย</option>
+						<option value="นางสาว">นางสาว</option>
+						<option value="นาง">นาง</option>
+					</select>
+				</div>
+				<div class="flex flex-col gap-1">
+					<label for="firstname_th">ชื่อ</label>
+					<input
+						id="firstname_th"
+						class="input-bordered input"
+						bind:value={editingValue.firstname_th}
+					/>
+				</div>
+				<div class="flex flex-col gap-1">
+					<label for="lastname_th">นามสกุล</label>
+					<input
+						id="lastname_th"
+						class="input-bordered input"
+						bind:value={editingValue.lastname_th}
+					/>
+				</div>
+				{#if errors.name_th}
+					<div class="alert alert-error" role="alert">
+						<Icon icon="mdi:alert-circle-outline" class="h-6 w-6" />
+						<span>{errors}</span>
+					</div>
+				{:else}
+					<!-- save done -->
+					{#if editingState.name_th[1]}
+						<div class="alert alert-success" role="alert">
+							<Icon icon="mdi:check-circle-outline" class="h-6 w-6" />
+							<span>บันทึกข้อมูลเรียบร้อย</span>
+						</div>
+					{/if}
+				{/if}
+				<div class="flex justify-end gap-2">
+					<button class="btn-primary btn" on:click={updateNameTh}> บันทึก </button>
+					<button class="btn-ghost btn-secondary btn" on:click={() => (isEditing.name_th = false)}>
+						ยกเลิก
+					</button>
+				</div>
+			</div>
+		{/if}
+	</div>
+	<b> ชื่ออังกฤษ </b>
+	<div>
+		{data.user_metadata?.title_en}
+		{data.user_metadata?.firstname_en}
+		{data.user_metadata?.lastname_en}
+		<button
+			class="btn-ghost btn-secondary btn-xs btn"
+			on:click={() => {
+				editingValue.title_en = data.user_metadata?.title_en ?? '';
+				editingValue.firstname_en = data.user_metadata?.firstname_en ?? '';
+				editingValue.lastname_en = data.user_metadata?.lastname_en ?? '';
+				isEditing.name_en = !isEditing.name_en;
+			}}
+		>
+			{#if isEditing.name_en}ยกเลิกการ{/if}แก้ไข
+		</button>
+		{#if isEditing.name_en}
+			<div class="flex flex-col gap-2">
+				<div class="flex flex-col gap-1">
+					<label for="title_en">คำนำหน้าชื่อ</label>
+					<select id="title_en" class="select" bind:value={editingValue.title_en}>
+						<option value="Mr.">Mr.</option>
+						<option value="Miss">Miss</option>
+						<option value="Ms.">Ms.</option>
+						<option value="Mrs.">Mrs.</option>
+					</select>
+				</div>
+				<div class="flex flex-col gap-1">
+					<label for="firstname_en">ชื่อ</label>
+					<input
+						id="firstname_en"
+						class="input-bordered input"
+						bind:value={editingValue.firstname_en}
+					/>
+				</div>
+				<div class="flex flex-col gap-1">
+					<label for="lastname_en">นามสกุล</label>
+					<input
+						id="lastname_en"
+						class="input-bordered input"
+						bind:value={editingValue.lastname_en}
+					/>
+				</div>
+				{#if errors.name_en}
+					<div class="alert alert-error" role="alert">
+						<Icon icon="mdi:alert-circle-outline" class="h-6 w-6" />
+						<span>{errors}</span>
+					</div>
+				{/if}
+				{#if editingState.name_en[0]}
+					<div class="alert alert-success" role="alert">
+						<Icon icon="mdi:check-circle-outline" class="h-6 w-6" />
+						<span>บันทึกข้อมูลเรียบร้อย</span>
+					</div>
+				{/if}
+				<div class="flex justify-end gap-2">
+					<button class="btn-primary btn" on:click={updateNameEn}> บันทึก </button>
+					<button class="btn-ghost btn-secondary btn" on:click={() => (isEditing.name_en = false)}>
+						ยกเลิก
+					</button>
+				</div>
+			</div>
+		{/if}
+	</div>
+	<b>หมายเลขโทรศัพท์</b>
+	<div>
+		{data.user_metadata?.phone}
+		<button
+			class="btn-ghost btn-secondary btn-xs btn"
+			on:click={() => {
+				editingValue.phone = data.user_metadata?.phone ?? '';
+				isEditing.phone = !isEditing.phone;
+			}}
+		>
+			{#if isEditing.phone}ยกเลิกการ{/if}แก้ไข
+		</button>
+		{#if isEditing.phone}
+			<div class="flex flex-col gap-2">
+				<div class="flex flex-col gap-1">
+					<label for="phone">หมายเลขโทรศัพท์</label>
+					<input
+						id="phone"
+						class="input-bordered input"
+						bind:value={editingValue.phone}
+						on:input={() => {
+							editingValue.phone = editingValue.phone.replace(/\D/g, '');
+							const safeParsed = phoneSchema.safeParse(editingValue.phone);
+							if (!safeParsed.success) errors.phone = safeParsed.error.message[0].message;
+							else errors.phone = '';
+						}}
+					/>
+				</div>
+				{#if errors.phone}
+					<div class="alert alert-error">{errors.phone}</div>
+				{/if}
+				{#if editingState.phone[0]}
+					<div class="alert alert-success">
+						{editingState.phone[1]}
+					</div>
+				{/if}
+				<div class="flex justify-end gap-2">
+					<button class="btn-primary btn" on:click={updatePhone}> บันทึก </button>
+					<button class="btn-ghost btn-secondary btn" on:click={() => (isEditing.phone = false)}>
+						ยกเลิก
+					</button>
+				</div>
+			</div>
+		{/if}
+	</div>
 	<b>อีเมล</b>
 	<span>{data.session?.user.email}</span>
 	<b>บทบาท</b>
@@ -127,7 +376,7 @@
 	<span class=""
 		>{data.session?.user.email}
 		<button
-			class="btn-secondary btn-xs btn"
+			class="btn-ghost btn-secondary btn-xs btn"
 			on:click|preventDefault={() => {
 				isEditing.email = !isEditing.email;
 			}}
@@ -180,7 +429,7 @@
 	<span class=""
 		>********
 		<button
-			class="btn-secondary btn-xs btn"
+			class="btn-ghost btn-secondary btn-xs btn"
 			on:click|preventDefault={() => {
 				isEditing.password = !isEditing.password;
 				if (!isEditing.password) {

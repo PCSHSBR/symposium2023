@@ -2,10 +2,7 @@ import { error, fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
-
-function isPropertyExist(obj: Record<string, string>, prop: string[]) {
-	return prop.every((p) => obj.hasOwnProperty(p));
-}
+import { isPropertyExist } from '$lib/utils';
 
 const userWelcomeMetadataSchema = z
 	.object({
