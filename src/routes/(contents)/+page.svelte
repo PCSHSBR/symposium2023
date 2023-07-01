@@ -44,7 +44,7 @@
 			delay: 1000
 		});
 		let s1am2 = tl1.add({
-			targets: '.sub-title , .send-project',
+			targets: '.sub-title , .send-project , .enter-event',
 			opacity: [0, 1],
 			delay: 100
 		});
@@ -112,7 +112,7 @@
 				<div class="date-range flex flex-row flex-wrap items-center">
 					<span>PCSHSBR</span>
 					<span class="divider w-16 h-1 bg-base-content rounded-sm mx-8" />
-					<span>9 กันยายน 2566</span>
+					<span>3 กันยายน - 7 กันยายน 2566</span>
 				</div>
 				<h1 class="main-title text-4xl font-black leading-none md:text-6xl">
 					<span class="text-[128px]">3</span><span class="align-top text-xl">rd</span> PCSHS Science
@@ -123,6 +123,7 @@
 				</p>
 				<!-- svelte-ignore a11y-missing-attribute -->
 				<a class="send-project btn-primary btn">ส่งโครงงาน</a>
+				<a href="#info" class="btn btn-primary enter-event">เข้างาน</a>
 			</div>
 			<div class="absolute bottom-0 flex h-16 w-full flex-col items-center">
 				<Icon icon="mdi:menu-down" />
@@ -132,7 +133,7 @@
 	</section>
 </div>
 
-<div class="info-sticky">
+<div class="info-sticky h-screen" id="info">
 	<section class="symp-description mx-auto p-32">
 		<p class="max-w-sm">
 			"Symposium นั้นเป็นงานที่รวมนวัตกรรมและความคิดของผู้คนหลากหลายความคิดมาไว้ในที่เดียว โดยมีเป้าหมายเพื่อสร้างสรรค์นวัตกรรมที่จะเปลี่ยนโลกให้ดีขึ้น และเป็นการสร้างความรู้ความเข้าใจให้กับผู้คนที่เข้าร่วมงาน โดยเฉพาะนักเรียนที่เข้าร่วมงาน ซึ่งจะได้รับความรู้ความเข้าใจในการสร้างสรรค์นวัตกรรม และการนำเสนอผลงานโครงงาน ซึ่งจะเป็นประโยชน์ต่อการเรียนรู้ในอนาคตของนักเรียนอย่างแน่นอน"
