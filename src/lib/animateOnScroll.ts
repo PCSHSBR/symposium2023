@@ -57,4 +57,34 @@ class animator {
 	}
 }
 
+function calculateProgressPercentage(
+	document: Document,
+	window: Window,
+	target: HTMLDivElement,
+	limit: number = 1,
+	offset: number = 0
+) {
+	return window.scrollY >= target.offsetTop + offset
+		? (window.scrollY - (target.offsetTop + offset)) / (target.scrollHeight - window.innerHeight) >
+		  limit
+			? limit
+			: (window.scrollY - (target.offsetTop + offset)) / (target.scrollHeight - window.innerHeight)
+		: 0;
+}
+
+function scaledNumber(
+	min: number,
+	max: number,
+	percentage: number,
+	rangedMin: number = 0,
+	rangedMax: number = 1
+) {
+	return ((percentage - min) / (max - min) > rangedMax
+		? rangedMax
+		: (percentage - min) / (max - min) < rangedMin
+		? rangedMin
+		: (percentage - min) / (max - min)) * (rangedMax - rangedMin) + rangedMin;
+}
+
 export default animator;
+export { calculateProgressPercentage, scaledNumber };
