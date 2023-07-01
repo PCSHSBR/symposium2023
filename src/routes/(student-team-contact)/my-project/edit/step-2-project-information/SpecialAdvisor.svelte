@@ -16,7 +16,7 @@
 
 	<div class="flex flex-col sm:flex-row sm:gap-5">
 		<TextInput label="คำนำหน้า" />
-		<TextInput label="Prefix" />
+		<TextInput label="Title" />
 	</div>
 	<div class="flex flex-col sm:flex-row sm:gap-5">
 		<TextInput label="ชื่อ" />

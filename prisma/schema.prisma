@@ -200,6 +200,7 @@ model sessions {
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model sso_domains {
   id              String        @id @db.Uuid
   sso_provider_id String        @db.Uuid
@@ -216,6 +217,7 @@ model sso_domains {
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model sso_providers {
   id                String              @id @db.Uuid
   resource_id       String?
@@ -230,6 +232,7 @@ model sso_providers {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model users {
@@ -362,7 +365,7 @@ model schools {
 model students {
   id                                  BigInt    @id(map: "srudent_pkey") @default(autoincrement())
   created_at                          DateTime? @default(now()) @db.Timestamptz(6)
-  prefix                              String?
+  title                               String?
   firstname                           String?
   lastname                            String?
   school                              BigInt?
@@ -380,7 +383,7 @@ model students {
 model teachers {
   id                                  BigInt    @id(map: "teacher_2_pkey") @default(autoincrement())
   created_at                          DateTime? @default(now()) @db.Timestamptz(6)
-  prefix                              String?
+  title                               String?
   firstname                           String?
   lastname                            String?
   school                              BigInt?
