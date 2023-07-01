@@ -2,6 +2,7 @@
 	import Icon from '@iconify/svelte';
 	import { slide, fade } from 'svelte/transition';
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 
 	// function to close the menu, for using with use directive
 	function closeMenu(_node?: HTMLElement) {
@@ -12,16 +13,27 @@
 		};
 	}
 
+	onMount(()=>{
+		window.addEventListener('scroll',()=>{
+			if(window.scrollY > window.innerHeight*2){
+				isClearBanner = true;
+			}else{
+				isClearBanner = false;
+			}
+		})
+	})
+	
 	export let data = $page.data;
-
+	
 	let isNotShowLogin = ['/login'].includes($page.url.pathname);
 	let isMenuOpen: boolean;
+	let isClearBanner : boolean;
 </script>
 
 <nav
 	class="navbar fixed z-20 h-14 justify-between border-neutral {isMenuOpen
 		? 'bg-transparent'
-		: 'bg-base-100/70'} backdrop-blur-sm"
+		: 'bg-base-100/70'} backdrop-blur-sm  {isClearBanner ? 'bg-base-100/70' : 'bg-transparent'}"
 >
 	<div>
 		<label>

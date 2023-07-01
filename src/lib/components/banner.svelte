@@ -18,14 +18,13 @@
 		return new THREE.Vector3(x, 0, z);
 	}
 	export let isHover: boolean = false;
-	export let bannerContainer: HTMLDivElement;
+	export let scrollProgress: number = 0;
 
 	let threeCanvas: HTMLDivElement;
 	onMount(async () => {
 		setTimeout(() => {
 			let width = window.innerWidth;
 			let height = window.innerHeight;
-			let scrollProgress = calculateProgressPercentage(document, window, bannerContainer);
 
 			let pointer = new THREE.Vector2();
 			let p1 = new THREE.Vector2();
@@ -66,8 +65,10 @@
 			let pointLightHelper = new THREE.PointLightHelper(pointLight, 100);
 			pointLight.position.set(-200, -200, 0);
 			pointLight.castShadow = true;
-			pointLight.shadow.mapSize.width = 2048;
-			pointLight.shadow.mapSize.height = 2048;
+			pointLight.shadow.mapSize.width = 512;
+			pointLight.shadow.mapSize.height = 512;
+			pointLight.shadow.camera.near = 0.5;
+			pointLight.shadow.camera.far = 5000;
 
 			scene.add(
 				pointLight
@@ -110,7 +111,6 @@
 				composer.setSize(width, height);
 			});
 			window.addEventListener('scroll', (evn) => {
-				scrollProgress = calculateProgressPercentage(document, window, bannerContainer,1.6,600);
 				let lerpVector = new THREE.Vector3().lerpVectors(startVector, endVector, scrollProgress);
 				let lerpRotation = new THREE.Vector3().lerpVectors(
 					startRotation,
@@ -119,7 +119,7 @@
 				);
 				camera.position.set(lerpVector.x, lerpVector.y, lerpVector.z);
 				camera.rotation.set(lerpRotation.x, lerpRotation.y, lerpRotation.z);
-				threeCanvas.style.opacity = `${1.2 - scrollProgress}`;
+				threeCanvas.style.opacity = `${1 - scrollProgress}`;
 				// console.log(
 				// 	scrollProgress,
 				// 	// window.scrollY,window.innerHeight,window.scrollY+window.innerHeight,endScollTop

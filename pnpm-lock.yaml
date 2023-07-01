@@ -17,6 +17,9 @@ dependencies:
   '@supabase/supabase-js':
     specifier: ^2.26.0
     version: 2.26.0
+  animejs:
+    specifier: ^3.2.1
+    version: 3.2.1
   dotenv-vault-core:
     specifier: ^0.7.1
     version: 0.7.1
@@ -32,6 +35,9 @@ dependencies:
   remark-strip-html:
     specifier: ^1.0.2
     version: 1.0.2
+  scrollmagic:
+    specifier: ^2.0.8
+    version: 2.0.8
   svelte-exmarkdown:
     specifier: ^2.1.0
     version: 2.1.0(svelte@4.0.0)
@@ -58,9 +64,15 @@ devDependencies:
   '@sveltejs/kit':
     specifier: ^1.20.4
     version: 1.20.5(svelte@4.0.0)(vite@4.3.9)
+  '@types/animejs':
+    specifier: ^3.1.7
+    version: 3.1.7
   '@types/sanitize-html':
     specifier: ^2.9.0
     version: 2.9.0
+  '@types/scrollmagic':
+    specifier: ^2.0.3
+    version: 2.0.3
   '@types/three':
     specifier: ^0.152.1
     version: 0.152.1
@@ -650,6 +662,10 @@ packages:
     resolution: {integrity: sha512-lB9lMjuqjtuJrx7/kOkqQBtllspPIN+96OvTCeJ2j5FEzinoAXTdAMFnDAQT1KVPRlnYfBrqxtqP66vDM40xxQ==}
     dev: true
 
+  /@types/animejs@3.1.7:
+    resolution: {integrity: sha512-kFSyjM+fLo3oE9noWEtUvF82ttN8fTrKohiEMIrSzEzEjnsCmtO0rBCUQBlSPEb2w8vfN+v4/Zo0tK21Bgmq4g==}
+    dev: true
+
   /@types/cookie@0.5.1:
     resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
 
@@ -707,6 +723,10 @@ packages:
     resolution: {integrity: sha512-4fP/kEcKNj2u39IzrxWYuf/FnCCwwQCpif6wwY6ROUS1EPRIfWJjGkY3HIowY1EX/VbX5e86yq8AAE7UPMgATg==}
     dependencies:
       htmlparser2: 8.0.2
+    dev: true
+
+  /@types/scrollmagic@2.0.3:
+    resolution: {integrity: sha512-bfTr5jGgcbBZa/KcbhbuT4Pj6LFYQE1e2NKa93++7oAnAG0+5rBijSbRCuPP5yoNgbxw6jLiUvEn99JYLi1I0A==}
     dev: true
 
   /@types/semver@7.5.0:
@@ -908,6 +928,10 @@ packages:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
     dev: true
+
+  /animejs@3.2.1:
+    resolution: {integrity: sha512-sWno3ugFryK5nhiDm/2BKeFCpZv7vzerWUcUPyAZLDhMek3+S/p418ldZJbJXo5ZUOpfm2kP2XRO4NJcULMy9A==}
+    dev: false
 
   /ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -3050,6 +3074,11 @@ packages:
     engines: {node: '>=v12.22.7'}
     dependencies:
       xmlchars: 2.2.0
+    dev: false
+
+  /scrollmagic@2.0.8:
+    resolution: {integrity: sha512-UYXEGBPVLziovXl3FjHGkY9c4UXKUKopIdXwWR2JapWxCo0U345wYegi7rcsv5vHf/ktc1bSNWy4QRFiV+Yccw==}
+    engines: {node: '>=0.10.x'}
     dev: false
 
   /semver-compare@1.0.0:
