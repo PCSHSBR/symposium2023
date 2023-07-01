@@ -24,7 +24,7 @@
 </svelte:head>
 
 <section>
-	<h1>ยินดีต้อนรับ</h1>
+	<h1>ยินดีต้อนรับ {data.user_metadata?.firstname_th ?? ''}!</h1>
 	<p>คุณกำลังเข้าสู่ระบบในฐานะ{toThai(data.role)} ({data.session?.user.email})</p>
 	<div class="flex flex-row flex-wrap gap-2 pt-4">
 		<a href="/account">

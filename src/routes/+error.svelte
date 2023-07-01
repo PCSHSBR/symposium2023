@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import type { PageData } from './$types';
-	let error = $page;
 	interface LocalErrorMessage {
 		[key: number]: string;
 	}
@@ -32,32 +30,33 @@
 </script>
 
 <svelte:head>
-	<title>{error.status} - {error.error?.message}</title>
+	<title>{$page.status} - {$page.error?.message}</title>
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
 <section class="m-auto max-w-md px-10">
 	<div class="flex h-screen items-center justify-center text-center align-middle">
 		<div class="flex flex-wrap items-center gap-4">
-			<h1 class="text-8xl">{error.status}</h1>
+			<h1 class="text-8xl">{$page.status}</h1>
 			<div class="text-left">
 				<h2 class="text-2xl font-bold">
 					{errmsg_locals[Math.floor(Math.random() * errmsg_locals.length)]}
 				</h2>
-				<h2>{locals[error.status] ?? error.error?.message}</h2>
+				<h2>{locals[$page.status] ?? $page.error?.message}</h2>
 				<div>
-					{#if data.user}
+					{#if data.session}
 						<span>เข้าสู่ระบบในฐานะ {data.role}</span>
 						<a href="/auth" class="link">กลับไปหน้าแดชบอร์ด</a>
 					{:else}
-						<span>คุณยังไม่ได้เข้าสู่ระบบ</span>
+						<span>หรืออาจะเป็นเพราะคุณยังไม่ได้เข้าสู่ระบบ?</span>
 						<a href="/login" class="link">เข้าสู่ระบบ</a>
 					{/if}
 					<a
-						href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{error.status}"
-						class="link pt-4">อะไรคือ {error.status}?</a
+						href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{$page.status}"
+						class="link">อะไรคือ {$page.status}?</a
 					>
 				</div>
+				<pre class="mt-3">{$page.error?.message}</pre>
 			</div>
 		</div>
 	</div>
