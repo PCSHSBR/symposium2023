@@ -33,7 +33,7 @@
 <nav
 	class="navbar fixed z-20 h-14 justify-between border-neutral {isMenuOpen
 		? 'bg-transparent'
-		: 'bg-base-100/70'} backdrop-blur-sm {isClearBanner ? 'bg-base-100/70' : 'bg-transparent'}"
+		: 'bg-base-100/70'} backdrop-blur-sm"
 >
 	<div>
 		<label>

@@ -32,7 +32,7 @@
 		})
 			.on('progress', (e) => {
 				hero_section_percent = e.progress;
-				console.log(hero_section_percent);
+				// console.log(hero_section_percent);
 			})
 			.addTo(control);
 
@@ -61,14 +61,41 @@
 			duration: document.querySelector('.hero-sticky')?.clientHeight - window.innerHeight
 		})
 			.on('enter', (e) => {
-				s1am1.play();
-				s1am2.play();
-				s1am3.play();
+				tl1.play();
 			})
 			.on('leave', (e) => {
-				s1am1.play();
-				s1am2.play();
-				s1am3.play();
+				tl1.play();
+			})
+			.addTo(control);
+
+		// symp quote animation
+		let quoteWrapper = document.querySelector('.symp-description p');
+		quoteWrapper.innerHTML = quoteWrapper.textContent.replace(
+			/\S/g,
+			"<span class='letter'>$&</span>"
+		);
+		let tl2 = animejs.timeline({ autoplay: false, duration: 1000, easing: 'easeOutExpo' });
+		let s2am1 = tl2.add({
+			targets: '.symp-description p .letter',
+			opacity: [0, 1],
+			translateY: [40, 0],
+			delay: (el, i) => 50 * (i + 1)
+		});
+		let s2am2 = tl2.add({
+			targets: '.symp-description .author',
+			opacity: [0, 1],
+			translateY: [40, 0],
+			delay: 1000
+		});
+
+		let scene2 = new ScrollMagic.Scene({
+			triggerElement: '.symp-description',
+			triggerHook: 0,
+			offset: -window.innerHeight / 1.5,
+			duration: document.querySelector('.symp-description').clientHeight
+		})
+			.on('enter', (e) => {
+				tl2.play();
 			})
 			.addTo(control);
 	});
@@ -98,7 +125,7 @@
 			isBannerHovered = false;
 		}}
 	>
-		<div class="h-screen overflow-hidden">
+		<div class="min-h-[-webkit-fill-available] overflow-hidden">
 			<Banner
 				bind:isLoading
 				bind:isHover={isBannerHovered}
@@ -133,14 +160,58 @@
 	</section>
 </div>
 
-<div class="info-sticky h-screen" id="info">
-	<section class="symp-description mx-auto p-32">
-		<p class="max-w-sm">
-			"Symposium นั้นเป็นงานที่รวมนวัตกรรมและความคิดของผู้คนหลากหลายความคิดมาไว้ในที่เดียว
-			โดยมีเป้าหมายเพื่อสร้างสรรค์นวัตกรรมที่จะเปลี่ยนโลกให้ดีขึ้น
-			และเป็นการสร้างความรู้ความเข้าใจให้กับผู้คนที่เข้าร่วมงาน โดยเฉพาะนักเรียนที่เข้าร่วมงาน
-			ซึ่งจะได้รับความรู้ความเข้าใจในการสร้างสรรค์นวัตกรรม และการนำเสนอผลงานโครงงาน
-			ซึ่งจะเป็นประโยชน์ต่อการเรียนรู้ในอนาคตของนักเรียนอย่างแน่นอน"
+<div class="info-container relative" id="info">
+	<section class="event-countdown mx-auto max-w-md px-8 py-16 flex flex-col justify-center items-center gap-4">
+		<div class="self-start">
+			<span class="text-3xl w-full">เหลืออีก</span>
+		</div>
+		<div class="flex flex-wrap flex-row justify-center gap-5 text-center">
+			<div class="flex flex-col">
+				<span class="countdown font-mono text-5xl">
+					<span style="--value:{remaining.getMonth()};" />
+				</span>
+				month
+			</div>
+			<div class="flex flex-col">
+				<span class="countdown font-mono text-5xl">
+					<span style="--value:{remaining.getDay()};" />
+				</span>
+				days
+			</div>
+			<div class="flex flex-col">
+				<span class="countdown font-mono text-5xl">
+					<span style="--value:{remaining.getHours()};" />
+				</span>
+				hours
+			</div>
+			<div class="flex flex-col">
+				<span class="countdown font-mono text-5xl">
+					<span style="--value:{remaining.getMinutes()};" />
+				</span>
+				min
+			</div>
+			<div class="flex flex-col">
+				<span class="countdown font-mono text-5xl">
+					<span style="--value:{remaining.getSeconds()};" />
+				</span>
+				sec
+			</div>
+		</div>
+		<div class="self-end">
+			<span class="text-3xl w-full">กิจกรรมจะเริ่ม</span>
+		</div>
+	</section>
+	<section class="symp-description mx-auto flex max-w-2xl flex-col px-8 py-16 bg-base-300 shadow rounded-none my-16 md:rounded-xl">
+		<p class="p-4 text-2xl italic">
+			"The scientist is not a person who gives the right answers, but the one who asks the right
+			questions."
 		</p>
+		<span class="author relative self-end">Claude Bernard</span>
 	</section>
 </div>
+
+<style>
+	:global(.letter) {
+		display: inline-block;
+	}
+</style>
