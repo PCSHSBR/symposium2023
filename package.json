@@ -9,7 +9,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write ."
+		"format": "prettier --plugin-search-dir . --write .",
+		"prepare": "husky install"
 	},
 	"devDependencies": {
 		"@iconify/svelte": "^3.1.4",
@@ -27,6 +28,7 @@
 		"eslint": "^8.43.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte": "^2.31.1",
+		"lint-staged": "^13.2.3",
 		"postcss": "^8.4.23",
 		"postcss-load-config": "^4.0.1",
 		"postcss-nesting": "^11.3.0",
@@ -63,5 +65,12 @@
 		"svelte-legos": "^0.2.1",
 		"svelte-markdown": "^0.2.3",
 		"three": "^0.154.0"
+	},
+	"lint-staged": {
+		"*.{js,ts,svelte,css,scss,postcss,md,json}": [
+			"prettier --write --plugin-search-dir=.",
+			"prettier --check --plugin-search-dir=."
+		],
+		"*.{js,ts,svelte}": "eslint"
 	}
 }
