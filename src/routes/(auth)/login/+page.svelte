@@ -29,9 +29,9 @@
 	<div class="flex h-screen items-center justify-center text-center align-middle">
 		<form
 			method="post"
-			use:enhance={({ formElement, formData, action, cancel, submitter }) => {
+			use:enhance={() => {
 				isLoading = true;
-				return async ({ result, update }) => {
+				return async ({ update }) => {
 					isLoading = false;
 					update({ reset: false });
 				};

@@ -161,11 +161,13 @@
 </div>
 
 <div class="info-container relative" id="info">
-	<section class="event-countdown mx-auto max-w-md px-8 py-16 flex flex-col justify-center items-center gap-4">
+	<section
+		class="event-countdown mx-auto flex max-w-md flex-col items-center justify-center gap-4 px-8 py-16"
+	>
 		<div class="self-start">
-			<span class="text-3xl w-full">เหลืออีก</span>
+			<span class="w-full text-3xl">เหลืออีก</span>
 		</div>
-		<div class="flex flex-wrap flex-row justify-center gap-5 text-center">
+		<div class="flex flex-row flex-wrap justify-center gap-5 text-center">
 			<div class="flex flex-col">
 				<span class="countdown font-mono text-5xl">
 					<span style="--value:{remaining.getMonth()};" />
@@ -198,10 +200,12 @@
 			</div>
 		</div>
 		<div class="self-end">
-			<span class="text-3xl w-full">กิจกรรมจะเริ่ม</span>
+			<span class="w-full text-3xl">กิจกรรมจะเริ่ม</span>
 		</div>
 	</section>
-	<section class="symp-description mx-auto flex max-w-2xl flex-col px-8 py-16 bg-base-300 shadow rounded-none my-16 md:rounded-xl">
+	<section
+		class="symp-description mx-auto my-16 flex max-w-2xl flex-col rounded-none bg-base-300 px-8 py-16 shadow md:rounded-xl"
+	>
 		<p class="p-4 text-2xl italic">
 			"The scientist is not a person who gives the right answers, but the one who asks the right
 			questions."

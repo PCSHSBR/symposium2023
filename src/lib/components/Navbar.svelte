@@ -86,7 +86,10 @@
 						<span class="sr-only">เปิดเครื่องมือผู้ใช้</span>
 					</button>
 					<ul class="dropdown-content menu rounded-box w-52 bg-base-200 shadow">
-						<li class="menu-title text-sm">ยินดีต้อนรับ, {data.user_metadata?.firstname_th} {data.user_metadata?.lastname_th}</li>
+						<li class="menu-title text-sm">
+							ยินดีต้อนรับ, {data.user_metadata?.firstname_th}
+							{data.user_metadata?.lastname_th}
+						</li>
 						<li>
 							<a href="/dashboard">
 								<Icon icon="mdi:view-dashboard" class="h-5 w-5" />

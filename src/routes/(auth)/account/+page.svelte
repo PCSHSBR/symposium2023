@@ -57,6 +57,12 @@
 		password: false
 	};
 
+	let displayUserInfo = {
+		name_th: '',
+		name_en: '',
+		phone: ''
+	};
+
 	async function changeEmail() {
 		const { error, data: result } = await data.supabase.auth.updateUser({
 			email: editingValue.email
@@ -97,6 +103,7 @@
 
 		if (result.error) return (errors.name_th = result.error.message);
 		editingState.name_th = [true, 'อัปเดตชื่อเรียบร้อยแล้ว'];
+		displayUserInfo.name_th = `${editingValue.title_th}${editingValue.firstname_th} ${editingValue.lastname_th}`;
 	}
 
 	async function updateNameEn() {
@@ -110,6 +117,7 @@
 
 		if (result.error) return (errors.name_en = result.error.message);
 		editingState.name_en = [true, 'อัปเดตชื่อเรียบร้อยแล้ว'];
+		displayUserInfo.name_en = `${editingValue.title_en}${editingValue.firstname_en} ${editingValue.lastname_en}`;
 	}
 
 	async function updatePhone() {
@@ -186,8 +194,12 @@
 	{/if}
 	<b> ชื่อไทย </b>
 	<div>
-		{data.user_metadata?.title_th}{data.user_metadata?.firstname_th}
-		{data.user_metadata?.lastname_th}
+		{#if displayUserInfo.name_th}
+			{displayUserInfo.name_th}
+		{:else}
+			{data.user_metadata?.title_th}{data.user_metadata?.firstname_th}
+			{data.user_metadata?.lastname_th}
+		{/if}
 		<button
 			class="btn-ghost btn-secondary btn-xs btn"
 			on:click={() => {
@@ -250,9 +262,13 @@
 	</div>
 	<b> ชื่ออังกฤษ </b>
 	<div>
-		{data.user_metadata?.title_en}
-		{data.user_metadata?.firstname_en}
-		{data.user_metadata?.lastname_en}
+		{#if displayUserInfo.name_en}
+			{displayUserInfo.name_en}
+		{:else}
+			{data.user_metadata?.title_en}
+			{data.user_metadata?.firstname_en}
+			{data.user_metadata?.lastname_en}
+		{/if}
 		<button
 			class="btn-ghost btn-secondary btn-xs btn"
 			on:click={() => {
