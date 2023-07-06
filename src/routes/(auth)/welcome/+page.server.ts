@@ -45,6 +45,7 @@ const userWelcomeMetadataSchema = z
 export const load = (async ({ locals: { role, getSession, supabase } }) => {
 	const session = await getSession();
 	if (!session) throw error(401, 'Unauthorized');
+	supabase.auth.refreshSession();
 	await supabase.auth.refreshSession();
 	const form = await superValidate(session.user.user_metadata, userWelcomeMetadataSchema);
 	return {

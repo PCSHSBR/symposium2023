@@ -2,9 +2,10 @@
 	import { goto } from '$app/navigation';
 	import type { PageData } from './$types';
 	import { toThai } from '$lib/langUtils';
+	import Icon from '@iconify/svelte';
+	import { notify } from '$lib/notify';
 	export let data: PageData;
 	let { supabase } = data;
-
 	let isLogginout = false;
 
 	const handleSignOut = async () => {
@@ -25,14 +26,16 @@
 
 <section>
 	<h1>ยินดีต้อนรับ {data.user_metadata?.firstname_th ?? ''}!</h1>
-	<p>คุณกำลังเข้าสู่ระบบในฐานะ{toThai(data.role)} ({data.session?.user.email})</p>
-	<div class="flex flex-row flex-wrap gap-2 pt-4">
-		<a href="/account">
-			<button class="btn">การตั้งค่าบัญชี</button>
-		</a>
-		<button class="btn-error btn" on:click={handleSignOut} disabled={isLogginout}>
-			{isLogginout ? 'กำลังออกจากระบบ...' : 'ออกจากระบบ'}
-		</button>
+	<div class="md:grid md:grid-cols-2">
+		<p>คุณกำลังเข้าสู่ระบบในฐานะ{toThai(data.role)} ({data.session?.user.email})</p>
+		<div class="flex flex-row flex-wrap gap-2 pt-4">
+			<a href="/account">
+				<button class="btn-sm btn">การตั้งค่าบัญชี</button>
+			</a>
+			<button class="btn-error btn-sm btn" on:click={handleSignOut} disabled={isLogginout}>
+				{isLogginout ? 'กำลังออกจากระบบ...' : 'ออกจากระบบ'}
+			</button>
+		</div>
 	</div>
 </section>
 
@@ -45,6 +48,18 @@
 			</a>
 			<a href="/manage/invite">
 				<button class="btn">ส่งคำเชิญสร้างบัญชีใหม่</button>
+			</a>
+		</div>
+	{/if}
+
+	{#if data.role === 'student-team-contact'}
+		<h2>เครื่องมือสำหรับทีมโครงงานนักเรียน</h2>
+		<div class="flex flex-col">
+			<a href="/my-project">
+				<button class="btn-primary btn-block btn">
+					<Icon icon="mdi:arrow-projectile-multiple" class="h-5 w-5" />
+					จัดการโครงงานของฉัน
+				</button>
 			</a>
 		</div>
 	{/if}

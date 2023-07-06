@@ -25,8 +25,11 @@
 	let numberOfStudent = 1;
 	let numberOfAdvisor = 1;
 	let numberOfSpecialAdvisor = 0;
+
+	let projectDataInput = {};
 </script>
 
+<pre class="fixed bg-white/70">{JSON.stringify(projectDataInput)}</pre>
 <div class="mt-4 flex flex-row justify-between gap-5 md:flex-row-reverse md:justify-end">
 	<h1>แก้ไขข้อมูลโครงงาน</h1>
 	<div>
@@ -131,9 +134,9 @@
 	<div>
 		<h2>โรงเรียน</h2>
 		<div class="form-control w-full">
-			<div class="input-group input h-auto w-full p-0">
-				<span class="h-auto w-full">โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย</span>
-				<select name="school" class="select-bordered select">
+			<div class="xs:input-group xs:input xs:h-auto xs:w-full xs:p-0">
+				<span class="xs:h-auto xs:w-full">โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย</span>
+				<select name="school" class="select-bordered select select-sm xs:select-md">
 					<option value="1">ชลบุรี</option>
 					<option value="2">เชียงราย</option>
 					<option value="3">ตรัง</option>
@@ -153,7 +156,7 @@
 	<div>
 		<h2>สมาชิกในทีม</h2>
 		<StudentMember
-			sectionTitle="คนที่ 1 (ตัวแทนติดต่อของทีม)"
+			sectionTitle="สมาชิกที่ 1 (ตัวแทนติดต่อของทีม)"
 			idx={1}
 			remove={() => {
 				numberOfStudent -= 1;
@@ -161,7 +164,7 @@
 		/>
 		{#each Array(numberOfStudent - 1) as _, i}
 			<StudentMember
-				sectionTitle={`คนที่ ${i + 2}`}
+				sectionTitle={`สมาชิกที่ ${i + 2}`}
 				idx={i + 2}
 				remove={() => {
 					numberOfStudent -= 1;
@@ -171,7 +174,7 @@
 		{#if numberOfStudent < 3}
 			<button
 				type="button"
-				class="btn-accent btn-outline btn-wide btn mx-auto my-3"
+				class="btn-accent btn-outline btn-block btn mx-auto my-3"
 				on:click={() => (numberOfStudent += 1)}
 			>
 				เพิ่มสมาชิกในทีม
@@ -192,7 +195,7 @@
 		{#if numberOfAdvisor < 3}
 			<button
 				type="button"
-				class="btn-accent btn-outline btn-wide btn mx-auto my-3"
+				class="btn-accent btn-outline btn-block btn mx-auto my-3"
 				on:click={() => (numberOfAdvisor += 1)}
 			>
 				เพิ่มครูที่ปรึกษา
@@ -212,7 +215,7 @@
 		{#if numberOfSpecialAdvisor < 3}
 			<button
 				type="button"
-				class="btn-accent btn-outline btn-wide btn mx-auto my-3"
+				class="btn-accent btn-outline btn-block btn mx-auto my-3"
 				on:click={() => (numberOfSpecialAdvisor += 1)}
 			>
 				เพิ่มที่ปรึกษาพิเศษ (ถ้ามี)
@@ -233,5 +236,11 @@
 	}
 	.input[type='text'] {
 		@apply w-full;
+	}
+
+	h1,
+	h2,
+	h3 {
+		@apply font-bold;
 	}
 </style>

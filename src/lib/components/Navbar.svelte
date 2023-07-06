@@ -3,6 +3,7 @@
 	import { slide, fade } from 'svelte/transition';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	// function to close the menu, for using with use directive
 	function closeMenu(_node?: HTMLElement) {
@@ -28,6 +29,18 @@
 	let isNotShowLogin = ['/login'].includes($page.url.pathname);
 	let isMenuOpen: boolean;
 	let isClearBanner: boolean;
+	let isLogginout = !data.session;
+
+	const handleSignOut = async () => {
+		isLogginout = true;
+		let result = await data.supabase.auth.signOut();
+		// TODO: refacto here
+		if (result.error) {
+			alert(result.error.message);
+		}
+		isLogginout = false;
+		goto('/login');
+	};
 </script>
 
 <nav
