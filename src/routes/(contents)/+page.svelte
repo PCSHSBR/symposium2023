@@ -73,24 +73,38 @@
 		let s2am1 = tl2.add({
 			targets: '.info-img',
 			opacity: [0, 1],
-			scale: [1.5, 1]
+			scale: [1.5, 1],
+			delay: 200
 		});
 		let s2am2 = tl2.add({
 			targets: '.event-info .info-paragrpah',
 			opacity: [0, 1]
 		});
+		let s2am3 = tl2.add({
+			targets: ' .event-info .event-poem',
+			opacity: [0, 1]
+		});
+
+		let s2am4 = animejs({
+			targets: '.event-info .background',
+			translateY: [100, 0],
+			rotate: [90, 90],
+			opacity: [0, 1],
+			delay: 100,
+			duration: 1000,
+			easing: 'easeOutExpo'
+		});
 
 		let scene2 = new ScrollMagic.Scene({
 			triggerElement: '.event-info',
 			triggerHook: 0,
-			offset: -(window.innerHeight / 2),
+			offset: -(window.innerHeight - 200),
 			duration: document.querySelector('.event-info')?.clientHeight
 		})
-			.on('progress', (e) => {
-				console.log(e.progress);
-				tl2.seek(tl2.duration * e.progress);
+			.on('enter', (e) => {
+				tl2.play();
+				s2am4.play();
 			})
-
 			.addTo(control);
 	});
 </script>
@@ -187,7 +201,7 @@
 				การประชุมสัมมนาพยายามที่จะขับเคลื่อนโครงการทางวิทยาศาสตร์ให้สูงขึ้นไปอีกขั้นซึ่งท้ายที่สุดจะเป็นประโยชน์ต่อความก้าวหน้าและนวัตกรรมของประเทศ
 			</p>
 		</div>
-		<div class="event-icon flex flex-row flex-wrap items-center pt-10">
+		<div class="event-poem flex flex-row flex-wrap items-center pt-10">
 			<div class="my-2 mr-2 flex">
 				<Icon icon="material-symbols:circle" />
 				<Icon icon="mdi:triangle" />
