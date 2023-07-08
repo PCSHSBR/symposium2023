@@ -8,8 +8,6 @@
 	import { enhance } from '$app/forms';
 	import { superForm } from 'sveltekit-superforms/client';
 	import { goto } from '$app/navigation';
-	// import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
-
 	export let data: PageData;
 	export let form: ActionData;
 	const { form: formStore, errors: formErrors, constraints } = superForm(data.form);

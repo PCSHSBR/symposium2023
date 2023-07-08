@@ -7,11 +7,11 @@
 	export let remove: () => void;
 </script>
 
-<div class="relative mt-5 border p-4">
-	<h3 class="absolute -top-3 bg-base-100 px-3">{sectionTitle}</h3>
+<div class="relative mt-5 rounded-sm border border-base-300 p-4">
+	<h3 class="absolute -top-3.5 mb-3 bg-base-100 px-3 font-bold">{sectionTitle}</h3>
 	{#if idx > 1}
 		<div class="absolute right-0 top-0 p-2">
-			<button class="btn-sm btn" type="reset" on:click|preventDefault={remove}>
+			<button class="btn-error btn-ghost btn-sm btn" type="reset" on:click|preventDefault={remove}>
 				<Icon icon="mdi:delete-forever" class="h-5 w-5" />
 				ลบออก</button
 			>

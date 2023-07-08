@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import '@fontsource-variable/anuphan';
 	import { page } from '$app/stores';
+	import ToastWrapper from '$lib/components/ToastWrapper.svelte';
 	export let data;
 
 	let { supabase, session } = data;
@@ -88,4 +89,5 @@ ${"                       `=---='"}
 	<meta name="theme-color" content="#374250" />
 </svelte:head>
 
+<ToastWrapper />
 <slot />

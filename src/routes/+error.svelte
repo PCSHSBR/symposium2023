@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { toThai } from '$lib/langUtils';
 	interface LocalErrorMessage {
 		[key: number]: string;
 	}
@@ -45,7 +46,7 @@
 				<h2>{locals[$page.status] ?? $page.error?.message}</h2>
 				<div>
 					{#if data.session}
-						<span>เข้าสู่ระบบในฐานะ {data.role}</span>
+						<span>เข้าสู่ระบบในฐานะ<i>{toThai(data.role)}</i></span>
 						<a href="/auth" class="link">กลับไปหน้าแดชบอร์ด</a>
 					{:else}
 						<span>หรืออาจะเป็นเพราะคุณยังไม่ได้เข้าสู่ระบบ?</span>

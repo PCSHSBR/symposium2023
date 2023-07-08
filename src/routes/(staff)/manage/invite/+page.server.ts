@@ -1,14 +1,17 @@
 import type { Actions, PageServerLoad } from './$types';
 import { z } from 'zod';
-import { error, fail } from '@sveltejs/kit';
+import { error, fail, redirect } from '@sveltejs/kit';
 
 export const load = (async ({ locals: { role } }) => {
-	if ((await role()) !== 'staff') throw error(403, { message: 'คุณไม่มีสิทธิ์เข้าถึงหน้านี้' });
+	if ((await role()) !== 'staff') throw redirect(303, '/login?redirect=/manage/invite');
 }) satisfies PageServerLoad;
 
 export let actions = {
 	default: async ({ request, url, locals: { role, supabase, getSession } }) => {
-		if ((await role()) !== 'staff') throw fail(403, { message: 'คุณไม่มีสิทธิ์เข้าถึงหน้านี้' });
+		if ((await role()) !== 'staff')
+			throw fail(403, {
+				message: 'คุณไม่ใช่ Staff โปรดเข้าสู่ระบบด้วยบัญชี Staff ก่อนดำเนินการต่อ'
+			});
 		const session = await getSession();
 		const formData = await request.formData();
 		const formSchema = z.object({
