@@ -83,7 +83,7 @@
 		let scene2 = new ScrollMagic.Scene({
 			triggerElement: '.event-info',
 			triggerHook: 0,
-			offset: -window.innerHeight,
+			offset: -(window.innerHeight / 2),
 			duration: document.querySelector('.event-info')?.clientHeight
 		})
 			.on('progress', (e) => {
