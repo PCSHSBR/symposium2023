@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { PageData } from './$types';
 	import DOMPurify from 'isomorphic-dompurify';
 	import { enhance } from '$app/forms';
 	import StudentMember from './StudentMember.svelte';
@@ -6,10 +7,24 @@
 	import SpecialAdvisor from './SpecialAdvisor.svelte';
 	import BottomChevron from '../BottomChevron.svelte';
 	import Icon from '@iconify/svelte';
+	import { superForm } from 'sveltekit-superforms/client';
 	import RenderStyledText from '$lib/components/RenderStyledText.svelte';
+	import { get } from 'svelte/store';
+	export let data: PageData;
+	import { notify } from '$lib/notify';
+	const { form, errors } = superForm(data.form, {
+		dataType: 'json',
+		scrollToError: 'smooth',
+		onError({ message, result }) {
+			notify({
+				message: result.error.message,
+				type: 'error'
+			});
+		}
+	});
 	let projectName = {
-		th: '',
-		en: ''
+		th: get(form).project_title_th,
+		en: get(form).project_title_en
 	};
 	let displayProjectName = {
 		th: '',
@@ -29,7 +44,12 @@
 	let projectDataInput = {};
 </script>
 
-<pre class="fixed bg-white/70">{JSON.stringify(projectDataInput)}</pre>
+<pre
+	class="text-base/40 max-w-screen fixed bottom-0 right-0 z-50 h-32 w-full overflow-scroll break-words bg-base-100/40 text-xs">{JSON.stringify(
+		$form,
+		null,
+		2
+	)}</pre>
 <div class="mt-4 flex flex-row justify-between gap-5 md:flex-row-reverse md:justify-end">
 	<h1>แก้ไขข้อมูลโครงงาน</h1>
 	<div>
@@ -41,49 +61,111 @@
 	</div>
 </div>
 
-<form use:enhance method="post">
+<form
+	use:enhance={({}) => {
+		return async ({ update }) => {};
+	}}
+	method="post"
+>
 	<div class="">
 		<h2>ประเภทการนำเสนอ</h2>
 		<div class="form-control ml-5">
-			<label class="label flex flex-row gap-3">
-				<input type="radio" class="radio" name="presentationType" value="1" />
-				<span>ภาคบรรยาย ภาษาไทย (Oral presentation)</span>
-			</label>
-			<label class="label flex flex-row gap-3">
-				<input type="radio" class="radio" name="presentationType" value="2" />
-				ภาคบรรยาย ภาษาอังกฤษ (English Oral presentation)
-			</label>
-			<label class="label flex flex-row gap-3">
-				<input type="radio" class="radio" name="presentationType" value="3" />
-				โปสเตอร์ ภาษาไทย (Poster presentation)
-			</label>
+			{#each ['ภาคบรรยาย ภาษาไทย (Oral presentation)', 'ภาคบรรยาย ภาษาอังกฤษ (English Oral presentation)', 'โปสเตอร์ ภาษาไทย (Poster presentation)'] as type_label, type_id}
+				<label class="label flex flex-row gap-3">
+					<input
+						on:change={(e) => {
+							$form.presentation_type = +e.currentTarget.value;
+						}}
+						checked={get(form).presentation_type === type_id}
+						type="radio"
+						class="radio"
+						name="presentationType"
+						value={type_id + 1}
+					/>
+					<span>{type_label}</span>
+				</label>
+			{/each}
 		</div>
 	</div>
 	<div class="">
 		<h2>สาขาโครงงาน</h2>
 		<div class="form-control ml-5">
 			<label class="label flex flex-row gap-3">
-				<input type="radio" class="radio" name="project_field" value="1" />
+				<input
+					type="radio"
+					class="radio"
+					name="project_field"
+					value="1"
+					checked={get(form).project_field == 1}
+					on:change={(e) => {
+						$form.project_field = +e.currentTarget.value;
+					}}
+				/>
 				<span>ฟิสิกส์และดาราศาสตร์</span>
 			</label>
 			<label class="label flex flex-row gap-3">
-				<input type="radio" class="radio" name="project_field" value="2" />
+				<input
+					type="radio"
+					class="radio"
+					name="project_field"
+					value="2"
+					checked={get(form).project_field == 2}
+					on:change={(e) => {
+						$form.project_field = +e.currentTarget.value;
+					}}
+				/>
 				<span>เคมีและวัสดุศาสตร์</span>
 			</label>
 			<label class="label flex flex-row gap-3">
-				<input type="radio" class="radio" name="project_field" value="3" />
+				<input
+					type="radio"
+					class="radio"
+					name="project_field"
+					value="3"
+					checked={get(form).project_field == 3}
+					on:change={(e) => {
+						$form.project_field = +e.currentTarget.value;
+					}}
+				/>
 				<span>ชีววิทยาและสิ่งแวดล้อม</span>
 			</label>
 			<label class="label flex flex-row gap-3">
-				<input type="radio" class="radio" name="project_field" value="4" />
+				<input
+					type="radio"
+					class="radio"
+					name="project_field"
+					value="4"
+					checked={get(form).project_field == 4}
+					on:change={(e) => {
+						$form.project_field = +e.currentTarget.value;
+					}}
+				/>
 				<span>คอมพิวเตอร์และเทคโนโลยี</span>
 			</label>
 			<label class="label flex flex-row gap-3">
-				<input type="radio" class="radio" name="project_field" value="5" />
+				<input
+					type="radio"
+					class="radio"
+					name="project_field"
+					value="5"
+					checked={get(form).project_field == 5}
+					on:change={(e) => {
+						$form.project_field = +e.currentTarget.value;
+					}}
+				/>
 				<span>คณิตศาสตร์</span>
 			</label>
 			<label class="label flex flex-row items-center gap-3">
-				<input type="radio" class="radio" name="project_field" value="6" />
+				<input
+					type="radio"
+					class="radio"
+					name="project_field"
+					value="6"
+					checked={get(form).project_field == 6}
+					on:change={(e) => {
+						$form.project_field = +e.currentTarget.value;
+					}}
+				/>
 				<span>วิศวกรรมศาสตร์</span>
 			</label>
 		</div>
@@ -105,6 +187,9 @@
 				id="thai_project_name"
 				name="project_name_th"
 				bind:value={projectName.th}
+				on:input={(e) => {
+					$form.project_title_th = displayProjectName.th;
+				}}
 			/>
 			<span class="label-text-alt mt-2 {!displayProjectName.th ? 'invisible' : ''}"
 				>แสดงผลเป็น: "<RenderStyledText content={displayProjectName.th} />"</span
@@ -125,6 +210,9 @@
 				id="eng_project_name"
 				name="project_name_en"
 				bind:value={projectName.en}
+				on:input={() => {
+					$form.project_title_en = displayProjectName.en;
+				}}
 			/>
 			<span class="label-text-alt mt-2 {!displayProjectName.en ? 'invisible' : ''}"
 				>แสดงผลเป็น: "<RenderStyledText content={displayProjectName.en} />"</span
@@ -132,23 +220,29 @@
 		</div>
 	</div>
 	<div>
-		<h2>โรงเรียน</h2>
+		<h2 id="select_school_label">โรงเรียน</h2>
 		<div class="form-control w-full">
 			<div class="xs:input-group xs:input xs:h-auto xs:w-full xs:p-0">
 				<span class="xs:h-auto xs:w-full">โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย</span>
-				<select name="school" class="select-bordered select select-sm xs:select-md">
-					<option value="1">ชลบุรี</option>
-					<option value="2">เชียงราย</option>
-					<option value="3">ตรัง</option>
-					<option value="4">นครศรีธรรมราช</option>
-					<option value="5">บุรีรัมย์</option>
-					<option value="6">ปทุมธานี</option>
-					<option value="7">พิษณุโลก</option>
-					<option value="8">เพชรบุรี</option>
-					<option value="9">มุกดาหาร</option>
-					<option value="10">ลพบุรี</option>
-					<option value="11">เลย</option>
-					<option value="12">สตูล</option>
+				<select
+					name="school"
+					aria-labelledby="select_school_label"
+					class="select-bordered select select-sm xs:select-md"
+					bind:value={$form.school}
+				>
+					<option value={0} disabled>โปรดเลือก</option>
+					<option value={1}>ชลบุรี</option>
+					<option value={2}>เชียงราย</option>
+					<option value={3}>ตรัง</option>
+					<option value={4}>นครศรีธรรมราช</option>
+					<option value={5}>บุรีรัมย์</option>
+					<option value={6}>ปทุมธานี</option>
+					<option value={7}>พิษณุโลก</option>
+					<option value={8}>เพชรบุรี</option>
+					<option value={9}>มุกดาหาร</option>
+					<option value={10}>ลพบุรี</option>
+					<option value={11}>เลย</option>
+					<option value={12}>สตูล</option>
 				</select>
 			</div>
 		</div>
@@ -161,6 +255,7 @@
 			remove={() => {
 				numberOfStudent -= 1;
 			}}
+			bind:value={$form.student_members[0]}
 		/>
 		{#each Array(numberOfStudent - 1) as _, i}
 			<StudentMember
@@ -169,6 +264,7 @@
 				remove={() => {
 					numberOfStudent -= 1;
 				}}
+				bind:value={$form.student_members[i + 1]}
 			/>
 		{/each}
 		{#if numberOfStudent < 3}
@@ -222,6 +318,21 @@
 			</button>
 		{/if}
 	</div>
+	<div>
+		<h2>ภาพถ่ายหมู่สมาชิกโครงงาน</h2>
+		<label
+			for="team-image-upload"
+			class="mx-auto my-3 flex aspect-video max-w-sm cursor-pointer flex-col items-center justify-center gap-4 rounded-lg border-2 border-dashed border-base-300 duration-300 hover:bg-base-200 dark:border-gray-500"
+			title="ลากแล้ววางหรือกดเพื่อเลือกภาพ"
+		>
+			<div class="flex flex-col items-center justify-center text-sm text-base-content">
+				<Icon icon="mdi:account-group" class="h-12 w-12" />
+				<span>ลากแล้ววางหรือคลิกที่นี่</span>
+				<span>เพื่ออัปโหลดภาพถ่ายหมู่สมาชิกโครงงาน</span>
+			</div>
+		</label>
+		<input type="file" id="team-image-upload" class="hidden" />
+	</div>
 
 	<button class="btn-primary btn-block btn mt-5">บันทึก</button>
 	<BottomChevron nextHref="step-3-abstract" nextPage="บทคัดย่อ" />
@@ -239,8 +350,7 @@
 	}
 
 	h1,
-	h2,
-	h3 {
+	h2 {
 		@apply font-bold;
 	}
 </style>

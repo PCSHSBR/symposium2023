@@ -1,46 +1,37 @@
 import { writable } from 'svelte/store';
 
-/**
- * @typedef {import('svelte').ComponentType} SvelteComponent
- */
+type SvelteComponent = import('svelte').ComponentType;
 
-/**
- * @typedef {import('svelte/transition').FlyParams} FlyParams
- */
+export type FlyParams = import('svelte/transition').FlyParams;
 
-/**
- * @typedef {Object} SvelteToastCustomComponent
- * @property {SvelteComponent} src - custom Svelte Component
- * @property {Object<string,any>} [props] - props to pass into custom component
- * @property {string} [sendIdTo] - forward toast id to prop name
- */
+export interface SvelteToastCustomComponent {
+	src: SvelteComponent;
+	props?: Record<string, any>;
+	sendIdTo?: string;
+}
 
-/**
- * @callback SvelteToastOnPopCallback
- * @param {number} [id] - optionally get the toast id if needed
- */
+type SvelteToastOnPopCallback = (id?: number) => void;
 
-/**
- * @typedef {Object} SvelteToastOptions
- * @property {number} [id] - unique id generated for every toast
- * @property {string} [target] - container target name to send toast to
- * @property {string} [msg] - toast message
- * @property {number} [duration] - duration of progress bar tween from initial to next
- * @property {number} [initial] - initial progress bar value
- * @property {number} [next] - next progress bar value
- * @property {boolean} [pausable] - pause progress bar tween on mouse hover
- * @property {boolean} [dismissable] - allow dissmiss with close button
- * @property {boolean} [reversed] - display toasts in reverse order
- * @property {FlyParams} [intro] - toast intro fly animation settings
- * @property {Object<string,string|number>} [theme] - css var overrides
- * @property {string[]} [classes] - user-defined classes
- * @property {SvelteToastOnPopCallback} [onpop] - callback that runs on toast dismiss
- * @property {SvelteToastCustomComponent} [component] - send custom Svelte Component as a message
- * @property {number} [progress] - DEPRECATED
- */
+export interface SvelteToastOptions {
+	id?: number;
+	target?: string;
+	msg?: string;
+	duration?: number;
+	initial?: number;
+	next?: number;
+	pausable?: boolean;
+	dismissable?: boolean;
+	reversed?: boolean;
+	intro?: FlyParams;
+	theme?: Record<string, string | number>;
+	classes?: string[];
+	onpop?: SvelteToastOnPopCallback;
+	component?: SvelteToastCustomComponent;
+	progress?: number;
+}
 
 /** @type {SvelteToastOptions} */
-const defaults = {
+const defaults: SvelteToastOptions = {
 	duration: 4000,
 	initial: 1,
 	next: 0,
@@ -53,11 +44,11 @@ const defaults = {
 function createToast() {
 	const { subscribe, update } = writable(new Array());
 	/** @type {Object<string,SvelteToastOptions>} */
-	const options = {};
+	const options: { [s: string]: SvelteToastOptions } = {};
 	let count = 0;
 
 	/** @param {any} obj */
-	function _obj(obj) {
+	function _obj(obj: any) {
 		return obj instanceof Object;
 	}
 
@@ -72,10 +63,10 @@ function createToast() {
 	 * @param {SvelteToastOptions} [opts]
 	 * @returns {number}
 	 */
-	function push(msg, opts) {
+	function push(msg: string | SvelteToastOptions, opts: SvelteToastOptions): number {
 		const param = {
 			target: 'default',
-			...(_obj(msg) ? /** @type {SvelteToastOptions} */ msg : { ...opts, msg })
+			...(_obj(msg) ? msg : { ...opts, msg })
 		};
 		const conf = options[param.target] || {};
 		const entry = {
@@ -98,13 +89,12 @@ function createToast() {
 	 * - toast.pop({ target: 'foo' }) // remove all toasts from target `foo`
 	 * @param {(number|Object<'target',string>)} [id]
 	 */
-	function pop(id) {
+	function pop(id: number | Record<'target', string>) {
 		update((n) => {
 			if (!n.length || id === 0) return [];
 			// Filter function is deprecated; shim added for backward compatibility
 			if (typeof id === 'function') return n.filter((i) => id(i));
-			if (_obj(id))
-				return n.filter(/** @type {SvelteToastOptions[]} i */ (i) => i.target !== id.target);
+			if (_obj(id)) return n.filter((i) => i.target !== id.target);
 			const found = id || Math.max(...n.map((i) => i.id));
 			return n.filter((i) => i.id !== found);
 		});
@@ -115,9 +105,9 @@ function createToast() {
 	 * @param {(number|SvelteToastOptions)} id
 	 * @param {SvelteToastOptions} [opts]
 	 */
-	function set(id, opts) {
+	function set(id: number | SvelteToastOptions, opts: SvelteToastOptions) {
 		/** @type {any} */
-		const param = _obj(id) ? id : { ...opts, id };
+		const param: any = _obj(id) ? id : { ...opts, id };
 		update((n) => {
 			const idx = n.findIndex((i) => i.id === param.id);
 			if (idx > -1) {
