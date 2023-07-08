@@ -1,46 +1,9 @@
-import { error, fail } from '@sveltejs/kit';
+import { error, fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
 import { isPropertyExist } from '$lib/utils';
-
-const userWelcomeMetadataSchema = z
-	.object({
-		title_th: z.string(),
-		title_en: z.string(),
-		firstname_th: z.string(),
-		firstname_en: z.string(),
-		lastname_th: z.string(),
-		lastname_en: z.string(),
-		phone: z.string().regex(/^(0|\+66)[2-9]{1}[0-9]{7,8}$/, {
-			message: 'โปรดกรอกเฉพาะตัวเลข ไม่ต้องมีเครื่องหมายขีดหรือช่องว่าง'
-		}),
-		password: z
-			.string()
-			.min(8, {
-				message: 'รหัสผ่านต้องยาวอย่างน้อย 8 ตัวอักษร'
-			})
-			.max(32, {
-				message: 'รหัสผ่านต้องไม่ยาวกว่า 32 ตัวอักษร'
-			}),
-		retype_password: z
-			.string()
-			.min(8, {
-				message: 'รหัสผ่านต้องยาวอย่างน้อย 8 ตัวอักษร'
-			})
-			.max(32, {
-				message: 'รหัสผ่านต้องไม่ยาวกว่า 32 ตัวอักษร'
-			})
-	})
-	.superRefine(({ password, retype_password }, ctx) => {
-		if (password !== retype_password) {
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
-				message: 'รหัสผ่านไม่ตรงกัน',
-				path: ['retype_password']
-			});
-		}
-	});
+import { userWelcomeMetadataSchema } from '$lib/formSchemas';
 
 export const load = (async ({ locals: { role, getSession, supabase } }) => {
 	const session = await getSession();
@@ -83,6 +46,6 @@ export const actions = {
 			password: form.data.password
 		});
 		if (result.error) return fail(500, { form, error: result.error });
-		return { form, ok: true };
+		throw redirect(303, '/dashboard');
 	}
 } satisfies Actions;

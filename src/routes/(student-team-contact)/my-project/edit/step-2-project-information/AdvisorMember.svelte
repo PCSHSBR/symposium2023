@@ -6,7 +6,7 @@
 	export let removeAdvisor: () => void;
 </script>
 
-<div class="relative mt-5 border p-4">
+<div class="relative mt-5 rounded-sm border p-4">
 	<h3 class="absolute -top-3 bg-base-100 px-3 font-bold">{sectionTitle}</h3>
 	<div class="absolute right-0 top-0 p-2">
 		{#if idx > 0}

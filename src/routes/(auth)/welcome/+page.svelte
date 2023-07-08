@@ -47,12 +47,6 @@
 	};
 
 	let isSubmitting = false;
-
-	$: if (form?.ok) {
-		setTimeout(() => {
-			goto('/dashboard');
-		}, 3000);
-	}
 </script>
 
 <svelte:head>
