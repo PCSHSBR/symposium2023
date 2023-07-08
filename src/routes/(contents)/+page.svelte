@@ -68,35 +68,29 @@
 			})
 			.addTo(control);
 
-		// symp quote animation
-		let quoteWrapper = document.querySelector('.symp-description p');
-		quoteWrapper.innerHTML = quoteWrapper.textContent.replace(
-			/\S/g,
-			"<span class='letter'>$&</span>"
-		);
+		// info animation
 		let tl2 = animejs.timeline({ autoplay: false, duration: 1000, easing: 'easeOutExpo' });
 		let s2am1 = tl2.add({
-			targets: '.symp-description p .letter',
+			targets: '.info-img',
 			opacity: [0, 1],
-			translateY: [40, 0],
-			delay: (el, i) => 50 * (i + 1)
+			scale: [1.5, 1]
 		});
 		let s2am2 = tl2.add({
-			targets: '.symp-description .author',
-			opacity: [0, 1],
-			translateY: [40, 0],
-			delay: 1000
+			targets: '.event-info .info-paragrpah',
+			opacity: [0, 1]
 		});
 
 		let scene2 = new ScrollMagic.Scene({
-			triggerElement: '.symp-description',
+			triggerElement: '.event-info',
 			triggerHook: 0,
-			offset: -window.innerHeight / 1.5,
-			duration: document.querySelector('.symp-description').clientHeight
+			offset: -window.innerHeight,
+			duration: document.querySelector('.event-info')?.clientHeight
 		})
-			.on('enter', (e) => {
-				tl2.play();
+			.on('progress', (e) => {
+				console.log(e.progress);
+				tl2.seek(tl2.duration * e.progress);
 			})
+
 			.addTo(control);
 	});
 </script>
@@ -149,7 +143,7 @@
 					มาร่วมสร้างสรรค์นวัตกรรมที่จะเปลี่ยนโลกให้ดีขึ้นผ่านการนำเสนอผลงานโครงงานของคุณกันเถอะ!
 				</p>
 				<!-- svelte-ignore a11y-missing-attribute -->
-				<a class="send-project btn-primary btn">ส่งโครงงาน</a>
+				<!-- <a class="send-project btn-primary btn">ส่งโครงงาน</a> -->
 				<a href="#info" class="enter-event btn-primary btn">เข้างาน</a>
 			</div>
 			<div class="absolute bottom-0 flex h-16 w-full flex-col items-center">
@@ -161,61 +155,51 @@
 </div>
 
 <div class="info-container relative" id="info">
-	<section
-		class="event-countdown mx-auto flex max-w-md flex-col items-center justify-center gap-4 px-8 py-16"
-	>
-		<div class="self-start">
-			<span class="w-full text-3xl">เหลืออีก</span>
-		</div>
-		<div class="flex flex-row flex-wrap justify-center gap-5 text-center">
-			<div class="flex flex-col">
-				<span class="countdown font-mono text-5xl">
-					<span style="--value:{remaining.getMonth()};" />
-				</span>
-				month
-			</div>
-			<div class="flex flex-col">
-				<span class="countdown font-mono text-5xl">
-					<span style="--value:{remaining.getDay()};" />
-				</span>
-				days
-			</div>
-			<div class="flex flex-col">
-				<span class="countdown font-mono text-5xl">
-					<span style="--value:{remaining.getHours()};" />
-				</span>
-				hours
-			</div>
-			<div class="flex flex-col">
-				<span class="countdown font-mono text-5xl">
-					<span style="--value:{remaining.getMinutes()};" />
-				</span>
-				min
-			</div>
-			<div class="flex flex-col">
-				<span class="countdown font-mono text-5xl">
-					<span style="--value:{remaining.getSeconds()};" />
-				</span>
-				sec
+	<section class="event-info relative mx-auto max-w-4xl px-10 py-40">
+		<div
+			class="background absolute -left-10 top-5 -z-40 flex rotate-90 flex-col text-8xl text-base-content/50 blur-md"
+		>
+			<span class="">WE</span>
+			<span class="">BUILD</span>
+			<span class="">FUTURE</span>
+			<span class="">TOGETER</span>
+			<div class="my-2 mr-2 flex">
+				<Icon icon="material-symbols:circle" />
+				<Icon icon="mdi:triangle" />
+				<Icon icon="mdi:square" />
 			</div>
 		</div>
-		<div class="self-end">
-			<span class="w-full text-3xl">กิจกรรมจะเริ่ม</span>
+		<div class="h-40 overflow-hidden rounded-3xl">
+			<img src="Image/HeroPic1.jpg" class="info-img h-full w-full object-cover" alt="" />
+		</div>
+		<div class="info-paragrpah">
+			<h1
+				class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-6xl font-bold text-transparent"
+			>
+				PCSHS SYMPOSIUM
+			</h1>
+			<p class="">
+				<span
+					class="bg-gradient-to-r from-primary to-secondary bg-clip-text font-bold text-transparent"
+					>PCSHS Symposium</span
+				> มีเป้าหมายเพื่อส่งเสริมการพัฒนาและเผยแพร่โครงการทางวิทยาศาสตร์และเทคโนโลยีในระดับชาติภายในกลุ่มโรงเรียนวิทยาศาสตร์จุฬาภรณ์ระดับมัธยมศึกษาตอนปลาย(PCSHS)
+				ซึ่งมีทั้งหมด 12 โรงเรียนทั่วประเทศไทย งานนี้ทำหน้าที่เป็นเวทีในการส่งเสริมและอำนวยความสะดวกในความก้าวหน้าทางวิทยาศาสตร์และเทคโนโลยีโดยเปิดโอกาสให้นักเรียนได้แสดงผลงานการวิจัยของพวกเขาด้วยการส่งเสริมการแลกเปลี่ยนความรู้และการทำงานร่วมกัน
+				การประชุมสัมมนาพยายามที่จะขับเคลื่อนโครงการทางวิทยาศาสตร์ให้สูงขึ้นไปอีกขั้นซึ่งท้ายที่สุดจะเป็นประโยชน์ต่อความก้าวหน้าและนวัตกรรมของประเทศ
+			</p>
+		</div>
+		<div class="event-icon flex flex-row flex-wrap items-center pt-10">
+			<div class="my-2 mr-2 flex">
+				<Icon icon="material-symbols:circle" />
+				<Icon icon="mdi:triangle" />
+				<Icon icon="mdi:square" />
+			</div>
+			<span class="text-sm"
+				>In the realm of science, knowledge ascends, driven by the PCSHS Science Symposium.</span
+			>
 		</div>
 	</section>
-	<section
-		class="symp-description mx-auto my-16 flex max-w-2xl flex-col rounded-none bg-base-300 px-8 py-16 shadow md:rounded-xl"
-	>
-		<p class="p-4 text-2xl italic">
-			"The scientist is not a person who gives the right answers, but the one who asks the right
-			questions."
-		</p>
-		<span class="author relative self-end">Claude Bernard</span>
-	</section>
+	<section class="event-calendar mx-auto max-w-4xl px-10 py-10" />
 </div>
 
 <style>
-	:global(.letter) {
-		display: inline-block;
-	}
 </style>
