@@ -48,7 +48,7 @@
 			let rotation = new THREE.Vector3();
 			let camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 5000);
 			let scene = new THREE.Scene();
-			let renderer = new THREE.WebGLRenderer({ antialias: true });
+			let renderer = new THREE.WebGLRenderer({ antialias: !isMobile });
 			// let controls = new OrbitControls(camera, renderer.domElement);
 
 			renderer.setSize(width, height);
@@ -80,7 +80,7 @@
 			let pointLight = new THREE.PointLight(0xffffff, 1, 5000);
 			let pointLightHelper = new THREE.PointLightHelper(pointLight, 100);
 			pointLight.position.set(-200, -200, 0);
-			pointLight.castShadow = isMobile ? false : true;
+			pointLight.castShadow = !isMobile;
 			pointLight.shadow.mapSize.width = 512;
 			pointLight.shadow.mapSize.height = 512;
 			pointLight.shadow.camera.near = 0.5;
