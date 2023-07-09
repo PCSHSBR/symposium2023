@@ -22,9 +22,25 @@
 
 	let threeCanvas: HTMLDivElement;
 	onMount(async () => {
+		function detectMob() {
+			const toMatch = [
+				/Android/i,
+				/webOS/i,
+				/iPhone/i,
+				/iPad/i,
+				/iPod/i,
+				/BlackBerry/i,
+				/Windows Phone/i
+			];
+
+			return toMatch.some((toMatchItem) => {
+				return navigator.userAgent.match(toMatchItem);
+			});
+		}
 		setTimeout(() => {
 			let width = window.innerWidth;
 			let height = window.innerHeight;
+			let isMobile = detectMob();
 
 			let pointer = new THREE.Vector2();
 			let p1 = new THREE.Vector2();
@@ -64,7 +80,7 @@
 			let pointLight = new THREE.PointLight(0xffffff, 1, 5000);
 			let pointLightHelper = new THREE.PointLightHelper(pointLight, 100);
 			pointLight.position.set(-200, -200, 0);
-			pointLight.castShadow = true;
+			pointLight.castShadow = isMobile ? false : true;
 			pointLight.shadow.mapSize.width = 512;
 			pointLight.shadow.mapSize.height = 512;
 			pointLight.shadow.camera.near = 0.5;

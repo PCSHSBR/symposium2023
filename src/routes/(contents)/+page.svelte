@@ -239,16 +239,16 @@
 		</div>
 	</section>
 	<section class="event-calendar relative mx-auto overflow-hidden bg-base-300">
-		<div class="calendar-info z-[99] mx-auto max-w-lg p-10">
-			<div class="title">
+		<div class="background">
+			<span class="circle interactive" />
+			<span class="circle left-10 top-0 scale-[5]" />
+			<span class="circle right-0 top-20 scale-[3]" />
+		</div>
+		<div class="calendar-info relative mx-auto max-w-lg p-10">
+			<div>
 				<h1 class="m-0 text-6xl font-bold">Calendar</h1>
 				<p class="text-xl">กำหนดการ</p>
 			</div>
-		</div>
-		<div class="background z-[0]">
-			<span class="circle interactive" />
-			<span class="circle left-10 top-0 scale-[10]" />
-			<span class="circle right-0 top-20 scale-[5]" />
 		</div>
 	</section>
 </div>
