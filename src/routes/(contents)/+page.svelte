@@ -4,6 +4,7 @@
 	import Icon from '@iconify/svelte';
 	import ScrollMagic from 'scrollmagic';
 	import animejs from 'animejs';
+	import { watchWithFilter } from 'svelte-legos';
 
 	let isLoading = true;
 	let isBannerHovered = false;
@@ -22,90 +23,115 @@
 	}, 1000);
 
 	onMount(() => {
-		let control = new ScrollMagic.Controller();
+		function animation() {
+			let control = new ScrollMagic.Controller();
 
-		// hero-sticky progress scroll
-		let scene1 = new ScrollMagic.Scene({
-			triggerElement: '.hero-sticky',
-			triggerHook: 0,
-			duration: document.querySelector('.hero-sticky')?.clientHeight
-		})
-			.on('progress', (e) => {
-				hero_section_percent = e.progress;
-				// console.log(hero_section_percent);
+			// hero-sticky progress scroll
+			let scene1 = new ScrollMagic.Scene({
+				triggerElement: '.hero-sticky',
+				triggerHook: 0,
+				duration: document.querySelector('.hero-sticky')?.clientHeight
 			})
-			.addTo(control);
+				.on('progress', (e) => {
+					hero_section_percent = e.progress;
+					// console.log(hero_section_percent);
+				})
+				.addTo(control);
 
-		// text animation
-		let tl1 = animejs.timeline({ autoplay: true, duration: 1000, easing: 'easeOutExpo' });
-		let s1am1 = tl1.add({
-			targets: '.main-title ',
-			opacity: [0, 1],
-			delay: 1000
-		});
-		let s1am2 = tl1.add({
-			targets: '.sub-title , .send-project , .enter-event',
-			opacity: [0, 1],
-			delay: 100
-		});
-		let s1am3 = tl1.add({
-			targets: '.date-range',
-			opacity: [0, 1],
-			delay: 0
-		});
+			// text animation
+			let tl1 = animejs.timeline({ autoplay: true, duration: 1000, easing: 'easeOutExpo' });
+			let s1am1 = tl1.add({
+				targets: '.main-title ',
+				opacity: [0, 1],
+				delay: 1000
+			});
+			let s1am2 = tl1.add({
+				targets: '.sub-title , .send-project , .enter-event',
+				opacity: [0, 1],
+				delay: 100
+			});
+			let s1am3 = tl1.add({
+				targets: '.date-range',
+				opacity: [0, 1],
+				delay: 0
+			});
 
-		// text-in-out animation
-		let scene1_1 = new ScrollMagic.Scene({
-			triggerElement: '.hero-sticky',
-			triggerHook: 0,
-			duration: document.querySelector('.hero-sticky')?.clientHeight - window.innerHeight
-		})
-			.on('enter', (e) => {
-				tl1.play();
+			// text-in-out animation
+			let scene1_1 = new ScrollMagic.Scene({
+				triggerElement: '.hero-sticky',
+				triggerHook: 0,
+				duration: document.querySelector('.hero-sticky')?.clientHeight - window.innerHeight
 			})
-			.on('leave', (e) => {
-				tl1.play();
+				.on('enter', (e) => {
+					tl1.play();
+				})
+				.on('leave', (e) => {
+					tl1.play();
+				})
+				.addTo(control);
+
+			// info animation
+			let tl2 = animejs.timeline({ autoplay: false, duration: 1000, easing: 'easeOutExpo' });
+			let s2am1 = tl2.add({
+				targets: '.info-img',
+				opacity: [0, 1],
+				scale: [1.5, 1],
+				delay: 200
+			});
+			let s2am2 = tl2.add({
+				targets: '.event-info .info-paragrpah',
+				opacity: [0, 1]
+			});
+			let s2am3 = tl2.add({
+				targets: ' .event-info .event-poem',
+				opacity: [0, 1]
+			});
+
+			let s2am4 = animejs({
+				targets: '.event-info .background span,.event-info .background svg',
+				translateY: [100, 0],
+				opacity: [0, 1],
+				delay: (el, i) => 200 * i,
+				duration: 1000,
+				easing: 'easeOutExpo'
+			});
+
+			let scene2 = new ScrollMagic.Scene({
+				triggerElement: '.event-info',
+				triggerHook: 0,
+				offset: -(window.innerHeight - 200),
+				duration: document.querySelector('.event-info')?.clientHeight
 			})
-			.addTo(control);
+				.on('enter', (e) => {
+					tl2.play();
+					s2am4.play();
+				})
+				.addTo(control);
+		}
 
-		// info animation
-		let tl2 = animejs.timeline({ autoplay: false, duration: 1000, easing: 'easeOutExpo' });
-		let s2am1 = tl2.add({
-			targets: '.info-img',
-			opacity: [0, 1],
-			scale: [1.5, 1],
-			delay: 200
-		});
-		let s2am2 = tl2.add({
-			targets: '.event-info .info-paragrpah',
-			opacity: [0, 1]
-		});
-		let s2am3 = tl2.add({
-			targets: ' .event-info .event-poem',
-			opacity: [0, 1]
-		});
+		function interactiveEvent() {
+			let event_calendar = document.querySelector('.event-calendar');
+			let background = event_calendar?.querySelector('.background');
+			let interactiveCircle = background?.querySelector('.interactive');
 
-		let s2am4 = animejs({
-			targets: '.event-info .background',
-			translateY: [100, 0],
-			rotate: [90, 90],
-			opacity: [0, 1],
-			delay: 100,
-			duration: 1000,
-			easing: 'easeOutExpo'
-		});
-
-		let scene2 = new ScrollMagic.Scene({
-			triggerElement: '.event-info',
-			triggerHook: 0,
-			offset: -(window.innerHeight - 200),
-			duration: document.querySelector('.event-info')?.clientHeight
-		})
-			.on('enter', (e) => {
-				tl2.play();
-				s2am4.play();
-			})
-			.addTo(control);
+			window.addEventListener('mousemove', (e) => {
+				let event_calendar_rect = event_calendar?.getBoundingClientRect();
+				if (
+					e.clientY - event_calendar_rect.top < event_calendar?.clientHeight &&
+					e.clientY - event_calendar_rect?.top > 0
+				) {
+					interactiveCircle.style.opacity = '1';
+					interactiveCircle.style.left = `${e.clientX - event_calendar_rect.left}px`;
+					interactiveCircle.style.top = `${e.clientY - event_calendar_rect.top}px`;
+					interactiveCircle.style.transform = `translate(-50%,-50%)`;
+					// console.log(e.clientX - event_calendar_rect.left,e.clientY - event_calendar_rect.top);
+				} else {
+					interactiveCircle.style.opacity = '0';
+				}
+			});
+		}
+		interactiveEvent();
+		animation();
 	});
 </script>
 
@@ -168,7 +194,7 @@
 	</section>
 </div>
 
-<div class="info-container relative" id="info">
+<div class="info-container relative w-full overflow-hidden" id="info">
 	<section class="event-info relative mx-auto max-w-4xl px-10 py-40">
 		<div
 			class="background absolute -left-10 top-5 -z-40 flex rotate-90 flex-col text-8xl text-base-content/50 blur-md"
@@ -212,8 +238,28 @@
 			>
 		</div>
 	</section>
-	<section class="event-calendar mx-auto max-w-4xl px-10 py-10" />
+	<section class="event-calendar relative mx-auto overflow-hidden bg-base-300">
+		<div class="calendar-info z-[99] mx-auto max-w-lg p-10">
+			<div class="title">
+				<h1 class="m-0 text-6xl font-bold">Calendar</h1>
+				<p class="text-xl">กำหนดการ</p>
+			</div>
+		</div>
+		<div class="background z-[0]">
+			<span class="circle interactive" />
+			<span class="circle left-10 top-0 scale-[10]" />
+			<span class="circle right-0 top-20 scale-[5]" />
+		</div>
+	</section>
 </div>
 
-<style>
+<style lang="postcss">
+	.circle {
+		z-index: 0;
+		@apply absolute h-20 w-20 rounded-full bg-red-800/50 blur-xl transition-colors transition-opacity duration-500;
+
+		&:hover {
+			@apply bg-primary/50;
+		}
+	}
 </style>
