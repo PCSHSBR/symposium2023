@@ -1,10 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import Banner from '$lib/components/banner.svelte';
 	import Icon from '@iconify/svelte';
 	import ScrollMagic from 'scrollmagic';
 	import animejs from 'animejs';
 	import { watchWithFilter } from 'svelte-legos';
+
+	import { calendarData } from '$lib/calendarData';
+	import Banner from '$lib/components/banner.svelte';
+	import Calendar from '$lib/components/Calendar.svelte';
+	import heropic1 from '$lib/assets/images/HeroPic1.jpg';
 
 	let isLoading = true;
 	let isBannerHovered = false;
@@ -16,7 +20,6 @@
 	let hero_sticky: HTMLDivElement;
 	let hero_section_percent: number;
 
-	console.log(now.toISOString());
 	setInterval(() => {
 		now = new Date();
 		remaining = new Date(eventdate.getTime() - now.getTime());
@@ -210,7 +213,7 @@
 			</div>
 		</div>
 		<div class="h-40 overflow-hidden rounded-3xl">
-			<img src="Image/HeroPic1.jpg" class="info-img h-full w-full object-cover" alt="" />
+			<img src={heropic1} class="info-img h-full w-full object-cover" alt="" />
 		</div>
 		<div class="info-paragrpah">
 			<h1
@@ -241,14 +244,15 @@
 	<section class="event-calendar relative mx-auto overflow-hidden bg-base-300">
 		<div class="background">
 			<span class="circle interactive" />
-			<span class="circle left-10 top-0 scale-[5]" />
-			<span class="circle right-0 top-20 scale-[3]" />
+			<!-- <span class="circle left-10 top-0 scale-[5]" />
+			<span class="circle right-0 top-20 scale-[3]" /> -->
 		</div>
-		<div class="calendar-info relative mx-auto max-w-lg p-10">
+		<div class="calendar-info relative mx-auto max-w-6xl p-10">
 			<div>
 				<h1 class="m-0 text-6xl font-bold">Calendar</h1>
 				<p class="text-xl">กำหนดการ</p>
 			</div>
+			<Calendar class="" calenderData={calendarData} />
 		</div>
 	</section>
 </div>

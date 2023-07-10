@@ -16,14 +16,9 @@ class animator {
 			this.animateElement?.forEach((element) => {
 				if (element.getBoundingClientRect().top < this.window.innerHeight + window.scrollY - 100) {
 					element.style.cssText = this.afterAnimate?.cssText ?? '';
-					console.log('animate');
 				} else {
 					element.style.cssText = this.beforeAnimate?.cssText ?? '';
 				}
-				console.log({
-					ele: element.getBoundingClientRect().top,
-					window: this.window.innerHeight + window.scrollY
-				});
 			});
 		});
 	}

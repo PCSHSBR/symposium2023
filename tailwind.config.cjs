@@ -1,4 +1,5 @@
 const daisyui = require('daisyui');
+const neasting= require('postcss-nesting');
 
 /** @type {import('tailwindcss').Config}*/
 const config = {
@@ -15,7 +16,7 @@ const config = {
 		}
 	},
 
-	plugins: [daisyui]
+	plugins: [daisyui, neasting]
 };
 
 module.exports = config;

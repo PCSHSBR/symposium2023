@@ -16,3 +16,12 @@ export interface RoleDescription {
 	name: string;
 	desc: string;
 }
+
+export interface CalendarSchema {
+	'start-date': string;
+	'end-date': string;
+	'start-time': string;
+	'end-time': string;
+	name: string;
+	description: string;
+}
