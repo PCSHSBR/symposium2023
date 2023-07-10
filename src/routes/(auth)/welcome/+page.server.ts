@@ -46,6 +46,6 @@ export const actions = {
 			password: form.data.password
 		});
 		if (result.error) return fail(500, { form, error: result.error });
-		throw redirect(303, '/dashboard');
+		throw redirect(303, '/welcome/done');
 	}
 } satisfies Actions;

@@ -1,24 +1,62 @@
 import { z } from 'zod';
 
+export const phoneNumberSchema = z.string().regex(/^(0|\+66)[2-9]{1}[0-9]{7,8}$/, {
+	message: 'โปรดกรอกเฉพาะตัวเลข ไม่ต้องมีเครื่องหมายขีดหรือช่องว่าง'
+});
+
+export const simpleStringSchema = z
+	.string({
+		required_error: 'อย่าเว้นว่างช่องนี้ไว้'
+	})
+	.min(1);
+
 export const studentMembers = z.object({
-	title_th: z.string().min(1),
-	title_en: z.string().min(1),
-	firstname_th: z.string().min(1),
-	firstname_en: z.string().min(1),
-	lastname_th: z.string().min(1),
-	lastname_en: z.string().min(1),
-	phone_number: z.string().min(1).max(10),
+	title_th: simpleStringSchema,
+	title_en: simpleStringSchema,
+	firstname_th: simpleStringSchema,
+	firstname_en: simpleStringSchema,
+	lastname_th: simpleStringSchema,
+	lastname_en: simpleStringSchema,
+	phone_number: phoneNumberSchema.optional(),
+	email: z.string().email().optional()
+});
+
+export const teacherAdvisor = z.object({
+	title_th: simpleStringSchema,
+	title_en: simpleStringSchema,
+	firstname_th: simpleStringSchema,
+	firstname_en: simpleStringSchema,
+	lastname_th: simpleStringSchema,
+	lastname_en: simpleStringSchema,
+	phone_number: phoneNumberSchema,
 	email: z.string().email()
 });
+
+export const specialAdvisor = z.object({
+	title_th: simpleStringSchema,
+	title_en: simpleStringSchema,
+	firstname_th: simpleStringSchema,
+	firstname_en: simpleStringSchema,
+	lastname_th: simpleStringSchema,
+	lastname_en: simpleStringSchema,
+	academic_ranks: simpleStringSchema.optional(),
+	institution: simpleStringSchema,
+	institution_address: simpleStringSchema,
+	email: z.string().email().optional()
+});
 export type StudentMembers = z.infer<typeof studentMembers>;
+export type TeacherAdvisor = z.infer<typeof teacherAdvisor>;
+export type SpecialAdvisor = z.infer<typeof specialAdvisor>;
 
 export const studentRegisterProjectFormSchema = z.object({
 	presentation_type: z.number().int().min(1).max(3),
 	project_field: z.number().int().min(1).max(6),
-	project_title_th: z.string().min(1),
-	project_title_en: z.string().min(1),
+	project_title_th: simpleStringSchema,
+	project_title_en: simpleStringSchema,
 	school: z.number().int().min(1).max(12),
-	student_members: z.array(studentMembers)
+	student_members: z.array(studentMembers),
+	teacher_advisor: z.array(teacherAdvisor),
+	special_advisor: z.array(specialAdvisor)
 });
 
 export type StudentRegisterProjectFormSchema = z.infer<typeof studentRegisterProjectFormSchema>;
@@ -31,9 +69,7 @@ export const userWelcomeMetadataSchema = z
 		firstname_en: z.string(),
 		lastname_th: z.string(),
 		lastname_en: z.string(),
-		phone: z.string().regex(/^(0|\+66)[2-9]{1}[0-9]{7,8}$/, {
-			message: 'โปรดกรอกเฉพาะตัวเลข ไม่ต้องมีเครื่องหมายขีดหรือช่องว่าง'
-		}),
+		phone: phoneNumberSchema,
 		password: z
 			.string()
 			.min(8, {

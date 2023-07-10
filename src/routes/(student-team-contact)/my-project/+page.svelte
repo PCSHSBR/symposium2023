@@ -54,7 +54,7 @@
 				{/if}
 			</p>
 			<a href="/account" class="tooltip tooltip-bottom" data-tip="ไปยังหน้าการตั้งค่าบัญชี">
-				<button class="btn-primary btn-sm btn my-2 mt-3"
+				<button class="btn-sm btn my-2 mt-3"
 					><Icon icon="mdi:edit" class="h-4 w-4" /> แก้ไขข้อมูลบัญชี</button
 				>
 			</a>

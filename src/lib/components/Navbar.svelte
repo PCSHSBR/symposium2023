@@ -4,6 +4,8 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { networkStore } from 'svelte-legos';
+	const networkInfo = networkStore();
 
 	// function to close the menu, for using with use directive
 	function closeMenu(_node?: HTMLElement) {
@@ -89,7 +91,13 @@
 			</li>
 		</ul>
 	</div>
-	<div>
+	<div class="gap-4">
+		{#if !$networkInfo.isOnline}
+			<div class="flex flex-row gap-3 text-warning">
+				<Icon icon="mdi:wifi-alert" class="h-6 w-6" />
+				<span class="hidden xs:inline"> คุณไม่ได้เชื่อมต่ออินเตอร์เน็ต </span>
+			</div>
+		{/if}
 		{#if !isNotShowLogin}
 			{#if data.session}
 				<!-- <a class="btn-primary btn" href="/dashboard">แดชบอร์ด</a> -->

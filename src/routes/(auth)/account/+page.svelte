@@ -224,6 +224,7 @@
 				<div class="flex flex-col gap-1">
 					<label for="firstname_th">ชื่อ</label>
 					<input
+						required
 						id="firstname_th"
 						class="input-bordered input"
 						bind:value={editingValue.firstname_th}
@@ -233,6 +234,7 @@
 					<label for="lastname_th">นามสกุล</label>
 					<input
 						id="lastname_th"
+						required
 						class="input-bordered input"
 						bind:value={editingValue.lastname_th}
 					/>
@@ -294,6 +296,7 @@
 				<div class="flex flex-col gap-1">
 					<label for="firstname_en">ชื่อ</label>
 					<input
+						required
 						id="firstname_en"
 						class="input-bordered input"
 						bind:value={editingValue.firstname_en}
@@ -302,6 +305,7 @@
 				<div class="flex flex-col gap-1">
 					<label for="lastname_en">นามสกุล</label>
 					<input
+						required
 						id="lastname_en"
 						class="input-bordered input"
 						bind:value={editingValue.lastname_en}
@@ -345,6 +349,7 @@
 				<div class="flex flex-col gap-1">
 					<label for="phone">หมายเลขโทรศัพท์</label>
 					<input
+						required
 						id="phone"
 						class="input-bordered input"
 						bind:value={editingValue.phone}
@@ -404,6 +409,7 @@
 			<div class="input-group">
 				<input
 					id="new-email"
+					required
 					type="email"
 					class="{!isFieldValid.email ? 'input-error' : ''} input input-sm w-full"
 					placeholder="อีเมลใหม่"
@@ -461,6 +467,7 @@
 		<input
 			class="input input-sm"
 			id="new-password"
+			required
 			type="password"
 			autocomplete="new-password"
 			bind:value={editingValue.password1}
@@ -470,6 +477,7 @@
 			class="input input-sm"
 			id="retype-password"
 			type="password"
+			required
 			autocomplete="new-password"
 			bind:value={editingValue.password2}
 		/>
