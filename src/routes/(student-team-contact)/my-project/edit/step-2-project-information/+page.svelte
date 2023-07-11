@@ -56,6 +56,19 @@
 			email: data.session?.user.email || ''
 		};
 	}
+
+	let isEnglishPresentation = get(form).presentation_type === 2;
+	$: isEnglishPresentation = $form.presentation_type === 2;
+
+	let teamImageTemp: FileList | null | undefined = null;
+	let teamImageUrl = '';
+	let teamImageError = '';
+	$: if (teamImageTemp && teamImageTemp[0]) {
+		teamImageError = teamImageTemp[0].size > 1024 * 1024 * 3 ? 'รูปภาพต้องมีขนาดไม่เกิน 3 MB' : '';
+		if (!teamImageError) {
+			teamImageUrl = URL.createObjectURL(teamImageTemp[0]);
+		}
+	}
 </script>
 
 <svelte:window
@@ -91,6 +104,7 @@
 		return async ({ update }) => {};
 	}}
 	method="post"
+	class="rounded-md bg-base-200 p-4"
 >
 	<div class="">
 		<h2>ประเภทการนำเสนอ</h2>
@@ -110,10 +124,10 @@
 					<span>{type_label}</span>
 				</label>
 			{/each}
-			{#if $errors.presentation_type}
+			{#if $errors.presentation_type && $errors.presentation_type[0]}
 				<div class="alert alert-error">
 					<Icon icon="mdi:alert" class="h-6 w-6" />
-					{$errors.presentation_type}
+					{$errors.presentation_type[0]}
 				</div>
 			{/if}
 		</div>
@@ -199,11 +213,24 @@
 				/>
 				<span>วิศวกรรมศาสตร์</span>
 			</label>
+			{#if $errors.project_field && $errors.project_field[0]}
+				<div class="alert alert-error">
+					<Icon icon="mdi:alert" class="h-6 w-6" />
+					{$errors.project_field[0]}
+				</div>
+			{/if}
 		</div>
 	</div>
+	{#if isEnglishPresentation}
+		<h2>หมายเหตุ</h2>
+		<div class="alert alert-info">
+			<Icon icon="mdi:info" class="h-6 w-6" />
+			เนื่องจากเป็นการบรรยายภาคภาษาอังกฤษ ให้ช่องกรอกข้อมูลทั้งไทยและอังกฤษเท่าที่ทราบ
+		</div>
+	{/if}
 	<div class="">
 		<h2>ชื่อโครงงาน</h2>
-		<div class="form-control">
+		<div class="form-control mb-4">
 			<label class="label mb-0 flex-row justify-between" for="thai_project_name">
 				<span class="label-text">ชื่อโครงงานภาษาไทย</span>
 				<span
@@ -214,7 +241,7 @@
 			</label>
 			<input
 				type="text"
-				class="backlit input-bordered input"
+				class="backlit input {$errors.project_title_th ? 'input-error' : ''}"
 				id="thai_project_name"
 				name="project_name_th"
 				bind:value={projectName.th}
@@ -223,8 +250,11 @@
 				}}
 				{...$constraints.project_title_th}
 			/>
-			<span class="label-text-alt mt-2 {!displayProjectName.th ? 'invisible' : ''}"
-				>แสดงผลเป็น: "<RenderStyledText content={displayProjectName.th} />"</span
+			<span class="label-text-alt mt-2 {!displayProjectName.th ? 'invisible' : ''}">
+				{#if $errors.project_title_th}
+					<span class="text-xs text-error">{$errors.project_title_th}</span>
+				{/if}
+				แสดงผลเป็น: "<RenderStyledText content={displayProjectName.th} />"</span
 			>
 		</div>
 		<div class="form-control">
@@ -238,7 +268,7 @@
 			</label>
 			<input
 				type="text"
-				class="input-bordered input"
+				class="input"
 				id="eng_project_name"
 				name="project_name_en"
 				bind:value={projectName.en}
@@ -247,8 +277,11 @@
 				}}
 				{...$constraints.project_title_en}
 			/>
-			<span class="label-text-alt mt-2 {!displayProjectName.en ? 'invisible' : ''}"
-				>แสดงผลเป็น: "<RenderStyledText content={displayProjectName.en} />"</span
+			<span class="label-text-alt mt-2 {!displayProjectName.en ? 'invisible' : ''}">
+				{#if $errors.project_title_en}
+					<span class="text-xs text-error">{$errors.project_title_en}</span>
+				{/if}
+				แสดงผลเป็น: "<RenderStyledText content={displayProjectName.en} />"</span
 			>
 		</div>
 	</div>
@@ -260,7 +293,7 @@
 				<select
 					name="school"
 					aria-labelledby="select_school_label"
-					class="select-bordered select select-sm xs:select-md"
+					class="select select-sm xs:select-md"
 					bind:value={$form.school}
 					{...$constraints.school}
 				>
@@ -279,11 +312,18 @@
 					<option value={12}>สตูล</option>
 				</select>
 			</div>
+			{#if $errors.school}
+				<span class="label-text-alt mt-2">
+					<span class="text-xs text-error">{$errors.school}</span>
+				</span>
+			{/if}
 		</div>
 	</div>
 	<div>
 		<h2>สมาชิกในทีม</h2>
 		<StudentMember
+			{isEnglishPresentation}
+			errors={$errors.student_members ? $errors.student_members[0] : {}}
 			sectionTitle="สมาชิกที่ 1 (ตัวแทนติดต่อของทีม)"
 			idx={1}
 			remove={() => {
@@ -294,8 +334,10 @@
 		/>
 		{#each Array(numberOfStudent - 1) as _, i}
 			<StudentMember
+				{isEnglishPresentation}
 				sectionTitle={`สมาชิกที่ ${i + 2}`}
 				idx={i + 2}
+				errors={$errors.student_members ? $errors.student_members[i + 1] : {}}
 				remove={() => {
 					$form.student_members = $form.student_members.filter(
 						(a, idx) => a.title_th !== '' && idx !== 0
@@ -332,6 +374,8 @@
 		<h2>ครูที่ปรึกษาโครงงาน</h2>
 		{#each Array(numberOfAdvisor) as _, i}
 			<AdvisorMember
+				{isEnglishPresentation}
+				errors={$errors.teacher_advisor ? $errors.teacher_advisor[i] : {}}
 				sectionTitle={`ครูที่ปรึกษาที่ ${i + 1}`}
 				idx={i}
 				removeAdvisor={() => {
@@ -370,6 +414,7 @@
 		<h2>ที่ปรึกษาพิเศษ (ถ้ามี)</h2>
 		{#each Array(numberOfSpecialAdvisor) as _, i}
 			<SpecialAdvisor
+				{isEnglishPresentation}
 				sectionTitle={`ที่ปรึกษาพิเศษ ${i + 1}`}
 				removeAdvisor={() => {
 					numberOfSpecialAdvisor -= 1;
@@ -393,21 +438,43 @@
 		<div class="flex flex-col items-center justify-center">
 			<label
 				for="team-image-upload"
-				class="mx-auto my-3 flex aspect-video w-full max-w-sm cursor-pointer flex-col items-center justify-center gap-4 rounded-lg border-2 border-dashed border-base-300 duration-300 hover:bg-base-200 dark:border-gray-500"
+				class="relative mx-auto my-3 flex aspect-[4/3] w-full max-w-sm cursor-pointer flex-col items-center justify-center gap-4 rounded-lg border-2 border-dashed border-base-300 duration-300 hover:bg-base-200 dark:border-gray-500"
 				title="ลากแล้ววางหรือกดเพื่อเลือกภาพ"
 			>
-				<div class="flex flex-col items-center justify-center text-sm text-base-content">
-					<Icon icon="mdi:account-group" class="h-12 w-12" />
-					<span>ลากแล้ววางหรือคลิกที่นี่</span>
-					<span>เพื่ออัปโหลดภาพถ่ายหมู่สมาชิกโครงงาน</span>
-				</div>
+				{#if teamImageUrl}
+					<img
+						src={teamImageUrl}
+						class="absolute h-full w-full rounded-lg object-cover"
+						alt="ภาพถ่ายหมู่สมาชิกโครงงาน"
+					/>
+					<!-- <span
+						class="absolute flex aspect-video w-full items-end justify-end border-b-2 border-t-2 border-white/50 p-1 text-xs text-white drop-shadow-lg"
+					>
+						กรอบ 16:9 (สำหรับงานวิดีโอ)
+					</span> -->
+				{:else}
+					<div class="flex flex-col items-center justify-center text-sm text-base-content">
+						<Icon icon="mdi:account-group" class="h-12 w-12" />
+						<span>ลากแล้ววางหรือคลิกที่นี่</span>
+						<span>เพื่ออัปโหลดภาพถ่ายหมู่สมาชิกโครงงาน</span>
+					</div>
+				{/if}
 			</label>
-			<input type="file" id="team-image-upload" class="hidden" />
-			<small>ภาพอัตราส่วน 16:9 ไฟล์รูปแบบ JPG, JPEG, หรือ PNG เท่านั้น</small>
+			<input
+				bind:files={teamImageTemp}
+				accept="image/*"
+				type="file"
+				id="team-image-upload"
+				class="hidden"
+			/>
+			<small>ภาพอัตราส่วน 4:3 เท่านั้น ขนาดไม่เกิน 3MB</small>
+			{#if teamImageError}
+				<small class="text-error">{teamImageError}</small>
+			{/if}
 		</div>
 	</div>
 
-	<button class="btn-primary btn-block btn mt-5">บันทึก</button>
+	<button disabled={$allErrors.length !== 0} class="btn-primary btn-block btn mt-5">บันทึก</button>
 	<BottomChevron nextHref="step-3-abstract" nextPage="บทคัดย่อ" />
 </form>
 
