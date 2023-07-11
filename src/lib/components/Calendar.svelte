@@ -32,45 +32,95 @@
 </script>
 
 <div class={`main-container ${clazz || ''}`}>
-	<div class="item">
-		<div class="d-date">
-			<span class="">17-23</span>
-			<span>July</span>
-		</div>
-		<div class="d-info">
-			<h1>ลงทะเบียนผ่าน Website</h1>
-			<p>
-				ผู้ใช้สามารถลงทะเบียนผ่านเว็บไซต์ได้ผ่าน <a href="/login">ลิงค์นี้</a> โดยที่สามารถลงทะเบียนได้ไม่เกินวันที่
-				25
-			</p>
+	<div class="collapse-arrow collapse mb-4 bg-base-200/70 shadow-sm">
+		<input type="radio" name="my-accordion-2" checked="checked" />
+		<div class="collapse-title text-xl font-medium">ONSITE</div>
+		<div class="collapse-content">
+			<div class="item">
+				<div class="d-date">
+					<span class="">17-25</span>
+					<span>สิงหาคม</span>
+				</div>
+				<div class="d-info">
+					<h1>ลงทะเบียนและส่งบทคัดย่อ</h1>
+					<p>
+						ลงทะเบียนแข้าสู่ระบบ , ยืนยัน , ส่งบทคัดย่อ และ ส่งบทความ ภายในวันที่ 17-25 สิงหาคม
+						ผ่านทางเว็บไซต์
+					</p>
+					<a href="/login" class="btn"><Icon icon="mdi:open-in-new" />ลงทะเบียน</a>
+				</div>
+			</div>
+			<div class="item">
+				<div class="d-date">
+					<span class="">4-6</span>
+					<span>กันยายน</span>
+				</div>
+				<div class="d-info">
+					<h1>The 3<span class="align-top text-xl">rd</span> Science symposium 2023</h1>
+					<p>
+						งาน The 3rd Science symposium 2023 จะจัดขึ้นในวันที่ 4-6 กันยายน 2566 ณ
+						โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย บุรีรัมย์ โดยสามารถดูตารางงานได้จาก
+					</p>
+					<a href="/schedule" class="btn"><Icon icon="mdi:open-in-new" />ลิงค์นี้</a>
+				</div>
+			</div>
 		</div>
 	</div>
-	<div class="item">
-		<div class="d-date">
-			<span class="">26-10</span>
-			<span>Aug</span>
-		</div>
-		<div class="d-info">
-			<h1>ส่ง Abstract</h1>
-			<p>
-				ส่ง Abstract ผ่านหน้าผู้ใช้งาน โดยสามารถเข้าไปแก้ไขได้ตลอดเวลา
-				โดยที่สามารถส่งได้ไม่เกินวันที่ 10 สิงหาคม
-			</p>
-		</div>
-	</div>
-	<div class="item">
-		<div class="d-date">
-			<span class="">4-6</span>
-			<span>Sep</span>
-		</div>
-		<div class="d-info">
-			<h1>The 3<span class="align-top text-xl">rd</span> Science symposium 2023</h1>
-			<p>
-				งาน The 3rd Science symposium 2023 จะจัดขึ้นในวันที่ 4-6 กันยายน 2566 ณ
-				โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย บุรีรัมย์ โดยสามารถดูตารางงานได้จาก <a
-					href="/schedule">ลิงค์นี้</a
-				>
-			</p>
+	<div class="collapse-arrow collapse bg-base-200/70 shadow-sm">
+		<input type="radio" name="my-accordion-2" />
+		<div class="collapse-title text-xl font-medium">ONLINE</div>
+		<div class="collapse-content">
+			<div class="item">
+				<div class="d-date">
+					<span class="">17-31</span>
+					<span>กันยายน</span>
+				</div>
+				<div class="d-info">
+					<h1>ลงทะเบียนผ่าน</h1>
+					<p>ผู้ใช้ที่นำเสนอ Online สามารถลงทะเบียนได้ผ่านหน้าผู้ใช้งาน</p>
+					<a href="/login" class="btn"><Icon icon="mdi:open-in-new" />ลงทะเบียน</a>
+				</div>
+			</div>
+			<div class="item">
+				<div class="d-date">
+					<span class="">14-18</span>
+					<span>สิงหาคม</span>
+				</div>
+				<div class="d-info">
+					<h1>อัพโหลดไฟล์</h1>
+					<p>อัพโหลดบทความและคลิปวิดีโอผ่านช่อง Youtube ของโรงเรียน ภายในวันที่ 14-18 สิงหาคม</p>
+				</div>
+			</div>
+			<div class="item">
+				<div class="d-date">
+					<span class="">19-20</span>
+					<span>สิงหาคม</span>
+				</div>
+				<div class="d-info">
+					<h1>รวบรวมแยกสาขา</h1>
+					<p>คณะกรรมการตามคำสั่งตรวจสอบข้อมูลที่นักเรียนอัพโหลดและรวบรวมแยกตามสาขา</p>
+				</div>
+			</div>
+			<div class="item">
+				<div class="d-date">
+					<span class="">21-25</span>
+					<span>สิงหาคม</span>
+				</div>
+				<div class="d-info">
+					<h1>คณะกรรมการตัดสิน</h1>
+					<p>คณะกรรมการตามคำสั่งตรวจสอบzผลงานที่ส่งเข้ามาและตัดสินตามเกณท์ที่กำหนด</p>
+				</div>
+			</div>
+			<div class="item">
+				<div class="d-date">
+					<span class="">26</span>
+					<span>สิงหาคม</span>
+				</div>
+				<div class="d-info">
+					<h1>ส่งผลการตัดสิน</h1>
+					<p>คณะกรรมการตามคำสั่งส่งผลการตัดสิน เพื่อรวบรวมและประกาศต่อไป</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -78,7 +128,7 @@
 <style lang="scss">
 	.main-container {
 		.item {
-			@apply mb-4 grid grid-cols-1 overflow-hidden rounded-2xl shadow-xl transition-all;
+			@apply mb-4 grid grid-cols-1 overflow-hidden rounded-xl shadow-xl transition-all;
 			@media (min-width: 768px) {
 				grid-template-columns: 200px 1fr;
 			}

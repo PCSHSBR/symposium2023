@@ -8,6 +8,7 @@
 	import { calendarData } from '$lib/calendarData';
 	import Banner from '$lib/components/banner.svelte';
 	import Calendar from '$lib/components/Calendar.svelte';
+	import FieldTrip from '$lib/components/FieldTrip.svelte';
 	import heropic1 from '$lib/assets/images/HeroPic1.jpg';
 
 	let isLoading = true;
@@ -113,24 +114,27 @@
 		}
 
 		function interactiveEvent() {
-			let event_calendar = document.querySelector('.event-calendar');
-			let background = event_calendar?.querySelector('.background');
-			let interactiveCircle = background?.querySelector('.interactive');
+			let event_calendar = document.querySelectorAll('.hover-effect');
 
-			window.addEventListener('mousemove', (e) => {
-				let event_calendar_rect = event_calendar?.getBoundingClientRect();
-				if (
-					e.clientY - event_calendar_rect.top < event_calendar?.clientHeight &&
-					e.clientY - event_calendar_rect?.top > 0
-				) {
-					interactiveCircle.style.opacity = '1';
-					interactiveCircle.style.left = `${e.clientX - event_calendar_rect.left}px`;
-					interactiveCircle.style.top = `${e.clientY - event_calendar_rect.top}px`;
-					interactiveCircle.style.transform = `translate(-50%,-50%)`;
-					// console.log(e.clientX - event_calendar_rect.left,e.clientY - event_calendar_rect.top);
-				} else {
-					interactiveCircle.style.opacity = '0';
-				}
+			event_calendar.forEach((item, index) => {
+				let background = item.querySelector('.background');
+				let interactiveCircle = background?.querySelector('.interactive');
+
+				window.addEventListener('mousemove', (e) => {
+					let event_calendar_rect = item?.getBoundingClientRect();
+					if (
+						e.clientY - event_calendar_rect.top < item?.clientHeight &&
+						e.clientY - event_calendar_rect?.top > 0
+					) {
+						interactiveCircle.style.opacity = '1';
+						interactiveCircle.style.left = `${e.clientX - event_calendar_rect.left}px`;
+						interactiveCircle.style.top = `${e.clientY - event_calendar_rect.top}px`;
+						interactiveCircle.style.transform = `translate(-50%,-50%)`;
+						// console.log(e.clientX - event_calendar_rect.left,e.clientY - event_calendar_rect.top);
+					} else {
+						interactiveCircle.style.opacity = '0';
+					}
+				});
 			});
 		}
 		interactiveEvent();
@@ -236,33 +240,46 @@
 				<Icon icon="mdi:triangle" />
 				<Icon icon="mdi:square" />
 			</div>
-			<span class="text-sm"
-				>In the realm of science, knowledge ascends, driven by the PCSHS Science Symposium.</span
-			>
+			<span class="text-sm">Improving a Sustainable World through Innovation and Projects</span>
 		</div>
 	</section>
-	<section class="event-calendar relative mx-auto overflow-hidden bg-base-300">
+	<section class="event-calendar hover-effect relative mx-auto overflow-hidden bg-base-300">
 		<div class="background">
 			<span class="circle interactive" />
-			<!-- <span class="circle left-10 top-0 scale-[5]" />
-			<span class="circle right-0 top-20 scale-[3]" /> -->
+			<span class="circle left-10 top-0 scale-[5]" />
+			<span class="circle right-0 top-20 scale-[3]" />
 		</div>
 		<div class="calendar-info relative mx-auto max-w-6xl p-10">
-			<div>
-				<h1 class="m-0 text-6xl font-bold">Calendar</h1>
-				<p class="text-xl">กำหนดการ</p>
+			<div class="pb-4">
+				<h1 class="m-0 flex items-center text-6xl font-bold">
+					<Icon icon="mdi:calendar" class="pr-4" />Calendar
+				</h1>
 			</div>
 			<Calendar class="" calenderData={calendarData} />
 		</div>
 	</section>
+	<section class="event-trip relative mx-auto overflow-hidden">
+		<div class="mx-auto max-w-6xl p-10">
+			<div class="relative z-10">
+				<h1 class="m-0 flex items-center text-6xl font-bold">
+					<Icon icon="mdi:person" />Field Trip
+				</h1>
+			</div>
+			<FieldTrip />
+			<a href="" class="btn"><Icon icon="mdi:open-in-new" />ดูข้อมูลทั้งหมด</a>
+		</div>
+	</section>
+	<section class="event-speaker relative mx-auto overflow-hidden">
+		<div class="mx-auto max-w-6xl p-10">
+			<div class="relative z-10">
+				<h1 class="m-0 flex items-center text-6xl font-bold"><Icon icon="mdi:person" />Speaker</h1>
+			</div>
+		</div>
+	</section>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
 	.circle {
 		@apply absolute z-0 h-20 w-20 rounded-full bg-red-800/50 blur-xl transition-opacity duration-500;
-
-		&:hover {
-			@apply bg-primary/50;
-		}
 	}
 </style>
