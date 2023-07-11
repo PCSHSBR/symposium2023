@@ -48,11 +48,12 @@ export const load = (async ({ locals: { getSession, supabase } }) => {
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
-	default: async ({ locals: { getSession, role }, request }) => {
+	default: async ({ locals: { getSession, role, supabase }, request }) => {
 		const session = await getSession();
 		if (!session) return fail(401);
 		const form = await superValidate(request, studentRegisterProjectFormSchema);
-		console.log('POST', JSON.stringify({ form }));
+		console.log('POST', JSON.stringify(form.errors, null, 2));
+		console.log('POST', JSON.stringify(form.data, null, 2));
 		if (!form.valid) return fail(400, { form });
 		return { form };
 	}

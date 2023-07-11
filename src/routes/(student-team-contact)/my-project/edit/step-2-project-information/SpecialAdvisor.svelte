@@ -30,7 +30,10 @@
 		'ดร.': 'Dr.'
 	};
 
-	$: value!.title_en = titleToThMap[value!.title_th];
+	$: {
+		if (value.title_th) value.title_en = titleToThMap[value.title_th];
+		else value.title_en = '';
+	}
 </script>
 
 <div class="relative mt-5 border border-gray-700 p-4 dark:border-gray-400">

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import DOMPurify from 'isomorphic-dompurify';
-	import { enhance } from '$app/forms';
 	import StudentMember from './StudentMember.svelte';
 	import AdvisorMember from './AdvisorMember.svelte';
 	import SpecialAdvisor from './SpecialAdvisor.svelte';
@@ -15,9 +14,11 @@
 
 	export let data: PageData;
 
-	const { form, errors, constraints, allErrors } = superForm(data.form, {
+	const { form, errors, constraints, enhance, allErrors, capture, restore } = superForm(data.form, {
 		dataType: 'json',
 		scrollToError: 'smooth',
+		autoFocusOnError: 'detect',
+		taintedMessage: 'คุณยังไม่ได้บันทึกการเปลี่ยนแปลง ต้องการออกจากหน้านี้หรือไม่',
 		onError({ message, result }) {
 			notify({
 				message: result.error.message,
@@ -26,13 +27,10 @@
 		}
 	});
 	let projectName = {
-		th: get(form).project_title_th,
-		en: get(form).project_title_en
+		th: $form.project_title_th,
+		en: $form.project_title_en
 	};
-	let displayProjectName = {
-		th: '',
-		en: ''
-	};
+	let displayProjectName = projectName;
 	$: displayProjectName.th = DOMPurify.sanitize(projectName.th, {
 		ALLOWED_TAGS: ['i', 'b']
 	});
@@ -71,13 +69,6 @@
 	}
 </script>
 
-<svelte:window
-	on:beforeunload|preventDefault={(event) => {
-		event.returnValue = '';
-		return 'คุณยังไม่ได้บันทึกข้อมูล ต้องการออกจากหน้านี้หรือไม่?';
-	}}
-/>
-
 {#if dev}
 	<pre
 		class="text-base/40 max-w-screen fixed bottom-0 right-0 z-50 h-32 w-full overflow-scroll break-words bg-base-100/40 text-xs">{JSON.stringify(
@@ -99,13 +90,7 @@
 	</div>
 </div>
 
-<form
-	use:enhance={({}) => {
-		return async ({ update }) => {};
-	}}
-	method="post"
-	class="rounded-md bg-base-200 p-4"
->
+<form use:enhance method="post" class="rounded-md bg-base-200 p-4">
 	<div class="">
 		<h2>ประเภทการนำเสนอ</h2>
 		<div class="form-control ml-5">
@@ -124,10 +109,10 @@
 					<span>{type_label}</span>
 				</label>
 			{/each}
-			{#if $errors.presentation_type && $errors.presentation_type[0]}
+			{#if $errors.presentation_type}
 				<div class="alert alert-error">
 					<Icon icon="mdi:alert" class="h-6 w-6" />
-					{$errors.presentation_type[0]}
+					{$errors.presentation_type.join(', ')}
 				</div>
 			{/if}
 		</div>
@@ -241,7 +226,7 @@
 			</label>
 			<input
 				type="text"
-				class="backlit input {$errors.project_title_th ? 'input-error' : ''}"
+				class="input {$errors.project_title_th ? 'input-error' : ''}"
 				id="thai_project_name"
 				name="project_name_th"
 				bind:value={projectName.th}
@@ -474,7 +459,7 @@
 		</div>
 	</div>
 
-	<button disabled={$allErrors.length !== 0} class="btn-primary btn-block btn mt-5">บันทึก</button>
+	<button disabled={$allErrors.length > 0} class="btn-primary btn-block btn mt-5">บันทึก</button>
 	<BottomChevron nextHref="step-3-abstract" nextPage="บทคัดย่อ" />
 </form>
 

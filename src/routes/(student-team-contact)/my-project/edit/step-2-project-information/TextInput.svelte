@@ -12,6 +12,7 @@
 		{#if type === 'email'}
 			<input
 				type="email"
+				aria-invalid={error && error[0] ? 'true' : undefined}
 				class="input w-full {error && error[0] ? 'input-error' : ''}"
 				bind:value
 				{...$$restProps}
@@ -19,6 +20,7 @@
 		{:else}
 			<input
 				type="text"
+				aria-invalid={error && error[0] ? 'true' : undefined}
 				class="input w-full {error && error[0] ? 'input-error' : ''}"
 				bind:value
 				{...$$restProps}
