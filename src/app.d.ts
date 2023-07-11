@@ -1,7 +1,7 @@
 // src/app.d.ts
 
 import { SupabaseClient, Session } from '@supabase/supabase-js';
-import { Database } from './DatabaseDefinitions';
+import type { Database } from '$lib/supabase';
 import type { Roles, UserMetadata as LocalMetadata } from '$lib/types';
 import type { UserMetadata } from '@supabase/supabase-js';
 

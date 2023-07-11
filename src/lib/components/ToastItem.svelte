@@ -14,6 +14,7 @@
 	let cprops = {};
 	/** @type {any} */
 	let unlisten;
+	let type = 'info';
 
 	const progress = tweened(item.initial, { duration: item.duration, easing: linear });
 

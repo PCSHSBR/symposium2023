@@ -14,18 +14,22 @@
 
 	export let data: PageData;
 
-	const { form, errors, constraints, enhance, allErrors, capture, restore } = superForm(data.form, {
-		dataType: 'json',
-		scrollToError: 'smooth',
-		autoFocusOnError: 'detect',
-		taintedMessage: 'คุณยังไม่ได้บันทึกการเปลี่ยนแปลง ต้องการออกจากหน้านี้หรือไม่',
-		onError({ message, result }) {
-			notify({
-				message: result.error.message,
-				type: 'error'
-			});
+	const { form, errors, constraints, message, enhance, allErrors, capture, restore } = superForm(
+		data.form,
+		{
+			dataType: 'json',
+			scrollToError: 'smooth',
+			autoFocusOnError: 'detect',
+			taintedMessage: 'คุณยังไม่ได้บันทึกการเปลี่ยนแปลง ต้องการออกจากหน้านี้หรือไม่',
+			onError({ message, result }) {
+				notify({
+					message: result.error.message,
+					type: 'error',
+					initial: 0
+				});
+			}
 		}
-	});
+	);
 	let projectName = {
 		th: $form.project_title_th,
 		en: $form.project_title_en
@@ -458,6 +462,13 @@
 			{/if}
 		</div>
 	</div>
+
+	{#if $message}
+		<div class="alert alert-success">
+			<Icon icon="mdi:tick" class="h-6 w-6" />
+			<span>{$message}</span>
+		</div>
+	{/if}
 
 	<button disabled={$allErrors.length > 0} class="btn-primary btn-block btn mt-5">บันทึก</button>
 	<BottomChevron nextHref="step-3-abstract" nextPage="บทคัดย่อ" />
