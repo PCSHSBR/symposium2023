@@ -180,7 +180,7 @@
 				<div class="date-range flex flex-row flex-wrap items-center">
 					<span>PCSHSBR</span>
 					<span class="divider mx-8 h-1 w-16 rounded-sm bg-base-content" />
-					<span>3 กันยายน - 7 กันยายน 2566</span>
+					<span>4 กันยายน - 6 กันยายน 2566</span>
 				</div>
 				<h1 class="main-title text-4xl font-black leading-none md:text-6xl">
 					<span class="text-[128px]">3</span><span class="align-top text-xl">rd</span> PCSHS Science
