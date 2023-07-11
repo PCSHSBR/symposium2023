@@ -1,8 +1,8 @@
-import { SENTRY_DSN } from '$env/static/private';
+import { PUBLIC_SENTRY_DSN } from '$env/static/public';
 import * as Sentry from '@sentry/sveltekit';
 
 Sentry.init({
-	dsn: SENTRY_DSN,
+	dsn: PUBLIC_SENTRY_DSN,
 	// Performance Monitoring:
 	tracesSampleRate: 1.0, // Capture 100% of the transactions. Adjust this value in production as necessary.
 	// Session Replay

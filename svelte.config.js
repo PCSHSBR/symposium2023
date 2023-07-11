@@ -22,9 +22,12 @@ const config = {
 	compilerOptions: {
 		enableSourcemap: true
 	},
-	preprocess: preprocess({
-		sourceMap: true
-	})
+	preprocess: [
+		preprocess({
+			sourceMap: true
+		}),
+		vitePreprocess({})
+	]
 };
 
 export default config;

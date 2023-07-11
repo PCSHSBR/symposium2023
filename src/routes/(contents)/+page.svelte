@@ -257,10 +257,9 @@
 	</section>
 </div>
 
-<style lang="postcss">
+<style lang="scss">
 	.circle {
-		z-index: 0;
-		@apply absolute h-20 w-20 rounded-full bg-red-800/50 blur-xl transition-colors transition-opacity duration-500;
+		@apply absolute z-0 h-20 w-20 rounded-full bg-red-800/50 blur-xl transition-opacity duration-500;
 
 		&:hover {
 			@apply bg-primary/50;

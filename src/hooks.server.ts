@@ -1,12 +1,12 @@
 // src/hooks.server.ts
-import { PUBLIC_SUPABASE_URL } from '$env/static/public';
-import { SENTRY_DSN, SUPABASE_SERVICE_ROLE_KEY } from '$env/static/private';
+import { PUBLIC_SENTRY_DSN, PUBLIC_SUPABASE_URL } from '$env/static/public';
+import { SUPABASE_SERVICE_ROLE_KEY } from '$env/static/private';
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
 import type { Handle } from '@sveltejs/kit';
 import * as Sentry from '@sentry/sveltekit';
 
 Sentry.init({
-	dsn: SENTRY_DSN,
+	dsn: PUBLIC_SENTRY_DSN,
 	// Performance Monitoring
 	tracesSampleRate: 1.0 // Capture 100% of the transactions. Adjust this value in production as necessary.
 });

@@ -15,7 +15,16 @@ export default defineConfig({
 			authToken: process.env.SENTRY_AUTH_TOKEN
 		})
 	],
+
 	build: {
 		sourcemap: true // Source map generation must be turned on
+	},
+
+	css: {
+		preprocessorOptions: {
+			scss: {
+				additionalData: '@use "src/variables.scss" as *;'
+			}
+		}
 	}
 });

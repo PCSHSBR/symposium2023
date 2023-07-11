@@ -36,7 +36,7 @@ export const specialAdvisor = z.object({
 	title_th: simpleStringSchema,
 	title_en: simpleStringSchema.optional(),
 	firstname_th: simpleStringSchema,
-	firstname_en: simpleStringSchema.optiona(),
+	firstname_en: simpleStringSchema.optional(),
 	lastname_th: simpleStringSchema,
 	lastname_en: simpleStringSchema.optional(),
 	academic_ranks: simpleStringSchema.optional(),

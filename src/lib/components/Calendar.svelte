@@ -75,7 +75,7 @@
 	</div>
 </div>
 
-<style lang="postcss">
+<style lang="scss">
 	.main-container {
 		.item {
 			@apply mb-4 grid grid-cols-1 overflow-hidden rounded-2xl shadow-xl transition-all;
