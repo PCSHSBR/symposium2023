@@ -12,33 +12,33 @@ export const simpleStringSchema = z
 
 export const studentMembers = z.object({
 	title_th: simpleStringSchema,
-	title_en: simpleStringSchema,
+	title_en: simpleStringSchema.optional(),
 	firstname_th: simpleStringSchema,
-	firstname_en: simpleStringSchema,
+	firstname_en: simpleStringSchema.optional(),
 	lastname_th: simpleStringSchema,
-	lastname_en: simpleStringSchema,
+	lastname_en: simpleStringSchema.optional(),
 	phone_number: phoneNumberSchema.optional(),
 	email: z.string().email().optional()
 });
 
 export const teacherAdvisor = z.object({
 	title_th: simpleStringSchema,
-	title_en: simpleStringSchema,
+	title_en: simpleStringSchema.optional(),
 	firstname_th: simpleStringSchema,
-	firstname_en: simpleStringSchema,
+	firstname_en: simpleStringSchema.optional(),
 	lastname_th: simpleStringSchema,
-	lastname_en: simpleStringSchema,
-	phone_number: phoneNumberSchema,
+	lastname_en: simpleStringSchema.optional(),
+	phone_number: phoneNumberSchema.optional(),
 	email: z.string().email()
 });
 
 export const specialAdvisor = z.object({
 	title_th: simpleStringSchema,
-	title_en: simpleStringSchema,
+	title_en: simpleStringSchema.optional(),
 	firstname_th: simpleStringSchema,
-	firstname_en: simpleStringSchema,
+	firstname_en: simpleStringSchema.optiona(),
 	lastname_th: simpleStringSchema,
-	lastname_en: simpleStringSchema,
+	lastname_en: simpleStringSchema.optional(),
 	academic_ranks: simpleStringSchema.optional(),
 	institution: simpleStringSchema,
 	institution_address: simpleStringSchema,
