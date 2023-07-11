@@ -18,10 +18,23 @@
 		academic_ranks: '',
 		email: ''
 	};
+	export let isEnglishPresentation: boolean;
+
+	let titleToThMap: Record<string, string> = {
+		นางสาว: 'Miss',
+		นาย: 'Mr.',
+		นาง: 'Mrs.',
+		ศาสตราจารย์: 'Prof.',
+		รองศาสตราจารย์: 'Assoc. Prof.',
+		ผู้ช่วยศาสตราจารย์: 'Asst. Prof.',
+		'ดร.': 'Dr.'
+	};
+
+	$: value!.title_en = titleToThMap[value!.title_th];
 </script>
 
-<div class="relative mt-5 border p-4">
-	<h3 class="absolute -top-3 bg-base-100 px-3 font-bold">{sectionTitle}</h3>
+<div class="relative mt-5 border border-gray-700 p-4 dark:border-gray-400">
+	<h3 class="absolute -top-3 bg-base-200 px-3 font-bold">{sectionTitle}</h3>
 	<div class="absolute right-0 top-0 p-2">
 		<button
 			class="btn-sm btn"
@@ -49,23 +62,31 @@
 
 	<div class="flex flex-col sm:flex-row sm:gap-5">
 		<TextInput label="คำนำหน้า" bind:value={value.title_th} {...constraints?.title_th} />
-		<TextInput label="Title (อังกฤษ)" bind:value={value.title_en} {...constraints?.title_en} />
+		{#if isEnglishPresentation}
+			<TextInput label="Title (อังกฤษ)" bind:value={value.title_en} {...constraints?.title_en} />
+		{/if}
 	</div>
 	<div class="flex flex-col sm:flex-row sm:gap-5">
 		<TextInput label="ชื่อ" bind:value={value.firstname_th} {...constraints?.firstname_th} />
-		<TextInput
-			label="Firstname (อังกฤษ)"
-			bind:value={value.firstname_en}
-			{...constraints?.firstname_en}
-		/>
+
+		{#if isEnglishPresentation}
+			<TextInput
+				label="Firstname (อังกฤษ)"
+				bind:value={value.firstname_en}
+				{...constraints?.firstname_en}
+			/>
+		{/if}
 	</div>
 	<div class="flex flex-col sm:flex-row sm:gap-5">
 		<TextInput label="นามสกุล" bind:value={value.lastname_th} {...constraints?.lastname_th} />
-		<TextInput
-			label="Lastname (อังกฤษ)"
-			bind:value={value.lastname_en}
-			{...constraints?.lastname_en}
-		/>
+
+		{#if isEnglishPresentation}
+			<TextInput
+				label="Lastname (อังกฤษ)"
+				bind:value={value.lastname_en}
+				{...constraints?.lastname_en}
+			/>
+		{/if}
 	</div>
 	<TextInput
 		label="ตำแหน่งทางวิชาการ (ถ้ามี)"

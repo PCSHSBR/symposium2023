@@ -4,7 +4,7 @@
 	import Icon from '@iconify/svelte';
 	import TextInput from './TextInput.svelte';
 	import type { StudentMembers, studentMembers } from '$lib/formSchemas';
-	import type { InputConstraints } from 'sveltekit-superforms';
+	import type { InputConstraints, ValidationErrors } from 'sveltekit-superforms';
 	export let sectionTitle = 'คนที่ 1 (ตัวแทนติดต่อกลุ่ม)';
 	export let idx = 1;
 	export let remove: () => void;
@@ -19,6 +19,8 @@
 		phone_number: '',
 		email: ''
 	};
+	export let errors: ValidationErrors<typeof studentMembers> = {};
+	export let isEnglishPresentation: boolean;
 	let titleToThMap: Record<string, string> = {
 		นางสาว: 'Miss',
 		นาย: 'Mr.',
@@ -28,12 +30,12 @@
 	$: value!.title_en = titleToThMap[value!.title_th];
 </script>
 
-<div class="relative mt-5 rounded-sm border p-4">
-	<h3 class="absolute -top-3.5 mb-3 bg-base-100 px-3 font-bold">{sectionTitle}</h3>
+<div class="relative mt-5 rounded-sm border border-gray-700 p-4 dark:border-gray-400">
+	<h3 class="absolute -top-3.5 mb-3 bg-base-200 px-3 font-bold">{sectionTitle}</h3>
 	{#if idx > 1}
 		<div class="absolute right-0 top-0 p-2">
 			<button
-				class="btn-error btn-ghost btn-sm btn"
+				class="btn-ghost btn-error btn-sm btn"
 				type="reset"
 				on:click|preventDefault={() => {
 					value = {
@@ -60,7 +62,7 @@
 				<span class="label-text">คำนำหน้า</span>
 				<select
 					bind:value={value.title_th}
-					class="select-bordered select w-full"
+					class="select w-full {errors.title_th ? 'input-error' : ''}"
 					name="title_th"
 					{...constraints.title_th}
 				>
@@ -69,43 +71,77 @@
 					<option value="นาย">นาย</option>
 				</select>
 			</label>
+			{#if errors.title_th}
+				<span class="text-xs text-error">{errors.title_th}</span>
+			{/if}
 		</div>
-		<div class="form-control w-full">
-			<label class="label w-full flex-col">
-				<span class="label-text">title</span>
-				<select
-					class="select-bordered select w-full"
-					bind:value={value.title_en}
-					name="title_en"
-					{...constraints.title_en}
-				>
-					<option value="" disabled>เลือกคำนำหน้า</option>
-					<option value="Miss">Miss</option>
-					<option value="Mr.">Mr.</option>
-				</select>
-			</label>
-		</div>
+		{#if isEnglishPresentation}
+			<div class="form-control w-full">
+				<label class="label w-full flex-col">
+					<span class="label-text">Title (อังกฤษ)</span>
+					<select
+						class="select w-full {errors.title_en ? 'input-error' : ''}"
+						bind:value={value.title_en}
+						name="title_en"
+						{...constraints.title_en}
+					>
+						<option value="" disabled>เลือกคำนำหน้า</option>
+						<option value="Miss">Miss</option>
+						<option value="Mr.">Mr.</option>
+					</select>
+				</label>
+				{#if errors.title_en}
+					<span class="text-xs text-error">{errors.title_en}</span>
+				{/if}
+			</div>
+		{/if}
 	</div>
 	<div class="flex flex-col sm:flex-row sm:gap-5">
-		<TextInput label="ชื่อ" bind:value={value.firstname_th} {...constraints.firstname_th} />
 		<TextInput
-			label="Firstname (อังกฤษ)"
-			bind:value={value.firstname_en}
-			{...constraints.firstname_en}
+			error={errors.firstname_th}
+			label="ชื่อ"
+			bind:value={value.firstname_th}
+			{...constraints.firstname_th}
 		/>
+
+		{#if isEnglishPresentation}
+			<TextInput
+				error={errors.firstname_en}
+				label="Firstname (อังกฤษ)"
+				bind:value={value.firstname_en}
+				{...constraints.firstname_en}
+			/>
+		{/if}
 	</div>
 	<div class="flex flex-col sm:flex-row sm:gap-5">
-		<TextInput label="นามสกุล" bind:value={value.lastname_th} {...constraints.lastname_th} />
 		<TextInput
-			label="Lastname (อังกฤษ)"
-			bind:value={value.lastname_en}
-			{...constraints.lastname_en}
+			error={errors.lastname_th}
+			label="นามสกุล"
+			bind:value={value.lastname_th}
+			{...constraints.lastname_th}
 		/>
+		{#if isEnglishPresentation}
+			<TextInput
+				error={errors.lastname_en}
+				label="Lastname (อังกฤษ)"
+				bind:value={value.lastname_en}
+				{...constraints.lastname_en}
+			/>
+		{/if}
 	</div>
 	<TextInput
+		type="tel"
+		error={errors.phone_number}
 		label="หมายเลขโทรศัพท์"
 		bind:value={value.phone_number}
 		{...constraints.phone_number}
+		bottomLeftLabel="ใช้รูปแบบ 0XXXXXXXXX"
 	/>
-	<TextInput type="email" label="ที่อยู่อีเมล" bind:value={value.email} {...constraints.email} />
+	<TextInput
+		error={errors.email}
+		type="email"
+		label="ที่อยู่อีเมล"
+		bind:value={value.email}
+		{...constraints.email}
+	/>
 </div>

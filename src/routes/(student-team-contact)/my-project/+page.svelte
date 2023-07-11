@@ -166,7 +166,7 @@
 		@apply relative mt-8 flex flex-row;
 	}
 	.custom-step {
-		@apply m-10 flex flex-col items-center font-display text-2xl font-bold;
+		@apply z-10 m-10 flex flex-col items-center font-display text-2xl font-bold;
 	}
 	.custom-step span:first-child {
 		@apply absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-full bg-base-200 text-base-content;
@@ -184,6 +184,7 @@
 		@apply hidden;
 	}
 	.custom-step-onprogress span:first-child {
+		content: '';
 		@apply bg-primary text-primary-content;
 	}
 </style>
