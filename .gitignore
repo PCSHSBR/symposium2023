@@ -13,3 +13,5 @@ vite.config.ts.timestamp-*
 .flaskenv*
 !.env.project
 !.env.vault
+.vercel
+.env*.local
