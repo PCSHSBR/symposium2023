@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { loadpercent } from '$lib/store';
 	import { onMount } from 'svelte';
-	import Full_Icon from '$lib/components/Full-Icon.svelte';
+	import LogoWithText from '$lib/components/LogoWithText.svelte';
 
 	$: $loadpercent < 100
 		? (document.body.style.overflow = 'hidden')
@@ -16,7 +16,7 @@
 	<div
 		class="max-w- m-auto flex h-full w-[calc(100%-32px)] max-w-sm flex-col items-center justify-center align-middle"
 	>
-		<Full_Icon class="w-full" />
+		<LogoWithText class="w-full" />
 		<progress class="progress-primary progress w-full" value={$loadpercent} max="100" />
 	</div>
 </div>

@@ -5,9 +5,9 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { networkStore } from 'svelte-legos';
-	import Full_Icon from '$lib/components/Full-Icon.svelte';
-	import Small_Icon from '$lib/components/Icon.svelte';
-	import FullIcon from '$lib/components/Full-Icon.svelte';
+	import LogoWithText from '$lib/components/LogoWithText.svelte';
+	import Logo from '$lib/components/Logo.svelte';
+	import FullIcon from '$lib/components/LogoWithText.svelte';
 	const networkInfo = networkStore();
 
 	// function to close the menu, for using with use directive
@@ -58,7 +58,7 @@
 			<button
 				aria-label="เปิด/ปิดเมนู"
 				type="button"
-				class="swap-rotate swap btn-ghost btn-square btn md:hidden"
+				class="swap btn-ghost swap-rotate btn-square btn md:hidden"
 				on:click={() => {
 					isMenuOpen = !isMenuOpen;
 				}}
@@ -69,8 +69,8 @@
 			</button>
 		</label>
 		<a class="btn-ghost btn text-xl normal-case" href="/">
-			<Full_Icon class="hidden h-full w-full md:block" />
-			<Small_Icon class="blobk h-5/6 w-full md:hidden" />
+			<LogoWithText class="hidden h-full w-full md:block" />
+			<Logo class="blobk h-5/6 w-full md:hidden" />
 		</a>
 		<ul class="menu menu-horizontal hidden flex-row px-1 md:flex">
 			<li>
