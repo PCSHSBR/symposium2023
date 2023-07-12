@@ -3,8 +3,9 @@
 	import { tweened } from 'svelte/motion';
 	import { linear } from 'svelte/easing';
 	import { toast } from '$lib/toastStore';
+	import Icon from '@iconify/svelte';
 
-	/** @type {import('$lib/toastStore').SvelteToastOptions} */
+	/** @type {import('$lib/toastStore').SvelteToastOptions & { type: string; id: number }} */
 	export let item;
 
 	/** @type {any} */
@@ -14,7 +15,6 @@
 	let cprops = {};
 	/** @type {any} */
 	let unlisten;
-	let type = 'info';
 
 	const progress = tweened(item.initial, { duration: item.duration, easing: linear });
 
@@ -84,16 +84,17 @@
 	});
 </script>
 
+<!-- Possible class for type: alert-info alert-error alert-success alert-warning -->
 <div
 	role="status"
-	class="alert p-2"
-	class:pe={item.pausable}
+	class="alert alert-{item.type} relative max-w-sm flex-col p-4 align-middle shadow-lg"
 	on:mouseenter={() => {
 		if (item.pausable) pause();
 	}}
 	on:mouseleave={resume}
 >
-	<div class="p-0" class:pe={item.component}>
+	<span class="pe" style:--progress={$progress} />
+	<div class="p-1 text-sm">
 		{#if item.component}
 			<svelte:component this={item.component.src} {...cprops} />
 		{:else}
@@ -102,14 +103,24 @@
 	</div>
 	{#if item.dismissable}
 		<div
-			class="btn"
+			class="btn-ghost btn-error btn-sm btn z-10"
 			role="button"
 			tabindex="0"
 			on:click={close}
 			on:keydown={(e) => {
 				if (e instanceof KeyboardEvent && ['Enter', ' '].includes(e.key)) close();
 			}}
-		/>
+		>
+			<Icon icon="mdi:close" class="h-5 w-5" />
+		</div>
 	{/if}
-	<progress class="progress-primary progress" value={$progress} />
 </div>
+
+<style lang="postcss">
+	.pe {
+		content: '';
+		width: calc(var(--progress) * 100%);
+		@apply absolute right-0 top-0 z-10 h-full rounded-2xl bg-base-300
+			opacity-10;
+	}
+</style>

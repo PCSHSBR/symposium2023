@@ -3,7 +3,7 @@
 	export let sectionTitle = 'คนที่ 1';
 	import TextInput from './TextInput.svelte';
 	import type { SpecialAdvisor, specialAdvisor } from '$lib/formSchemas';
-	import type { InputConstraints } from 'sveltekit-superforms';
+	import type { InputConstraints, ValidationErrors } from 'sveltekit-superforms';
 	export let removeAdvisor: () => void;
 	export let constraints: InputConstraints<typeof specialAdvisor> | undefined;
 	export let value: SpecialAdvisor = {
@@ -19,7 +19,7 @@
 		email: ''
 	};
 	export let isEnglishPresentation: boolean;
-
+	export let errors: ValidationErrors<typeof specialAdvisor> = {};
 	let titleToThMap: Record<string, string> = {
 		นางสาว: 'Miss',
 		นาย: 'Mr.',
@@ -30,9 +30,12 @@
 		'ดร.': 'Dr.'
 	};
 
-	$: {
-		if (value.title_th) value.title_en = titleToThMap[value.title_th];
-		else value.title_en = '';
+	let suggestedTitle = '';
+
+	$: if (titleToThMap[value.title_th]) {
+		suggestedTitle = titleToThMap[value.title_th];
+	} else {
+		suggestedTitle = '';
 	}
 </script>
 
@@ -64,28 +67,51 @@
 	</div>
 
 	<div class="flex flex-col sm:flex-row sm:gap-5">
-		<TextInput label="คำนำหน้า" bind:value={value.title_th} {...constraints?.title_th} />
+		<TextInput
+			label="คำนำหน้า"
+			bind:value={value.title_th}
+			{...constraints?.title_th}
+			error={errors.title_th}
+		/>
 		{#if isEnglishPresentation}
-			<TextInput label="Title (อังกฤษ)" bind:value={value.title_en} {...constraints?.title_en} />
+			<TextInput
+				label="Title (อังกฤษ)"
+				bind:value={value.title_en}
+				{...constraints?.title_en}
+				error={errors.title_en}
+				suggestValue={suggestedTitle}
+			/>
 		{/if}
 	</div>
 	<div class="flex flex-col sm:flex-row sm:gap-5">
-		<TextInput label="ชื่อ" bind:value={value.firstname_th} {...constraints?.firstname_th} />
+		<TextInput
+			label="ชื่อ"
+			bind:value={value.firstname_th}
+			error={errors.firstname_th}
+			{...constraints?.firstname_th}
+		/>
 
 		{#if isEnglishPresentation}
 			<TextInput
 				label="Firstname (อังกฤษ)"
+				error={errors.firstname_en}
 				bind:value={value.firstname_en}
 				{...constraints?.firstname_en}
 			/>
 		{/if}
 	</div>
 	<div class="flex flex-col sm:flex-row sm:gap-5">
-		<TextInput label="นามสกุล" bind:value={value.lastname_th} {...constraints?.lastname_th} />
+		<TextInput
+			label="นามสกุล"
+			bind:value={value.lastname_th}
+			error={errors.lastname_th}
+			{...constraints?.lastname_th}
+		/>
 
 		{#if isEnglishPresentation}
 			<TextInput
 				label="Lastname (อังกฤษ)"
+				error={errors.lastname_en}
 				bind:value={value.lastname_en}
 				{...constraints?.lastname_en}
 			/>
@@ -93,14 +119,26 @@
 	</div>
 	<TextInput
 		label="ตำแหน่งทางวิชาการ (ถ้ามี)"
+		error={errors.academic_ranks}
 		bind:value={value.academic_ranks}
 		{...constraints?.academic_ranks}
 	/>
-	<TextInput label="สถาบัน" bind:value={value.institution} {...constraints?.institution} />
+	<TextInput
+		label="สถาบัน"
+		error={errors.institution}
+		bind:value={value.institution}
+		{...constraints?.institution}
+	/>
 	<TextInput
 		label="ที่อยู่สถาบัน"
+		error={errors.institution_address}
 		bind:value={value.institution_address}
 		{...constraints?.institution_address}
 	/>
-	<TextInput label="ที่อยู่อีเมล (ถ้ามี)" bind:value={value.email} {...constraints?.email} />
+	<TextInput
+		label="ที่อยู่อีเมล (ถ้ามี)"
+		error={errors.email}
+		bind:value={value.email}
+		{...constraints?.email}
+	/>
 </div>

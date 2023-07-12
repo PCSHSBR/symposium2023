@@ -25,9 +25,12 @@
 		นาย: 'Mr.',
 		นาง: 'Mrs.'
 	};
-	$: {
-		if (value.title_th) value.title_en = titleToThMap[value.title_th];
-		else value.title_en = '';
+
+	let suggestedTitle = '';
+	$: if (titleToThMap[value.title_th]) {
+		suggestedTitle = titleToThMap[value.title_th];
+	} else {
+		suggestedTitle = '';
 	}
 </script>
 
@@ -49,7 +52,12 @@
 			{...constraints.title_th}
 		/>
 		{#if isEnglishPresentation}
-			<TextInput label="Title (อังกฤษ)" bind:value={value.title_en} {...constraints.title_en} />
+			<TextInput
+				label="Title (อังกฤษ)"
+				bind:value={value.title_en}
+				suggestValue={suggestedTitle}
+				{...constraints.title_en}
+			/>
 		{/if}
 	</div>
 	<div class="flex flex-col sm:flex-row sm:gap-5">

@@ -4,11 +4,9 @@ export const phoneNumberSchema = z.string().regex(/^(0|\+66)[2-9]{1}[0-9]{7,8}$/
 	message: 'โปรดกรอกเฉพาะตัวเลข ไม่ต้องมีเครื่องหมายขีดหรือช่องว่าง'
 });
 
-export const simpleStringSchema = z
-	.string({
-		required_error: 'อย่าเว้นว่างช่องนี้ไว้'
-	})
-	.min(1);
+export const simpleStringSchema = z.string({
+	required_error: 'อย่าเว้นว่างช่องนี้ไว้'
+});
 
 export const studentMembers = z.object({
 	title_th: simpleStringSchema,
@@ -18,7 +16,7 @@ export const studentMembers = z.object({
 	lastname_th: simpleStringSchema,
 	lastname_en: simpleStringSchema.optional(),
 	phone_number: phoneNumberSchema.optional(),
-	email: z.string().email().optional()
+	email: z.string().email()
 });
 
 export const teacherAdvisor = z.object({
@@ -42,7 +40,8 @@ export const specialAdvisor = z.object({
 	academic_ranks: simpleStringSchema.optional(),
 	institution: simpleStringSchema,
 	institution_address: simpleStringSchema,
-	email: z.string().email().optional()
+	// email is optional because it is not required in the form
+	email: z.string().optional()
 });
 export type StudentMembers = z.infer<typeof studentMembers>;
 export type TeacherAdvisor = z.infer<typeof teacherAdvisor>;

@@ -61,6 +61,8 @@ export interface Database {
 					presentation_type: number | null;
 					school: number | null;
 					special_advisor: Json[] | null;
+					student_members: Json[] | null;
+					teacher_advisor: Json[] | null;
 					team_contact_user_id: string | null;
 					title_en: string | null;
 					title_th: string | null;
@@ -73,6 +75,8 @@ export interface Database {
 					presentation_type?: number | null;
 					school?: number | null;
 					special_advisor?: Json[] | null;
+					student_members?: Json[] | null;
+					teacher_advisor?: Json[] | null;
 					team_contact_user_id?: string | null;
 					title_en?: string | null;
 					title_th?: string | null;
@@ -85,6 +89,8 @@ export interface Database {
 					presentation_type?: number | null;
 					school?: number | null;
 					special_advisor?: Json[] | null;
+					student_members?: Json[] | null;
+					teacher_advisor?: Json[] | null;
 					team_contact_user_id?: string | null;
 					title_en?: string | null;
 					title_th?: string | null;
@@ -148,165 +154,6 @@ export interface Database {
 					ref?: string;
 				};
 				Relationships: [];
-			};
-			special_advisors: {
-				Row: {
-					academic_title: string | null;
-					address: string | null;
-					created_at: string | null;
-					email: string | null;
-					firstname: string | null;
-					id: number;
-					lastname: string | null;
-					prefix: string | null;
-					project: number | null;
-				};
-				Insert: {
-					academic_title?: string | null;
-					address?: string | null;
-					created_at?: string | null;
-					email?: string | null;
-					firstname?: string | null;
-					id?: number;
-					lastname?: string | null;
-					prefix?: string | null;
-					project?: number | null;
-				};
-				Update: {
-					academic_title?: string | null;
-					address?: string | null;
-					created_at?: string | null;
-					email?: string | null;
-					firstname?: string | null;
-					id?: number;
-					lastname?: string | null;
-					prefix?: string | null;
-					project?: number | null;
-				};
-				Relationships: [
-					{
-						foreignKeyName: 'special_advisors_project_fkey';
-						columns: ['project'];
-						referencedRelation: 'projects';
-						referencedColumns: ['id'];
-					}
-				];
-			};
-			students: {
-				Row: {
-					created_at: string | null;
-					email: string | null;
-					firstname_en: string | null;
-					firstname_th: string | null;
-					id: number;
-					lastname_en: string | null;
-					lastname_th: string | null;
-					phone: string | null;
-					project: number | null;
-					school: number | null;
-					title_en: string | null;
-					title_th: string | null;
-				};
-				Insert: {
-					created_at?: string | null;
-					email?: string | null;
-					firstname_en?: string | null;
-					firstname_th?: string | null;
-					id?: number;
-					lastname_en?: string | null;
-					lastname_th?: string | null;
-					phone?: string | null;
-					project?: number | null;
-					school?: number | null;
-					title_en?: string | null;
-					title_th?: string | null;
-				};
-				Update: {
-					created_at?: string | null;
-					email?: string | null;
-					firstname_en?: string | null;
-					firstname_th?: string | null;
-					id?: number;
-					lastname_en?: string | null;
-					lastname_th?: string | null;
-					phone?: string | null;
-					project?: number | null;
-					school?: number | null;
-					title_en?: string | null;
-					title_th?: string | null;
-				};
-				Relationships: [
-					{
-						foreignKeyName: 'students_project_fkey';
-						columns: ['project'];
-						referencedRelation: 'projects';
-						referencedColumns: ['id'];
-					},
-					{
-						foreignKeyName: 'students_school_fkey';
-						columns: ['school'];
-						referencedRelation: 'projects';
-						referencedColumns: ['id'];
-					}
-				];
-			};
-			teachers: {
-				Row: {
-					created_at: string | null;
-					email: string | null;
-					firstname_en: string | null;
-					firstname_th: string | null;
-					id: number;
-					lastname_en: string | null;
-					lastname_th: string | null;
-					phone: string | null;
-					project: number | null;
-					school: number | null;
-					title_en: string | null;
-					title_th: string | null;
-				};
-				Insert: {
-					created_at?: string | null;
-					email?: string | null;
-					firstname_en?: string | null;
-					firstname_th?: string | null;
-					id?: number;
-					lastname_en?: string | null;
-					lastname_th?: string | null;
-					phone?: string | null;
-					project?: number | null;
-					school?: number | null;
-					title_en?: string | null;
-					title_th?: string | null;
-				};
-				Update: {
-					created_at?: string | null;
-					email?: string | null;
-					firstname_en?: string | null;
-					firstname_th?: string | null;
-					id?: number;
-					lastname_en?: string | null;
-					lastname_th?: string | null;
-					phone?: string | null;
-					project?: number | null;
-					school?: number | null;
-					title_en?: string | null;
-					title_th?: string | null;
-				};
-				Relationships: [
-					{
-						foreignKeyName: 'teachers_project_fkey';
-						columns: ['project'];
-						referencedRelation: 'projects';
-						referencedColumns: ['id'];
-					},
-					{
-						foreignKeyName: 'teachers_school_fkey';
-						columns: ['school'];
-						referencedRelation: 'projects';
-						referencedColumns: ['id'];
-					}
-				];
 			};
 			user_roles: {
 				Row: {

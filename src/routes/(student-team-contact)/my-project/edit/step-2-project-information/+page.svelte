@@ -11,9 +11,8 @@
 	import { get } from 'svelte/store';
 	import { notify } from '$lib/notify';
 	import { dev } from '$app/environment';
-
+	import { dateTimeFormatter } from '$lib/langUtils';
 	export let data: PageData;
-
 	const { form, errors, constraints, message, enhance, allErrors, capture, restore } = superForm(
 		data.form,
 		{
@@ -23,10 +22,23 @@
 			taintedMessage: 'คุณยังไม่ได้บันทึกการเปลี่ยนแปลง ต้องการออกจากหน้านี้หรือไม่',
 			onError({ message, result }) {
 				notify({
-					message: result.error.message,
+					message: `<b>ข้อผิดพลาด:</b> ${result.error.message}`,
 					type: 'error',
 					initial: 0
 				});
+			},
+			async onSubmit() {
+				isLoading = true;
+				if (teamImageTemp && teamImageTemp[0]) {
+					await uploadTeamImage();
+				}
+			},
+			onUpdated(event) {},
+			onResult(event) {
+				isLoading = false;
+			},
+			onUpdate(event) {
+				isLoading = false;
 			}
 		}
 	);
@@ -42,9 +54,10 @@
 		ALLOWED_TAGS: ['i', 'b']
 	});
 
-	let numberOfStudent = 1;
-	let numberOfAdvisor = 1;
-	let numberOfSpecialAdvisor = 0;
+	let numberOfStudent = $form.student_members.length;
+	let numberOfAdvisor = $form.teacher_advisor.length;
+	let numberOfSpecialAdvisor = $form.special_advisor.length;
+	let isLoading = false;
 
 	if (!$form.student_members[0]?.title_th) {
 		$form.student_members[0] = {
@@ -63,13 +76,28 @@
 	$: isEnglishPresentation = $form.presentation_type === 2;
 
 	let teamImageTemp: FileList | null | undefined = null;
-	let teamImageUrl = '';
+	let teamImageUrl = data.teamImageUrl || '';
 	let teamImageError = '';
 	$: if (teamImageTemp && teamImageTemp[0]) {
 		teamImageError = teamImageTemp[0].size > 1024 * 1024 * 3 ? 'รูปภาพต้องมีขนาดไม่เกิน 3 MB' : '';
 		if (!teamImageError) {
 			teamImageUrl = URL.createObjectURL(teamImageTemp[0]);
 		}
+	}
+
+	async function uploadTeamImage() {
+		await data.supabase.storage
+			.from('teamImages')
+			.upload(
+				`img/${data.session?.user.id}-${new Date().getTime()}.${
+					teamImageTemp[0].type.split('/')[1]
+				}`,
+				teamImageTemp[0],
+				{
+					cacheControl: '3600',
+					upsert: true
+				}
+			);
 	}
 </script>
 
@@ -403,6 +431,7 @@
 		<h2>ที่ปรึกษาพิเศษ (ถ้ามี)</h2>
 		{#each Array(numberOfSpecialAdvisor) as _, i}
 			<SpecialAdvisor
+				errors={$errors.special_advisor ? $errors.special_advisor[i] : {}}
 				{isEnglishPresentation}
 				sectionTitle={`ที่ปรึกษาพิเศษ ${i + 1}`}
 				removeAdvisor={() => {
@@ -457,20 +486,42 @@
 				class="hidden"
 			/>
 			<small>ภาพอัตราส่วน 4:3 เท่านั้น ขนาดไม่เกิน 3MB</small>
+			{#if data.teamImageData}
+				<small
+					>อัปโหลดภาพเมื่อ {dateTimeFormatter(new Date(data.teamImageData.updated_at))} น.</small
+				>
+			{/if}
 			{#if teamImageError}
 				<small class="text-error">{teamImageError}</small>
 			{/if}
 		</div>
 	</div>
+	<div class="my-3 flex flex-col gap-2">
+		{#if $message}
+			<div class="alert alert-success">
+				<Icon icon="mdi:tick" class="h-6 w-6" />
+				<span>{$message}</span>
+			</div>
+		{/if}
 
-	{#if $message}
-		<div class="alert alert-success">
-			<Icon icon="mdi:tick" class="h-6 w-6" />
-			<span>{$message}</span>
-		</div>
-	{/if}
-
-	<button disabled={$allErrors.length > 0} class="btn-primary btn-block btn mt-5">บันทึก</button>
+		{#if $allErrors.length > 0}
+			<div class="alert alert-error">
+				{#each $allErrors as { path, messages: fMessage }}
+					<div class="flex items-center gap-2">
+						<Icon icon="mdi:alert-circle" class="h-6 w-6" />
+						<span><span class="text-mono">{path}</span>: {fMessage.join(', ')}</span>
+					</div>
+				{/each}
+			</div>
+		{/if}
+	</div>
+	<button disabled={$allErrors.length > 0 || isLoading} class="btn-primary btn-block btn mt-5">
+		{#if isLoading}
+			<span class="loading loading-spinner loading-md" />
+		{:else}
+			บันทึกข้อมูล
+		{/if}
+	</button>
 	<BottomChevron nextHref="step-3-abstract" nextPage="บทคัดย่อ" />
 </form>
 

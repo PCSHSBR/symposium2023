@@ -9,6 +9,9 @@ type NotifyParams = SvelteToastOptions & {
 export const notify = ({ message, type = 'default', ...restParams }: NotifyParams) => {
 	return toast.push(message, {
 		...restParams,
-		duration: 10000
+		duration: 10000,
+		dismissable: true,
+		// @ts-ignore
+		type
 	});
 };

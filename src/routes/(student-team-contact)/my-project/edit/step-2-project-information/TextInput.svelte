@@ -4,6 +4,7 @@
 	export let bottomLeftLabel: string = '';
 	export let type = 'text';
 	export let error: string[] | undefined = [''];
+	export let suggestValue = '';
 </script>
 
 <div class="form-control w-full">
@@ -32,5 +33,16 @@
 	{/if}
 	{#if bottomLeftLabel}
 		<span class="label-text-alt">{bottomLeftLabel}</span>
+	{/if}
+	{#if suggestValue}
+		<span class="label-text-alt"
+			>✨ ค่าที่แนะนำ: <button
+				class="btn-ghost btn-info btn-xs btn"
+				type="button"
+				on:click={() => {
+					value = suggestValue;
+				}}>{suggestValue}</button
+			></span
+		>
 	{/if}
 </div>

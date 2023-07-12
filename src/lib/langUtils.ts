@@ -53,6 +53,20 @@ export function dateFormatter(date: Date | undefined, options?: Intl.DateTimeFor
 	}).format(date);
 }
 
+export function dateTimeFormatter(date: Date | undefined, options?: Intl.DateTimeFormatOptions) {
+	if (typeof date === 'undefined') return undefined;
+	if (options) {
+		return new Intl.DateTimeFormat('th-TH', options).format(date);
+	}
+	return new Intl.DateTimeFormat('th-TH', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		hour: 'numeric',
+		minute: 'numeric'
+	}).format(date);
+}
+
 /**
  * Shorthand for dateFormatter. Format date into localized string.
  * @param date date to format. Must be in ISO 8601 format. {@link https://en.wikipedia.org/wiki/ISO_8601}

@@ -22,7 +22,7 @@
 	$: items = $toast.filter((i) => i.target === target);
 </script>
 
-<ul class="_toastContainer">
+<ul class="fixed right-3 top-16 z-[9999] flex flex-col-reverse gap-2">
 	{#each items as item (item.id)}
 		<li
 			class={item.classes?.join(' ')}
@@ -35,18 +35,3 @@
 		</li>
 	{/each}
 </ul>
-
-<style>
-	._toastContainer {
-		top: var(--toastContainerTop, 1.5rem);
-		right: var(--toastContainerRight, 2rem);
-		bottom: var(--toastContainerBottom, auto);
-		left: var(--toastContainerLeft, auto);
-		position: fixed;
-		margin: 0;
-		padding: 0;
-		list-style-type: none;
-		pointer-events: none;
-		z-index: var(--toastContainerZIndex, 9999);
-	}
-</style>
