@@ -2,6 +2,7 @@
 	export let isLoading = false;
 
 	import { onMount } from 'svelte';
+	import { loadpercent } from '$lib/store';
 	import * as THREE from 'three';
 	import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 	import { SSAOPass } from 'three/examples/jsm/postprocessing/SSAOPass.js';
@@ -42,6 +43,7 @@
 			let height = window.innerHeight;
 			let isMobile = detectMob();
 
+			let loadingManager = new THREE.LoadingManager();
 			let pointer = new THREE.Vector2();
 			let p1 = new THREE.Vector2();
 			let raycaster = new THREE.Raycaster();
@@ -66,7 +68,7 @@
 
 			isLoading = true;
 			//scene
-			const loader = new SplineLoader();
+			const loader = new SplineLoader(loadingManager);
 			loader.load(
 				'https://prod.spline.design/eT-odXHjbLjvN6uT/scene.splinecode',
 				(splineScene) => {
@@ -74,8 +76,12 @@
 				},
 				(event) => {
 					console.log(event);
+					loadpercent.set((event.loaded / event.total) * 100);
 				}
 			);
+			loadingManager.onLoad = function () {
+				console.log('Loading complete!');
+			};
 
 			let pointLight = new THREE.PointLight(0xffffff, 1, 5000);
 			let pointLightHelper = new THREE.PointLightHelper(pointLight, 100);
