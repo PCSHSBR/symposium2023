@@ -3,7 +3,7 @@
 	import type { CalendarSchema } from '$lib/types';
 	import Icon from '@iconify/svelte';
 
-	let clazz: string = '';
+	let clazz = '';
 	export { clazz as class };
 	export let calenderData: CalendarSchema[];
 

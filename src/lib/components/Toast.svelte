@@ -6,9 +6,9 @@
 	if (!knownTypes.includes(toastType)) {
 		throw new Error(`Unknown type: ${toastType}`);
 	}
-	const knowClassType = ['alert-success', 'alert-error', 'alert-info', 'alert-warning'];
 </script>
 
+<!-- alert-success alert-error alert-info alert-warning -->
 <div class="alert-{toastType} p-3">
 	<p>{message}</p>
 </div>

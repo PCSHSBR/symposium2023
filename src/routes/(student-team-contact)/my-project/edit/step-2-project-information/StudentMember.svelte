@@ -38,7 +38,7 @@
 	{#if idx > 1}
 		<div class="absolute right-0 top-0 p-2">
 			<button
-				class="btn-ghost btn-error btn-sm btn"
+				class="btn-error btn-ghost btn-sm btn"
 				type="reset"
 				on:click|preventDefault={() => {
 					value = {

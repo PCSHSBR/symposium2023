@@ -9,7 +9,6 @@
 	import Banner from '$lib/components/Banner.svelte';
 	import Calendar from '$lib/components/Calendar.svelte';
 	import FieldTrip from '$lib/components/FieldTrip.svelte';
-	import heropic1 from '$lib/assets/images/HeroPic1.jpg';
 
 	let isLoading = true;
 	let isBannerHovered = false;

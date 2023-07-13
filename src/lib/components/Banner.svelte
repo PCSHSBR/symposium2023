@@ -18,8 +18,8 @@
 		let z = Math.sin((maxY - clientY * 2) / maxY) * intensity;
 		return new THREE.Vector3(x, 0, z);
 	}
-	export let isHover: boolean = false;
-	export let scrollProgress: number = 0;
+	export let isHover = false;
+	export let scrollProgress = 0;
 
 	let threeCanvas: HTMLDivElement;
 	onMount(async () => {

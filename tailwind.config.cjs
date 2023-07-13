@@ -1,5 +1,5 @@
 const daisyui = require('daisyui');
-const neasting= require('postcss-nesting');
+const neasting = require('postcss-nesting');
 
 /** @type {import('tailwindcss').Config}*/
 const config = {

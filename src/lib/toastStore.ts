@@ -42,7 +42,7 @@ const defaults: SvelteToastOptions = {
 };
 
 function createToast() {
-	const { subscribe, update } = writable(new Array());
+	const { subscribe, update } = writable([]);
 	/** @type {Object<string,SvelteToastOptions>} */
 	const options: { [s: string]: SvelteToastOptions } = {};
 	let count = 0;

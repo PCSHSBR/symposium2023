@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { loadpercent } from '$lib/store';
-	import { onMount } from 'svelte';
 	import LogoWithText from '$lib/components/LogoWithText.svelte';
 
 	$: $loadpercent < 100
