@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import type { CalendarSchema } from '$lib/types';
 	import Icon from '@iconify/svelte';
+	import FieldSchedule from './FieldSchedule.svelte';
 
 	let clazz = '';
 	export { clazz as class };
@@ -64,6 +65,7 @@
 					<a href="/schedule" class="btn"><Icon icon="mdi:open-in-new" />ลิงค์นี้</a>
 				</div>
 			</div>
+			<!-- <FieldSchedule /> -->
 		</div>
 	</div>
 	<div class="collapse-arrow collapse bg-base-200/70 shadow-sm">

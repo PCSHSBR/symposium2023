@@ -9,6 +9,7 @@
 	import Banner from '$lib/components/Banner.svelte';
 	import Calendar from '$lib/components/Calendar.svelte';
 	import FieldTrip from '$lib/components/FieldTrip.svelte';
+	import FieldSchedule from '$lib/components/FieldSchedule.svelte';
 
 	let isLoading = true;
 	let isBannerHovered = false;
@@ -260,6 +261,7 @@
 				</h2>
 			</div>
 			<Calendar class="" calenderData={calendarData} />
+			<FieldSchedule />
 		</div>
 	</section>
 	<section class="event-trip relative mx-auto overflow-hidden">
@@ -298,6 +300,6 @@
 
 <style lang="postcss">
 	.circle {
-		@apply absolute z-0 h-20 w-20 rounded-full bg-red-800/50 blur-xl transition-opacity duration-500;
+		@apply absolute z-0 h-20 w-20 rounded-full bg-primary/50 blur-xl transition-opacity duration-500;
 	}
 </style>
