@@ -255,9 +255,9 @@
 		</div>
 		<div class="calendar-info relative mx-auto max-w-6xl p-10">
 			<div class="pb-4">
-				<h1 class="m-0 flex items-center text-6xl font-bold">
+				<h2 class="m-0 flex items-center text-6xl font-bold">
 					<Icon icon="mdi:calendar" class="pr-4" />Calendar
-				</h1>
+				</h2>
 			</div>
 			<Calendar class="" calenderData={calendarData} />
 		</div>
@@ -265,9 +265,9 @@
 	<section class="event-trip relative mx-auto overflow-hidden">
 		<div class="mx-auto max-w-6xl p-10">
 			<div class="relative z-10">
-				<h1 class="m-0 flex items-center text-6xl font-bold">
-					<Icon icon="mdi:person" />Field Trip
-				</h1>
+				<h2 class="m-0 flex items-center text-6xl font-bold">
+					<Icon icon="mdi:location" class="pr-4" />Field Trip
+				</h2>
 			</div>
 			<FieldTrip />
 			<a href="" class="btn"><Icon icon="mdi:open-in-new" />ดูข้อมูลทั้งหมด</a>
@@ -276,7 +276,9 @@
 	<section class="event-speaker relative mx-auto overflow-hidden">
 		<div class="mx-auto max-w-6xl p-10">
 			<div class="relative z-10">
-				<h1 class="m-0 flex items-center text-6xl font-bold"><Icon icon="mdi:person" />Speaker</h1>
+				<h2 class="m-0 flex items-center text-6xl font-bold">
+					<Icon icon="mdi:person" class="pr-4" />Speaker
+				</h2>
 			</div>
 		</div>
 	</section>
