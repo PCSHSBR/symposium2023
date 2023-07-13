@@ -282,7 +282,18 @@
 			</div>
 		</div>
 	</section>
-	<section class="event-document relative mx-auto overflow-hidden" />
+	<section class="event-document relative mx-auto overflow-hidden">
+		<div class="mx-auto max-w-6xl p-10">
+			<div class="relative z-10">
+				<h2 class="m-0 flex items-center text-6xl font-bold">
+					<Icon icon="mdi:document" class="pr-4" />Document
+				</h2>
+				<div class="flex flex-row flex-wrap">
+					<a href="/" class="btn-primary btn"><Icon icon="mdi:download" />เอกสาร</a>
+				</div>
+			</div>
+		</div>
+	</section>
 </div>
 
 <style lang="postcss">
