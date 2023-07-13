@@ -203,7 +203,7 @@
 <div class="info-container relative w-full overflow-hidden" id="info">
 	<section class="event-info relative mx-auto max-w-4xl px-10 py-40">
 		<div
-			class="background absolute -left-10 top-5 -z-40 flex rotate-90 flex-col text-8xl text-base-content/50 blur-md"
+			class="background absolute -left-10 top-5 flex rotate-90 flex-col text-8xl text-base-content/50 blur-md"
 		>
 			<span class="">WE</span>
 			<span class="">BUILD</span>
@@ -280,6 +280,7 @@
 			</div>
 		</div>
 	</section>
+	<section class="event-document relative mx-auto overflow-hidden" />
 </div>
 
 <style lang="postcss">

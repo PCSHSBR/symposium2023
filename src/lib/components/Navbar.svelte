@@ -7,7 +7,6 @@
 	import { networkStore } from 'svelte-legos';
 	import LogoWithText from '$lib/components/LogoWithText.svelte';
 	import Logo from '$lib/components/Logo.svelte';
-	import FullIcon from '$lib/components/LogoWithText.svelte';
 	const networkInfo = networkStore();
 
 	// function to close the menu, for using with use directive
@@ -70,7 +69,7 @@
 		</label>
 		<a class="btn-ghost btn text-xl normal-case" href="/">
 			<LogoWithText class="hidden h-full w-full md:block" />
-			<Logo class="blobk h-5/6 w-full md:hidden" />
+			<Logo class="block h-5/6 w-full md:hidden" />
 		</a>
 		<ul class="menu menu-horizontal hidden flex-row px-1 md:flex">
 			<li>
