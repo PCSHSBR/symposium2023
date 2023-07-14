@@ -82,8 +82,8 @@ export const actions: Actions = {
 		if (!session)
 			throw redirect(303, '/login?redirect=/my-project/edit/step-2-project-information');
 		const form = await superValidate(request, studentRegisterProjectFormSchema);
-		console.log('POST', JSON.stringify(form.data, null, 2));
-		console.log('POST', JSON.stringify(form.errors, null, 2));
+		// console.log('POST', JSON.stringify(form.data, null, 2));
+		// console.log('POST', JSON.stringify(form.errors, null, 2));
 		if (!form.valid) return fail(400, { form });
 		// upsert
 		const checkIfProjectExist = await supabase

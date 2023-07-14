@@ -54,6 +54,7 @@ export interface Database {
 			};
 			projects: {
 				Row: {
+					abstract: string | null;
 					code: string | null;
 					created_at: string | null;
 					field: number | null;
@@ -68,6 +69,7 @@ export interface Database {
 					title_th: string | null;
 				};
 				Insert: {
+					abstract?: string | null;
 					code?: string | null;
 					created_at?: string | null;
 					field?: number | null;
@@ -82,6 +84,7 @@ export interface Database {
 					title_th?: string | null;
 				};
 				Update: {
+					abstract?: string | null;
 					code?: string | null;
 					created_at?: string | null;
 					field?: number | null;

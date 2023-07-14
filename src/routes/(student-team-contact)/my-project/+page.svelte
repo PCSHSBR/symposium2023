@@ -1,12 +1,130 @@
-<script>
+<script lang="ts">
 	import Icon from '@iconify/svelte';
+	import RenderStyledText from '$lib/components/RenderStyledText.svelte';
+	import type { PageData } from './$types';
+	import { onMount } from 'svelte';
+	import { notify } from '$lib/notify';
+	import type { StyledText } from '$lib/types';
+	import { textListFormatter } from '$lib/langUtils';
+	export let data: PageData;
+	interface ProjectData {
+		data?: {
+			project_title_th: StyledText;
+			project_title_en: StyledText;
+			field: string;
+			presentation_type: string;
+			school: string;
+			members: string[];
+			teachers: string[];
+			special_advisors: string[];
+			teamImageUrl: string;
+		};
+		isProjectDataAvailable?: boolean;
+		isLoadingData?: boolean;
+	}
 
-	let stepData = {
+	let projectData: ProjectData = {};
+
+	async function getAndSetImage() {
+		if (projectData.data?.teamImageUrl) return;
+		const teamImageResult = await data.supabase.storage.from('teamImages').list(`img`, {
+			limit: 1,
+			sortBy: {
+				// newest first
+				column: 'updated_at',
+				order: 'desc'
+			},
+			search: `${data.session?.user.id}`
+		});
+		if (teamImageResult.error) {
+			notify({
+				message: `${teamImageResult.error.message}`,
+				type: 'error'
+			});
+			return;
+		}
+		if (teamImageResult.data?.length !== 0) {
+			const {
+				data: { publicUrl }
+			} = data.supabase.storage
+				.from('teamImages')
+				.getPublicUrl(`img/${teamImageResult.data[0].name}`, {});
+			projectData.data.teamImageUrl = publicUrl;
+		}
+	}
+
+	async function getProjectData(d) {
+		function getName({ title_en, firstname_en, lastname_en, title_th, firstname_th, lastname_th }) {
+			const isEn = d.presentation_type.id === 2;
+			if (isEn) {
+				return ` ${title_en} ${firstname_en} ${lastname_en}`;
+			} else {
+				return `${title_th}${firstname_th} ${lastname_th}`;
+			}
+		}
+		getAndSetImage();
+		projectData.data = {
+			field: d.field.name,
+			presentation_type: d.presentation_type.type,
+			school: `วิทยาศาสตร์จุฬาภรณราชวิทยาลัย ${d.school.province}`,
+			project_title_en: d.title_en,
+			project_title_th: d.title_th,
+			members: d.student_members.map(getName),
+			teachers: d.teacher_advisor.map(getName),
+			special_advisors: d.special_advisor.map(getName)
+		};
+		projectData.isLoadingData = false;
+	}
+
+	onMount(async () => {
+		projectData.isLoadingData = true;
+		const currentUserProjectIDResult = await data.supabase
+			.from('projects')
+			.select(
+				`
+				title_en,
+				title_th,
+				code,
+				field (
+					id,
+					name
+				),
+				presentation_type (
+					id,
+					type,
+					description,
+					is_onsite
+				), 
+				school (
+					id,
+					province
+				),
+				special_advisor,
+				student_members,
+				teacher_advisor
+			`
+			)
+			.eq('team_contact_user_id', data.session?.user.id)
+			.limit(1);
+		if (currentUserProjectIDResult.error) {
+			notify({
+				message: `${currentUserProjectIDResult.error.message} <br/><small>${currentUserProjectIDResult.error.hint}</small>`,
+				type: 'error'
+			});
+			return;
+		}
+		if (currentUserProjectIDResult.data?.length !== 0) {
+			projectData.isProjectDataAvailable = true;
+			getProjectData(currentUserProjectIDResult.data[0]);
+		}
+	});
+
+	$: stepData = {
 		step1: {
 			isDone: true
 		},
 		step2: {
-			isDone: false
+			isDone: projectData.isProjectDataAvailable
 		},
 		step3: {
 			isDone: false
@@ -76,10 +194,80 @@
 			<span />
 		</div>
 		<div>
-			<h2>ข้อมูลโครงงาน</h2>
+			<h2>
+				ข้อมูลโครงงาน
+				{#if projectData.isLoadingData}
+					<span class="loading loading-spinner loading-sm" />
+				{/if}
+			</h2>
 			<p>
 				{#if stepData.step1.isDone && !stepData.step2.isDone}เพิ่ม{/if}รายละเอียดต่าง ๆ ของโครงงาน
 			</p>
+			{#if projectData.isProjectDataAvailable}
+				<ul class="mt-2 w-full rounded-md bg-base-200 p-3 text-sm leading-6">
+					<li>
+						<b>ชื่อโครงงาน (ไทย):</b>
+						<RenderStyledText content={projectData.data?.project_title_th} />
+					</li>
+					<li>
+						<b>ชื่อโครงงาน (อังกฤษ):</b>
+						<RenderStyledText content={projectData.data?.project_title_en} />
+					</li>
+					<li>
+						<b>สาขา:</b>
+						{projectData.data?.field}
+					</li>
+					<li>
+						<b>รูปแบบการนำเสนอ:</b>
+						{projectData.data?.presentation_type}
+					</li>
+					<li>
+						<b>โรงเรียน:</b>
+						{projectData.data?.school}
+					</li>
+					<li>
+						<b>สมาชิกในทีม:</b>
+						{textListFormatter((projectData.data?.members || []).map((t) => `${t} `))}
+					</li>
+					<li>
+						<b>ครูที่ปรึกษาโครงงาน:</b>
+						{textListFormatter((projectData.data?.teachers || []).map((t) => `${t} `))}
+					</li>
+					<li>
+						<b>ที่ปรึกษาพิเศษ:</b>
+						{#each projectData.data?.special_advisors || [] as name, id}
+							{id === projectData.data?.special_advisors.length - 1 ? ' และ' : ''}{name}{id ===
+							projectData.data?.special_advisors.length - 1
+								? ''
+								: ', '}
+						{:else}
+							- ไม่มี -
+						{/each}
+					</li>
+					<li class="mt-2">
+						<b>ภาพหมู่: </b>
+						<div
+							class="relative flex aspect-[4/3] w-full max-w-full flex-col justify-center rounded-md border text-center align-middle {projectData
+								.data?.teamImageUrl
+								? 'border-gray-600 dark:border-gray-400'
+								: 'border-warning shadow-md shadow-warning/25'} mt-2 border-dashed"
+						>
+							{#if projectData.data?.teamImageUrl}
+								<img
+									alt="ภาพกลุ่มโครงงาน"
+									src={projectData.data?.teamImageUrl}
+									class="absolute h-full w-full rounded-md object-cover"
+								/>
+							{:else}
+								<div class="flex flex-col items-center justify-center gap-2 text-center">
+									<Icon icon="mdi:image-off" class="h-8 w-8 text-warning" />
+									<span class="text-warning">ยังไม่ได้อัปภาพ</span>
+								</div>
+							{/if}
+						</div>
+					</li>
+				</ul>
+			{/if}
 			<!-- <p class="whitespace-pre-line">
 				<b>ชื่อโครงงาน:</b> EXAMPLE
 				<b>สาขา:</b> ชีววิทยาและสิ่งแวดล้อม

@@ -25,3 +25,8 @@ export interface CalendarSchema {
 	name: string;
 	description: string;
 }
+
+/**
+ * For using with <RenderStyledText />
+ */
+export type StyledText = string;

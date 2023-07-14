@@ -85,8 +85,15 @@
 		}
 	}
 
+	let isUploadingImage = false;
+	let uploadTeamImageError = '';
+	let uploadTeamImageSuccess = false;
+	let isAddNewImage = false;
+
 	async function uploadTeamImage() {
-		await data.supabase.storage
+		if (!teamImageTemp || !teamImageTemp[0]) return;
+		isUploadingImage = true;
+		const teamImageUploadResult = await data.supabase.storage
 			.from('teamImages')
 			.upload(
 				`img/${data.session?.user.id}-${new Date().getTime()}.${
@@ -98,6 +105,42 @@
 					upsert: true
 				}
 			);
+		if (teamImageUploadResult.error) {
+			uploadTeamImageError = teamImageUploadResult.error.message;
+			uploadTeamImageSuccess = false;
+		} else {
+			uploadTeamImageError = '';
+			teamImageUrl = data.supabase.storage
+				.from('teamImages')
+				.getPublicUrl(teamImageUploadResult.data.path).data.publicUrl;
+			uploadTeamImageSuccess = true;
+		}
+		isUploadingImage = false;
+	}
+
+	function onTeamImageFileDrop(event: DragEvent) {
+		if (!event.dataTransfer?.files) return;
+		teamImageTemp = event.dataTransfer?.files;
+	}
+
+	function onTeamImageFileDragOver(event: DragEvent) {
+		event.preventDefault();
+	}
+
+	function onTeamImageFileChange(event: ElementEvent<HTMLInputElement>) {
+		event.preventDefault();
+	}
+
+	let isDragOver = false;
+
+	function onTeamImageFileEnter(event: ElementEvent<HTMLInputElement>) {
+		event.preventDefault();
+		isDragOver = true;
+	}
+
+	function onTeamImageFileLeave(event: ElementEvent<HTMLInputElement>) {
+		event.preventDefault();
+		isDragOver = false;
 	}
 </script>
 
@@ -455,6 +498,16 @@
 		<h2>ภาพถ่ายหมู่สมาชิกโครงงาน</h2>
 		<div class="flex flex-col items-center justify-center">
 			<label
+				on:drop={(e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					if (!e.dataTransfer?.files[0]) return;
+					if (!teamImageTemp) teamImageTemp = [];
+					teamImageTemp[0] = e.dataTransfer?.files[0];
+				}}
+				on:dragover={onTeamImageFileDragOver}
+				on:dragenter={onTeamImageFileEnter}
+				on:dragleave={onTeamImageFileLeave}
 				for="team-image-upload"
 				class="relative mx-auto my-3 flex aspect-[4/3] w-full max-w-sm cursor-pointer flex-col items-center justify-center gap-4 rounded-lg border-2 border-dashed border-base-300 duration-300 hover:bg-base-200 dark:border-gray-500"
 				title="ลากแล้ววางหรือกดเพื่อเลือกภาพ"
@@ -485,12 +538,13 @@
 				id="team-image-upload"
 				class="hidden"
 			/>
-			<small>ภาพอัตราส่วน 4:3 เท่านั้น ขนาดไม่เกิน 3MB</small>
+			<small>ภาพอัตราส่วน 4:3 ขนาดไม่เกิน 3MB</small>
 			{#if data.teamImageData}
 				<small
 					>อัปโหลดภาพเมื่อ {dateTimeFormatter(new Date(data.teamImageData.updated_at))} น.</small
 				>
 			{/if}
+			<small class="">กดบันทึกเพื่ออัปโหลดภาพ</small>
 			{#if teamImageError}
 				<small class="text-error">{teamImageError}</small>
 			{/if}
@@ -501,6 +555,26 @@
 			<div class="alert alert-success">
 				<Icon icon="mdi:tick" class="h-6 w-6" />
 				<span>{$message}</span>
+			</div>
+		{/if}
+		{#if $message && isUploadingImage}
+			<div class="alert alert-error">
+				<span>
+					<span class="loading loading-spinner" />
+				</span>
+				<span>อย่าเพิ่งไปไหน ไฟล์ยังอัปโหลดไม่เสร็จ!</span>
+			</div>
+		{/if}
+		{#if teamImageError}
+			<div class="alert alert-error">
+				<Icon icon="mdi:alert-circle" class="h-6 w-6" />
+				<span>{teamImageError}</span>
+			</div>
+		{/if}
+		{#if uploadTeamImageSuccess}
+			<div class="alert alert-success">
+				<Icon icon="mdi:tick" class="h-6 w-6" />
+				<span>อัปโหลดไฟล์เรียบร้อยแล้ว คุณสามารถออกจากหน้านี้ได้อย่างปลอดภัย</span>
 			</div>
 		{/if}
 
