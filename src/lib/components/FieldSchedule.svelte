@@ -2,7 +2,7 @@
 	let classes = '';
 	export { classes as class };
 
-	let tab = 0;
+	let tab = 1;
 </script>
 
 <div class="main-container flex flex-col {classes}">
@@ -46,13 +46,8 @@
 				</div>
 				<div class="info">
 					<div>
-						<span>Location</span>
+						<span>สถานที่</span>
 						<span>หอประชุมแคแสด</span>
-					</div>
-					<span class="divider my-1" />
-					<div>
-						<span>Type</span>
-						<span>Register / Check in</span>
 					</div>
 				</div>
 			</div>
@@ -68,7 +63,7 @@
 				</div>
 				<div class="info">
 					<div>
-						<span>Location</span>
+						<span>สถานที่</span>
 						<span>โรงอาหาร</span>
 					</div>
 				</div>
@@ -83,7 +78,7 @@
 				</div>
 				<div class="info">
 					<div>
-						<span>Location</span>
+						<span>สถานที่</span>
 						<span>โรงยิม</span>
 					</div>
 				</div>
@@ -102,7 +97,7 @@
 				</div>
 				<div class="info">
 					<div>
-						<span>Location</span>
+						<span>สถานที่</span>
 						<span>โรงอาหาร</span>
 					</div>
 				</div>
@@ -114,28 +109,268 @@
 		<div class="item">
 			<div class="sub-item">
 				<div class="title">
-					<span class="child-span">18:00 น. - 19:00 น.</span>
-					<h2 class="text-3xl">รับประทานอาหารเย็น</h2>
+					<span class="child-span">8:00 น. - 10:20 น.</span>
+					<h2 class="text-3xl">พิธีเปิด คณะครู - นักเรียนและผู้มีเกียรติเข้าร่วมพิธีเปิด</h2>
+					<p class="whitespace-pre-line">
+						- ชุดแสดงพิธีเปิด ๑ ชุด - กิจกรรมบรรยายสร้างแรงบัลดาลใจในการทำ โครงงาน โดย ดร.สุพรรณ
+						ยอดยิ่งยง
+					</p>
 				</div>
 				<div class="info">
 					<div>
-						<span>Location</span>
+						<span>สถานที่</span>
+						<span>หอประชุมแคแสด</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">9:00 น. - 10:30 น.</span>
+					<h2 class="text-3xl">คณะกรรมการตัดสินโครงงานประชุมร่วมกัน</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>ห้องเกียรติยศ</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">10:20 น. - 10:30 น.</span>
+					<h2 class="text-3xl">ประธานเยี่ยมชมนิทรรศการ</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>หอสมุด</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">10:30 น. - 10:45 น.</span>
+					<h2 class="text-3xl">รับประทานอาหารว่าง</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>หอสมุด</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item-full">
+				<div class="title">
+					<span class="child-span">10:45 น. - 12:00 น.</span>
+					<h2 class="text-3xl">นำเสนอโครงงาน</h2>
+					<div>
+						<p>นำเสนอโครงงานแบบปากเปล่า</p>
+						<table class="table">
+							<!-- head -->
+							<thead>
+								<tr>
+									<th>สาขา</th>
+									<th>สถานที่</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- row 1 -->
+								<tr>
+									<td>ฟิสิกส์และดาราศาสตร์</td>
+									<td>
+										<ul>
+											<li>ห้องฟิสิกส์ 1 (Oral Eng) (223)</li>
+											<li>ห้องฟิสิกส์ 2 (Oral Thai) (212)</li>
+										</ul>
+									</td>
+								</tr>
+								<!-- row 2 -->
+								<tr>
+									<td>เคมีและวัสดุศาสตร์</td>
+									<td>
+										<ul>
+											<li>ห้องเคมี 1 (Oral Eng) (224)</li>
+											<li>ห้องเคมี 2 (Oral Thai) (213)</li>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td>ชีววิทยา และสิ่งแวดล้อม</td>
+									<td>
+										<ul>
+											<li>ห้องชีววิทยา 1 (Oral Eng) (225)</li>
+											<li>ห้องชีววิทยา 2 (Oral Thai) (214)</li>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td>คณิตศาสตร์</td>
+									<td>
+										<ul>
+											<li>ห้องคณิตศาสตร์ 1 (Oral Eng) (226)</li>
+											<li>ห้องคณิตศาสตร์ 2 (Oral Thai) (216)</li>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td>คอมพิวเตอร์</td>
+									<td>
+										<ul>
+											<li>ห้องคอมพิวเตอร์ 1 (Oral Eng) (227)</li>
+											<li>ห้องคอมพิวเตอร์ 2 (Oral Thai) (217)</li>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td>วิศวกรรมศาสตร์</td>
+									<td>
+										<ul>
+											<li>ห้องวิศวกกรรม 1 (Oral Eng) (228)</li>
+											<li>ห้องวิศวกกรรม 2 (Oral Thai) (218)</li>
+										</ul>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<p>นำเสนอโครงงานแบบโปสเตอร์</p>
+						<table class="table">
+							<!-- head -->
+							<thead>
+								<tr>
+									<th>สาขา</th>
+									<th>สถานที่</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- row 1 -->
+								<tr>
+									<td>ทุกสาขา</td>
+									<td>ลานกิจกรรมห้องสมุด</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">12:00 น. - 13:00 น.</span>
+					<h2 class="text-3xl">รับประทานอาหาร</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
 						<span>โรงอาหาร</span>
 					</div>
 				</div>
 			</div>
 		</div>
+
 		<span class="divider" />
+
 		<div class="item">
 			<div class="sub-item">
 				<div class="title">
-					<span class="child-span">19:00 น. - 20:00 น.</span>
-					<h2 class="text-3xl">ชี้แจงกิจกรรม</h2>
+					<span class="child-span">13:00 น. - 14:30 น.</span>
+					<h2 class="text-3xl">นักเรียนนำเสนอผลงานโครงงาน (ต่อ)</h2>
 				</div>
 				<div class="info">
 					<div>
-						<span>Location</span>
-						<span>โรงยิม</span>
+						<span>สถานที่</span>
+						<span>...</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">14:30 น. - 14:45 น.</span>
+					<h2 class="text-3xl">รับประทานอาหารว่าง</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>โรงอาหาร</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">14:45 น. - 16:30 น.</span>
+					<h2 class="text-3xl">นักเรียนนำเสนอผลงานโครงงาน (ต่อ)</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>...</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">17:00 น. - 18:00 น.</span>
+					<h2 class="text-3xl">พักผ่อนตามอัธยาศัย</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>...</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">18:00 น. - 21:00 น.</span>
+					<h2 class="text-3xl">กิจกรรมกลุ่มสัมพันธ์</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>หอประชุมแคแสด</span>
 					</div>
 				</div>
 			</div>
@@ -159,6 +394,18 @@
 				}
 				.info {
 					@apply w-full md:w-1/3;
+					div {
+						@apply flex flex-row flex-wrap justify-between;
+					}
+				}
+			}
+			.sub-item-full {
+				@apply flex flex-row flex-wrap justify-between;
+				.title {
+					@apply w-full;
+				}
+				.info {
+					@apply w-full;
 					div {
 						@apply flex flex-row flex-wrap justify-between;
 					}
