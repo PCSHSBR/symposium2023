@@ -376,6 +376,59 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="items-container {tab == 2 ? 'flex flex-col' : 'hidden'}">
+		<span class="head-span w-full bg-base-content p-4 text-2xl text-base-300">5 กันยายน 2565</span>
+		<span class="divider" />
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">13:00 น. - 18:00 น.</span>
+					<h2 class="text-3xl">
+						ลงทะเบียน / เข้าที่พัก นำเอกสารงารสาร โปสเตอร์ และไฟล์ Powerpoint
+					</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>หอประชุมแคแสด</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">18:00 น. - 19:00 น.</span>
+					<h2 class="text-3xl">รับประทานอาหารเย็น</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>โรงอาหาร</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="divider" />
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">19:00 น. - 20:00 น.</span>
+					<h2 class="text-3xl">ชี้แจงกิจกรรม</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>โรงยิม</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <style lang="postcss">
