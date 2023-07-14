@@ -18,6 +18,7 @@
 			teachers: string[];
 			special_advisors: string[];
 			teamImageUrl: string;
+			abstract: string;
 		};
 		isProjectDataAvailable?: boolean;
 		isLoadingData?: boolean;
@@ -50,6 +51,10 @@
 			} = data.supabase.storage
 				.from('teamImages')
 				.getPublicUrl(`${data.session?.user.id}/${teamImageResult.data[0].name}`, {});
+			await data.supabase.from('project_status').upsert({
+				team_contact_user_id: data.session?.user.id,
+				is_upload_team_image: true
+			});
 			projectData.data.teamImageUrl = publicUrl;
 		}
 	}
@@ -72,7 +77,8 @@
 			project_title_th: d.title_th,
 			members: d.student_members.map(getName),
 			teachers: d.teacher_advisor.map(getName),
-			special_advisors: d.special_advisor.map(getName)
+			special_advisors: d.special_advisor.map(getName),
+			abstract: d.abstract
 		};
 		projectData.isLoadingData = false;
 	}
@@ -102,7 +108,8 @@
 				),
 				special_advisor,
 				student_members,
-				teacher_advisor
+				teacher_advisor,
+				abstract
 			`
 			)
 			.eq('team_contact_user_id', data.session?.user.id)
@@ -125,15 +132,50 @@
 			isDone: true
 		},
 		step2: {
-			isDone: projectData.isProjectDataAvailable
+			isDone: projectData.data?.teamImageUrl
 		},
 		step3: {
-			isDone: false
+			isDone: projectData.data?.abstract,
+			text: projectData.data?.abstract,
+			docUrl: '',
+			pdfUrl: ''
 		},
 		step4: {
 			isDone: false
 		}
 	};
+
+	// (async () => {
+	// 	await data.supabase.storage
+	// 		.from('abstracts')
+	// 		.list(data.session?.user.id, {
+	// 			limit: 2,
+	// 			sortBy: {
+	// 				// newest first
+	// 				column: 'updated_at',
+	// 				order: 'desc'
+	// 			}
+	// 		})
+	// 		.then(async (result) => {
+	// 			console.log(result);
+	// 			// doc and pdf
+	// 			if (result.data?.length !== 0) {
+	// 				for (const docts of result.data) {
+	// 					console.log(docts)
+	// 					const {
+	// 						data: { publicUrl }
+	// 					} = await data.supabase.storage
+	// 						.from('abstracts')
+	// 						.getPublicUrl(`${data.session?.user.id}/${docts.name}`, {});
+	// 					if (docts.name.endsWith('.docx')) {
+	// 						stepData.step3.docUrl = publicUrl;
+	// 					} else if (docts.name.endsWith('.pdf')) {
+	// 						stepData.step3.pdfUrl = publicUrl;
+	// 					}
+	// 				}
+	// 			}
+	// 		});
+	// })();
 </script>
 
 <svelte:head>
@@ -248,7 +290,7 @@
 					<li class="mt-2">
 						<b>ภาพหมู่: </b>
 						<div
-							class="relative flex aspect-[4/3] w-full max-w-full flex-col justify-center rounded-md border text-center align-middle {projectData
+							class="relative flex aspect-[4/3] w-full max-w-xs flex-col justify-center rounded-md border text-center align-middle {projectData
 								.data?.teamImageUrl
 								? 'border-gray-600 dark:border-gray-400'
 								: 'border-warning shadow-md shadow-warning/25'} mt-2 border-dashed"
@@ -269,16 +311,6 @@
 					</li>
 				</ul>
 			{/if}
-			<!-- <p class="whitespace-pre-line">
-				<b>ชื่อโครงงาน:</b> EXAMPLE
-				<b>สาขา:</b> ชีววิทยาและสิ่งแวดล้อม
-				<b>ประเภทการนำเสนอ:</b> ภาคบรรยายภาษาไทย (Thai oral presentation)
-				โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย บุรีรัมย์
-				<b>ตัวแทนติดต่อของทีม:</b> นายพัสกร ยืนยง (คุณ)
-				<b>สมาชิกในทีม:</b> นายพัสกร ยืนยง, นายพัฒนเดช รุ่งรัศมีทรัพย์, นางสาวกุลนิดา พงศ์ไพศาล
-				<b>ครูที่ปรึกษาโครงงาน:</b> นายพชร กาญจนมาศ,
-				<b>ที่ปรึกษาพิเศษ:</b> ศาสตรจารย์สราวลี เจริญผลวัฒนา
-			</p> -->
 			{#if stepData.step1.isDone}
 				<a href="/my-project/edit/step-2-project-information">
 					<button class="btn-primary btn-sm btn mt-3" title="แก้ไขข้อมูลโครงงาน"
@@ -306,9 +338,22 @@
 		<div>
 			<h2>อัปโหลดบทคัดย่อ</h2>
 			<p>บทคัดย่อของโครงงาน</p>
-			<!-- <p class="line-clamp-4 max-w-[75ch]">
-				<b>บทคัดย่อ:</b> แอบมองดูฟ้าที่ค้างในใจที่มีในเวลานี้ก็บอกไปเลยไม่สนก็ได้ถึงเวลาที่ฉันจะเดินไปเลยไม่หยุดได้จับมือฉันลมแปรเปลี่ยนตามไปบนท้องฟ้าแล้วที่เธอนั้นมีอยู่ข้างในใจทุกทุกครั้งที่ต้องการใครที่คอยวนเวียนทำยังไม่ต้องไปนึกเกรงและหวาดกลัวอย่างนี้ไม่ต้องไปจำได้วางบางอย่างเดิมหรือไปด้วยกันนะเราจะกอดเธอ
-			</p> -->
+			{#if stepData.step3.text}
+				<div class="rounded-md bg-base-200 p-3 leading-4">
+					<div class="line-clamp-4">
+						<b>เนื้อหาบทคัดย่อ:</b>
+						<RenderStyledText content={stepData.step3.text} />
+					</div>
+					<ul>
+						{#if stepData.step3.docUrl}
+							<li><a href={stepData.step3.docUrl}>DOCX</a></li>
+						{/if}
+						{#if stepData.step3.pdfUrl}
+							<li><a href={stepData.step3.pdfUrl}>PDF</a></li>
+						{/if}
+					</ul>
+				</div>
+			{/if}
 			{#if stepData.step2.isDone}
 				<a href="/my-project/edit/step-3-abstract">
 					<button class="btn-primary btn-sm btn my-2 mt-3"

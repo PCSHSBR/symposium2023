@@ -39,7 +39,7 @@
 	async function uploadDocx() {
 		uploading.document = true;
 		const result = await data.supabase.storage
-			.from('abstracts')
+			.from('articles')
 			.upload(
 				`${data.session?.user.id}/article.${articleStagedFilesDoc[0].name.split('.').pop()}`,
 				articleStagedFilesDoc[0],
@@ -64,7 +64,7 @@
 	async function uploadPDF() {
 		uploading.pdf = true;
 		const result = await data.supabase.storage
-			.from('abstracts')
+			.from('articles')
 			.upload(
 				`${data.session?.user.id}/article.${articleStagedFilesPDF[0].name.split('.').pop()}`,
 				articleStagedFilesPDF[0],

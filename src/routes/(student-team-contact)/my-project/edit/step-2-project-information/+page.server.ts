@@ -115,7 +115,6 @@ export const actions: Actions = {
 		if (projectResult.error) throw error(500, projectResult.error.message);
 		const updateStatusResult = await supabase.from('project_status').upsert({
 			is_information_complete: true,
-			project_id: projectID,
 			team_contact_user_id: session.user.id
 		});
 		if (updateStatusResult.error) throw error(500, updateStatusResult.error.message);

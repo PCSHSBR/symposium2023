@@ -112,12 +112,12 @@
 			teamImageUrl = data.supabase.storage
 				.from('teamImages')
 				.getPublicUrl(teamImageUploadResult.data.path).data.publicUrl;
-			data.supabase
-				.from('project_status')
-				.update({
-					is_upload_team_image: true
-				})
-				.eq('team_contact_user_id', data.session?.user.id);
+			if (data.session?.user.id) {
+				await data.supabase.from('project_status').upsert({
+					is_upload_team_image: true,
+					team_contact_user_id: data.session?.user.id
+				});
+			}
 			uploadTeamImageSuccess = true;
 		}
 		isUploadingImage = false;

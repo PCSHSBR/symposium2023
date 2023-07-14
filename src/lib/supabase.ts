@@ -60,8 +60,8 @@ export interface Database {
 					is_upload_team_image: boolean | null;
 					is_uploaded_abstract: boolean | null;
 					is_uploaded_article: boolean | null;
-					project_id: number | null;
-					team_contact_user_id: string | null;
+					project_id: number;
+					team_contact_user_id: string;
 				};
 				Insert: {
 					id?: string;
@@ -70,8 +70,8 @@ export interface Database {
 					is_upload_team_image?: boolean | null;
 					is_uploaded_abstract?: boolean | null;
 					is_uploaded_article?: boolean | null;
-					project_id?: number | null;
-					team_contact_user_id?: string | null;
+					project_id: number;
+					team_contact_user_id: string;
 				};
 				Update: {
 					id?: string;
@@ -80,8 +80,8 @@ export interface Database {
 					is_upload_team_image?: boolean | null;
 					is_uploaded_abstract?: boolean | null;
 					is_uploaded_article?: boolean | null;
-					project_id?: number | null;
-					team_contact_user_id?: string | null;
+					project_id?: number;
+					team_contact_user_id?: string;
 				};
 				Relationships: [
 					{
