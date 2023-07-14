@@ -59,6 +59,7 @@ export interface Database {
 					created_at: string | null;
 					field: number | null;
 					id: number;
+					keywords: string[] | null;
 					presentation_type: number | null;
 					school: number | null;
 					special_advisor: Json[] | null;
@@ -74,6 +75,7 @@ export interface Database {
 					created_at?: string | null;
 					field?: number | null;
 					id?: number;
+					keywords?: string[] | null;
 					presentation_type?: number | null;
 					school?: number | null;
 					special_advisor?: Json[] | null;
@@ -89,6 +91,7 @@ export interface Database {
 					created_at?: string | null;
 					field?: number | null;
 					id?: number;
+					keywords?: string[] | null;
 					presentation_type?: number | null;
 					school?: number | null;
 					special_advisor?: Json[] | null;

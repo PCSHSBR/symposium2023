@@ -7,6 +7,7 @@
 	import type { PageData } from './$types';
 	import { notify } from '$lib/notify';
 	import { sanitizeHTML } from '$lib/utils';
+	import { dateTimeFormatter } from '$lib/langUtils';
 
 	let abstractContent = '';
 	let abstractContentBeforeEdit = '';
@@ -34,8 +35,14 @@
 		pdf: false
 	};
 	let lastUploadFile = {
-		document: '',
-		pdf: ''
+		document: {
+			lastUpdateDate: '',
+			url: ''
+		},
+		pdf: {
+			lastUpdateDate: '',
+			url: ''
+		}
 	};
 
 	async function saveAbstractText() {
@@ -140,6 +147,35 @@
 			abstractContentBeforeEdit = projectdata.abstract;
 		}
 	})();
+	(async () => {
+		await data.supabase.storage
+			.from('abstracts')
+			.list(`${data.session?.user.id}/`)
+			.then((result) => {
+				if (result.error) {
+					console.error(result.error);
+					return notify({
+						message: result.error.message
+					});
+				}
+				if (result.data) {
+					result.data.forEach((file) => {
+						if (file.name.endsWith('.docx')) {
+							lastUploadFile.document.lastUpdateDate = file.updated_at;
+							lastUploadFile.document.url = data.supabase.storage
+								.from('abstracts')
+								.getPublicUrl(`${data.session?.user.id}/${file.name}`).data.publicUrl;
+						}
+						if (file.name.endsWith('.pdf')) {
+							lastUploadFile.pdf.lastUpdateDate = file.updated_at;
+							lastUploadFile.pdf.url = data.supabase.storage
+								.from('abstracts')
+								.getPublicUrl(`${data.session?.user.id}/${file.name}`).data.publicUrl;
+						}
+					});
+				}
+			});
+	})();
 </script>
 
 <div class="mt-4 flex flex-row justify-between gap-5 md:flex-row-reverse md:justify-end">
@@ -220,8 +256,15 @@
 	</div>
 	<div class="">
 		<h2>2. อัปโหลดบทคัดย่อรูปแบบ Document</h2>
+		{#if lastUploadFile.document.lastUpdateDate}
+			<p class="text-sm text-inherit text-opacity-10">
+				อัปโหลดล่าสุดเมื่อ {dateTimeFormatter(new Date(lastUploadFile.document.lastUpdateDate))}
+				<a href={lastUploadFile.document.url} target="_blank">ดาวน์โหลด</a>
+			</p>
+		{/if}
+		<!-- .docx -->
 		<Upload
-			accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/msword"
+			accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 			bind:fileInput={abstractFileInput}
 			bind:files={abstractStagedFilesDoc}
 			class="relative my-4 {abstractStagedFilesDoc &&
@@ -239,7 +282,7 @@
 				{:else}
 					<Icon icon="mdi:upload" class="h-8 w-8" />
 					<span class="text-center">เลือกไฟล์บทคัดย่อรูปแบบเอกสารแก้ไขได้</span>
-					<small class="text-center"> .docx, .doc </small>
+					<small class="text-center"> .docx </small>
 				{/if}
 			</svelte:fragment>
 		</Upload>
@@ -263,7 +306,12 @@
 	</div>
 	<div class="">
 		<h2>3. อัปโหลดบทคัดย่อรูปแบบ PDF</h2>
-		<p class="text-sm text-inherit text-opacity-10">คุณอัปโหลดบทคัดย่อล่าสุดเมื่อ กหฟหก</p>
+		{#if lastUploadFile.pdf.lastUpdateDate}
+			<p class="text-sm text-inherit text-opacity-10">
+				อัปโหลดล่าสุดเมื่อ {dateTimeFormatter(new Date(lastUploadFile.pdf.lastUpdateDate))}
+				<a href={lastUploadFile.pdf.url} target="_blank">ดาวน์โหลด</a>
+			</p>
+		{/if}
 		<Upload
 			accept="application/pdf"
 			bind:files={abstractStagedFilesPDF}
