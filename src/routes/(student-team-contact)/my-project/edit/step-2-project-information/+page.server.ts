@@ -17,8 +17,15 @@ export const load = (async ({ locals: { getSession, supabase } }) => {
 		.eq('team_contact_user_id', session.user.id);
 	if (checkIfProjectExist.error) throw error(500, checkIfProjectExist.error.message);
 	let projectID = checkIfProjectExist.data[0]?.id;
-	const projectResult = await supabase.from('projects').select().eq('id', projectID);
-	if (projectResult.error) throw error(500, projectResult.error.message);
+	let projectResult;
+	if (projectID) {
+		projectResult = await supabase.from('projects').select().eq('id', projectID);
+		if (projectResult.error) throw error(500, projectResult.error.message);
+	} else {
+		projectResult = {
+			data: []
+		};
+	}
 	const projectData = {
 		presentation_type: projectResult.data[0]?.presentation_type || 1,
 		project_field: projectResult.data[0]?.field || 1,
@@ -55,14 +62,13 @@ export const load = (async ({ locals: { getSession, supabase } }) => {
 	const form = await superValidate(projectData, studentRegisterProjectFormSchema, {
 		errors: false
 	});
-	const teamImageList = await supabase.storage.from('teamImages').list(`img`, {
+	const teamImageList = await supabase.storage.from('teamImages').list(session.user.id, {
 		limit: 1,
 		sortBy: {
 			// newest first
 			column: 'updated_at',
 			order: 'desc'
-		},
-		search: `${session.user.id}`
+		}
 	});
 	if (teamImageList.error) throw error(500, teamImageList.error.message);
 	let teamImageUrl = '';
@@ -70,7 +76,9 @@ export const load = (async ({ locals: { getSession, supabase } }) => {
 	if (teamImageList.data.length > 0) {
 		const {
 			data: { publicUrl }
-		} = supabase.storage.from('teamImages').getPublicUrl(`img/${teamImageList.data[0].name}`);
+		} = supabase.storage
+			.from('teamImages')
+			.getPublicUrl(`${session.user.id}/${teamImageList.data[0].name}`);
 		teamImageUrl = publicUrl;
 	}
 	return { form, teamImageUrl: teamImageUrl, teamImageData: teamImageData };
@@ -105,6 +113,12 @@ export const actions: Actions = {
 			id: projectID
 		});
 		if (projectResult.error) throw error(500, projectResult.error.message);
+		const updateStatusResult = await supabase.from('project_status').upsert({
+			is_information_complete: true,
+			project_id: projectID,
+			team_contact_user_id: session.user.id
+		});
+		if (updateStatusResult.error) throw error(500, updateStatusResult.error.message);
 		return message(form, 'บันทึกข้อมูลเรียบร้อยแล้ว');
 	}
 };

@@ -27,15 +27,16 @@
 
 	async function getAndSetImage() {
 		if (projectData.data?.teamImageUrl) return;
-		const teamImageResult = await data.supabase.storage.from('teamImages').list(`img`, {
-			limit: 1,
-			sortBy: {
-				// newest first
-				column: 'updated_at',
-				order: 'desc'
-			},
-			search: `${data.session?.user.id}`
-		});
+		const teamImageResult = await data.supabase.storage
+			.from('teamImages')
+			.list(data.session?.user.id, {
+				limit: 1,
+				sortBy: {
+					// newest first
+					column: 'updated_at',
+					order: 'desc'
+				}
+			});
 		if (teamImageResult.error) {
 			notify({
 				message: `${teamImageResult.error.message}`,
@@ -48,7 +49,7 @@
 				data: { publicUrl }
 			} = data.supabase.storage
 				.from('teamImages')
-				.getPublicUrl(`img/${teamImageResult.data[0].name}`, {});
+				.getPublicUrl(`${data.session?.user.id}/${teamImageResult.data[0].name}`, {});
 			projectData.data.teamImageUrl = publicUrl;
 		}
 	}

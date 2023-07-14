@@ -52,6 +52,52 @@ export interface Database {
 				};
 				Relationships: [];
 			};
+			project_status: {
+				Row: {
+					id: string;
+					is_add_text_abstract: boolean | null;
+					is_information_complete: boolean | null;
+					is_upload_team_image: boolean | null;
+					is_uploaded_abstract: boolean | null;
+					is_uploaded_article: boolean | null;
+					project_id: number | null;
+					team_contact_user_id: string | null;
+				};
+				Insert: {
+					id?: string;
+					is_add_text_abstract?: boolean | null;
+					is_information_complete?: boolean | null;
+					is_upload_team_image?: boolean | null;
+					is_uploaded_abstract?: boolean | null;
+					is_uploaded_article?: boolean | null;
+					project_id?: number | null;
+					team_contact_user_id?: string | null;
+				};
+				Update: {
+					id?: string;
+					is_add_text_abstract?: boolean | null;
+					is_information_complete?: boolean | null;
+					is_upload_team_image?: boolean | null;
+					is_uploaded_abstract?: boolean | null;
+					is_uploaded_article?: boolean | null;
+					project_id?: number | null;
+					team_contact_user_id?: string | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'project_status_project_id_fkey';
+						columns: ['project_id'];
+						referencedRelation: 'projects';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'project_status_team_contact_user_id_fkey';
+						columns: ['team_contact_user_id'];
+						referencedRelation: 'users';
+						referencedColumns: ['id'];
+					}
+				];
+			};
 			projects: {
 				Row: {
 					abstract: string | null;

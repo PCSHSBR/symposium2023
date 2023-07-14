@@ -58,6 +58,7 @@
 	let numberOfAdvisor = $form.teacher_advisor.length;
 	let numberOfSpecialAdvisor = $form.special_advisor.length;
 	let isLoading = false;
+	let isOpenExampleImage = false;
 
 	if (!$form.student_members[0]?.title_th) {
 		$form.student_members[0] = {
@@ -96,9 +97,7 @@
 		const teamImageUploadResult = await data.supabase.storage
 			.from('teamImages')
 			.upload(
-				`img/${data.session?.user.id}-${new Date().getTime()}.${
-					teamImageTemp[0].type.split('/')[1]
-				}`,
+				`${data.session?.user.id}/${new Date().getTime()}.${teamImageTemp[0].type.split('/')[1]}`,
 				teamImageTemp[0],
 				{
 					cacheControl: '3600',
@@ -113,6 +112,12 @@
 			teamImageUrl = data.supabase.storage
 				.from('teamImages')
 				.getPublicUrl(teamImageUploadResult.data.path).data.publicUrl;
+			data.supabase
+				.from('project_status')
+				.update({
+					is_upload_team_image: true
+				})
+				.eq('team_contact_user_id', data.session?.user.id);
 			uploadTeamImageSuccess = true;
 		}
 		isUploadingImage = false;
@@ -127,18 +132,18 @@
 		event.preventDefault();
 	}
 
-	function onTeamImageFileChange(event: ElementEvent<HTMLInputElement>) {
+	function onTeamImageFileChange(event: Event) {
 		event.preventDefault();
 	}
 
 	let isDragOver = false;
 
-	function onTeamImageFileEnter(event: ElementEvent<HTMLInputElement>) {
+	function onTeamImageFileEnter(event: Event) {
 		event.preventDefault();
 		isDragOver = true;
 	}
 
-	function onTeamImageFileLeave(event: ElementEvent<HTMLInputElement>) {
+	function onTeamImageFileLeave(event: Event) {
 		event.preventDefault();
 		isDragOver = false;
 	}
@@ -545,6 +550,27 @@
 				>
 			{/if}
 			<small class="">กดบันทึกเพื่ออัปโหลดภาพ</small>
+			<button
+				class="btn-accent btn-xs btn m-3"
+				on:click|preventDefault={() => (isOpenExampleImage = !isOpenExampleImage)}
+				>ดูตัวอย่างภาพ</button
+			>
+			{#if isOpenExampleImage}
+				<div class="card my-5 max-w-xs bg-base-100">
+					<img
+						height="450"
+						class="m-5 aspect-[4/3] max-w-xs rounded-lg border border-base-300 bg-base-200 dark:border-gray-500"
+						alt="ตัวอย่างภาพกลุ่มโครงงาน"
+						srcset="https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=100 100w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=116 116w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=134 134w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=156 156w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=182 182w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=210 210w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=244 244w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=282 282w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=328 328w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=380 380w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=442 442w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=512 512w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=594 594w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=688 688w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=798 798w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=926 926w, https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?auto=format,compress&w=1074 1074w"
+						src="https://termtem-cdn.imgix.net/sym2023/EF971A61-40A7-4E00-9C6B-925B0EEEFF16-cropped.jpg?ixembed=1689354837188&auto=format,compress"
+					/>
+					<div class="card-body text-sm">
+						<h3 class="card-title">ภาพตัวอย่าง</h3>
+						ตัวอย่างภาพอัตราส่วน 4:3 เน้นให้ใบหน้าอยู่บริเวณกลางภาพ อาจมีครูที่ปรึกษาร่วมอยู่ด้วยหรือไม่ก็ได้
+						โดยภาพจะนำไปใช้ในสื่อประชาสัมพันธ์ของงาน
+					</div>
+				</div>
+			{/if}
 			{#if teamImageError}
 				<small class="text-error">{teamImageError}</small>
 			{/if}
@@ -589,7 +615,7 @@
 			</div>
 		{/if}
 	</div>
-	<button disabled={$allErrors.length > 0 || isLoading} class="btn-primary btn-block btn mt-5">
+	<button disabled={isLoading} class="btn-primary btn-block btn mt-5">
 		{#if isLoading}
 			<span class="loading loading-spinner loading-md" />
 		{:else}

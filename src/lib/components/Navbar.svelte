@@ -57,7 +57,7 @@
 			<button
 				aria-label="เปิด/ปิดเมนู"
 				type="button"
-				class="swap-rotate swap btn-ghost btn-square btn md:hidden"
+				class="swap btn-ghost swap-rotate btn-square btn md:hidden"
 				on:click={() => {
 					isMenuOpen = !isMenuOpen;
 				}}
@@ -122,6 +122,14 @@
 								แดชบอร์ด
 							</a>
 						</li>
+						{#if data.user_metadata?.role === 'student-team-contact'}
+							<li>
+								<a href="/my-project">
+									<Icon icon="mdi:account-group" class="h-5 w-5" />
+									จัดการโครงงาน
+								</a>
+							</li>
+						{/if}
 						<li>
 							<a href="/account">
 								<Icon icon="mdi:account" class="h-5 w-5" />

@@ -56,9 +56,16 @@
 			uploadError.text = error.message;
 			uploading.text = false;
 			return notify({
-				message: error.message
+				message: error.message,
+				type: 'error'
 			});
 		}
+		await data.supabase
+			.from('project_status')
+			.update({
+				is_add_text_abstract: true
+			})
+			.eq('team_contact_user_id', data.session?.user.id);
 		uploadSuccess.text = 'บันทึกสำเร็จ';
 		uploading.text = false;
 	}
@@ -80,7 +87,8 @@
 			uploadError.document = result.error.message;
 			uploading.document = false;
 			return notify({
-				message: result.error.message
+				message: result.error.message,
+				type: 'error'
 			});
 		}
 		if (result.data) {
@@ -101,7 +109,8 @@
 			uploadError.pdf = result.error.message;
 			uploading.pdf = false;
 			return notify({
-				message: result.error.message
+				message: result.error.message,
+				type: 'error'
 			});
 		}
 		if (result.data) {
@@ -143,8 +152,8 @@
 			});
 		}
 		if (projectdata) {
-			abstractContent = projectdata.abstract;
-			abstractContentBeforeEdit = projectdata.abstract;
+			abstractContent = projectdata.abstract || '';
+			abstractContentBeforeEdit = projectdata.abstract || '';
 		}
 	})();
 	(async () => {
@@ -155,7 +164,8 @@
 				if (result.error) {
 					console.error(result.error);
 					return notify({
-						message: result.error.message
+						message: result.error.message,
+						type: 'error'
 					});
 				}
 				if (result.data) {
@@ -173,6 +183,23 @@
 								.getPublicUrl(`${data.session?.user.id}/${file.name}`).data.publicUrl;
 						}
 					});
+					if (lastUploadFile.pdf.url && lastUploadFile.document.url) {
+						data.supabase
+							.from('project_status')
+							.update({
+								is_uploaded_abstract: true
+							})
+							.eq('team_contact_user_id', data.session?.user.id)
+							.then((result) => {
+								if (result.error) {
+									console.error(result.error);
+									return notify({
+										message: result.error.message,
+										type: 'error'
+									});
+								}
+							});
+					}
 				}
 			});
 	})();
