@@ -99,7 +99,7 @@
 	</div>
 </section>
 
-<style lang="postcss">
+<style lang="scss">
 	.label {
 		@apply flex-col;
 	}

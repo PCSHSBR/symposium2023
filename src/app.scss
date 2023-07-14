@@ -1,1 +1,128 @@
 /* Write your global styles here, in SCSS syntax. Variables and mixins from the src/variables.scss file are available here without importing */
+
+:root {
+	--btn-text-case: capitalize;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: 'Chula Likit Text', sans-serif;
+	@apply bg-base-100;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Anuphan Variable', sans-serif;
+}
+
+/* regular */
+@font-face {
+	font-family: 'Chula Likit Text';
+	src: url('/fonts/chulabhornlikittext-regular.woff2') format('woff2'),
+		url('/fonts/chulabhornlikittext-regular.woff') format('woff'),
+		url('/fonts/chulabhornlikittext-regular.eot') format('eot');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* bold */
+@font-face {
+	font-family: 'Chula Likit Text';
+	src: url('/fonts/chulabhornlikittext-bold.woff2') format('woff2'),
+		url('/fonts/chulabhornlikittext-bold.woff') format('woff'),
+		url('/fonts/chulabhornlikittext-bold.eot') format('eot');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* light */
+@font-face {
+	font-family: 'Chula Likit Text';
+	src: url('/fonts/chulabhornlikittext-light.woff2') format('woff2'),
+		url('/fonts/chulabhornlikittext-light.woff') format('woff'),
+		url('/fonts/chulabhornlikittext-light.eot') format('eot');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* medium */
+@font-face {
+	font-family: 'Chula Likit Text';
+	src: url('/fonts/chulabhornlikittext-medium.woff2') format('woff2'),
+		url('/fonts/chulabhornlikittext-medium.woff') format('woff'),
+		url('/fonts/chulabhornlikittext-medium.eot') format('eot');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* display medium */
+@font-face {
+	font-face: 'Chula Likit Display';
+	src: url('/fonts/chulabhornlikitdisplay-medium.woff2') format('woff2'),
+		url('/fonts/chulabhornlikitdisplay-medium.woff') format('woff'),
+		url('/fonts/chulabhornlikitdisplay-medium.eot') format('eot');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+h1 {
+	@apply mb-6 mt-3 text-4xl;
+}
+
+h2 {
+	@apply mb-2 mt-4 text-xl;
+}
+
+b {
+	@apply font-bold;
+}
+
+.alert {
+	@apply flex flex-row items-start justify-start text-left;
+}
+
+main a {
+	@apply link text-blue-700 dark:text-blue-400;
+
+	&:hover {
+		@apply underline;
+	}
+}
+
+.form-control {
+	@apply flex flex-col items-start text-left;
+}
+
+.label {
+	@apply flex items-start px-0 text-left;
+}
+
+.label .label-text {
+	@apply mb-2;
+}
+
+.select {
+	@apply font-normal;
+}
+
+.input-bordered,
+.select-bordered,
+.textarea-bordered {
+	@apply rounded-md border border-base-300 focus:ring-1 dark:border-gray-400;
+}
+
+code {
+	@apply rounded-md bg-base-300 p-1 font-mono;
+}

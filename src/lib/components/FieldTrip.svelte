@@ -51,7 +51,7 @@
 	</div>
 </div>
 
-<style lang="postcss">
+<style lang="scss">
 	.event-trip {
 		.trip-container {
 			.item {

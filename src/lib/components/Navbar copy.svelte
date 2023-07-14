@@ -179,7 +179,7 @@
 	</div>
 {/if}
 
-<style lang="postcss">
+<style lang="scss">
 	.sidemenu a,
 	.sidemenu summary {
 		@apply flex h-16 justify-between text-base;

@@ -298,7 +298,7 @@
 	</section>
 </div>
 
-<style lang="postcss">
+<style lang="scss">
 	.circle {
 		@apply absolute z-0 h-20 w-20 rounded-full bg-primary/50 blur-xl transition-opacity duration-500;
 	}

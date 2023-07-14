@@ -3,6 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Write your global styles here, in SCSS syntax. Variables and mixins from the src/variables.scss file are available here without importing */
+
 :root {
 	--btn-text-case: capitalize;
 }
@@ -97,7 +99,11 @@ b {
 }
 
 main a {
-	@apply link;
+	@apply link text-blue-700 dark:text-blue-400;
+
+	&:hover {
+		@apply underline;
+	}
 }
 
 .form-control {

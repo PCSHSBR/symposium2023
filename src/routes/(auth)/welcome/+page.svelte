@@ -290,7 +290,7 @@
 	</section>
 </form>
 
-<!-- <style lang="postcss">
+<!-- <style lang="scss">
 	input:invalid,
 	[aria-invalid='true'] {
 		@apply border-2 border-red-500;

@@ -431,7 +431,7 @@
 	</div>
 </div>
 
-<style lang="postcss">
+<style lang="scss">
 	.divider {
 		@apply before:bg-base-content after:bg-base-content;
 	}

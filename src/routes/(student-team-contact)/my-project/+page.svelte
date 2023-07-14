@@ -346,7 +346,7 @@
 	</div>
 </section>
 
-<style lang="postcss">
+<style lang="scss">
 	h2 {
 		@apply my-2 text-2xl font-bold;
 	}

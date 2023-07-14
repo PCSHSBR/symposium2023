@@ -506,7 +506,7 @@
 	{/if}
 </div>
 
-<style lang="postcss">
+<style lang="scss">
 	label {
 		@apply font-bold;
 	}

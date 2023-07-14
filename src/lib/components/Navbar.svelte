@@ -57,7 +57,7 @@
 			<button
 				aria-label="เปิด/ปิดเมนู"
 				type="button"
-				class="swap btn-ghost swap-rotate btn-square btn md:hidden"
+				class="swap-rotate swap btn-ghost btn-square btn md:hidden"
 				on:click={() => {
 					isMenuOpen = !isMenuOpen;
 				}}
@@ -179,7 +179,7 @@
 	</div>
 {/if}
 
-<style lang="postcss">
+<style lang="scss">
 	.sidemenu a,
 	.sidemenu summary {
 		@apply flex h-16 justify-between text-base;

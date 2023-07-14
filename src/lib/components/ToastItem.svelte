@@ -116,7 +116,7 @@
 	{/if}
 </div>
 
-<style lang="postcss">
+<style lang="scss">
 	.pe {
 		content: '';
 		width: calc(var(--progress) * 100%);

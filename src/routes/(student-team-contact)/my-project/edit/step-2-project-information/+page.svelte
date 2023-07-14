@@ -599,7 +599,7 @@
 	<BottomChevron nextHref="step-3-abstract" nextPage="บทคัดย่อ" />
 </form>
 
-<style lang="postcss">
+<style lang="scss">
 	.label {
 		@apply w-full justify-start;
 	}
