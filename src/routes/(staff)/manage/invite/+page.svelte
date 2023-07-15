@@ -19,7 +19,9 @@
 <svelte:head>
 	<title>ส่งคำเชิญสร้างบัญชี</title>
 </svelte:head>
-<div class="mx-auto flex flex-col items-center justify-center text-center align-middle">
+<div
+	class="mx-auto flex max-w-2xl flex-col items-center justify-center p-5 text-center align-middle"
+>
 	<form
 		method="post"
 		use:enhance={({ data }) => {
