@@ -12,7 +12,7 @@
 				main_container.style.opacity = '0';
 				main_container.style.transform = 'translateY(-100%)';
 				document.body.style.overflow = 'auto';
-			}, 500);
+			}, 1000);
 		}
 	}
 </script>
@@ -26,6 +26,10 @@
 	>
 		<LogoWithText class="w-full" />
 		<progress class="progress-primary progress w-full" value={$loadpercent} max="100" />
+		<div class="mt-10 text-center text-sm">
+			<p>"Hope you well (I'm poor now lol)"</p>
+			<span><i>from Developer</i></span>
+		</div>
 	</div>
 </div>
 
