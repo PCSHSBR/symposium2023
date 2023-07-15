@@ -5,6 +5,7 @@
 	import animejs from 'animejs';
 	import { watchWithFilter } from 'svelte-legos';
 
+	import Speaker from '$lib/assets/images/Speaker.png';
 	import { calendarData } from '$lib/calendarData';
 	import Banner from '$lib/components/Banner.svelte';
 	import Calendar from '$lib/components/Calendar.svelte';
@@ -27,6 +28,7 @@
 	}, 1000);
 
 	onMount(() => {
+		let is_hero_showed = false;
 		function animation() {
 			let control = new ScrollMagic.Controller();
 
@@ -107,8 +109,11 @@
 				duration: document.querySelector('.event-info')?.clientHeight
 			})
 				.on('enter', (e) => {
-					tl2.play();
-					s2am4.play();
+					if (!is_hero_showed) {
+						tl2.play();
+						s2am4.play();
+						is_hero_showed = true;
+					}
 				})
 				.addTo(control);
 		}
@@ -248,13 +253,16 @@
 			<span class="text-sm">Improving a Sustainable World through Innovation and Projects</span>
 		</div>
 	</section>
-	<section class="event-calendar hover-effect relative mx-auto overflow-hidden bg-base-300">
+	<section
+		id="event-calendar"
+		class="event-calendar hover-effect relative mx-auto overflow-hidden bg-base-300"
+	>
 		<div class="background">
 			<span class="circle interactive" />
 			<span class="circle left-10 top-0 scale-[5]" />
 			<span class="circle right-0 top-20 scale-[3]" />
 		</div>
-		<div class="calendar-info relative mx-auto max-w-6xl p-10">
+		<div id="event-schedule" class="calendar-info relative mx-auto max-w-6xl p-10">
 			<div class="pb-4">
 				<h2 class="m-0 flex items-center text-6xl font-bold">
 					<Icon icon="mdi:calendar" class="pr-4" />Calendar
@@ -264,7 +272,7 @@
 			<FieldSchedule />
 		</div>
 	</section>
-	<section class="event-trip relative mx-auto overflow-hidden">
+	<section id="event-trip" class="event-trip relative mx-auto overflow-hidden">
 		<div class="mx-auto max-w-6xl p-10">
 			<div class="relative z-10">
 				<h2 class="m-0 flex items-center text-6xl font-bold">
@@ -272,19 +280,33 @@
 				</h2>
 			</div>
 			<FieldTrip />
-			<a href="" class="btn"><Icon icon="mdi:open-in-new" />ดูข้อมูลทั้งหมด</a>
 		</div>
 	</section>
-	<section class="event-speaker relative mx-auto overflow-hidden">
+	<section id="event-speaker" class="event-speaker relative mx-auto overflow-hidden">
 		<div class="mx-auto max-w-6xl p-10">
 			<div class="relative z-10">
 				<h2 class="m-0 flex items-center text-6xl font-bold">
 					<Icon icon="mdi:person" class="pr-4" />Speaker
 				</h2>
 			</div>
+			<div class="my-4 grid grid-cols-1 text-center md:grid-cols-2 md:text-left">
+				<div class="mx-auto max-w-sm overflow-hidden rounded-lg md:mx-0">
+					<img src={Speaker} class="h-full w-full object-cover" alt="Speaker" />
+				</div>
+				<div class="p-6">
+					<h3 class="mb-6 text-2xl font-bold">ดร.สุพรรณ ยอดยิ่งยง</h3>
+					<p>
+						คว้ารางวัล Special Prize (On stage) จากผลงาน
+						"กระบวนการสังเคราะห์ซิลิกาแอโรเจลต้นทุนต่ำด้วยการทำแห้งที่ความดันบรรยากาศ" จาก
+						INDONESIAN INVENTION AND INNOVATION PROMOTION ASSOCIATION (INNOPA) ประเทศอินโดนีเซีย
+						ในงาน Bitgaram International Exposition of Electric Power Technology (BIXPO 2015)
+						ซึ่งจัดขึ้นระหว่างวันที่ 12 - 14
+					</p>
+				</div>
+			</div>
 		</div>
 	</section>
-	<section class="event-document relative mx-auto overflow-hidden">
+	<section id="event-document" class="event-document relative mx-auto overflow-hidden">
 		<div class="mx-auto max-w-6xl p-10">
 			<div class="relative z-10">
 				<h2 class="m-0 flex items-center text-6xl font-bold">

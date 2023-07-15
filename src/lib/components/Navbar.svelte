@@ -48,7 +48,7 @@
 </script>
 
 <nav
-	class="navbar fixed z-20 h-14 justify-between border-neutral {isMenuOpen
+	class="navbar fixed z-[1000] h-14 justify-between border-neutral {isMenuOpen
 		? 'bg-transparent'
 		: 'bg-base-100/70'} backdrop-blur-sm"
 >
@@ -80,19 +80,25 @@
 					<summary>ข้อมูลงาน</summary>
 					<ul>
 						<li>
-							<a href="/" use:closeMenu>แผนที่งาน</a>
+							<a href="/#event-calendar" use:closeMenu>กำหนดการ</a>
 						</li>
 						<li>
-							<a href="/" use:closeMenu>ตารางงาน</a>
+							<a href="/#event-schedule" use:closeMenu>ตารางงาน</a>
+						</li>
+						<li>
+							<a href="/#event-trip" use:closeMenu>ฟิวทริป</a>
+						</li>
+						<li>
+							<a href="/#event-speaker" use:closeMenu>สปีกเกอร์</a>
+						</li>
+						<li>
+							<a href="/#event-document" use:closeMenu>ดาวโหลดเอกสาร</a>
 						</li>
 					</ul>
 				</details>
 			</li>
 			<li>
 				<a href="/" use:closeMenu>ช่องทางติดต่อ</a>
-			</li>
-			<li>
-				<a href="/faq" use:closeMenu>FAQ</a>
 			</li>
 		</ul>
 	</div>
@@ -153,11 +159,11 @@
 
 {#if isMenuOpen}
 	<div
-		class="fixed z-10 h-screen w-screen bg-base-200 md:hidden"
+		class="fixed z-[999] h-screen w-screen bg-base-200 md:hidden"
 		transition:slide|local={{ duration: 500 }}
 	>
 		<div
-			class="sidemenu absolute left-0 top-[4rem] z-[101] h-[calc(100vh-4rem)] w-screen bg-base-200 shadow-xl md:w-[300px]"
+			class="sidemenu absolute left-0 top-[4rem] z-[999] h-[calc(100vh-4rem)] w-screen bg-base-200 shadow-xl md:w-[300px]"
 		>
 			<ul class="menu w-full px-1">
 				<li>
@@ -168,10 +174,19 @@
 						<summary>ข้อมูลงาน</summary>
 						<ul>
 							<li>
-								<a href="/" use:closeMenu>แผนที่งาน</a>
+								<a href="/#event-calendar" use:closeMenu>กำหนดการ</a>
 							</li>
 							<li>
-								<a href="/" use:closeMenu>ตารางงาน</a>
+								<a href="/#event-schedule" use:closeMenu>ตารางงาน</a>
+							</li>
+							<li>
+								<a href="/#event-trip" use:closeMenu>ฟิวทริป</a>
+							</li>
+							<li>
+								<a href="/#event-speaker" use:closeMenu>สปีกเกอร์</a>
+							</li>
+							<li>
+								<a href="/#event-document" use:closeMenu>ดาวโหลดเอกสาร</a>
 							</li>
 						</ul>
 					</details>

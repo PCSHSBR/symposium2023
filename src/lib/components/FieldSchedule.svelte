@@ -2,7 +2,7 @@
 	let classes = '';
 	export { classes as class };
 
-	let tab = 1;
+	let tab = 2;
 </script>
 
 <div class="main-container flex flex-col {classes}">
@@ -383,15 +383,13 @@
 		<div class="item">
 			<div class="sub-item">
 				<div class="title">
-					<span class="child-span">13:00 น. - 18:00 น.</span>
-					<h2 class="text-3xl">
-						ลงทะเบียน / เข้าที่พัก นำเอกสารงารสาร โปสเตอร์ และไฟล์ Powerpoint
-					</h2>
+					<span class="child-span">7:00 น. - 8:30 น.</span>
+					<h2 class="text-3xl">รับประทานอาหารเช้า</h2>
 				</div>
 				<div class="info">
 					<div>
 						<span>สถานที่</span>
-						<span>หอประชุมแคแสด</span>
+						<span>โรงอาหาร</span>
 					</div>
 				</div>
 			</div>
@@ -402,7 +400,74 @@
 		<div class="item">
 			<div class="sub-item">
 				<div class="title">
-					<span class="child-span">18:00 น. - 19:00 น.</span>
+					<span class="child-span">8:30 น. - 12:00 น.</span>
+					<h2 class="text-3xl">กิจกรรมทัศนศึกษาแหล่งเรียนรู้นอกสถานที่</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>จังหวัดบุรีรัมย์</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">12:00 น. - 13:00 น.</span>
+					<h2 class="text-3xl">รับประทานอาหาร</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>นอกสถานที่</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">13:00 น. - 16:00 น.</span>
+					<h2 class="text-3xl">กิจกรรมทัศนศึกษาแหล่งเรียนรู้นอกสถานที่ (ต่อ)</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>จังหวัดบุรีรัมย์</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">16:00 น. - 17:00 น.</span>
+					<h2 class="text-3xl">จัดเตรียมการแสดงแลกเปลี่ยนทางวัฒนธรรม</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>ตามห้อง STUDY แต่ละหอ</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">17:00 น. - 18:00 น.</span>
 					<h2 class="text-3xl">รับประทานอาหารเย็น</h2>
 				</div>
 				<div class="info">
@@ -414,16 +479,100 @@
 			</div>
 		</div>
 		<span class="divider" />
+
 		<div class="item">
 			<div class="sub-item">
 				<div class="title">
-					<span class="child-span">19:00 น. - 20:00 น.</span>
-					<h2 class="text-3xl">ชี้แจงกิจกรรม</h2>
+					<span class="child-span">18:00 น. - 22:00 น.</span>
+					<h2 class="text-3xl">แลกเปลี่ยนทางวัฒนธรรมการแสดงของทั้ง 12 จ.ภ.</h2>
 				</div>
 				<div class="info">
 					<div>
 						<span>สถานที่</span>
-						<span>โรงยิม</span>
+						<span>หอประชุมแคแสด</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="items-container {tab == 3 ? 'flex flex-col' : 'hidden'}">
+		<span class="head-span w-full bg-base-content p-4 text-2xl text-base-300">6 กันยายน 2565</span>
+		<span class="divider" />
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">7:00 น. - 8:00 น.</span>
+					<h2 class="text-3xl">รับประทานอาหารเช้า</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>โรงอาหาร</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<span class="divider" />
+
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">8:30 น. - 10:00 น.</span>
+					<h2 class="text-3xl">
+						นักเรียนและครูเข้ารับฟังสรุปภาพรวมของโครงงานสาขาต่างๆ โดยผู3ทรงคุณวุฒิ
+					</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>หอประชุมแคแสด</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="divider" />
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">10:00 น. - 10:30 น.</span>
+					<h2 class="text-3xl">กล่าวสรุปงานประมวลภาพกิจกรรม</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>หอประชุมแคแสด</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="divider" />
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">10:30 น. - 12:00 น.</span>
+					<h2 class="text-3xl">พิธีปิด และประกาศผลนำเสนอโครงงาน มอบโล่ รางวัล พร้อมเกียรติบัตร</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>หอประชุมแคแสด</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="divider" />
+		<div class="item">
+			<div class="sub-item">
+				<div class="title">
+					<span class="child-span">12:30 น. - 13:00 น.</span>
+					<h2 class="text-3xl">รับประทานอาหารเดินทางกลับโดยสวัสดิภาพ</h2>
+				</div>
+				<div class="info">
+					<div>
+						<span>สถานที่</span>
+						<span>โรงอาหาร</span>
 					</div>
 				</div>
 			</div>
