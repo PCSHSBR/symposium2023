@@ -27,7 +27,7 @@
 		<LogoWithText class="w-full" />
 		<progress class="progress-primary progress w-full" value={$loadpercent} max="100" />
 		<div class="mt-10 text-center text-sm">
-			<p>"Hope you well (I'm poor now lol)"</p>
+			<p>"Hope you well"</p>
 			<span><i>from Developer</i></span>
 		</div>
 	</div>
