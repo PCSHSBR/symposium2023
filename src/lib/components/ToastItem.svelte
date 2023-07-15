@@ -4,6 +4,7 @@
 	import { linear } from 'svelte/easing';
 	import { toast } from '$lib/toastStore';
 	import Icon from '@iconify/svelte';
+	import { toThai } from '$lib/langUtils';
 
 	/** @type {import('$lib/toastStore').SvelteToastOptions & { type: string; id: number }} */
 	export let item;
@@ -98,12 +99,12 @@
 		{#if item.component}
 			<svelte:component this={item.component.src} {...cprops} />
 		{:else}
-			{@html item.msg}
+			{@html toThai(item.msg)}
 		{/if}
 	</div>
 	{#if item.dismissable}
 		<div
-			class="btn-error btn-ghost btn-sm btn z-10"
+			class="btn-ghost btn-error btn-sm btn z-10"
 			role="button"
 			tabindex="0"
 			on:click={close}

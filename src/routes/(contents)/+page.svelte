@@ -4,7 +4,7 @@
 	import ScrollMagic from 'scrollmagic';
 	import animejs from 'animejs';
 	import { watchWithFilter } from 'svelte-legos';
-
+	import LoadingPage from '$lib/components/LoadingPage.svelte';
 	import Speaker from '$lib/assets/images/Speaker.png';
 	import { calendarData } from '$lib/calendarData';
 	import Banner from '$lib/components/Banner.svelte';
@@ -158,8 +158,32 @@
 		content="ยินดีต้อนรับสู่งานนำเสนอผลงานโครงงานนักเรียนโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัยของระดับชั้นมัธยมศึกษาปีที่ 6 The 3rd PCSHS Science Symposium 2023 ณ โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย บุรีรัมย์"
 	/>
 	<meta property="og:title" content="The 3rd PCSHS Science Symposium 2023 @PCSHSBR" />
+	<meta property="og:url" content="https://3rdpss2023.pcshsbr.ac.th/" />
+	<meta
+		property="og:image"
+		content="https://pcshsbr-assets.imgix.net/sym2023/og_image.png?w=1200&h=627&fit=crop&auto=format%2Cenhance%2Ccompress"
+	/>
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="627" />
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="The 3rd PCSHS Science Symposium 2023 @PCSHSBR" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@pcshsbr" />
+	<meta name="twitter:creator" content="@pcshsbr" />
+	<meta name="twitter:title" content="The 3rd PCSHS Science Symposium 2023 @PCSHSBR" />
+	<meta
+		name="twitter:description"
+		content="ยินดีต้อนรับสู่งานนำเสนอผลงานโครงงานนักเรียนโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัยของระดับชั้นมัธยมศึกษาปีที่ 6 The 3rd PCSHS Science Symposium 2023 ณ โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย บุรีรัมย์"
+	/>
+	<meta
+		name="twitter:image"
+		content="https://pcshsbr-assets.imgix.net/sym2023/og_image.png?w=1200&h=627&fit=crop&auto=format%2Cenhance%2Ccompress"
+	/>
+	<meta name="twitter:image:alt" content="The 3rd PCSHS Science Symposium 2023 @PCSHSBR" />
+	<meta name="twitter:domain" content="https://3rdpss2023.pcshsbr.ac.th/" />
 </svelte:head>
 
+<LoadingPage />
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="hero-sticky h-[200vh]" bind:this={hero_sticky}>
 	<section
@@ -188,19 +212,13 @@
 					<span>4 กันยายน - 6 กันยายน 2566</span>
 				</div>
 				<h1 class="main-title text-4xl font-black leading-none md:text-6xl">
-					<span class="text-[128px]">3</span><span class="align-top text-xl">rd</span> PCSHS Science
-					Symposium
+					<span class="text-[128px]">3</span><sup class="align-top text-xl">rd</sup> PCSHS Science Symposium
 				</h1>
-				<p class="sub-title">
-					มาร่วมสร้างสรรค์นวัตกรรมที่จะเปลี่ยนโลกให้ดีขึ้นผ่านการนำเสนอผลงานโครงงานของคุณกันเถอะ!
-				</p>
-				<!-- svelte-ignore a11y-missing-attribute -->
-				<!-- <a class="send-project btn-primary btn">ส่งโครงงาน</a> -->
-				<a href="#info" class="enter-event btn-primary btn">เข้างาน</a>
+				<p class="sub-title text-xl shadow-lg">พัฒนาโลกสู่ความยั่งยืนด้วยนวัตกรรมและโครงงาน</p>
 			</div>
 			<div class="absolute bottom-0 flex h-16 w-full flex-col items-center">
 				<Icon icon="mdi:menu-down" />
-				<span>เข้าสู่งาน</span>
+				<span>ข้อมูลงาน</span>
 			</div>
 		</div>
 	</section>

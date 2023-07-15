@@ -1,8 +1,12 @@
 <script lang="ts">
-	import type { PageData } from './$types';
-	export let data: PageData;
+	import type { LayoutData } from './$types';
+	export let data: LayoutData;
 	import Navbar from '$lib/components/Navbar.svelte';
 </script>
 
+<svelte:head>
+	<meta name="robots" content="noindex, nofollow" />
+</svelte:head>
+
 <Navbar {data} />
-<main class="m-auto max-w-xl pt-16"><slot /></main>
+<main class="m-auto px-7 pt-16"><slot /></main>

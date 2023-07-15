@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Navbar from '$lib/components/Navbar.svelte';
-	import LoadingPage from '$lib/components/LoadingPage.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import type { PageData } from '../(content)/$types';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 </script>
@@ -14,7 +13,6 @@
 	/>
 </svelte:head>
 
-<LoadingPage />
 <Navbar {data} />
 <main>
 	<slot />
