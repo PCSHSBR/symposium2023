@@ -19,7 +19,7 @@
 
 <div
 	bind:this={main_container}
-	class="main-container absolute z-[100] h-full w-full bg-base-100 transition-all duration-700 ease-in-out"
+	class="main-container absolute z-[1002] h-full w-full bg-base-100 transition-all duration-700 ease-in-out"
 >
 	<div
 		class="max-w- m-auto flex h-full w-[calc(100%-32px)] max-w-sm flex-col items-center justify-center align-middle"
