@@ -3,7 +3,7 @@ import { error } from '@sveltejs/kit';
 export let load = async (req: Request, res: Response) => {
 	let token = req.url.searchParams.get('token');
 	let type = req.url.searchParams.get('type');
-
+	let redirect_to = req.url.searchParams.get('redirect_to');
 	// type 1 = confirm email
 	// type 2 = invite to team
 	// type 3 = change email
@@ -13,6 +13,7 @@ export let load = async (req: Request, res: Response) => {
 	if (!token) throw error(400, 'No token provided');
 	return {
 		token,
-		type
+		type,
+		redirect_to
 	};
 };

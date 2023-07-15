@@ -11,7 +11,7 @@
 	class="mx-auto flex h-[calc(100vh-4rem)] w-[calc(100%-20px)] max-w-2xl flex-col items-center justify-center align-middle"
 >
 	<a
-		href="https://immxnldrjsqvmbiucgyk.supabase.co/auth/v1/verify?token={data.token}&type={data.type}"
+		href="https://immxnldrjsqvmbiucgyk.supabase.co/auth/v1/verify?token={data.token}&type={data.type}&redirect_to={data.redirect_to}"
 	>
 		<button class="btn-primary btn"> ยืนยัน </button>
 	</a>
