@@ -125,7 +125,7 @@
 						<li>
 							<a href="/dashboard">
 								<Icon icon="mdi:view-dashboard" class="h-5 w-5" />
-								แดชบอร์ด
+								เครื่องมือ
 							</a>
 						</li>
 						{#if data.user_metadata?.role === 'student-team-contact'}
