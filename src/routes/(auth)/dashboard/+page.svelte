@@ -71,4 +71,12 @@
 			</a>
 		</div>
 	{/if}
+	{#if data.role === 'school-contact'}
+		<h2>เครื่องมือสำหรับผู้ประสารงาน</h2>
+		<div class="">
+			<a href="/manage/invite">
+				<button class="btn">ส่งคำเชิญให้ครู</button>
+			</a>
+		</div>
+	{/if}
 </section>
