@@ -57,8 +57,11 @@
 				{#if data.role === 'staff'}
 					<option value="staff">ทีมงาน</option>
 					<option value="school-contact">ผู้ประสานงานโรงเรียน</option>
+					<option value="teacher">ครู</option>
+					<option value="student-team-contact">นักเรียน</option>
 				{/if}
 				{#if data.role === 'school-contact'}
+					<option value="student-team-contact">นักเรียน</option>
 					<option value="teacher">ครู</option>
 				{/if}
 				{#if data.role === 'teacher'}
