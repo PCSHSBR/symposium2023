@@ -7,6 +7,7 @@
 	import FormMessage from '$lib/components/FormMessage.svelte';
 
 	export let form: ActionData;
+	export let data: PageData;
 	let isLoading: boolean = false;
 	let sForm = {
 		email: ''
@@ -35,26 +36,34 @@
 		class="flex flex-col gap-4"
 	>
 		<h1 class="mb-3 mt-5 text-4xl">ส่งคำเชิญให้สร้างบัญชี</h1>
-		<label class="label">
+		<label for="emails" class="label">
 			<span class="label-text"> อีเมล </span>
-			<input
-				class="input-bordered input w-full"
+			<textarea
+				id="emails"
+				class="input textarea-bordered w-full"
 				name="email"
-				type="email"
 				autocomplete="email"
 				data-invalid={!!errors.email}
 				value={sForm.email}
 				required
 			/>
+			<span class="label-text-alt mt-2">สามารถใส่หลายอีเมลพร้อมกันได้โดยขึ้นบรรทัดใหม่</span>
+			<span class="label-text-alt text-red-500">{errors.email}</span>
 		</label>
 		<label class="label">
 			<span class="label-text"> บทบาทของผู้ใช้คนนี้ </span>
 			<select class="select-bordered select" name="role" required>
 				<option value="" disabled selected>- โปรดเลือก -</option>
-				<option value="staff">ทีมงาน</option>
-				<option value="teacher">ครู</option>
-				<option value="student-team-contact">นักเรียน</option>
-				<option value="school-contact">ผู้ประสานงานโรงเรียน</option>
+				{#if data.role === 'staff'}
+					<option value="staff">ทีมงาน</option>
+					<option value="school-contact">ผู้ประสานงานโรงเรียน</option>
+				{/if}
+				{#if data.role === 'school-contact'}
+					<option value="teacher">ครู</option>
+				{/if}
+				{#if data.role === 'teacher'}
+					<option value="student-team-contact">นักเรียน</option>
+				{/if}
 			</select>
 		</label>
 		<FormMessage {form} />

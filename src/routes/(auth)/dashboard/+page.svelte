@@ -63,4 +63,12 @@
 			</a>
 		</div>
 	{/if}
+	{#if data.role === 'teacher'}
+		<h2>เครื่องมือสำหรับครู</h2>
+		<div class="">
+			<a href="/manage/invite">
+				<button class="btn">ส่งคำเชิญให้นักเรียน</button>
+			</a>
+		</div>
+	{/if}
 </section>
