@@ -128,11 +128,25 @@
 								เครื่องมือ
 							</a>
 						</li>
+						{#if data.role === 'teacher' || data.role === 'school-contact' || data.role === 'staff'}
+							<li>
+								<a href="/manage/invite">
+									<Icon icon="mdi:account-multiple-plus" class="h-5 w-5" />
+									ส่งคำเชิญ
+								</a>
+							</li>
+							<li>
+								<a href="/projects">
+									<Icon icon="mdi:arrow-projectile-multiple" class="h-5 w-5" />
+									รายการโครงงาน
+								</a>
+							</li>
+						{/if}
 						{#if data.user_metadata?.role === 'student-team-contact'}
 							<li>
 								<a href="/my-project">
 									<Icon icon="mdi:account-group" class="h-5 w-5" />
-									จัดการโครงงาน
+									จัดการโครงงานของฉัน
 								</a>
 							</li>
 						{/if}

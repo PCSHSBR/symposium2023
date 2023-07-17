@@ -15,7 +15,7 @@ declare global {
 		interface PageData {
 			session: Session | null;
 			role: Roles;
-			user_metadata: UserMetadata | LocalMetadata | undefined;
+			user_metadata: LocalMetadata | undefined;
 		}
 		// interface Error {}
 		// interface Platform {}

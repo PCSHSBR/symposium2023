@@ -40,7 +40,7 @@
 			<span class="label-text"> อีเมล </span>
 			<textarea
 				id="emails"
-				class="input textarea-bordered w-full"
+				class="textarea-bordered textarea w-full resize-y"
 				name="email"
 				autocomplete="email"
 				data-invalid={!!errors.email}
