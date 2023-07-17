@@ -116,7 +116,7 @@
 	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 
-<div class="px-6">
+<div class="p-5">
 	<h1>รายการโครงงาน</h1>
 	<div class="overflow-x-auto">
 		{#if isLoading}

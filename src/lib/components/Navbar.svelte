@@ -89,7 +89,7 @@
 							<a href="/#event-trip" use:closeMenu>ฟิวทริป</a>
 						</li>
 						<li>
-							<a href="/#event-speaker" use:closeMenu>สปีกเกอร์</a>
+							<a href="/#event-speaker" use:closeMenu>วิทยากร</a>
 						</li>
 						<li>
 							<a href="/#event-document" use:closeMenu>ดาวโหลดเอกสาร</a>
@@ -183,7 +183,7 @@
 								<a href="/#event-trip" use:closeMenu>ฟิวทริป</a>
 							</li>
 							<li>
-								<a href="/#event-speaker" use:closeMenu>สปีกเกอร์</a>
+								<a href="/#event-speaker" use:closeMenu>วิทยากร</a>
 							</li>
 							<li>
 								<a href="/#event-document" use:closeMenu>ดาวโหลดเอกสาร</a>

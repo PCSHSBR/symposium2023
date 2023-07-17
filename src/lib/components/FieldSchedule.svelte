@@ -2,7 +2,7 @@
 	let classes = '';
 	export { classes as class };
 
-	let tab = 2;
+	let tab = 0;
 </script>
 
 <div class="main-container flex flex-col {classes}">
