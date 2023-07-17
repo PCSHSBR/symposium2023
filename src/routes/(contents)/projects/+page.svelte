@@ -5,7 +5,6 @@
 	import { notify } from '$lib/notify';
 	import type { StudentMembers, StudentRegisterProjectFormSchema } from '$lib/formSchemas';
 	import RenderStyledText from '$lib/components/RenderStyledText.svelte';
-	import type { PostgrestResponse } from '@supabase/supabase-js';
 	export let data: PageData;
 	let tableData: Awaited<ReturnType<typeof getAllProject>> = [];
 	let tableKeys = [
@@ -57,7 +56,6 @@
 			`
 			)
 			.order('school', { ascending: true });
-		// .range(start, end);
 		if (results.error) {
 			notify({ message: results.error.message, type: 'error' });
 			return [];
@@ -96,19 +94,6 @@
 			return `${studentMember.title_th}${studentMember.firstname_th} ${studentMember.lastname_th}`;
 		});
 	}
-
-	function projectStatus(user_id: string) {
-		return [
-			{
-				label: '3',
-				isDone: abstractUploaded.includes(user_id)
-			},
-			{
-				label: '4',
-				isDone: articleUploaded.includes(user_id)
-			}
-		];
-	}
 </script>
 
 <svelte:head>
@@ -118,26 +103,26 @@
 
 <div class="p-5">
 	<h1>รายการโครงงาน</h1>
+	<div class="w-xs float-right rounded-md border p-3 text-sm">
+		<h3 class="mb-3">คำอธิบายสัญลักษณ์สถานะ</h3>
+		<div>
+			<span class="inline-block h-5 w-5 rounded-full bg-base-300 text-center">3</span> = ยังไม่อัปโหลดบทคัดย่อ
+		</div>
+		<div>
+			<span class="inline-block h-5 w-5 rounded-full bg-base-300 text-center">4</span> = ยังอัปโหลดบทความ
+		</div>
+		<div>
+			<span
+				class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-success text-success-content"
+			>
+				<Icon icon="mdi:tick" class="m-auto h-3.5 w-3.5" />
+			</span> = อัปโหลดบทคัดย่อ/บทความแล้ว
+		</div>
+	</div>
 	<div class="overflow-x-auto">
 		{#if isLoading}
 			<span class="loading loading-spinner loading-sm" /> กำลังโหลด...
 		{/if}
-		<div class="float-right w-full max-w-4xl p-3 text-sm">
-			<h3 class="mb-3">คำอธิบายสัญลักษณ์สถานะ</h3>
-			<div>
-				<span class="inline-block h-5 w-5 rounded-full bg-base-300 text-center">3</span> = ยังไม่อัปโหลดบทคัดย่อ
-			</div>
-			<div>
-				<span class="inline-block h-5 w-5 rounded-full bg-base-300 text-center">4</span> = ยังอัปโหลดบทความ
-			</div>
-			<div>
-				<span
-					class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-success text-success-content"
-				>
-					<Icon icon="mdi:tick" class="m-auto h-3.5 w-3.5" />
-				</span> = อัปโหลดบทคัดย่อ/บทความแล้ว
-			</div>
-		</div>
 		<table class="table-pin-rows table">
 			<thead>
 				<tr>

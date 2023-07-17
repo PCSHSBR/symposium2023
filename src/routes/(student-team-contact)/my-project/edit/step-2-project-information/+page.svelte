@@ -66,9 +66,9 @@
 			title_th: data.user_metadata?.title_th || '',
 			firstname_en: data.user_metadata?.firstname_en || '',
 			firstname_th: data.user_metadata?.firstname_th || '',
-			lastname_en: data.user_metadata?.firstname_en || '',
-			lastname_th: data.user_metadata?.firstname_th || '',
-			phone_number: '',
+			lastname_en: data.user_metadata?.lastname_en || '',
+			lastname_th: data.user_metadata?.lastname_th || '',
+			phone_number: data.user_metadata?.phone_number || '',
 			email: data.session?.user.email || ''
 		};
 	}
@@ -112,12 +112,6 @@
 			teamImageUrl = data.supabase.storage
 				.from('teamImages')
 				.getPublicUrl(teamImageUploadResult.data.path).data.publicUrl;
-			if (data.session?.user.id) {
-				await data.supabase.from('project_status').upsert({
-					is_upload_team_image: true,
-					team_contact_user_id: data.session?.user.id
-				});
-			}
 			uploadTeamImageSuccess = true;
 		}
 		isUploadingImage = false;
@@ -550,6 +544,9 @@
 				>
 			{/if}
 			<small class="">กดบันทึกเพื่ออัปโหลดภาพ</small>
+			{#if teamImageError}
+				<small class="text-error">{teamImageError}</small>
+			{/if}
 			<button
 				class="btn-accent btn-xs btn m-3"
 				on:click|preventDefault={() => (isOpenExampleImage = !isOpenExampleImage)}
@@ -570,9 +567,6 @@
 						โดยภาพจะนำไปใช้ในสื่อประชาสัมพันธ์ของงาน
 					</div>
 				</div>
-			{/if}
-			{#if teamImageError}
-				<small class="text-error">{teamImageError}</small>
 			{/if}
 		</div>
 	</div>

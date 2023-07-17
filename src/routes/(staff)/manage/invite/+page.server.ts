@@ -51,7 +51,7 @@ export let actions = {
 				},
 				redirectTo: `${url.origin}/welcome`
 			});
-			console.log(result);
+			// console.log(result);
 			if (result.error) e.push(`${email}: ${toThai(result.error.message)}`);
 		}
 		if (e.length !== 0)

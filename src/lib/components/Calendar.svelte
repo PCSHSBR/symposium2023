@@ -28,7 +28,7 @@
 		);
 		const today = new Date();
 		const timelineWidth = dateRange.length * 64;
-		console.log(dateRange);
+		// console.log(dateRange);
 	});
 </script>
 

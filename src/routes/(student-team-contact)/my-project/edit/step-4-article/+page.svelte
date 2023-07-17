@@ -84,12 +84,6 @@
 		uploadSuccess.pdf = 'อัปโหลดเรียบร้อย';
 		uploading.pdf = false;
 		lastUploadFile.pdf.lastUpdateDate = new Date().toISOString();
-		data.supabase
-			.from('project_status')
-			.update({
-				is_uploaded_article: true
-			})
-			.eq('team_contact_user_id', data.session?.user.id);
 	}
 
 	async function uploadArticle() {
@@ -113,7 +107,7 @@
 			.from('articles')
 			.list(`${data.session?.user.id}/`)
 			.then((result) => {
-				console.log(result);
+				// console.log(result);
 				if (result.error) {
 					console.error(result.error);
 					return notify({

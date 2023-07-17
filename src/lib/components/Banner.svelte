@@ -75,12 +75,12 @@
 					scene.add(splineScene);
 				},
 				(event) => {
-					console.log(event);
+					// console.log(event);
 					loadpercent.set((event.loaded / event.total) * 100);
 				}
 			);
 			loadingManager.onLoad = function () {
-				console.log('Loading complete!');
+				// console.log('Loading complete!');
 			};
 
 			let pointLight = new THREE.PointLight(0xffffff, 1, 5000);

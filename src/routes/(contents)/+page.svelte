@@ -3,7 +3,6 @@
 	import Icon from '@iconify/svelte';
 	import ScrollMagic from 'scrollmagic';
 	import animejs from 'animejs';
-	import { watchWithFilter } from 'svelte-legos';
 	import LoadingPage from '$lib/components/LoadingPage.svelte';
 	import Speaker from '$lib/assets/images/Speaker.png';
 	import { calendarData } from '$lib/calendarData';
@@ -11,6 +10,7 @@
 	import Calendar from '$lib/components/Calendar.svelte';
 	import FieldTrip from '$lib/components/FieldTrip.svelte';
 	import FieldSchedule from '$lib/components/FieldSchedule.svelte';
+	import SpeakerPatentImage from '$lib/assets/images/SpeakerPatent.jpg';
 
 	let isLoading = true;
 	let isBannerHovered = false;

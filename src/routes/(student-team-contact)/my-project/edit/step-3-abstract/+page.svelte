@@ -60,10 +60,6 @@
 				type: 'error'
 			});
 		}
-		await data.supabase.from('project_status').upsert({
-			is_add_text_abstract: true,
-			team_contact_user_id: data.session?.user.id
-		});
 		uploadSuccess.text = 'บันทึกสำเร็จ';
 		uploading.text = false;
 	}
@@ -181,23 +177,6 @@
 								.getPublicUrl(`${data.session?.user.id}/${file.name}`).data.publicUrl;
 						}
 					});
-					if (lastUploadFile.pdf.url && lastUploadFile.document.url) {
-						await data.supabase
-							.from('project_status')
-							.update({
-								is_uploaded_abstract: true
-							})
-							.eq('team_contact_user_id', data.session?.user.id)
-							.then((result) => {
-								if (result.error) {
-									console.error(result.error);
-									return notify({
-										message: result.error.message,
-										type: 'error'
-									});
-								}
-							});
-					}
 				}
 			});
 	})();

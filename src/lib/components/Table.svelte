@@ -23,7 +23,7 @@
 		// row head
 		let thead_tr = await thead.querySelector('tr');
 		let lkeys = Object.values(keys);
-		console.log(lkeys, activeKeys);
+		// console.log(lkeys, activeKeys);
 		allowSelect ? lkeys.unshift('<input type="checkbox" class="checkbox">') : null;
 		for (let i = 1; i <= lkeys.length; i++) {
 			let th = document.createElement('th');
@@ -106,7 +106,7 @@
 					.filter((item) => item.checked)
 					.map((item) => item.parentNode.querySelector('span').innerHTML)
 			};
-			console.log(activeKeys);
+			// console.log(activeKeys);
 		});
 	});
 </script>

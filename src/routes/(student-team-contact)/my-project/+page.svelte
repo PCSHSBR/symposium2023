@@ -51,10 +51,6 @@
 			} = data.supabase.storage
 				.from('teamImages')
 				.getPublicUrl(`${data.session?.user.id}/${teamImageResult.data[0].name}`, {});
-			await data.supabase.from('project_status').upsert({
-				team_contact_user_id: data.session?.user.id,
-				is_upload_team_image: true
-			});
 			projectData.data.teamImageUrl = publicUrl;
 		}
 	}
