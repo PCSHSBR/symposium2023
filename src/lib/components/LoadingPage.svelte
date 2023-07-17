@@ -12,6 +12,9 @@
 				main_container.style.opacity = '0';
 				main_container.style.transform = 'translateY(-100%)';
 				document.body.style.overflow = 'auto';
+				setTimeout(() => {
+					main_container.style.display = 'none';
+				}, 700);
 			}, 1000);
 		}
 	}
@@ -19,7 +22,7 @@
 
 <div
 	bind:this={main_container}
-	class="main-container absolute z-[1002] h-full w-full bg-base-100 transition-all duration-700 ease-in-out"
+	class="main-container absolute z-[2002] h-full w-full bg-base-100 transition-all duration-700 ease-in-out"
 >
 	<div
 		class="max-w- m-auto flex h-full w-[calc(100%-32px)] max-w-sm flex-col items-center justify-center align-middle"
