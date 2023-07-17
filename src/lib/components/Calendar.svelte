@@ -75,7 +75,7 @@
 			<div class="item">
 				<div class="d-date">
 					<span class="">17-31</span>
-					<span>กันยายน</span>
+					<span>กรกฎาคม</span>
 				</div>
 				<div class="d-info">
 					<h1>ลงทะเบียนผ่าน</h1>
