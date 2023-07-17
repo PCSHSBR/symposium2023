@@ -2,6 +2,7 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import type { PageData } from './$types';
+	import { page } from '$app/stores';
 
 	export let data: PageData;
 </script>
@@ -14,7 +15,7 @@
 </svelte:head>
 
 <Navbar {data} />
-<main class="pt-16">
+<main class={$page.url.pathname == '/' ? '' : 'pt-16'}>
 	<slot />
 </main>
 <Footer />
