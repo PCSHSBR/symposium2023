@@ -40,7 +40,7 @@
 			<div class="item">
 				<div class="d-date">
 					<span class="">17-25</span>
-					<span>สิงหาคม</span>
+					<span>กรกฎาคม</span>
 				</div>
 				<div class="d-info">
 					<h1>ลงทะเบียนและส่งบทคัดย่อ</h1>
