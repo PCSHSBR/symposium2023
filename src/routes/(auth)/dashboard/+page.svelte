@@ -13,7 +13,10 @@
 		let result = await supabase.auth.signOut();
 		// TODO: refacto here
 		if (result.error) {
-			alert(result.error.message);
+			notify({
+				message: result.error.message,
+				type: 'error'
+			});
 		}
 		isLogginout = false;
 		goto('/login');

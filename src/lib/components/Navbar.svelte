@@ -160,7 +160,11 @@
 							</a>
 						</li>
 						<li>
-							<a href="/logout" class="btn-error btn-outline">
+							<a
+								href="/logout"
+								class="btn-error btn-outline"
+								on:click|preventDefault={handleSignOut}
+							>
 								<Icon icon="mdi:logout" class="h-5 w-5" />
 								ออกจากระบบ</a
 							>
