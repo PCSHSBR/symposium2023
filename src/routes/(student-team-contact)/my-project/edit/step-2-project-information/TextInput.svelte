@@ -14,7 +14,7 @@
 			<input
 				type="email"
 				aria-invalid={error && error[0] ? 'true' : undefined}
-				class="input w-full {error && error[0] ? 'input-error' : ''}"
+				class="input-bordered input w-full {error && error[0] ? 'input-error' : ''}"
 				bind:value
 				{...$$restProps}
 			/>
@@ -22,7 +22,7 @@
 			<input
 				type="text"
 				aria-invalid={error && error[0] ? 'true' : undefined}
-				class="input w-full {error && error[0] ? 'input-error' : ''}"
+				class="input-bordered input w-full {error && error[0] ? 'input-error' : ''}"
 				bind:value
 				{...$$restProps}
 			/>
