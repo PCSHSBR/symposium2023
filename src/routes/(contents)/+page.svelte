@@ -214,7 +214,7 @@
 				<h1 class="main-title text-4xl font-black leading-none md:text-6xl">
 					<span class="text-[128px]">3</span><sup class="align-top text-xl">rd</sup> PCSHS Science Symposium
 				</h1>
-				<p class="sub-title text-xl shadow-lg">พัฒนาโลกสู่ความยั่งยืนด้วยนวัตกรรมและโครงงาน</p>
+				<p class="sub-title text-xl">พัฒนาโลกสู่ความยั่งยืนด้วยนวัตกรรมและโครงงาน</p>
 			</div>
 			<div class="absolute bottom-0 flex h-16 w-full flex-col items-center">
 				<Icon icon="mdi:menu-down" />
@@ -309,7 +309,14 @@
 				</h2>
 			</div>
 			<div class="my-4 grid grid-cols-1 text-center md:grid-cols-2 md:text-left">
-				<div class="mx-auto max-w-sm overflow-hidden rounded-lg md:mx-0">
+				<div class="relative mx-auto max-w-sm overflow-hidden rounded-lg md:mx-0">
+					<a href={SpeakerPatentImage} title="สิทธิบัตร"
+						><img
+							class="absolute bottom-[6px] right-[6px] mx-auto h-auto max-w-[25%] rounded-md shadow-lg"
+							src={SpeakerPatentImage}
+							alt=""
+						/></a
+					>
 					<img src={Speaker} class="h-full w-full object-cover" alt="Speaker" />
 				</div>
 				<div class="p-6">
@@ -332,7 +339,10 @@
 					<Icon icon="mdi:document" class="pr-4" /> <span>เอกสารต่าง ๆ</span>
 				</h2>
 				<div class="flex flex-row flex-wrap">
-					<a href="/" class="btn-primary btn"><Icon icon="mdi:download" />เอกสาร</a>
+					<a
+						href="https://drive.google.com/drive/folders/1P1nfoJ9mBKbJOENBbHmm_Om46doDjJHZ"
+						class="btn-primary btn"><Icon icon="mdi:download" />เอกสาร</a
+					>
 				</div>
 			</div>
 		</div>

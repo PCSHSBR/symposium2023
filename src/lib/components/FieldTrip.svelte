@@ -20,7 +20,10 @@
 				ซึ่งตั้งอยู่บนยอดภูเขาไฟที่ดับสนิทแล้ว สูงประมาณ 200 เมตรจากพื้นราบ (ประมาณ 350
 				เมตรจากระดับน้ำทะเลปานกลาง) คำว่า พนมรุ้ง นั้น มาจากภาษาเขมร คำว่า วนํรุง แปลว่า ภูเขาใหญ่
 			</p>
-			<a href="" class="btn-primary btn mt-4"><Icon icon="mdi:open-in-new" />อ่านต่อ</a>
+			<a
+				href="https://th.wikipedia.org/wiki/%E0%B8%AD%E0%B8%B8%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%99%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%A7%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%95%E0%B8%A3%E0%B9%8C%E0%B8%9E%E0%B8%99%E0%B8%A1%E0%B8%A3%E0%B8%B8%E0%B9%89%E0%B8%87"
+				class="btn-primary btn mt-4"><Icon icon="mdi:open-in-new" />อ่านต่อ</a
+			>
 		</div>
 	</div>
 	<div class="item">
@@ -46,7 +49,10 @@
 				และยังได้บันทึกลงกินเนสบุ๊คว่าเป็นสนามฟุตบอลในระดับฟีฟ่าที่ใช้เวลาก่อสร้างน้อยที่สุดในโลกคือ
 				256 วัน
 			</p>
-			<a href="" class="btn-primary btn mt-4"><Icon icon="mdi:open-in-new" />อ่านต่อ</a>
+			<a
+				href="https://th.wikipedia.org/wiki/%E0%B8%8A%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%AD%E0%B8%B2%E0%B8%A3%E0%B8%B5%E0%B8%99%E0%B8%B2N"
+				class="btn-primary btn mt-4"><Icon icon="mdi:open-in-new" />อ่านต่อ</a
+			>
 		</div>
 	</div>
 </div>
