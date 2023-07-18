@@ -262,81 +262,78 @@
 			</div>
 		{/if}
 	</div>
-	{#if displayUserInfo.name_en}
-		<b> ชื่ออังกฤษ </b>
-		<div>
-			{#if displayUserInfo.name_en}
-				{displayUserInfo.name_en}
-			{:else}
-				{data.user_metadata?.title_en}
-				{data.user_metadata?.firstname_en}
-				{data.user_metadata?.lastname_en}
-			{/if}
-			<button
-				class="btn-ghost btn-secondary btn-xs btn"
-				on:click={() => {
-					editingValue.title_en = data.user_metadata?.title_en ?? '';
-					editingValue.firstname_en = data.user_metadata?.firstname_en ?? '';
-					editingValue.lastname_en = data.user_metadata?.lastname_en ?? '';
-					isEditing.name_en = !isEditing.name_en;
-				}}
-			>
-				{#if isEditing.name_en}ยกเลิกการ{/if}แก้ไข
-			</button>
-			{#if isEditing.name_en}
-				<div class="flex flex-col gap-2">
-					<div class="flex flex-col gap-1">
-						<label for="title_en">คำนำหน้าชื่อ</label>
-						<select id="title_en" class="select" bind:value={editingValue.title_en}>
-							<option value="Mr.">Mr.</option>
-							<option value="Miss">Miss</option>
-							<option value="Ms.">Ms.</option>
-							<option value="Mrs.">Mrs.</option>
-						</select>
-					</div>
-					<div class="flex flex-col gap-1">
-						<label for="firstname_en">ชื่อ</label>
-						<input
-							required
-							id="firstname_en"
-							class="input-bordered input"
-							bind:value={editingValue.firstname_en}
-						/>
-					</div>
-					<div class="flex flex-col gap-1">
-						<label for="lastname_en">นามสกุล</label>
-						<input
-							required
-							id="lastname_en"
-							class="input-bordered input"
-							bind:value={editingValue.lastname_en}
-						/>
-					</div>
-					{#if errors.name_en}
-						<div class="alert alert-error" role="alert">
-							<Icon icon="mdi:alert-circle-outline" class="h-6 w-6" />
-							<span>{errors}</span>
-						</div>
-					{/if}
-					{#if editingState.name_en[0]}
-						<div class="alert alert-success" role="alert">
-							<Icon icon="mdi:check-circle-outline" class="h-6 w-6" />
-							<span>บันทึกข้อมูลเรียบร้อย</span>
-						</div>
-					{/if}
-					<div class="flex justify-end gap-2">
-						<button class="btn-primary btn" on:click={updateNameEn}> บันทึก </button>
-						<button
-							class="btn-ghost btn-secondary btn"
-							on:click={() => (isEditing.name_en = false)}
-						>
-							ยกเลิก
-						</button>
-					</div>
+	<b> ชื่ออังกฤษ </b>
+	<div>
+		{#if displayUserInfo.name_en}
+			{displayUserInfo.name_en}
+		{:else if data.user_metadata?.title_en}
+			{data.user_metadata?.title_en}
+			{data.user_metadata?.firstname_en}
+			{data.user_metadata?.lastname_en}
+		{:else}
+			<i>ยังไม่ได้ระบุชื่ออังกฤษ</i>
+		{/if}
+		<button
+			class="btn-ghost btn-secondary btn-xs btn"
+			on:click={() => {
+				editingValue.title_en = data.user_metadata?.title_en ?? '';
+				editingValue.firstname_en = data.user_metadata?.firstname_en ?? '';
+				editingValue.lastname_en = data.user_metadata?.lastname_en ?? '';
+				isEditing.name_en = !isEditing.name_en;
+			}}
+		>
+			{#if isEditing.name_en}ยกเลิกการ{/if}แก้ไข
+		</button>
+		{#if isEditing.name_en}
+			<div class="flex flex-col gap-2">
+				<div class="flex flex-col gap-1">
+					<label for="title_en">คำนำหน้าชื่อ</label>
+					<select id="title_en" class="select" bind:value={editingValue.title_en}>
+						<option value="Mr.">Mr.</option>
+						<option value="Miss">Miss</option>
+						<option value="Ms.">Ms.</option>
+						<option value="Mrs.">Mrs.</option>
+					</select>
 				</div>
-			{/if}
-		</div>
-	{/if}
+				<div class="flex flex-col gap-1">
+					<label for="firstname_en">ชื่อ</label>
+					<input
+						required
+						id="firstname_en"
+						class="input-bordered input"
+						bind:value={editingValue.firstname_en}
+					/>
+				</div>
+				<div class="flex flex-col gap-1">
+					<label for="lastname_en">นามสกุล</label>
+					<input
+						required
+						id="lastname_en"
+						class="input-bordered input"
+						bind:value={editingValue.lastname_en}
+					/>
+				</div>
+				{#if errors.name_en}
+					<div class="alert alert-error" role="alert">
+						<Icon icon="mdi:alert-circle-outline" class="h-6 w-6" />
+						<span>{errors}</span>
+					</div>
+				{/if}
+				{#if editingState.name_en[0]}
+					<div class="alert alert-success" role="alert">
+						<Icon icon="mdi:check-circle-outline" class="h-6 w-6" />
+						<span>บันทึกข้อมูลเรียบร้อย</span>
+					</div>
+				{/if}
+				<div class="flex justify-end gap-2">
+					<button class="btn-primary btn" on:click={updateNameEn}> บันทึก </button>
+					<button class="btn-ghost btn-secondary btn" on:click={() => (isEditing.name_en = false)}>
+						ยกเลิก
+					</button>
+				</div>
+			</div>
+		{/if}
+	</div>
 	<b>หมายเลขโทรศัพท์</b>
 	<div>
 		{data.user_metadata?.phone}
