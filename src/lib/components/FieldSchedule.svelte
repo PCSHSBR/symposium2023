@@ -40,9 +40,7 @@
 			<div class="sub-item">
 				<div class="title">
 					<span class="child-span">13:00 น. - 18:00 น.</span>
-					<h2 class="text-3xl">
-						ลงทะเบียน / เข้าที่พัก นำเอกสารงารสาร โปสเตอร์ และไฟล์ Powerpoint
-					</h2>
+					<h2 class="text-3xl">ลงทะเบียน/เข้าที่พัก ติดตั้งโปสเตอร์และนำส่งไฟล์นำเสนอ</h2>
 				</div>
 				<div class="info">
 					<div>
@@ -110,11 +108,11 @@
 			<div class="sub-item">
 				<div class="title">
 					<span class="child-span">8:00 น. - 10:20 น.</span>
-					<h2 class="text-3xl">พิธีเปิด คณะครู - นักเรียนและผู้มีเกียรติเข้าร่วมพิธีเปิด</h2>
-					<p class="whitespace-pre-line">
-						- ชุดแสดงพิธีเปิด ๑ ชุด - กิจกรรมบรรยายสร้างแรงบัลดาลใจในการทำ โครงงาน โดย ดร.สุพรรณ
-						ยอดยิ่งยง
-					</p>
+					<h2 class="text-3xl">พิธีเปิด</h2>
+					<ul class="list-item list-inside list-disc">
+						<li>การแสดงพิธีเปิด</li>
+						<li>กิจกรรมบรรยายสร้างแรงบัลดาลใจในการทำ โครงงาน โดย ดร.สุพรรณ ยอดยิ่งยง</li>
+					</ul>
 				</div>
 				<div class="info">
 					<div>

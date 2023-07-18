@@ -11,6 +11,9 @@
 
 	// function to close the menu, for using with use directive
 	function closeMenu(_node?: HTMLElement) {
+		_node?.addEventListener('click', () => {
+			isMenuOpen = false;
+		});
 		return {
 			destroy() {
 				isMenuOpen = false;
@@ -194,13 +197,13 @@
 								<a href="/#event-schedule" use:closeMenu>ตารางงาน</a>
 							</li>
 							<li>
-								<a href="/#event-trip" use:closeMenu>ฟิวทริป</a>
+								<a href="/#event-trip" use:closeMenu>ทัศนศึกษา</a>
 							</li>
 							<li>
 								<a href="/#event-speaker" use:closeMenu>วิทยากร</a>
 							</li>
 							<li>
-								<a href="/#event-document" use:closeMenu>ดาวโหลดเอกสาร</a>
+								<a href="/#event-document" use:closeMenu>เอกสาร</a>
 							</li>
 						</ul>
 					</details>
