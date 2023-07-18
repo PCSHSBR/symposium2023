@@ -52,6 +52,7 @@
 				.from('teamImages')
 				.getPublicUrl(`${data.session?.user.id}/${teamImageResult.data[0].name}`, {});
 			projectData.data.teamImageUrl = publicUrl;
+			stepData.step2.isDone = true;
 		}
 	}
 
@@ -76,6 +77,7 @@
 			special_advisors: d.special_advisor.map(getName),
 			abstract: d.abstract
 		};
+		stepData.step3.text = d.abstract;
 		projectData.isLoadingData = false;
 	}
 
@@ -123,55 +125,89 @@
 		}
 	});
 
-	$: stepData = {
+	let stepData = {
 		step1: {
 			isDone: true
 		},
 		step2: {
-			isDone: projectData.data?.teamImageUrl
+			isDone: !!projectData.data?.teamImageUrl
 		},
 		step3: {
-			isDone: projectData.data?.abstract,
+			isDone: !!projectData.data?.abstract,
 			text: projectData.data?.abstract,
 			docUrl: '',
 			pdfUrl: ''
 		},
 		step4: {
-			isDone: false
+			isDone: false,
+			docUrl: '',
+			pdfUrl: ''
 		}
 	};
 
-	// (async () => {
-	// 	await data.supabase.storage
-	// 		.from('abstracts')
-	// 		.list(data.session?.user.id, {
-	// 			limit: 2,
-	// 			sortBy: {
-	// 				// newest first
-	// 				column: 'updated_at',
-	// 				order: 'desc'
-	// 			}
-	// 		})
-	// 		.then(async (result) => {
-	// 			console.log(result);
-	// 			// doc and pdf
-	// 			if (result.data?.length !== 0) {
-	// 				for (const docts of result.data) {
-	// 					console.log(docts)
-	// 					const {
-	// 						data: { publicUrl }
-	// 					} = await data.supabase.storage
-	// 						.from('abstracts')
-	// 						.getPublicUrl(`${data.session?.user.id}/${docts.name}`, {});
-	// 					if (docts.name.endsWith('.docx')) {
-	// 						stepData.step3.docUrl = publicUrl;
-	// 					} else if (docts.name.endsWith('.pdf')) {
-	// 						stepData.step3.pdfUrl = publicUrl;
-	// 					}
-	// 				}
-	// 			}
-	// 		});
-	// })();
+	(async () => {
+		await data.supabase.storage
+			.from('abstracts')
+			.list(data.session?.user.id, {
+				limit: 2,
+				sortBy: {
+					column: 'updated_at',
+					order: 'desc'
+				}
+			})
+			.then(async (result) => {
+				if (result.error) {
+					notify({
+						message: `${result.error.message}`,
+						type: 'error'
+					});
+					return;
+				}
+				if (result.data?.length !== 0) {
+					const abstract = result.data[0];
+					const {
+						data: { publicUrl }
+					} = data.supabase.storage
+						.from('abstracts')
+						.getPublicUrl(`${data.session?.user.id}/${abstract.name}`, {});
+					stepData.step3.docUrl = publicUrl;
+					stepData.step3.pdfUrl = publicUrl.replace('.docx', '.pdf');
+					stepData.step3.isDone = true;
+				}
+			});
+	})();
+
+	(async () => {
+		await data.supabase.storage
+			.from('articles')
+			.list(data.session?.user.id, {
+				limit: 2,
+				sortBy: {
+					column: 'updated_at',
+					order: 'desc'
+				}
+			})
+			.then(async (result) => {
+				if (result.error) {
+					notify({
+						message: `${result.error.message}`,
+						type: 'error'
+					});
+					return;
+				}
+				if (result.data?.length !== 0) {
+					const abstract = result.data[0];
+					const {
+						data: { publicUrl }
+					} = data.supabase.storage
+						.from('abstracts')
+						.getPublicUrl(`${data.session?.user.id}/${abstract.name}`, {});
+					stepData.step4.docUrl = publicUrl;
+					stepData.step4.pdfUrl = publicUrl.replace('.docx', '.pdf');
+					stepData.step4.isDone = true;
+				}
+			});
+	})();
 </script>
 
 <svelte:head>
@@ -340,21 +376,23 @@
 						<b>เนื้อหาบทคัดย่อ:</b>
 						<RenderStyledText content={stepData.step3.text} />
 					</div>
-					<ul>
-						{#if stepData.step3.docUrl}
-							<li><a href={stepData.step3.docUrl}>DOCX</a></li>
-						{/if}
-						{#if stepData.step3.pdfUrl}
-							<li><a href={stepData.step3.pdfUrl}>PDF</a></li>
-						{/if}
-					</ul>
 				</div>
 			{/if}
+			<ul>
+				{#if stepData.step3.docUrl}
+					<li><a href={stepData.step3.docUrl}>ดาวน์โหลด DOCX</a></li>
+				{/if}
+				{#if stepData.step3.pdfUrl}
+					<li><a href={stepData.step3.pdfUrl}>ดาวน์โหลด PDF</a></li>
+				{/if}
+			</ul>
 			{#if stepData.step2.isDone}
 				<a href="/my-project/edit/step-3-abstract">
-					<button class="btn-primary btn-sm btn my-2 mt-3"
-						><Icon icon="mdi:upload" class="h-4 w-4" /> อัปโหลด</button
-					>
+					<button class="{!stepData.step3.isDone ? 'btn-primary' : ''} btn-sm btn my-2 mt-3"
+						><Icon icon="mdi:upload" class="h-4 w-4" /> อัปโหลด{stepData.step3.isDone
+							? 'ใหม่อีกครั้ง'
+							: ''}
+					</button>
 				</a>
 			{/if}
 		</div>
@@ -377,16 +415,33 @@
 		<div>
 			<h2>อัปโหลดบทความวิชาการ</h2>
 			<p>บทความเชิงวิชาการของโครงงาน</p>
+			<ul>
+				{#if stepData.step3.docUrl}
+					<li><a href={stepData.step3.docUrl}>ดาวน์โหลด DOCX</a></li>
+				{/if}
+				{#if stepData.step3.pdfUrl}
+					<li><a href={stepData.step3.pdfUrl}>ดาวน์โหลด PDF</a></li>
+				{/if}
+			</ul>
 			{#if stepData.step3.isDone}
 				<a href="/my-project/edit/step-4-article">
-					<button class="btn-primary btn-sm btn my-2 mt-3"
-						><Icon icon="mdi:upload" class="h-4 w-4" /> อัปโหลด</button
-					>
+					<button class="{!stepData.step4.isDone ? 'btn-primary' : ''} btn-sm btn my-2 mt-3"
+						><Icon icon="mdi:upload" class="h-4 w-4" /> อัปโหลด{stepData.step3.isDone
+							? 'ใหม่อีกครั้ง'
+							: ''}
+					</button>
 				</a>
 			{/if}
 		</div>
 	</div>
 </section>
+
+{#if stepData.step1.isDone && stepData.step2.isDone && stepData.step3.isDone && stepData.step4.isDone}
+	<div class="alert mx-3 box-border h-auto w-auto bg-success text-success-content">
+		<Icon icon="icon-park-solid:success" class="h-11 w-11" />
+		<h2 class="text-2xl font-bold">คุณส่งโครงงานเรียบร้อยแล้ว!</h2>
+	</div>
+{/if}
 
 <style lang="scss">
 	h2 {
