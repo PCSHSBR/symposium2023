@@ -9,6 +9,7 @@
 
 	export let data: PageData;
 	onMount(() => {
+		if (!window.location.hash) return;
 		const hash = new Map(
 			window.location.hash
 				.split('#')[1]

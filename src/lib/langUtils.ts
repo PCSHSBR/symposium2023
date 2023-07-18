@@ -9,7 +9,9 @@ export const sentencesMap: Map<string | Roles, string> = new Map([
 		'ไม่สามารถตรวจสอบอีเมลได้: รูปแบบไม่ถูกต้อง'
 	],
 	['staff', 'เจ้าหน้าที่'],
-	['student-team-contact', 'นักเรียนตัวแทนทีมโครงงาน'],
+	['teacher', 'ครู'],
+	['school-contact', 'ผู้ติดต่อโรงเรียน'],
+	['student-team-contact', 'นักเรียน'],
 	[
 		'For security purposes, you can only request this once every 60 seconds',
 		'เนื่องด้วยเหตุผลด้านความปลอดภัย คุณสามารถส่งคำขอรีเซ็ตรหัสผ่านได้หนึ่งครั้งทุก ๆ 60 วินาที'
@@ -30,6 +32,8 @@ export function toThai(message: string | undefined) {
  */
 export function textListFormatter(texts: string[] | undefined) {
 	if (typeof texts === 'undefined') return undefined;
+	// trim all entries
+	texts = texts.map((text) => text.trim()).filter((text) => text !== '' || text !== undefined);
 	const formatter = new Intl.ListFormat('th-TH', {
 		style: 'long',
 		type: 'conjunction'
@@ -78,5 +82,6 @@ export function dateTimeFormatter(date: Date | undefined, options?: Intl.DateTim
  * @returns
  */
 export function d(date: string | undefined, options?: Intl.DateTimeFormatOptions) {
+	if (date === undefined) return undefined;
 	return dateFormatter(new Date(date ?? ''), options);
 }

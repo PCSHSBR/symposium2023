@@ -154,6 +154,13 @@
 							</li>
 						{/if}
 						<li>
+							<a href="/auth/list-of-invited">
+								<Icon icon="mdi:email-search" class="h-5 w-5" />
+								อีเมลที่ได้รับเชิญแล้ว
+								<span class="badge badge-success badge-sm text-success-content">ใหม่</span>
+							</a>
+						</li>
+						<li>
 							<a href="/account">
 								<Icon icon="mdi:account" class="h-5 w-5" />
 								บัญชีของฉัน

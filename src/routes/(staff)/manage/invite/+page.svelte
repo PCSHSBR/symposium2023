@@ -47,7 +47,14 @@
 				value={sForm.email}
 				required
 			/>
-			<span class="label-text-alt mt-2">สามารถใส่หลายอีเมลพร้อมกันได้โดยขึ้นบรรทัดใหม่</span>
+			<span class="label-text-alt mt-2"
+				>สามารถใส่หลายอีเมลพร้อมกันได้โดยขึ้นบรรทัดใหม่ อย่าใส่มากกว่า 2 บัญชี
+				ดูบััญชีที่ได้รับเชิญและสถานะการเชิญแต่ละบััญชีได้ที่ <a href="/auth/list-of-invited"
+					>หน้ารายการอีเมลที่ได้รับเชิญแล้ว <span
+						class="badge badge-success badge-sm text-success-content">ใหม่</span
+					></a
+				></span
+			>
 			<span class="label-text-alt text-red-500">{errors.email}</span>
 		</label>
 		<label class="label">
