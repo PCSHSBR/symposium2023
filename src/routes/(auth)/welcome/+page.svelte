@@ -7,7 +7,6 @@
 	import PasswordRequirementsBox from '$lib/components/PasswordRequirementsBox.svelte';
 	import { enhance } from '$app/forms';
 	import { superForm } from 'sveltekit-superforms/client';
-	import { goto } from '$app/navigation';
 	export let data: PageData;
 	export let form: ActionData;
 	const { form: formStore, errors: formErrors, constraints } = superForm(data.form);
@@ -15,7 +14,7 @@
 	const roleData: Record<Roles, RoleDescription> = {
 		anon: {
 			name: 'ผู้เข้าร่วมงาน',
-			desc: 'คุณได้รับเชิญในฐานะผู้เข้าร่วมงาน'
+			desc: 'เยี่ยมชมเว็บไซต์ได้'
 		},
 		'student-team-contact': {
 			name: 'นักเรียนผู้ร่วมนำเสนอ',

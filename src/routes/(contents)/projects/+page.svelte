@@ -103,7 +103,7 @@
 
 <div class="p-5">
 	<h1>รายการโครงงาน</h1>
-	<div class="w-xs float-right rounded-md border p-3 text-sm">
+	<div class="w-xs rounded-md border p-3 text-sm">
 		<h3 class="mb-3">คำอธิบายสัญลักษณ์สถานะ</h3>
 		<div>
 			<span class="inline-block h-5 w-5 rounded-full bg-base-300 text-center">3</span> = ยังไม่อัปโหลดบทคัดย่อ

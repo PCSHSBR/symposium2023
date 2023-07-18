@@ -14,7 +14,8 @@ export const sentencesMap: Map<string | Roles, string> = new Map([
 		'For security purposes, you can only request this once every 60 seconds',
 		'เนื่องด้วยเหตุผลด้านความปลอดภัย คุณสามารถส่งคำขอรีเซ็ตรหัสผ่านได้หนึ่งครั้งทุก ๆ 60 วินาที'
 	],
-	['Email rate limit exceeded', 'คุณส่งคำเขิญมากเกินไป โปรดรอสักครู่ก่อนส่งคำเชิญใหม่']
+	['Email rate limit exceeded', 'คุณส่งคำเขิญมากเกินไป โปรดรอสักครู่ก่อนส่งคำเชิญใหม่'],
+	['Email link is invalid or has expired', 'ลิงก์รับคำเชิญผ่านอีเมลไม่ถูกต้องหรือหมดอายุแล้ว']
 ]);
 
 export function toThai(message: string | undefined) {

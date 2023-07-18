@@ -2,7 +2,10 @@ import { error, fail, redirect } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import {
 	studentRegisterProjectFormSchema,
-	type StudentRegisterProjectFormSchema
+	type SpecialAdvisor,
+	type StudentRegisterProjectFormSchema,
+	type TeacherAdvisor,
+	type StudentMembers
 } from '$lib/formSchemas';
 import { message, superValidate } from 'sveltekit-superforms/server';
 export const ssr = false;
@@ -32,31 +35,50 @@ export const load = (async ({ locals: { getSession, supabase } }) => {
 		project_title_th: projectResult.data[0]?.title_th || '',
 		project_title_en: projectResult.data[0]?.title_en || '',
 		school: projectResult.data[0]?.school || 1,
-		student_members: projectResult.data[0]?.student_members || [
-			{
-				title_en: '',
-				title_th: '',
-				firstname_en: '',
-				firstname_th: '',
-				lastname_en: '',
-				lastname_th: '',
-				phone_number: '',
-				email: ''
-			}
-		],
-		teacher_advisor: projectResult.data[0]?.teacher_advisor || [
-			{
-				title_th: '',
-				title_en: '',
-				firstname_th: '',
-				firstname_en: '',
-				lastname_th: '',
-				lastname_en: '',
-				phone_number: '',
-				email: ''
-			}
-		],
-		special_advisor: [{}]
+		student_members:
+			projectResult.data[0]?.student_members ||
+			([
+				{
+					title_en: '',
+					title_th: '',
+					firstname_en: '',
+					firstname_th: '',
+					lastname_en: '',
+					lastname_th: '',
+					phone_number: '',
+					email: ''
+				}
+			] as StudentMembers[]),
+		teacher_advisor:
+			projectResult.data[0]?.teacher_advisor ||
+			([
+				{
+					title_th: '',
+					title_en: '',
+					firstname_th: '',
+					firstname_en: '',
+					lastname_th: '',
+					lastname_en: '',
+					phone_number: '',
+					email: ''
+				}
+			] as TeacherAdvisor[]),
+		special_advisor:
+			projectResult.data[0]?.special_advisor ||
+			([
+				{
+					title_th: '',
+					title_en: '',
+					firstname_th: '',
+					institution: '',
+					firstname_en: '',
+					lastname_th: '',
+					lastname_en: '',
+					institution_address: '',
+					academic_ranks: '',
+					email: ''
+				}
+			] as SpecialAdvisor[])
 	};
 	// @ts-ignore
 	const form = await superValidate(projectData, studentRegisterProjectFormSchema, {
