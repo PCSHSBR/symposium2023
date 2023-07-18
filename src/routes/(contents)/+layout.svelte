@@ -3,8 +3,12 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import type { PageData } from './$types';
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 
 	export let data: PageData;
+	onMount(() => {
+		console.log(location.hash);
+	});
 </script>
 
 <svelte:head>

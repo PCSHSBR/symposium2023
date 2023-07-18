@@ -27,7 +27,6 @@
 	}, 8000);
 </script>
 
-{$page.data.user_metadata.firstname_th}
 <div class="card flex max-w-3xl flex-row gap-5 text-primary-content">
 	<span class="loading loading-ring loading-lg" />
 	<div class="card-body">

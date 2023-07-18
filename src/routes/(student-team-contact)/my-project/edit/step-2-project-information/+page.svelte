@@ -438,6 +438,9 @@
 				sectionTitle={`ครูที่ปรึกษาที่ ${i + 1}`}
 				idx={i}
 				removeAdvisor={() => {
+					if (typeof $form.teacher_advisor === 'undefined' || $form.teacher_advisor === null) {
+						$form.teacher_advisor = [];
+					}
 					$form.teacher_advisor = $form.teacher_advisor.filter(
 						(a, idx) => a.title_th !== '' && idx !== 0
 					);

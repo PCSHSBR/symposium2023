@@ -56,7 +56,7 @@ export const load = (async ({ locals: { getSession, supabase } }) => {
 				email: ''
 			}
 		],
-		special_advisor: []
+		special_advisor: [{}]
 	};
 	// @ts-ignore
 	const form = await superValidate(projectData, studentRegisterProjectFormSchema, {

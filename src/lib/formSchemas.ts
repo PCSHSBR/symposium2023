@@ -40,7 +40,6 @@ export const specialAdvisor = z.object({
 	academic_ranks: simpleStringSchema.optional(),
 	institution: simpleStringSchema,
 	institution_address: simpleStringSchema,
-	// email is optional because it is not required in the form
 	email: z.string().optional()
 });
 export type StudentMembers = z.infer<typeof studentMembers>;
