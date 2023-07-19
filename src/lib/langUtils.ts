@@ -26,7 +26,8 @@ export const sentencesMap: Map<string | Roles, string> = new Map([
 	[
 		'New password should be different from the old password.',
 		'รหัสผ่านใหม่ควรแตกต่างกับรหัสผ่านเดิม'
-	]
+	],
+	['Email link is invalid or has expired', 'ลิงก์รับคำเชิญผ่านอีเมลไม่ถูกต้องหรือหมดอายุแล้ว']
 ]);
 
 export function toThai(message: string | undefined) {

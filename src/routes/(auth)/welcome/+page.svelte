@@ -19,6 +19,8 @@
 		// get params 'access_token', 'expires_in', 'refresh_token', 'token_type', 'type' from hash url
 		const hashParams = new URLSearchParams(window.location.hash.slice(1));
 		const params = Object.fromEntries(hashParams.entries());
+		if (params.error_description)
+			notify({ message: toThai(params.error_description), type: 'error', initial: 0 });
 		if (data.session && !hashParams.toString()) return;
 		if (!params.access_token)
 			return notify({ message: 'ไม่พบข้อมูลการเข้าสู่ระบบ', type: 'error', initial: 0 });
