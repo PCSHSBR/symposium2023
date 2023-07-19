@@ -35,7 +35,11 @@
 			<a href="/account">
 				<button class="btn-sm btn">การตั้งค่าบัญชี</button>
 			</a>
-			<button class="btn-error btn-sm btn" on:click={handleSignOut} disabled={isLogginout}>
+			<button
+				class="g_id_signout btn-error btn-sm btn"
+				on:click={handleSignOut}
+				disabled={isLogginout}
+			>
 				{isLogginout ? 'กำลังออกจากระบบ...' : 'ออกจากระบบ'}
 			</button>
 		</div>
@@ -78,7 +82,7 @@
 		<h2>เครื่องมือสำหรับผู้ประสานงาน</h2>
 		<div class="">
 			<a href="/manage/invite">
-				<button class="btn">ส่งคำเชิญให้ครู</button>
+				<button class="btn">ส่งคำเชิญ</button>
 			</a>
 		</div>
 	{/if}

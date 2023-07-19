@@ -6,6 +6,9 @@ import type { Roles, UserMetadata as LocalMetadata } from '$lib/types';
 import type { UserMetadata } from '@supabase/supabase-js';
 
 declare global {
+	interface Window {
+		handleSignInWithGoogle: (response) => void;
+	}
 	namespace App {
 		interface Locals {
 			supabase: SupabaseClient<Database>;

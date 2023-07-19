@@ -67,7 +67,7 @@
 			<button
 				aria-label="เปิด/ปิดเมนู"
 				type="button"
-				class="swap btn-ghost swap-rotate btn-square btn md:hidden"
+				class="swap-rotate swap btn-ghost btn-square btn md:hidden"
 				on:click={() => {
 					isMenuOpen = !isMenuOpen;
 				}}
@@ -176,7 +176,7 @@
 						<li>
 							<a
 								href="/logout"
-								class="btn-error btn-outline"
+								class="g_id_signout btn-error btn-outline"
 								on:click|preventDefault={handleSignOut}
 							>
 								<Icon icon="mdi:logout" class="h-5 w-5" />

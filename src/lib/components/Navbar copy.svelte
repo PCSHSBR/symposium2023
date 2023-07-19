@@ -129,7 +129,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="/logout" class="btn-error btn-outline">
+							<a href="/logout" class="g_id_signout btn-error btn-outline">
 								<Icon icon="mdi:logout" class="h-5 w-5" />
 								ออกจากระบบ</a
 							>
