@@ -20,6 +20,7 @@
 		'ที่ปรึกษาพิเศษ'
 	];
 
+	let isInfoToggle = false;
 	let isLoading = false;
 	let abstractUploaded: string[] = [];
 	let articleUploaded: string[] = [];
@@ -101,10 +102,13 @@
 	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 
-<div class="p-5">
-	<h1>รายการโครงงาน</h1>
-	<div class="w-xs rounded-md border p-3 text-sm">
-		<h3 class="mb-3">คำอธิบายสัญลักษณ์สถานะ</h3>
+<div class="fixed bottom-4 right-4 z-[1000] block md:hidden">
+	<div
+		class="w-xs rounded-md border bg-base-100 p-3 text-sm shadow-2xl transition-all duration-500 {!isInfoToggle
+			? 'translate-y-[50%] opacity-0'
+			: '-translate-y-16 opacity-100'}"
+	>
+		<h3 class="mb-3 font-bold">คำอธิบายสัญลักษณ์สถานะ</h3>
 		<div>
 			<span class="inline-block h-5 w-5 rounded-full bg-base-300 text-center">3</span> = ยังไม่อัปโหลดบทคัดย่อ
 		</div>
@@ -118,8 +122,49 @@
 				<Icon icon="mdi:tick" class="m-auto h-3.5 w-3.5" />
 			</span> = อัปโหลดบทคัดย่อ/บทความแล้ว
 		</div>
+		<div>
+			<span
+				class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-success text-success-content"
+			>
+				<Icon icon="mdi:help-rhombus" title="ยังไม่ได้จัดรหัสโครงงาน" />
+			</span> = ยังไม่ได้จัดรหัสโครงงาน
+		</div>
 	</div>
-	<div class="overflow-x-auto">
+	<label class="swap btn-primary swap-rotate btn-circle btn absolute bottom-0 right-0 shadow-2xl">
+		<input type="checkbox" bind:checked={isInfoToggle} />
+		<Icon icon="mdi:close" class="swap-on text-2xl" />
+		<Icon icon="mdi:info" class="swap-off text-2xl" />
+	</label>
+</div>
+
+<div class="p-5">
+	<div class="flex justify-between">
+		<h1>รายการโครงงาน</h1>
+		<div class="w-xs z-[500] hidden rounded-md border bg-base-100 p-3 text-sm md:block">
+			<h3 class="mb-3 font-bold">คำอธิบายสัญลักษณ์สถานะ</h3>
+			<div>
+				<span class="inline-block h-5 w-5 rounded-full bg-base-300 text-center">3</span> = ยังไม่อัปโหลดบทคัดย่อ
+			</div>
+			<div>
+				<span class="inline-block h-5 w-5 rounded-full bg-base-300 text-center">4</span> = ยังอัปโหลดบทความ
+			</div>
+			<div>
+				<span
+					class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-success text-success-content"
+				>
+					<Icon icon="mdi:tick" class="m-auto h-3.5 w-3.5" />
+				</span> = อัปโหลดบทคัดย่อ/บทความแล้ว
+			</div>
+			<div>
+				<span
+					class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-success text-success-content"
+				>
+					<Icon icon="mdi:help-rhombus" title="ยังไม่ได้จัดรหัสโครงงาน" />
+				</span> = ยังไม่ได้จัดรหัสโครงงาน
+			</div>
+		</div>
+	</div>
+	<div class="relative overflow-x-auto">
 		{#if isLoading}
 			<span class="loading loading-spinner loading-sm" /> กำลังโหลด...
 		{/if}
