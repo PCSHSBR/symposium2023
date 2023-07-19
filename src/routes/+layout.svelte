@@ -6,6 +6,7 @@
 	import '@fontsource-variable/anuphan';
 	import { page } from '$app/stores';
 	import ToastWrapper from '$lib/components/ToastWrapper.svelte';
+	import Icon from '@iconify/svelte';
 	export let data;
 
 	let { supabase, session } = data;
@@ -68,6 +69,5 @@ ${"                       `=---='"}
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="#374250" />
 </svelte:head>
-
 <ToastWrapper />
 <slot />

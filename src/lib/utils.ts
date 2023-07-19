@@ -1,6 +1,7 @@
 import DOMPurify from 'isomorphic-dompurify';
 
 export function isPropertyExist(obj: any, prop: string[]) {
+	if (!obj) return false;
 	return prop.every((p) => obj.hasOwnProperty(p));
 }
 

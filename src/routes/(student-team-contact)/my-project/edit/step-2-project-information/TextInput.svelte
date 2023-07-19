@@ -18,9 +18,17 @@
 				bind:value
 				{...$$restProps}
 			/>
-		{:else}
+		{:else if type === 'text'}
 			<input
 				type="text"
+				aria-invalid={error && error[0] ? 'true' : undefined}
+				class="input-bordered input w-full {error && error[0] ? 'input-error' : ''}"
+				bind:value
+				{...$$restProps}
+			/>
+		{:else if type === 'password'}
+			<input
+				type="password"
 				aria-invalid={error && error[0] ? 'true' : undefined}
 				class="input-bordered input w-full {error && error[0] ? 'input-error' : ''}"
 				bind:value

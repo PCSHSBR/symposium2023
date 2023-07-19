@@ -7,6 +7,10 @@ type NotifyParams = SvelteToastOptions & {
 };
 
 export const notify = ({ message, type = 'default', ...restParams }: NotifyParams) => {
+	if (type === 'error') console.error(message);
+	if (type === 'warning') console.warn(message);
+	if (type === 'success') console.log(message);
+	if (type === 'default') console.log(message);
 	return toast.push(message, {
 		...restParams,
 		duration: 10000,

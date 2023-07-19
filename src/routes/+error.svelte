@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { toThai } from '$lib/langUtils';
+	import type { LayoutData } from './$types';
 	interface LocalErrorMessage {
 		[key: number]: string;
 	}
 
-	export let data: PageData;
+	export let data: LayoutData;
 
 	const locals: LocalErrorMessage = {
 		400: 'คุณส่งอะไรมาเนีย!',
@@ -49,7 +50,7 @@
 						<span>เข้าสู่ระบบในฐานะ<i>{toThai(data.role)}</i></span>
 						<a href="/auth" class="link">กลับไปหน้าแดชบอร์ด</a>
 					{:else}
-						<span>หรืออาจะเป็นเพราะคุณยังไม่ได้เข้าสู่ระบบ?</span>
+						<span>หรืออาจจะเป็นเพราะคุณยังไม่ได้เข้าสู่ระบบ?</span>
 						<a href="/login" class="link">เข้าสู่ระบบ</a>
 					{/if}
 					<a

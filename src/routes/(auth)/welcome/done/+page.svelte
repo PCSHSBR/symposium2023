@@ -27,7 +27,7 @@
 	}, 8000);
 </script>
 
-<div class="card flex max-w-3xl flex-row gap-5 text-primary-content">
+<div class="card flex max-w-3xl flex-row gap-5">
 	<span class="loading loading-ring loading-lg" />
 	<div class="card-body">
 		<h2 class="card-title">เรากำลังนำคุณไปที่หน้าถัดไป</h2>

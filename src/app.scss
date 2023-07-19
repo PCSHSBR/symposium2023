@@ -68,7 +68,7 @@ h6 {
 
 /* display medium */
 @font-face {
-	font-face: 'Chula Likit Display';
+	font-family: 'Chula Likit Display';
 	src: url('/fonts/chulabhornlikitdisplay-medium.woff2') format('woff2'),
 		url('/fonts/chulabhornlikitdisplay-medium.woff') format('woff'),
 		url('/fonts/chulabhornlikitdisplay-medium.eot') format('eot');
@@ -95,10 +95,10 @@ b {
 
 main a {
 	@apply link text-blue-700 dark:text-blue-400;
+}
 
-	&:hover {
-		@apply underline;
-	}
+main a:hover {
+	@apply underline;
 }
 
 .form-control {

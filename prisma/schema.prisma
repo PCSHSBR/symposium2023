@@ -203,6 +203,8 @@ model sessions {
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model sso_domains {
   id              String        @id @db.Uuid
   sso_provider_id String        @db.Uuid
@@ -217,6 +219,8 @@ model sso_domains {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
@@ -241,45 +245,46 @@ model sso_providers {
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model users {
-  instance_id                 String?          @db.Uuid
-  id                          String           @id @db.Uuid
-  aud                         String?          @db.VarChar(255)
-  role                        String?          @db.VarChar(255)
-  email                       String?          @db.VarChar(255)
-  encrypted_password          String?          @db.VarChar(255)
-  email_confirmed_at          DateTime?        @db.Timestamptz(6)
-  invited_at                  DateTime?        @db.Timestamptz(6)
-  confirmation_token          String?          @db.VarChar(255)
-  confirmation_sent_at        DateTime?        @db.Timestamptz(6)
-  recovery_token              String?          @db.VarChar(255)
-  recovery_sent_at            DateTime?        @db.Timestamptz(6)
-  email_change_token_new      String?          @db.VarChar(255)
-  email_change                String?          @db.VarChar(255)
-  email_change_sent_at        DateTime?        @db.Timestamptz(6)
-  last_sign_in_at             DateTime?        @db.Timestamptz(6)
+  instance_id                 String?       @db.Uuid
+  id                          String        @id @db.Uuid
+  aud                         String?       @db.VarChar(255)
+  role                        String?       @db.VarChar(255)
+  email                       String?       @db.VarChar(255)
+  encrypted_password          String?       @db.VarChar(255)
+  email_confirmed_at          DateTime?     @db.Timestamptz(6)
+  invited_at                  DateTime?     @db.Timestamptz(6)
+  confirmation_token          String?       @db.VarChar(255)
+  confirmation_sent_at        DateTime?     @db.Timestamptz(6)
+  recovery_token              String?       @db.VarChar(255)
+  recovery_sent_at            DateTime?     @db.Timestamptz(6)
+  email_change_token_new      String?       @db.VarChar(255)
+  email_change                String?       @db.VarChar(255)
+  email_change_sent_at        DateTime?     @db.Timestamptz(6)
+  last_sign_in_at             DateTime?     @db.Timestamptz(6)
   raw_app_meta_data           Json?
   raw_user_meta_data          Json?
   is_super_admin              Boolean?
-  created_at                  DateTime?        @db.Timestamptz(6)
-  updated_at                  DateTime?        @db.Timestamptz(6)
-  phone                       String?          @unique
-  phone_confirmed_at          DateTime?        @db.Timestamptz(6)
-  phone_change                String?          @default("")
-  phone_change_token          String?          @default("") @db.VarChar(255)
-  phone_change_sent_at        DateTime?        @db.Timestamptz(6)
-  confirmed_at                DateTime?        @default(dbgenerated("LEAST(email_confirmed_at, phone_confirmed_at)")) @db.Timestamptz(6)
-  email_change_token_current  String?          @default("") @db.VarChar(255)
-  email_change_confirm_status Int?             @default(0) @db.SmallInt
-  banned_until                DateTime?        @db.Timestamptz(6)
-  reauthentication_token      String?          @default("") @db.VarChar(255)
-  reauthentication_sent_at    DateTime?        @db.Timestamptz(6)
-  is_sso_user                 Boolean          @default(false)
-  deleted_at                  DateTime?        @db.Timestamptz(6)
+  created_at                  DateTime?     @db.Timestamptz(6)
+  updated_at                  DateTime?     @db.Timestamptz(6)
+  phone                       String?       @unique
+  phone_confirmed_at          DateTime?     @db.Timestamptz(6)
+  phone_change                String?       @default("")
+  phone_change_token          String?       @default("") @db.VarChar(255)
+  phone_change_sent_at        DateTime?     @db.Timestamptz(6)
+  confirmed_at                DateTime?     @default(dbgenerated("LEAST(email_confirmed_at, phone_confirmed_at)")) @db.Timestamptz(6)
+  email_change_token_current  String?       @default("") @db.VarChar(255)
+  email_change_confirm_status Int?          @default(0) @db.SmallInt
+  banned_until                DateTime?     @db.Timestamptz(6)
+  reauthentication_token      String?       @default("") @db.VarChar(255)
+  reauthentication_sent_at    DateTime?     @db.Timestamptz(6)
+  is_sso_user                 Boolean       @default(false)
+  deleted_at                  DateTime?     @db.Timestamptz(6)
   identities                  identities[]
   mfa_factors                 mfa_factors[]
   sessions                    sessions[]
-  project_status              project_status[]
   projects                    projects[]
   user_roles                  user_roles[]
 
@@ -330,7 +335,6 @@ model projects {
   teacher_advisor                                                 Json[]             @default([])
   abstract                                                        String?
   keywords                                                        String[]
-  project_status                                                  project_status[]
   field_projects_fieldTofield                                     field?             @relation("projects_fieldTofield", fields: [field], references: [id], onDelete: NoAction, onUpdate: NoAction)
   presentation_type_projects_presentation_typeTopresentation_type presentation_type? @relation("projects_presentation_typeTopresentation_type", fields: [presentation_type], references: [id], onDelete: NoAction, onUpdate: NoAction)
   schools                                                         schools?           @relation(fields: [school], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -369,24 +373,6 @@ model user_roles {
   roles roles  @relation(fields: [role], references: [ref], onDelete: NoAction, onUpdate: NoAction)
   users users  @relation(fields: [user], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
-  @@schema("public")
-}
-
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model project_status {
-  id                      String   @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  project_id              BigInt
-  is_information_complete Boolean?
-  is_upload_team_image    Boolean?
-  is_add_text_abstract    Boolean?
-  is_uploaded_abstract    Boolean?
-  is_uploaded_article     Boolean?
-  team_contact_user_id    String   @db.Uuid
-  projects                projects @relation(fields: [project_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  users                   users    @relation(fields: [team_contact_user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-
-  @@id([id, project_id, team_contact_user_id])
   @@schema("public")
 }
 

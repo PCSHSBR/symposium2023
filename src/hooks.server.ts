@@ -2,8 +2,9 @@
 import { PUBLIC_SENTRY_DSN, PUBLIC_SUPABASE_URL } from '$env/static/public';
 import { SUPABASE_SERVICE_ROLE_KEY } from '$env/static/private';
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
-import type { Handle } from '@sveltejs/kit';
+import type { Handle, HandleServerError } from '@sveltejs/kit';
 import * as Sentry from '@sentry/sveltekit';
+import { dev } from '$app/environment';
 
 Sentry.init({
 	dsn: PUBLIC_SENTRY_DSN,
@@ -40,3 +41,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}
 	});
 };
+
+export const handleError = (({ error, event }) => {
+	Sentry.captureException(error, { extra: { event } });
+	if (dev) console.error(error);
+	return {
+		message: 'Whoops!'
+	};
+}) satisfies HandleServerError;
