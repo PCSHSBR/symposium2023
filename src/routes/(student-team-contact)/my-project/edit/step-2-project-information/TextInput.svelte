@@ -34,6 +34,22 @@
 				bind:value
 				{...$$restProps}
 			/>
+		{:else if type === 'tel'}
+			<input
+				type="tel"
+				aria-invalid={error && error[0] ? 'true' : undefined}
+				class="input-bordered input w-full {error && error[0] ? 'input-error' : ''}"
+				bind:value
+				{...$$restProps}
+			/>
+		{:else}
+			<input
+				type="text"
+				aria-invalid={error && error[0] ? 'true' : undefined}
+				class="input-bordered input w-full {error && error[0] ? 'input-error' : ''}"
+				bind:value
+				{...$$restProps}
+			/>
 		{/if}
 	</label>
 	{#if error && error[0]}

@@ -38,7 +38,7 @@
 	{#if idx > 1}
 		<div class="absolute right-0 top-0 p-2">
 			<button
-				class="btn-error btn-ghost btn-sm btn"
+				class="btn-ghost btn-error btn-sm btn"
 				type="reset"
 				on:click|preventDefault={() => {
 					value = {
@@ -65,7 +65,7 @@
 				<span class="label-text">คำนำหน้า</span>
 				<select
 					bind:value={value.title_th}
-					class="select w-full {errors.title_th ? 'input-error' : ''}"
+					class="select-bordered select w-full {errors.title_th ? 'input-error' : ''}"
 					name="title_th"
 					{...constraints.title_th}
 				>
@@ -83,7 +83,7 @@
 				<label class="label w-full flex-col">
 					<span class="label-text">Title (อังกฤษ)</span>
 					<select
-						class="select w-full {errors.title_en ? 'input-error' : ''}"
+						class="select-bordered select w-full {errors.title_en ? 'input-error' : ''}"
 						bind:value={value.title_en}
 						name="title_en"
 						{...constraints.title_en}
