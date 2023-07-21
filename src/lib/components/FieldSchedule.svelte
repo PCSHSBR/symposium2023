@@ -34,7 +34,7 @@
 	</div>
 
 	<div class="items-container {tab == 0 ? 'flex flex-col' : 'hidden'}">
-		<span class="head-span w-full bg-base-content p-4 text-2xl text-base-300">3 กันยายน 2565</span>
+		<span class="head-span w-full bg-base-content p-4 text-2xl text-base-300">3 กันยายน 2566</span>
 		<span class="divider" />
 		<div class="item">
 			<div class="sub-item">
@@ -85,7 +85,7 @@
 	</div>
 
 	<div class="items-container {tab == 1 ? 'flex flex-col' : 'hidden'}">
-		<span class="head-span w-full bg-base-content p-4 text-2xl text-base-300">4 กันยายน 2565</span>
+		<span class="head-span w-full bg-base-content p-4 text-2xl text-base-300">4 กันยายน 2566</span>
 		<span class="divider" />
 		<div class="item">
 			<div class="sub-item">
@@ -376,7 +376,7 @@
 	</div>
 
 	<div class="items-container {tab == 2 ? 'flex flex-col' : 'hidden'}">
-		<span class="head-span w-full bg-base-content p-4 text-2xl text-base-300">5 กันยายน 2565</span>
+		<span class="head-span w-full bg-base-content p-4 text-2xl text-base-300">5 กันยายน 2566</span>
 		<span class="divider" />
 		<div class="item">
 			<div class="sub-item">
@@ -495,7 +495,7 @@
 	</div>
 
 	<div class="items-container {tab == 3 ? 'flex flex-col' : 'hidden'}">
-		<span class="head-span w-full bg-base-content p-4 text-2xl text-base-300">6 กันยายน 2565</span>
+		<span class="head-span w-full bg-base-content p-4 text-2xl text-base-300">6 กันยายน 2566</span>
 		<span class="divider" />
 		<div class="item">
 			<div class="sub-item">
