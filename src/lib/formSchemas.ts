@@ -1,8 +1,6 @@
 import { z } from 'zod';
 
-export const phoneNumberSchema = z.string().regex(/^(0|\+66)[2-9]{1}[0-9]{7,8}$/, {
-	message: 'โปรดกรอกเฉพาะตัวเลข ไม่ต้องมีเครื่องหมายขีดหรือช่องว่าง'
-});
+export const phoneNumberSchema = z.string();
 
 export const simpleStringSchema = z.string({
 	required_error: 'อย่าเว้นว่างช่องนี้ไว้'
@@ -38,8 +36,8 @@ export const specialAdvisor = z.object({
 	lastname_th: simpleStringSchema,
 	lastname_en: simpleStringSchema.optional(),
 	academic_ranks: simpleStringSchema.optional(),
-	institution: simpleStringSchema,
-	institution_address: simpleStringSchema,
+	institution: simpleStringSchema.optional(),
+	institution_address: simpleStringSchema.optional(),
 	email: z.string().optional()
 });
 export type StudentMembers = z.infer<typeof studentMembers>;

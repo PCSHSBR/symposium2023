@@ -67,7 +67,7 @@
 			<button
 				aria-label="เปิด/ปิดเมนู"
 				type="button"
-				class="swap-rotate swap btn-ghost btn-square btn md:hidden"
+				class="swap btn-ghost swap-rotate btn-square btn md:hidden"
 				on:click={() => {
 					isMenuOpen = !isMenuOpen;
 				}}
@@ -93,10 +93,10 @@
 							<a href="/#event-calendar" use:closeMenu>กำหนดการ</a>
 						</li>
 						<li>
-							<a href="/#event-schedule" use:closeMenu>ตารางงาน</a>
+							<a href="/#event-schedule" use:closeMenu>ตารางกิจกรรม</a>
 						</li>
 						<li>
-							<a href="/#event-trip" use:closeMenu>ฟิวทริป</a>
+							<a href="/#event-trip" use:closeMenu>ทัศนศึกษา</a>
 						</li>
 						<li>
 							<a href="/#event-speaker" use:closeMenu>วิทยากร</a>
@@ -128,10 +128,12 @@
 						<span class="sr-only">เปิดเครื่องมือผู้ใช้</span>
 					</button>
 					<ul class="dropdown-content menu rounded-box w-52 bg-base-200 shadow">
-						<li class="menu-title text-sm">
-							ยินดีต้อนรับ, {data.user_metadata?.firstname_th}
-							{data.user_metadata?.lastname_th}
-						</li>
+						{#if data.user_metadata?.firstname_th && data.user_metadata?.lastname_th}
+							<li class="menu-title text-sm">
+								ยินดีต้อนรับ, {data.user_metadata?.firstname_th}
+								{data.user_metadata?.lastname_th}
+							</li>
+						{/if}
 						<li>
 							<a href="/dashboard">
 								<Icon icon="mdi:view-dashboard" class="h-5 w-5" />

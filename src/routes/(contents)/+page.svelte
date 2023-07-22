@@ -11,6 +11,8 @@
 	import FieldTrip from '$lib/components/FieldTrip.svelte';
 	import FieldSchedule from '$lib/components/FieldSchedule.svelte';
 	import SpeakerPatentImage from '$lib/assets/images/SpeakerPatent.jpg';
+	import { notify } from '$lib/notify';
+	import { toThai } from '$lib/langUtils';
 
 	let isLoading = true;
 	let isBannerHovered = false;
@@ -145,6 +147,28 @@
 		interactiveEvent();
 		animation();
 	});
+
+	async function handleSignInWithGoogle(response) {
+		const { data: _data, error } = await data.supabase.auth.signInWithIdToken({
+			token: response.credential,
+			provider: 'google'
+		});
+		if (error && error.message !== 'Internal Server Error')
+			notify({
+				message: toThai(error.message),
+				type: 'error'
+			});
+		if (error && error.message === 'Internal Server Error' && !_data.user) {
+			notify({
+				message: 'ไม่พบคุณในระบบ คุณต้องได้รับคำเชิญก่อนจึงสามารถเข้าใช้งานระบบได้',
+				initial: 0
+			});
+		}
+	}
+
+	onMount(() => {
+		window.handleSignInWithGoogle = handleSignInWithGoogle;
+	});
 </script>
 
 <svelte:head>
@@ -181,6 +205,7 @@
 	/>
 	<meta name="twitter:image:alt" content="The 3rd PCSHS Science Symposium 2023 @PCSHSBR" />
 	<meta name="twitter:domain" content="https://3rdpss2023.pcshsbr.ac.th/" />
+	<script src="https://accounts.google.com/gsi/client" async></script>
 </svelte:head>
 
 <LoadingPage />
@@ -251,15 +276,17 @@
 			<h1
 				class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-6xl font-bold text-transparent"
 			>
-				PCSHS SYMPOSIUM
+				PCSHS SCIENCE SYMPOSIUM
 			</h1>
 			<p class="">
 				<span
 					class="bg-gradient-to-r from-primary to-secondary bg-clip-text font-bold text-transparent"
-					>PCSHS Symposium</span
-				> มีเป้าหมายเพื่อส่งเสริมการพัฒนาและเผยแพร่โครงการทางวิทยาศาสตร์และเทคโนโลยีในระดับชาติภายในกลุ่มโรงเรียนวิทยาศาสตร์จุฬาภรณ์ระดับมัธยมศึกษาตอนปลาย(PCSHS)
-				ซึ่งมีทั้งหมด 12 โรงเรียนทั่วประเทศไทย งานนี้ทำหน้าที่เป็นเวทีในการส่งเสริมและอำนวยความสะดวกในความก้าวหน้าทางวิทยาศาสตร์และเทคโนโลยีโดยเปิดโอกาสให้นักเรียนได้แสดงผลงานการวิจัยของพวกเขาด้วยการส่งเสริมการแลกเปลี่ยนความรู้และการทำงานร่วมกัน
-				การประชุมสัมมนาพยายามที่จะขับเคลื่อนโครงการทางวิทยาศาสตร์ให้สูงขึ้นไปอีกขั้นซึ่งท้ายที่สุดจะเป็นประโยชน์ต่อความก้าวหน้าและนวัตกรรมของประเทศ
+					>PCSHS Science Symposium</span
+				> มีเป้าหมายเพื่อส่งเสริมการพัฒนาและเผยแพร่โครงงานวิทยาศาสตร์และเทคโนโลยีของนักเรียนภายในกลุ่มโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย
+				(PCSHS) ทั้ง 12 แห่ง โดยจัดเป็นการนำเสนอผลงานโครงงานของนักเรียนระดับชั้นมัธยมศึกษาปีที่ 6 ณ โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัยเจ้าภาพ
+				โดยนอกจากเป็นการแสดงผลงานของนักเรียนแล้ว ยังเป็นการเผยแพร่วัฒนธรรมและวิถีชีวิตของคนในท้องถิ่น
+				เพื่อการพัฒนานักเรียนให้มีศักยภาพสอดรับกับความต้องการของประเทศ และนำองค์ความรู้มาพัฒนาประเทศในด้านต่าง
+				ๆ ต่อไปในอนาคต
 			</p>
 		</div>
 		<div class="event-poem flex flex-row flex-wrap items-center pt-10">
@@ -338,16 +365,37 @@
 				<h2 class="m-0 flex items-center text-6xl font-bold">
 					<Icon icon="mdi:document" class="pr-4" /> <span>เอกสารต่าง ๆ</span>
 				</h2>
-				<div class="flex flex-row flex-wrap">
-					<a
-						href="https://drive.google.com/drive/folders/1P1nfoJ9mBKbJOENBbHmm_Om46doDjJHZ"
-						class="btn-primary btn"><Icon icon="mdi:download" />เอกสาร</a
-					>
+				<div class="carousel flex flex-row py-10">
+					<div class="card card-compact w-64 bg-base-200 text-base-content shadow-xl">
+						<figure class="px-10 pt-10">
+							<Icon icon="mdi:download" class="h-9 w-9" />
+						</figure>
+						<div class="card-body items-center text-center">
+							<h2 class="card-title">แม่แบบต่าง ๆ</h2>
+							<p>
+								แนวทางการเขียนบทคัดย่อและบทความวิชาการ แม่แบบเอกสาร
+								และแม่แบบโปสเตอร์ในรูปแบบไฟล์ต่าง ๆ
+							</p>
+							<div class="card-actions">
+								<a
+									href="https://drive.google.com/drive/folders/1P1nfoJ9mBKbJOENBbHmm_Om46doDjJHZ"
+									class="btn-primary btn">เอกสาร</a
+								>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 </div>
+<div
+	id="g_id_onload"
+	data-client_id="430296940905-hs3h8t91t4q9k5aj5uu6q7it9gdnj70t.apps.googleusercontent.com"
+	data-context="signin"
+	data-callback="handleSignInWithGoogle"
+	data-itp_support="true"
+/>
 
 <style lang="scss">
 	.circle {

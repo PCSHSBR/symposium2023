@@ -109,7 +109,7 @@
 				<div class="title">
 					<span class="child-span">8:00 น. - 10:20 น.</span>
 					<h2 class="text-3xl">พิธีเปิด</h2>
-					<ul class="list-item list-inside list-disc">
+					<ul class="list-inside list-disc">
 						<li>การแสดงพิธีเปิด</li>
 						<li>กิจกรรมบรรยายสร้างแรงบัลดาลใจในการทำ โครงงาน โดย ดร.สุพรรณ ยอดยิ่งยง</li>
 					</ul>
@@ -118,40 +118,6 @@
 					<div>
 						<span>สถานที่</span>
 						<span>หอประชุมแคแสด</span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<span class="divider" />
-
-		<div class="item">
-			<div class="sub-item">
-				<div class="title">
-					<span class="child-span">9:00 น. - 10:30 น.</span>
-					<h2 class="text-3xl">คณะกรรมการตัดสินโครงงานประชุมร่วมกัน</h2>
-				</div>
-				<div class="info">
-					<div>
-						<span>สถานที่</span>
-						<span>ห้องเกียรติยศ</span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<span class="divider" />
-
-		<div class="item">
-			<div class="sub-item">
-				<div class="title">
-					<span class="child-span">10:20 น. - 10:30 น.</span>
-					<h2 class="text-3xl">ประธานเยี่ยมชมนิทรรศการ</h2>
-				</div>
-				<div class="info">
-					<div>
-						<span>สถานที่</span>
-						<span>หอสมุด</span>
 					</div>
 				</div>
 			</div>
@@ -243,8 +209,8 @@
 									<td>วิศวกรรมศาสตร์</td>
 									<td>
 										<ul>
-											<li>ห้องวิศวกกรรม 1 (Oral Eng) (228)</li>
-											<li>ห้องวิศวกกรรม 2 (Oral Thai) (218)</li>
+											<li>ห้องวิศวกรรม 1 (Oral Eng) (228)</li>
+											<li>ห้องวิศวกรรม 2 (Oral Thai) (218)</li>
 										</ul>
 									</td>
 								</tr>
@@ -294,47 +260,13 @@
 		<div class="item">
 			<div class="sub-item">
 				<div class="title">
-					<span class="child-span">13:00 น. - 14:30 น.</span>
+					<span class="child-span">13:00 น. - 16:30 น.</span>
 					<h2 class="text-3xl">นักเรียนนำเสนอผลงานโครงงาน (ต่อ)</h2>
 				</div>
 				<div class="info">
 					<div>
 						<span>สถานที่</span>
-						<span>...</span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<span class="divider" />
-
-		<div class="item">
-			<div class="sub-item">
-				<div class="title">
-					<span class="child-span">14:30 น. - 14:45 น.</span>
-					<h2 class="text-3xl">รับประทานอาหารว่าง</h2>
-				</div>
-				<div class="info">
-					<div>
-						<span>สถานที่</span>
-						<span>โรงอาหาร</span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<span class="divider" />
-
-		<div class="item">
-			<div class="sub-item">
-				<div class="title">
-					<span class="child-span">14:45 น. - 16:30 น.</span>
-					<h2 class="text-3xl">นักเรียนนำเสนอผลงานโครงงาน (ต่อ)</h2>
-				</div>
-				<div class="info">
-					<div>
-						<span>สถานที่</span>
-						<span>...</span>
+						<span>ตามที่ได้รับแจ้ง</span>
 					</div>
 				</div>
 			</div>
@@ -348,12 +280,12 @@
 					<span class="child-span">17:00 น. - 18:00 น.</span>
 					<h2 class="text-3xl">พักผ่อนตามอัธยาศัย</h2>
 				</div>
-				<div class="info">
+				<!-- <div class="info">
 					<div>
 						<span>สถานที่</span>
 						<span>...</span>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 
@@ -519,7 +451,7 @@
 				<div class="title">
 					<span class="child-span">8:30 น. - 10:00 น.</span>
 					<h2 class="text-3xl">
-						นักเรียนและครูเข้ารับฟังสรุปภาพรวมของโครงงานสาขาต่างๆ โดยผู3ทรงคุณวุฒิ
+						นักเรียนและครูเข้ารับฟังสรุปภาพรวมของโครงงานสาขาต่าง ๆ โดยผู้ทรงคุณวุฒิ
 					</h2>
 				</div>
 				<div class="info">
@@ -550,7 +482,7 @@
 			<div class="sub-item">
 				<div class="title">
 					<span class="child-span">10:30 น. - 12:00 น.</span>
-					<h2 class="text-3xl">พิธีปิด และประกาศผลนำเสนอโครงงาน มอบโล่ รางวัล พร้อมเกียรติบัตร</h2>
+					<h2 class="text-3xl">พิธีปิดและประกาศผลนำเสนอโครงงาน มอบโล่ รางวัล พร้อมเกียรติบัตร</h2>
 				</div>
 				<div class="info">
 					<div>
@@ -565,7 +497,7 @@
 			<div class="sub-item">
 				<div class="title">
 					<span class="child-span">12:30 น. - 13:00 น.</span>
-					<h2 class="text-3xl">รับประทานอาหารเดินทางกลับโดยสวัสดิภาพ</h2>
+					<h2 class="text-3xl">รับประทานอาหารและเดินทางกลับโดยสวัสดิภาพ</h2>
 				</div>
 				<div class="info">
 					<div>

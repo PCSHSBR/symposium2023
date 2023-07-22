@@ -34,33 +34,38 @@
 
 <div class={`main-container ${clazz || ''}`}>
 	<div class="collapse-arrow collapse mb-4 bg-base-200/70 shadow-sm">
-		<input type="radio" name="my-accordion-2" checked="checked" />
-		<div class="collapse-title text-xl font-medium">ONSITE</div>
+		<input type="radio" name="my-accordion-2" checked={true} />
+		<div class="collapse-title text-xl font-medium">การนำเสนอ ONSITE</div>
 		<div class="collapse-content">
 			<div class="item">
 				<div class="d-date">
-					<span class="">17-25</span>
+					<span class="">17–25</span>
 					<span>กรกฎาคม</span>
 				</div>
 				<div class="d-info">
 					<h1>ลงทะเบียนและส่งบทคัดย่อ</h1>
 					<p>
-						ลงทะเบียนแข้าสู่ระบบ ยืนยัน ส่งบทคัดย่อ และส่งบทความ ภายในวันที่ 17-25 กรกฎาคม
-						ผ่านทางเว็บไซต์
+						ลงทะเบียนแข้าสู่ระบบ ยืนยัน ส่งบทคัดย่อ และส่งบทความหลังได้รับคำเชิญในระบบ ภายในวันที่
+						25 กรกฎาคม ผ่านทางเว็บไซต์ <a class="link" href="https://3rdpss2023.pcshsbr.ac.th"
+							>https://3rdpss2023.pcshsbr.ac.th</a
+						>
 					</p>
-					<a href="/login" class="btn"><Icon icon="mdi:open-in-new" />ลงทะเบียน</a>
+					<a href="/login" class="btn float-right">
+						เข้าสู่ระบบ
+						<Icon icon="mdi:open-in-new" />
+					</a>
 				</div>
 			</div>
 			<div class="item">
 				<div class="d-date">
-					<span class="">4-6</span>
+					<span class="">4–6</span>
 					<span>กันยายน</span>
 				</div>
 				<div class="d-info">
-					<h1>The 3<span class="align-top text-xl">rd</span> Science symposium 2023</h1>
+					<h1>The 3<sup>rd</sup> PCSHS Science symposium 2023</h1>
 					<p>
-						งาน The 3rd Science symposium 2023 จะจัดขึ้นในวันที่ 4-6 กันยายน 2566 ณ
-						โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย บุรีรัมย์ โดยสามารถดูตารางงานได้ด้านล่าง
+						งาน The 3<sup>rd</sup> PCSHS Science symposium 2023 จะจัดขึ้นในวันที่ 4–6 กันยายน 2566 ณ
+						โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย บุรีรัมย์ โดยสามารถดูตารางกิจกรรมได้ด้านล่าง
 					</p>
 				</div>
 			</div>
@@ -69,7 +74,7 @@
 	</div>
 	<div class="collapse-arrow collapse bg-base-200/70 shadow-sm">
 		<input type="radio" name="my-accordion-2" />
-		<div class="collapse-title text-xl font-medium">ONLINE</div>
+		<div class="collapse-title text-xl font-medium">การนำเสนอ ONLINE</div>
 		<div class="collapse-content">
 			<div class="item">
 				<div class="d-date">
@@ -77,9 +82,20 @@
 					<span>กรกฎาคม</span>
 				</div>
 				<div class="d-info">
-					<h1>ลงทะเบียนผ่าน</h1>
-					<p>ผู้ใช้ที่นำเสนอ Online สามารถลงทะเบียนได้ผ่านหน้าผู้ใช้งาน</p>
-					<a href="/login" class="btn"><Icon icon="mdi:open-in-new" />ลงทะเบียน</a>
+					<h1>ลงทะเบียนการนำเสนอแบบ Online</h1>
+					<p>
+						นักเรียนที่นำเสนอรูปแบบออนไลน์ (ไม่ได้เดินทาง)
+						สามารถลงทะเบียนได้ผ่านเว็บไซต์แยกสำหรับกรณีออนไลน์ที่ <a
+							href="https://www.pcshsbr.ac.th/pcshs_symposium2023_vdo/"
+							class="link"
+							target="_blank">https://www.pcshsbr.ac.th/pcshs_symposium2023_vdo/</a
+						>
+					</p>
+					<a
+						href="https://www.pcshsbr.ac.th/pcshs_symposium2023_vdo/"
+						target="_blank"
+						class="btn float-right"><Icon icon="mdi:open-in-new" />ลงทะเบียน</a
+					>
 				</div>
 			</div>
 			<div class="item">
@@ -88,28 +104,8 @@
 					<span>สิงหาคม</span>
 				</div>
 				<div class="d-info">
-					<h1>อัพโหลดไฟล์</h1>
-					<p>อัพโหลดบทความและคลิปวิดีโอผ่านช่อง Youtube ของโรงเรียน ภายในวันที่ 14-18 สิงหาคม</p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="d-date">
-					<span class="">19-20</span>
-					<span>สิงหาคม</span>
-				</div>
-				<div class="d-info">
-					<h1>รวบรวมแยกสาขา</h1>
-					<p>คณะกรรมการตามคำสั่งตรวจสอบข้อมูลที่นักเรียนอัพโหลดและรวบรวมแยกตามสาขา</p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="d-date">
-					<span class="">21-25</span>
-					<span>สิงหาคม</span>
-				</div>
-				<div class="d-info">
-					<h1>คณะกรรมการตัดสิน</h1>
-					<p>คณะกรรมการตามคำสั่งตรวจสอบzผลงานที่ส่งเข้ามาและตัดสินตามเกณท์ที่กำหนด</p>
+					<h1>ส่งวีดีโอนำเสนอ</h1>
+					<p>อัพโหลดบทความและคลิปวิดีโอผ่านช่อง YouTube ของโรงเรียน ภายในวันที่ 14–18 สิงหาคม</p>
 				</div>
 			</div>
 			<div class="item">
@@ -118,8 +114,8 @@
 					<span>สิงหาคม</span>
 				</div>
 				<div class="d-info">
-					<h1>ส่งผลการตัดสิน</h1>
-					<p>คณะกรรมการตามคำสั่งส่งผลการตัดสิน เพื่อรวบรวมและประกาศต่อไป</p>
+					<h1>ประกาศผลการตัดสิน</h1>
+					<p>คณะกรรมการรวบรวมคะแนนและดำเนินการประกาศผลการตัดสิน</p>
 				</div>
 			</div>
 		</div>

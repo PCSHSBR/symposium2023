@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { PageData, Snapshot } from './$types';
 	import DOMPurify from 'isomorphic-dompurify';
 	import StudentMember from './StudentMember.svelte';
 	import AdvisorMember from './AdvisorMember.svelte';
@@ -42,6 +42,12 @@
 			}
 		}
 	);
+
+	export const snapshot: Snapshot = {
+		capture,
+		restore
+	};
+
 	let projectName = {
 		th: $form.project_title_th,
 		en: $form.project_title_en
@@ -347,7 +353,7 @@
 	<div>
 		<h2 id="select_school_label">โรงเรียน</h2>
 		<div class="form-control w-full">
-			<div class="xs:input-group xs:input xs:h-auto xs:w-full xs:p-0">
+			<div class="input-bordered xs:input-group xs:input xs:h-auto xs:w-full xs:p-0">
 				<span class="xs:h-auto xs:w-full">โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย</span>
 				<select
 					name="school"

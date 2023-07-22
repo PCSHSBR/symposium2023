@@ -1,13 +1,14 @@
 <script lang="ts">
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import type { PageData } from './$types';
+	import type { LayoutData } from './$types';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { notify } from '$lib/notify';
 	import { toThai } from '$lib/langUtils';
 
-	export let data: PageData;
+	export let data: LayoutData;
+
 	onMount(() => {
 		if (!window.location.hash) return;
 		const hash = new Map(
