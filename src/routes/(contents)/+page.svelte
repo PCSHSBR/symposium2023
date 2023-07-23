@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Icon from '@iconify/svelte';
-	import ScrollMagic from 'scrollmagic';
 	import animejs from 'animejs';
 	import LoadingPage from '$lib/components/LoadingPage.svelte';
 	import Speaker from '$lib/assets/images/Speaker.png';
@@ -13,6 +12,9 @@
 	import SpeakerPatentImage from '$lib/assets/images/SpeakerPatent.jpg';
 	import { notify } from '$lib/notify';
 	import { toThai } from '$lib/langUtils';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 
 	let isLoading = true;
 	let isBannerHovered = false;
@@ -29,7 +31,8 @@
 		remaining = new Date(eventdate.getTime() - now.getTime());
 	}, 1000);
 
-	onMount(() => {
+	onMount(async () => {
+		const ScrollMagic = (await import('scrollmagic')).default;
 		let is_hero_showed = false;
 		function animation() {
 			let control = new ScrollMagic.Controller();
@@ -175,36 +178,31 @@
 	<title>The 3rd PCSHS Science Symposium 2023 @PCSHSBR</title>
 	<meta
 		name="description"
-		content="ยินดีต้อนรับสู่งานนำเสนอผลงานโครงงานนักเรียนโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัยของระดับชั้นมัธยมศึกษาปีที่ 6 The 3rd PCSHS Science Symposium 2023 ณ โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย บุรีรัมย์"
+		content="การนำเสนอผลงานนักเรียนกลุ่มโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย ครั้งที่ 3"
 	/>
+	<meta property="og:url" content="https://3rdpss2023.pcshsbr.ac.th/" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="The 3rd PCSHS Science Symposium 2023" />
 	<meta
 		property="og:description"
-		content="ยินดีต้อนรับสู่งานนำเสนอผลงานโครงงานนักเรียนโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัยของระดับชั้นมัธยมศึกษาปีที่ 6 The 3rd PCSHS Science Symposium 2023 ณ โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย บุรีรัมย์"
+		content="การนำเสนอผลงานนักเรียนกลุ่มโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย ครั้งที่ 3"
 	/>
-	<meta property="og:title" content="The 3rd PCSHS Science Symposium 2023 @PCSHSBR" />
-	<meta property="og:url" content="https://3rdpss2023.pcshsbr.ac.th/" />
 	<meta
 		property="og:image"
-		content="https://pcshsbr-assets.imgix.net/sym2023/og_image.png?w=1200&h=627&fit=crop&auto=format%2Cenhance%2Ccompress"
+		content="https://termtem-cdn.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress"
 	/>
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="627" />
-	<meta property="og:type" content="website" />
-	<meta property="og:site_name" content="The 3rd PCSHS Science Symposium 2023 @PCSHSBR" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:site" content="@pcshsbr" />
-	<meta name="twitter:creator" content="@pcshsbr" />
-	<meta name="twitter:title" content="The 3rd PCSHS Science Symposium 2023 @PCSHSBR" />
+	<meta property="twitter:domain" content="3rdpss2023.pcshsbr.ac.th" />
+	<meta property="twitter:url" content="https://3rdpss2023.pcshsbr.ac.th/" />
+	<meta name="twitter:title" content="The 3rd PCSHS Science Symposium 2023" />
 	<meta
 		name="twitter:description"
-		content="ยินดีต้อนรับสู่งานนำเสนอผลงานโครงงานนักเรียนโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัยของระดับชั้นมัธยมศึกษาปีที่ 6 The 3rd PCSHS Science Symposium 2023 ณ โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย บุรีรัมย์"
+		content="การนำเสนอผลงานนักเรียนกลุ่มโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย ครั้งที่ 3"
 	/>
 	<meta
 		name="twitter:image"
-		content="https://pcshsbr-assets.imgix.net/sym2023/og_image.png?w=1200&h=627&fit=crop&auto=format%2Cenhance%2Ccompress"
+		content="https://termtem-cdn.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress"
 	/>
-	<meta name="twitter:image:alt" content="The 3rd PCSHS Science Symposium 2023 @PCSHSBR" />
-	<meta name="twitter:domain" content="https://3rdpss2023.pcshsbr.ac.th/" />
 	<script src="https://accounts.google.com/gsi/client" async></script>
 </svelte:head>
 
@@ -379,6 +377,7 @@
 							<div class="card-actions">
 								<a
 									href="https://drive.google.com/drive/folders/1P1nfoJ9mBKbJOENBbHmm_Om46doDjJHZ"
+									target="_blank"
 									class="btn-primary btn">เอกสาร</a
 								>
 							</div>

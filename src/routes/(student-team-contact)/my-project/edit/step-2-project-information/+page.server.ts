@@ -101,7 +101,7 @@ export const load = (async ({ locals: { getSession, supabase } }) => {
 		} = supabase.storage
 			.from('teamImages')
 			.getPublicUrl(`${session.user.id}/${teamImageList.data[0].name}`);
-		teamImageUrl = publicUrl;
+		teamImageUrl = publicUrl + '?width=400&height=300';
 	}
 	return { form, teamImageUrl: teamImageUrl, teamImageData: teamImageData };
 }) satisfies PageServerLoad;

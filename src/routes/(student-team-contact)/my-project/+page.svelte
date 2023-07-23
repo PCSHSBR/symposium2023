@@ -51,7 +51,7 @@
 			} = data.supabase.storage
 				.from('teamImages')
 				.getPublicUrl(`${data.session?.user.id}/${teamImageResult.data[0].name}`, {});
-			projectData.data.teamImageUrl = publicUrl;
+			projectData.data.teamImageUrl = publicUrl + '?width=400&height=300';
 			stepData.step2.isDone = true;
 		}
 	}
@@ -310,14 +310,15 @@
 					</li>
 					<li>
 						<b>ที่ปรึกษาพิเศษ:</b>
-						{#each projectData.data?.special_advisors || [] as name, id}
-							{id === projectData.data?.special_advisors.length - 1 ? ' และ' : ''}{name}{id ===
-							projectData.data?.special_advisors.length - 1
-								? ''
-								: ', '}
+						{#if projectData.data?.special_advisors.length > 0}
+							{#if projectData.data?.special_advisors[0].trim() !== ''}
+								{textListFormatter((projectData.data?.special_advisors || []).map((t) => `${t} `))}
+							{:else}
+								- ไม่มี -
+							{/if}
 						{:else}
 							- ไม่มี -
-						{/each}
+						{/if}
 					</li>
 					<li class="mt-2">
 						<b>ภาพหมู่: </b>
@@ -417,16 +418,16 @@
 			<p>บทความเชิงวิชาการของโครงงาน</p>
 			<ul>
 				{#if stepData.step3.docUrl}
-					<li><a href={stepData.step3.docUrl}>ดาวน์โหลด DOCX</a></li>
+					<li><a href={stepData.step4.docUrl}>ดาวน์โหลด DOCX</a></li>
 				{/if}
 				{#if stepData.step3.pdfUrl}
-					<li><a href={stepData.step3.pdfUrl}>ดาวน์โหลด PDF</a></li>
+					<li><a href={stepData.step4.pdfUrl}>ดาวน์โหลด PDF</a></li>
 				{/if}
 			</ul>
 			{#if stepData.step3.isDone}
 				<a href="/my-project/edit/step-4-article">
 					<button class="{!stepData.step4.isDone ? 'btn-primary' : ''} btn-sm btn my-2 mt-3"
-						><Icon icon="mdi:upload" class="h-4 w-4" /> อัปโหลด{stepData.step3.isDone
+						><Icon icon="mdi:upload" class="h-4 w-4" /> อัปโหลด{stepData.step4.isDone
 							? 'ใหม่อีกครั้ง'
 							: ''}
 					</button>

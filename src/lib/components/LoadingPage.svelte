@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { loadpercent } from '$lib/store';
 	import LogoWithText from '$lib/components/LogoWithText.svelte';
+	import { browser } from '$app/environment';
 
 	let main_container: HTMLDivElement;
 
-	$: {
+	$: if (browser) {
 		if ($loadpercent < 100) {
 			document.body.style.overflow = 'hidden';
 		} else {
