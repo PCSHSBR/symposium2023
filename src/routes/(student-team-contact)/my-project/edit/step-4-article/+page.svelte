@@ -206,7 +206,7 @@
 		{/if}
 	</div>
 	<div class="">
-		<h2>2. อัปโหลดบทคัดย่อรูปแบบ PDF</h2>
+		<h2>2. อัปโหลดบทความวิชาการรูปแบบ PDF</h2>
 		{#if lastUploadFile.pdf.lastUpdateDate}
 			<p class="text-sm text-inherit text-opacity-10">
 				อัปโหลดล่าสุดเมื่อ {dateTimeFormatter(new Date(lastUploadFile.pdf.lastUpdateDate))}
@@ -230,7 +230,7 @@
 					</span>
 				{:else}
 					<Icon icon="mdi:upload" class="h-8 w-8" />
-					<span>เลือกไฟล์บทคัดย่อรูปแบบ PDF</span>
+					<span>เลือกไฟล์บทความวิชาการรูปแบบ PDF</span>
 					<small class="text-center"> .pdf </small>
 				{/if}
 			</svelte:fragment>
