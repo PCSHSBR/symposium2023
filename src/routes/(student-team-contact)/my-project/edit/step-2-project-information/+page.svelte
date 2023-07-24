@@ -49,8 +49,8 @@
 	};
 
 	let projectName = {
-		th: $form.project_title_th,
-		en: $form.project_title_en
+		th: $form.project_title_th || '',
+		en: $form.project_title_en || ''
 	};
 	let displayProjectName = projectName;
 	$: displayProjectName.th = DOMPurify.sanitize(projectName.th, {
@@ -310,9 +310,6 @@
 				id="thai_project_name"
 				name="project_name_th"
 				bind:value={projectName.th}
-				on:input={(e) => {
-					$form.project_title_th = displayProjectName.th;
-				}}
 				{...$constraints.project_title_th}
 			/>
 			<span class="label-text-alt mt-2 {!displayProjectName.th ? 'invisible' : ''}">
@@ -337,9 +334,6 @@
 				id="eng_project_name"
 				name="project_name_en"
 				bind:value={projectName.en}
-				on:input={() => {
-					$form.project_title_en = displayProjectName.en;
-				}}
 				{...$constraints.project_title_en}
 			/>
 			<span class="label-text-alt mt-2 {!displayProjectName.en ? 'invisible' : ''}">
