@@ -196,12 +196,12 @@
 					return;
 				}
 				if (result.data?.length !== 0) {
-					const _article = result.data[0];
+					const abstract = result.data[0];
 					const {
 						data: { publicUrl }
 					} = data.supabase.storage
-						.from('articles')
-						.getPublicUrl(`${data.session?.user.id}/${_article.name}`, {});
+						.from('abstracts')
+						.getPublicUrl(`${data.session?.user.id}/${abstract.name}`, {});
 					stepData.step4.docUrl = publicUrl;
 					stepData.step4.pdfUrl = publicUrl.replace('.docx', '.pdf');
 					stepData.step4.isDone = true;

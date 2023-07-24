@@ -34,7 +34,7 @@ export const load = (async ({ locals: { getSession, supabase } }) => {
 		project_field: projectResult.data[0]?.field || 1,
 		project_title_th: projectResult.data[0]?.title_th || '',
 		project_title_en: projectResult.data[0]?.title_en || '',
-		school: projectResult.data[0]?.school || 0,
+		school: projectResult.data[0]?.school || 1,
 		student_members:
 			projectResult.data[0]?.student_members ||
 			([
