@@ -50,7 +50,7 @@
 				256 วัน
 			</p>
 			<a
-				href="https://th.wikipedia.org/wiki/%E0%B8%8A%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%AD%E0%B8%B2%E0%B8%A3%E0%B8%B5%E0%B8%99%E0%B8%B2N"
+				href="https://th.wikipedia.org/wiki/%E0%B8%8A%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%AD%E0%B8%B2%E0%B8%A3%E0%B8%B5%E0%B8%99%E0%B8%B2"
 				class="btn-primary btn mt-4"><Icon icon="mdi:open-in-new" />อ่านต่อ</a
 			>
 		</div>
