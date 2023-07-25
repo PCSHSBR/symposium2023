@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let isLoading = false;
 
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { loadpercent } from '$lib/store';
 	import * as THREE from 'three';
 	import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
@@ -12,6 +12,7 @@
 	import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 	import SplineLoader from '@splinetool/loader';
 	import { calculateProgressPercentage } from '$lib/animateOnScroll';
+	import { browser } from '$app/environment';
 
 	function calculate3DRotation(maxX: any, maxY: any, clientX: any, clientY: any, intensity: any) {
 		let x = Math.sin((maxX - clientX * 2) / maxX) * intensity;
@@ -22,6 +23,10 @@
 	export let scrollProgress = 0;
 
 	let threeCanvas: HTMLDivElement;
+
+	const clearEventListenerController = new AbortController();
+	let animationFrameID: number;
+
 	onMount(async () => {
 		function detectMob() {
 			const toMatch = [
@@ -122,7 +127,7 @@
 					intersects[0].point.z + 100
 				);
 			}
-		});
+		}, { signal: clearEventListenerController.signal });
 		window.addEventListener('resize', () => {
 			width = window.innerWidth;
 			height = window.innerHeight;
@@ -130,7 +135,7 @@
 			camera.updateProjectionMatrix();
 			renderer.setSize(width, height);
 			composer.setSize(width, height);
-		});
+		}, { signal: clearEventListenerController.signal });
 		window.addEventListener('scroll', (evn) => {
 			if (!threeCanvas) return;
 			let lerpVector = new THREE.Vector3().lerpVectors(startVector, endVector, scrollProgress);
@@ -146,14 +151,20 @@
 			// 	scrollProgress,
 			// 	// window.scrollY,window.innerHeight,window.scrollY+window.innerHeight,endScollTop
 			// 	);
-		});
+		}, { signal: clearEventListenerController.signal });
 
 		function animation() {
 			renderer.render(scene, camera);
-			requestAnimationFrame(animation);
+			animationFrameID = requestAnimationFrame(animation);
 		}
 		animation();
 	});
+	onDestroy(() => {
+		if (browser) {
+			clearEventListenerController.abort()
+			cancelAnimationFrame(animationFrameID)
+		}
+	})
 </script>
 
 <div class="three-canvas" bind:this={threeCanvas} />
