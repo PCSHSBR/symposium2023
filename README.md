@@ -67,7 +67,7 @@ Edit [HERE](<https://tree.nathanfriend.io/?s=(%27options!(%27fancy!true~fullPath
 
 ## Contributer
 
-- Patsagorn Yuenyong ([ptsgrn](https://guthub.com/ptsgrn)) - Project Manager, Backend Developer
+- Patsagorn Yuenyong ([ptsgrn](https://github.com/ptsgrn)) - Project Manager, Backend Developer
 - Phubest Srikoon ([PhubestSrikooon](https://github.com/PhubestSrikooon)) - Frontend Developer, Designer
 
 ## License
