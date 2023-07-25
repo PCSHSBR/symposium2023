@@ -325,8 +325,8 @@
 				<div>
 					<div class="text-c-1 absolute -bottom-[100%] left-0 z-[1000] transition-all duration-500">
 						<div class="text-c-2 p-8 transition-all duration-500">
-							<h3 class="text-4xl">แผ่นที่โรงเรียน</h3>
-							<p>คลิ๊กที่นี้เพื่อดูแผ่นที่โรงเรียน</p>
+							<h3 class="text-4xl">แผนที่โรงเรียน</h3>
+							<p>คลิกที่นี้เพื่อดูแผนที่โรงเรียน</p>
 						</div>
 					</div>
 				</div>

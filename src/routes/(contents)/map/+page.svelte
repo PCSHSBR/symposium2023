@@ -32,7 +32,7 @@
 			const controls = new OrbitControls(camera, renderer.domElement);
 			let composer = new EffectComposer(renderer);
 
-			controls.enablePan = false;
+			// controls.enablePan = false;
 			controls.maxPolarAngle = (Math.PI - 0.1) / 2; // Limit angle of visibility
 			controls.minZoom = 1;
 
