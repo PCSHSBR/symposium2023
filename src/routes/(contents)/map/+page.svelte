@@ -141,9 +141,14 @@
 
 <div class="relative">
 	<div class="absolute left-[16px] top-[16px]">
-		<a href="/#school-map">
-			<button class="btn-primary btn"><Icon icon="mdi:home" />กลับไปหน้าหลัก</button>
-		</a>
+		<div class="flex gap-1">
+			<a href="/#school-map">
+				<button class="btn-primary btn"><Icon icon="mdi:home" />กลับไปหน้าหลัก</button>
+			</a>
+			<a href="https://goo.gl/maps/hrtCinUXAnTnRN1FA">
+				<button class="btn-primary btn"><Icon icon="mdi:location" /></button>
+			</a>
+		</div>
 		<div class="my-2 rounded-2xl bg-base-100 p-4">
 			<p class="flex">ใข้ <Icon icon="material-symbols:pinch" /> เพื่อเลื่อนและขยาย</p>
 		</div>
