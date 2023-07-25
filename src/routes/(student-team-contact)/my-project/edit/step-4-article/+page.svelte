@@ -157,7 +157,7 @@
 	</p>
 
 	<div class="">
-		<h2>1. อัปโหลดบทคัดย่อรูปแบบ Document</h2>
+		<h2>1. อัปโหลดบทความวิชาการรูปแบบ Document</h2>
 		{#if lastUploadFile.document.lastUpdateDate}
 			<p class="text-sm text-inherit text-opacity-10">
 				อัปโหลดล่าสุดเมื่อ {dateTimeFormatter(new Date(lastUploadFile.document.lastUpdateDate))}
