@@ -10,6 +10,7 @@
 	import FieldTrip from '$lib/components/FieldTrip.svelte';
 	import FieldSchedule from '$lib/components/FieldSchedule.svelte';
 	import SpeakerPatentImage from '$lib/assets/images/SpeakerPatent.jpg';
+	import SchoolImage from '$lib/assets/images/SchoolMap.png';
 	import { notify } from '$lib/notify';
 	import { toThai } from '$lib/langUtils';
 	import type { PageData } from './$types';
@@ -316,6 +317,29 @@
 			<FieldSchedule />
 		</div>
 	</section>
+	<section id="school-map" class="school-map p-10">
+		<a href="/map">
+			<div
+				class="main-c-1 relative mx-auto h-[30rem] max-w-[60rem] overflow-hidden rounded-3xl transition-all duration-500"
+			>
+				<div>
+					<div class="text-c-1 absolute -bottom-[100%] left-0 z-[1000] transition-all duration-500">
+						<div class="text-c-2 p-8 transition-all duration-500">
+							<h3 class="text-4xl">แผ่นที่โรงเรียน</h3>
+							<p>คลิ๊กที่นี้เพื่อดูแผ่นที่โรงเรียน</p>
+						</div>
+					</div>
+				</div>
+				<span class="transition-all duration-500" />
+				<img
+					src={SchoolImage}
+					alt=""
+					class="z-[100] h-full w-full object-cover transition-all duration-500"
+				/>
+			</div>
+		</a>
+	</section>
+
 	<section id="event-trip" class="event-trip relative mx-auto overflow-hidden">
 		<div class="mx-auto max-w-6xl p-10">
 			<div class="relative z-10">
@@ -396,8 +420,27 @@
 	data-itp_support="true"
 />
 
-<style lang="scss">
+<style lang="postcss">
 	.circle {
 		@apply absolute z-0 h-20 w-20 rounded-full bg-primary/50 blur-xl transition-opacity duration-500;
+	}
+	.school-map {
+		.main-c-1 {
+			@apply text-base-100 shadow-xl dark:text-base-content;
+			span {
+				@apply absolute z-[101] h-full w-full bg-black/0;
+			}
+			&:hover {
+				img {
+					@apply scale-110;
+				}
+				.text-c-1 {
+					@apply bottom-0 left-0;
+				}
+				span {
+					@apply absolute z-[101] h-full w-full bg-black/50;
+				}
+			}
+		}
 	}
 </style>

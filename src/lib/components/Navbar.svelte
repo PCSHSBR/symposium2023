@@ -231,9 +231,6 @@
 				<li>
 					<a href="/" use:closeMenu>ช่องทางติดต่อ</a>
 				</li>
-				<li>
-					<a href="/faq" use:closeMenu>FAQ</a>
-				</li>
 			</ul>
 		</div>
 	</div>
