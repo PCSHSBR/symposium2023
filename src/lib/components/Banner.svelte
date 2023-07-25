@@ -24,7 +24,7 @@
 
 	let threeCanvas: HTMLDivElement;
 
-	const clearEventListenerController = new AbortController();
+	const clearListenerController = new AbortController();
 	let animationFrameID: number;
 
 	onMount(async () => {
@@ -111,47 +111,59 @@
 		let outputPass = new ShaderPass(GammaCorrectionShader);
 		composer.addPass(outputPass);
 
-		window.addEventListener('mousemove', (p) => {
-			pointer = new THREE.Vector2(p.clientX, p.clientY);
-			rotation = calculate3DRotation(width, height, p.x, p.y, 0.1);
+		window.addEventListener(
+			'mousemove',
+			(p) => {
+				pointer = new THREE.Vector2(p.clientX, p.clientY);
+				rotation = calculate3DRotation(width, height, p.x, p.y, 0.1);
 
-			p1.x = (p.clientX / window.innerWidth) * 2 - 1;
-			p1.y = -(p.clientY / window.innerHeight) * 2 + 1;
+				p1.x = (p.clientX / window.innerWidth) * 2 - 1;
+				p1.y = -(p.clientY / window.innerHeight) * 2 + 1;
 
-			raycaster.setFromCamera(p1, camera);
-			const intersects = raycaster.intersectObjects(scene.children, true);
-			if (isHover) {
-				pointLight.position.set(
-					intersects[0].point.x + 100,
-					intersects[0].point.y + 100,
-					intersects[0].point.z + 100
+				raycaster.setFromCamera(p1, camera);
+				const intersects = raycaster.intersectObjects(scene.children, true);
+				if (isHover) {
+					pointLight.position.set(
+						intersects[0].point.x + 100,
+						intersects[0].point.y + 100,
+						intersects[0].point.z + 100
+					);
+				}
+			},
+			{ signal: clearListenerController.signal }
+		);
+		window.addEventListener(
+			'resize',
+			() => {
+				width = window.innerWidth;
+				height = window.innerHeight;
+				camera.aspect = width / height;
+				camera.updateProjectionMatrix();
+				renderer.setSize(width, height);
+				composer.setSize(width, height);
+			},
+			{ signal: clearListenerController.signal }
+		);
+		window.addEventListener(
+			'scroll',
+			(evn) => {
+				if (!threeCanvas) return;
+				let lerpVector = new THREE.Vector3().lerpVectors(startVector, endVector, scrollProgress);
+				let lerpRotation = new THREE.Vector3().lerpVectors(
+					startRotation,
+					endRotation,
+					scrollProgress
 				);
-			}
-		}, { signal: clearEventListenerController.signal });
-		window.addEventListener('resize', () => {
-			width = window.innerWidth;
-			height = window.innerHeight;
-			camera.aspect = width / height;
-			camera.updateProjectionMatrix();
-			renderer.setSize(width, height);
-			composer.setSize(width, height);
-		}, { signal: clearEventListenerController.signal });
-		window.addEventListener('scroll', (evn) => {
-			if (!threeCanvas) return;
-			let lerpVector = new THREE.Vector3().lerpVectors(startVector, endVector, scrollProgress);
-			let lerpRotation = new THREE.Vector3().lerpVectors(
-				startRotation,
-				endRotation,
-				scrollProgress
-			);
-			camera.position.set(lerpVector.x, lerpVector.y, lerpVector.z);
-			camera.rotation.set(lerpRotation.x, lerpRotation.y, lerpRotation.z);
-			threeCanvas.style.opacity = `${1 - scrollProgress}`;
-			// console.log(
-			// 	scrollProgress,
-			// 	// window.scrollY,window.innerHeight,window.scrollY+window.innerHeight,endScollTop
-			// 	);
-		}, { signal: clearEventListenerController.signal });
+				camera.position.set(lerpVector.x, lerpVector.y, lerpVector.z);
+				camera.rotation.set(lerpRotation.x, lerpRotation.y, lerpRotation.z);
+				threeCanvas.style.opacity = `${1 - scrollProgress}`;
+				// console.log(
+				// 	scrollProgress,
+				// 	// window.scrollY,window.innerHeight,window.scrollY+window.innerHeight,endScollTop
+				// 	);
+			},
+			{ signal: clearListenerController.signal }
+		);
 
 		function animation() {
 			renderer.render(scene, camera);
@@ -161,10 +173,10 @@
 	});
 	onDestroy(() => {
 		if (browser) {
-			clearEventListenerController.abort()
-			cancelAnimationFrame(animationFrameID)
+			clearListenerController.abort();
+			cancelAnimationFrame(animationFrameID);
 		}
-	})
+	});
 </script>
 
 <div class="three-canvas" bind:this={threeCanvas} />
