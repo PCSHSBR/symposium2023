@@ -7,7 +7,7 @@
 
 This work is commissioned and owned by the school. 
 
-All source code except for all assets files in this repo (for example but not limited to, any image, logo, and threadmarks.) are free to use under MIT License. All other source code from third party is up to their their license.
+All source code except for all assets files in this repo (for example but not limited to, any image, logo, and trademark.) are free to use under MIT License. All other source code from third party is up to their their license.
 
 ## Developing
 
