@@ -25,6 +25,6 @@ export const handleError = (({ error, event }) => {
 	Sentry.captureException(error, { extra: { event } });
 	if (dev) console.error(error);
 	return {
-		message: 'Whoops!'
+		message: 'Whoops! Something went wrong on the client.'
 	};
 }) satisfies HandleClientError;

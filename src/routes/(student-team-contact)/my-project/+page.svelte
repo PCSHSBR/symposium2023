@@ -7,6 +7,7 @@
 	import type { StyledText } from '$lib/types';
 	import { textListFormatter } from '$lib/langUtils';
 	export let data: PageData;
+	import { featureFlags } from '$lib/featureFlags';
 	interface ProjectData {
 		data?: {
 			project_title_th: StyledText;
@@ -112,6 +113,7 @@
 			)
 			.eq('team_contact_user_id', data.session?.user.id)
 			.limit(1);
+		projectData.isLoadingData;
 		if (currentUserProjectIDResult.error) {
 			notify({
 				message: `${currentUserProjectIDResult.error.message} <br/><small>${currentUserProjectIDResult.error.hint}</small>`,
@@ -212,10 +214,18 @@
 
 <svelte:head>
 	<title>โครงงานของฉัน</title>
+	<meta name="description" content="โครงงานของฉัน" />
+	<meta name="robots" content="noindex" />
 </svelte:head>
 
 <section class="m-auto w-[calc(100%-64px)] pt-[calc(6rem)]">
 	<h1>โครงงานของฉัน</h1>
+	{#if !featureFlags.openForRegistrationAndEditProject && !featureFlags.openForUploadAbstract && !featureFlags.openForUploadArticle}
+		<div class="alert alert-warning">
+			<Icon icon="mdi:alert-circle" class="h-8 w-8 text-warning-content" />
+			ขณะนี้ระบบไม่เปิดให้ลงทะเบียนโครงงานหรือแก้ไขอัปโหลดบทคัดย่อ/บทความวิชาการแล้ว แต่นักเรียนยังสามารถอ่านข้อมูลโครงงานของตนเองได้
+		</div>
+	{/if}
 	<div class="custom-steps step1 mt-4">
 		<div
 			class="custom-step"
@@ -345,11 +355,22 @@
 				</ul>
 			{/if}
 			{#if stepData.step1.isDone}
-				<a href="/my-project/edit/step-2-project-information">
-					<button class="btn-primary btn-sm btn mt-3" title="แก้ไขข้อมูลโครงงาน"
-						><Icon icon="mdi:edit" class="h-4 w-4" /> แก้ไข</button
+				{#if featureFlags.openForRegistrationAndEditProject}
+					<a href="/my-project/edit/step-2-project-information">
+						<button class="btn-primary btn-sm btn mt-3" title="แก้ไขข้อมูลโครงงาน"
+							><Icon icon="mdi:edit" class="h-4 w-4" /> แก้ไข</button
+						>
+					</a>
+				{:else}
+					<span
+						class="tooltip-error tooltip tooltip-right"
+						data-tip="ปิดการลงทะเบียนและไม่สามารถแก้ไขข้อมูลโครงงานได้แล้ว"
 					>
-				</a>
+						<button class="btn-primary btn-sm btn mt-3" disabled title="แก้ไขข้อมูลโครงงาน"
+							><Icon icon="mdi:edit" class="h-4 w-4" /> แก้ไข</button
+						>
+					</span>
+				{/if}
 			{/if}
 		</div>
 	</div>
@@ -372,29 +393,46 @@
 			<h2>อัปโหลดบทคัดย่อ</h2>
 			<p>บทคัดย่อของโครงงาน</p>
 			{#if stepData.step3.text}
-				<div class="rounded-md bg-base-200 p-3 leading-4">
-					<div class="line-clamp-4">
+				<div class="rounded-md bg-base-200 p-3 leading-6">
+					<div class="leading-6">
 						<b>เนื้อหาบทคัดย่อ:</b>
 						<RenderStyledText content={stepData.step3.text} />
 					</div>
 				</div>
 			{/if}
-			<ul>
+			<div class="mt-4 flex gap-2">
 				{#if stepData.step3.docUrl}
-					<li><a href={stepData.step3.docUrl}>ดาวน์โหลด DOCX</a></li>
+					<a class="btn-outline btn-sm btn" href={stepData.step3.docUrl}>
+						<Icon icon="mdi:download" class="h-4 w-4" /> ดาวน์โหลด DOCX
+					</a>
 				{/if}
 				{#if stepData.step3.pdfUrl}
-					<li><a href={stepData.step3.pdfUrl}>ดาวน์โหลด PDF</a></li>
+					<a class="btn-outline btn-sm btn" href={stepData.step3.pdfUrl}
+						><Icon icon="mdi:download" class="h-4 w-4" /> ดาวน์โหลด PDF</a
+					>
 				{/if}
-			</ul>
+			</div>
 			{#if stepData.step2.isDone}
-				<a href="/my-project/edit/step-3-abstract">
-					<button class="{!stepData.step3.isDone ? 'btn-primary' : ''} btn-sm btn my-2 mt-3"
-						><Icon icon="mdi:upload" class="h-4 w-4" /> อัปโหลด{stepData.step3.isDone
-							? 'ใหม่อีกครั้ง'
-							: ''}
-					</button>
-				</a>
+				{#if featureFlags.openForUploadAbstract}
+					<a href="/my-project/edit/step-3-abstract">
+						<button class="{!stepData.step3.isDone ? 'btn-primary' : ''} btn-sm btn my-2 mt-3"
+							><Icon icon="mdi:upload" class="h-4 w-4" /> อัปโหลด{stepData.step3.isDone
+								? 'ใหม่อีกครั้ง'
+								: ''}
+						</button>
+					</a>
+				{:else}
+					<div
+						class="tooltip-error tooltip tooltip-right"
+						data-tip="ไม่สามารถอัปโหลดบทคัดย่อได้แล้ว"
+					>
+						<button class="btn-sm btn my-2 mt-3" disabled
+							><Icon icon="mdi:upload" class="h-4 w-4" /> อัปโหลด{stepData.step3.isDone
+								? 'ใหม่อีกครั้ง'
+								: ''}
+						</button>
+					</div>
+				{/if}
 			{/if}
 		</div>
 	</div>
@@ -416,22 +454,39 @@
 		<div>
 			<h2>อัปโหลดบทความวิชาการ</h2>
 			<p>บทความเชิงวิชาการของโครงงาน</p>
-			<ul>
-				{#if stepData.step3.docUrl}
-					<li><a href={stepData.step4.docUrl}>ดาวน์โหลด DOCX</a></li>
+			<div class="mt-4 flex gap-2">
+				{#if stepData.step4.docUrl}
+					<a class="btn-outline btn-sm btn" href={stepData.step4.docUrl}>
+						<Icon icon="mdi:download" class="h-4 w-4" /> ดาวน์โหลด DOCX
+					</a>
 				{/if}
-				{#if stepData.step3.pdfUrl}
-					<li><a href={stepData.step4.pdfUrl}>ดาวน์โหลด PDF</a></li>
+				{#if stepData.step4.pdfUrl}
+					<a class="btn-outline btn-sm btn" href={stepData.step4.pdfUrl}
+						><Icon icon="mdi:download" class="h-4 w-4" /> ดาวน์โหลด PDF</a
+					>
 				{/if}
-			</ul>
+			</div>
 			{#if stepData.step3.isDone}
-				<a href="/my-project/edit/step-4-article">
-					<button class="{!stepData.step4.isDone ? 'btn-primary' : ''} btn-sm btn my-2 mt-3"
-						><Icon icon="mdi:upload" class="h-4 w-4" /> อัปโหลด{stepData.step4.isDone
-							? 'ใหม่อีกครั้ง'
-							: ''}
-					</button>
-				</a>
+				{#if featureFlags.openForUploadArticle}
+					<a href="/my-project/edit/step-4-article">
+						<button class="{!stepData.step4.isDone ? 'btn-primary' : ''} btn-sm btn my-2 mt-3"
+							><Icon icon="mdi:upload" class="h-4 w-4" /> อัปโหลด{stepData.step4.isDone
+								? 'ใหม่อีกครั้ง'
+								: ''}
+						</button>
+					</a>
+				{:else}
+					<div
+						class="tooltip-error tooltip tooltip-right"
+						data-tip="ไม่สามารถอัปโหลดบทความวิชาการได้แล้ว"
+					>
+						<button class="btn-sm btn my-2 mt-3" disabled
+							><Icon icon="mdi:upload" class="h-4 w-4" /> อัปโหลด{stepData.step4.isDone
+								? 'ใหม่อีกครั้ง'
+								: ''}
+						</button>
+					</div>
+				{/if}
 			{/if}
 		</div>
 	</div>

@@ -7,7 +7,7 @@
 	import { networkStore } from 'svelte-legos';
 	import LogoWithText from '$lib/components/LogoWithText.svelte';
 	import Logo from '$lib/components/Logo.svelte';
-	// import { getMaintainentMessage } from '$lib/featureFlags';
+	import { featureFlags } from '$lib/featureFlags';
 	const networkInfo = networkStore();
 
 	// function to close the menu, for using with use directive
@@ -34,7 +34,7 @@
 
 	export let data = $page.data;
 
-	let isNotShowLogin = ['/login'].includes($page.url.pathname);
+	let isNotShowLogin = !featureFlags.openForLogin || ['/login'].includes($page.url.pathname);
 	let isMenuOpen: boolean;
 	let isClearBanner: boolean;
 	let isLogginout = !data.session;
@@ -47,16 +47,13 @@
 			alert(result.error.message);
 		}
 		isLogginout = false;
+		if (!featureFlags.openForLogin) {
+			return goto('/');
+		}
 		goto('/login');
 	};
 </script>
 
-<!-- <div
-	class="fixed bottom-0 left-0 right-0 z-[2000] rounded-none bg-warning p-1 text-center text-sm font-bold duration-700 hover:text-xl"
->
-	<Icon icon="mdi:alert-circle" class="inline-block h-5 w-5" />
-	{@html getMaintainentMessage(data.role) || getMaintainentMessage('all')}
-</div> -->
 <nav
 	class="navbar fixed z-[1000] h-14 justify-between border-neutral {isMenuOpen
 		? 'bg-transparent'

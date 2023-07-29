@@ -5,6 +5,7 @@
 	import { textListFormatter, toThai } from '$lib/langUtils';
 	import Icon from '@iconify/svelte';
 	import FormMessage from '$lib/components/FormMessage.svelte';
+	import { featureFlags } from '$lib/featureFlags';
 
 	export let form: ActionData;
 	export let data: PageData;
@@ -36,9 +37,16 @@
 		class="flex flex-col gap-4"
 	>
 		<h1 class="mb-3 mt-5 text-4xl">ส่งคำเชิญให้สร้างบัญชี</h1>
+		{#if featureFlags.disableInviteNewUser}
+			<div class="alert alert-warning">
+				<Icon icon="mdi:alert-circle-outline" class="inline-block h-6 w-6 text-warning-content" />
+				ขณะนี้ระบบปิดการเชิญผู้ใช้ใหม่แล้ว หากต้องการเชิญผู้ใช้ใหม่ กรุณาติดต่อทีมงาน
+			</div>
+		{/if}
 		<label for="emails" class="label">
 			<span class="label-text"> อีเมล </span>
 			<textarea
+				disabled={featureFlags.disableInviteNewUser || isLoading}
 				id="emails"
 				class="textarea-bordered textarea w-full resize-y"
 				name="email"
@@ -59,7 +67,12 @@
 		</label>
 		<label class="label">
 			<span class="label-text"> บทบาทของผู้ใช้คนนี้ </span>
-			<select class="select-bordered select" name="role" required>
+			<select
+				class="select-bordered select"
+				name="role"
+				required
+				disabled={featureFlags.disableInviteNewUser}
+			>
 				<option value="" disabled selected>- โปรดเลือก -</option>
 				{#if data.role === 'staff'}
 					<option value="staff">ทีมงาน</option>
@@ -77,7 +90,11 @@
 			</select>
 		</label>
 		<FormMessage {form} />
-		<button type="submit" class="btn-primary btn" disabled={isLoading}>
+		<button
+			type="submit"
+			class="btn-primary btn"
+			disabled={featureFlags.disableInviteNewUser || isLoading}
+		>
 			{#if isLoading}
 				<span class="loading loading-spinner" />
 			{:else}

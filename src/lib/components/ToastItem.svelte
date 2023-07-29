@@ -99,12 +99,12 @@
 		{#if item.component}
 			<svelte:component this={item.component.src} {...cprops} />
 		{:else}
-			{@html toThai(item.msg)}
+			{toThai(item.msg)}
 		{/if}
 	</div>
 	{#if item.dismissable}
 		<div
-			class="btn-ghost btn-error btn-sm btn z-10"
+			class="btn-error btn-ghost btn-sm btn z-10"
 			role="button"
 			tabindex="0"
 			on:click={close}

@@ -7,23 +7,13 @@
 	import RenderStyledText from '$lib/components/RenderStyledText.svelte';
 	export let data: PageData;
 	let tableData: Awaited<ReturnType<typeof getAllProject>> = [];
-	let tableKeys = [
-		'รหัสโครงงาน',
-		'สถานะ',
-		'สาขา',
-		'รูปแบบการนำเสนอ',
-		'ชื่อโครงงาน (ไทย)',
-		'ชื่อโครงงาน (อังกฤษ)',
-		'จังหวัด',
-		'ผู้พัฒนาโครงงาน',
-		'ครูที่ปรึกษา',
-		'ที่ปรึกษาพิเศษ'
-	];
 
 	let isInfoToggle = false;
 	let isLoading = false;
 	let abstractUploaded: string[] = [];
 	let articleUploaded: string[] = [];
+	let allProjectCount = 0;
+	let studentCount = 0;
 
 	async function getAllProject({ start = 0, end = 25 }: { start?: number; end?: number } = {}) {
 		const results = await data.supabase
@@ -85,8 +75,10 @@
 	(async () => {
 		isLoading = true;
 		tableData = await getAllProject();
-		abstractUploaded = await getUploadedAbstract();
-		articleUploaded = await getUploadedArticle();
+		allProjectCount = tableData.length;
+		studentCount = tableData.reduce((acc, cur) => acc + cur.student_members.length, 0);
+		// abstractUploaded = await getUploadedAbstract();
+		// articleUploaded = await getUploadedArticle();
 		isLoading = false;
 	})();
 
@@ -130,7 +122,7 @@
 			</span> = ยังไม่ได้จัดรหัสโครงงาน
 		</div>
 	</div>
-	<label class="swap btn-primary swap-rotate btn-circle btn absolute bottom-0 right-0 shadow-2xl">
+	<label class="swap-rotate swap btn-primary btn-circle btn absolute bottom-0 right-0 shadow-2xl">
 		<input type="checkbox" bind:checked={isInfoToggle} />
 		<Icon icon="mdi:close" class="swap-on text-2xl" />
 		<Icon icon="mdi:info" class="swap-off text-2xl" />
@@ -138,127 +130,140 @@
 </div>
 
 <div class="p-5">
-	<div class="flex justify-between">
-		<h1>รายการโครงงาน</h1>
-		<div class="w-xs z-[500] hidden rounded-md border bg-base-100 p-3 text-sm md:block">
-			<h3 class="mb-3 font-bold">คำอธิบายสัญลักษณ์สถานะ</h3>
-			<div>
-				<span class="inline-block h-5 w-5 rounded-full bg-base-300 text-center">3</span> = ยังไม่อัปโหลดบทคัดย่อ
+	<h1>รายการโครงงาน</h1>
+	<p>
+		รายการโครงงานโครงงานที่ร่วมนำเสนอรูปแบบ Onsite ที่โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย
+		บุรีรัมย์ สำหรับรูปแบบออนไลน์สามารถดูได้ที่ <a
+			href="https://www.pcshsbr.ac.th/pcshs_symposium2023_vdo/"
+			>https://www.pcshsbr.ac.th/pcshs_symposium2023_vdo/</a
+		>
+	</p>
+	<div class="w-xs z-[500] hidden rounded-md border bg-base-100 p-3 text-sm md:block">
+		<h3 class="mb-3 font-bold">คำอธิบายสัญลักษณ์สถานะ</h3>
+		<div>
+			<span class="inline-block h-5 w-5 rounded-full bg-base-300 text-center">3</span> = ยังไม่อัปโหลดบทคัดย่อ
+		</div>
+		<div>
+			<span class="inline-block h-5 w-5 rounded-full bg-base-300 text-center">4</span> = ยังอัปโหลดบทความ
+		</div>
+		<div>
+			<span
+				class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-success text-success-content"
+			>
+				<Icon icon="mdi:tick" class="m-auto h-3.5 w-3.5" />
+			</span> = อัปโหลดบทคัดย่อ/บทความแล้ว
+		</div>
+		<div>
+			<span
+				class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-success text-success-content"
+			>
+				<Icon icon="mdi:help-rhombus" title="ยังไม่ได้จัดรหัสโครงงาน" />
+			</span> = ยังไม่ได้จัดรหัสโครงงาน
+		</div>
+	</div>
+	<div class="stats my-2 bg-base-200 shadow">
+		<div class="stat">
+			<div class="stat-figure text-secondary">
+				<Icon icon="mdi:arrow-projectile-multiple" class="h-7 w-7 shadow-sm" />
 			</div>
-			<div>
-				<span class="inline-block h-5 w-5 rounded-full bg-base-300 text-center">4</span> = ยังอัปโหลดบทความ
+			<div class="stat-title font-display">โครงงานทั้งหมด</div>
+			<div class="stat-value">
+				{#if isLoading}
+					<span class="loading loading-spinner loading-sm" />
+				{:else}
+					{allProjectCount}
+				{/if}
 			</div>
-			<div>
-				<span
-					class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-success text-success-content"
-				>
-					<Icon icon="mdi:tick" class="m-auto h-3.5 w-3.5" />
-				</span> = อัปโหลดบทคัดย่อ/บทความแล้ว
+		</div>
+		<div class="stat">
+			<div class="stat-figure text-secondary">
+				<Icon icon="icons8:student" class="h-8 w-8 shadow-sm" />
 			</div>
-			<div>
-				<span
-					class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-success text-success-content"
-				>
-					<Icon icon="mdi:help-rhombus" title="ยังไม่ได้จัดรหัสโครงงาน" />
-				</span> = ยังไม่ได้จัดรหัสโครงงาน
+			<div class="stat-title font-display">นักเรียนที่เข้าร่วมงาน On-site</div>
+			<div class="stat-value">
+				{#if isLoading}
+					<span class="loading loading-spinner loading-sm" />
+				{:else}
+					{studentCount}
+				{/if}
+			</div>
+			<div class="stat-desc">
+				เป็น {Math.floor((studentCount * 100) / (12 * 144))}% ของนักเรียน ม.6 ปี 2566
 			</div>
 		</div>
 	</div>
-	<div class="relative overflow-x-auto">
-		{#if isLoading}
-			<span class="loading loading-spinner loading-sm" /> กำลังโหลด...
-		{/if}
-		<table class="table-pin-rows table">
-			<thead>
+</div>
+<div class="relative overflow-x-auto">
+	{#if isLoading}
+		<span class="loading loading-spinner loading-sm" /> กำลังโหลด...
+	{/if}
+	<table class="table-pin-rows table">
+		<thead>
+			<tr>
+				<th>รหัสโครงงาน</th>
+				<th>สาขา</th>
+				<th>รูปแบบการนำเสนอ</th>
+				<th>ชื่อโครงงาน (ไทย)</th>
+				<th>ชื่อโครงงาน (อังกฤษ)</th>
+				<th>จังหวัด</th>
+				<th>ผู้พัฒนาโครงงาน</th>
+				<th>ครูที่ปรึกษา</th>
+				<th>ที่ปรึกษาพิเศษ</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- <pre>{JSON.stringify(tableData, null, 2)}</pre> -->
+			{#each tableData as row}
 				<tr>
-					{#each tableKeys as key}
-						<th>{key}</th>
-					{/each}</tr
-				>
-			</thead>
-			<tbody>
-				<!-- <pre>{JSON.stringify(tableData, null, 2)}</pre> -->
-				{#each tableData as row}
-					<tr>
-						<td class="flex justify-center text-center"
-							>{#if row.code == null}
-								<Icon
-									icon="mdi:help-rhombus"
-									class="h-5 w-5 opacity-30"
-									title="ยังไม่ได้จัดรหัสโครงงาน"
-								/>
+					<td class="flex items-center justify-center text-center align-middle"
+						>{#if row.code == null}
+							<Icon
+								icon="mdi:help-rhombus"
+								class="h-5 w-5 opacity-30"
+								title="ยังไม่ได้จัดรหัสโครงงาน"
+							/>
+						{:else}
+							{row.code}
+						{/if}</td
+					>
+					<td>{row.field?.name}</td>
+					<td class="whitespace-nowrap">{row.presentation_type?.type}</td>
+					<td>
+						<RenderStyledText content={row.title_th || ''} />
+					</td>
+					<td><RenderStyledText content={row.title_en || ''} /></td>
+					<td>{row.school?.province}</td>
+					<td>
+						<ul>
+							{#each formatMembers(row.student_members) as p}
+								<li class="whitespace-nowrap">
+									{p.trim()}
+								</li>
+							{/each}
+						</ul>
+					</td>
+					<td>
+						<ul>
+							{#each formatMembers(row.teacher_advisor) as p}
+								<li class="whitespace-nowrap">
+									{p.trim()}
+								</li>
+							{/each}
+						</ul></td
+					>
+					<td>
+						<ul>
+							{#each formatMembers(row.special_advisor) as p}
+								<li class="whitespace-nowrap">
+									{p.trim()}
+								</li>
 							{:else}
-								{row.code}
-							{/if}</td
-						>
-						<td>
-							<div class="flex flex-row gap-2">
-								<button
-									class="block h-6 w-6 rounded-full text-center {abstractUploaded.includes(
-										row.team_contact_user_id
-									)
-										? 'bg-success text-success-content'
-										: 'bg-base-300'}"
-								>
-									{#if abstractUploaded.includes(row.team_contact_user_id)}
-										<Icon icon="mdi:tick" class="m-auto h-3.5 w-3.5" />
-									{:else}
-										3
-									{/if}
-								</button><button
-									class="block h-6 w-6 rounded-full {articleUploaded.includes(
-										row.team_contact_user_id
-									)
-										? 'bg-success text-success-content'
-										: 'bg-base-300'}"
-								>
-									{#if articleUploaded.includes(row.team_contact_user_id)}
-										<Icon icon="mdi:tick" class="m-auto h-3.5 w-3.5" />
-									{:else}
-										4
-									{/if}</button
-								>
-							</div>
-						</td>
-						<td>{row.field?.name}</td>
-						<td class="whitespace-nowrap">{row.presentation_type?.type}</td>
-						<td>
-							<RenderStyledText content={row.title_th} />
-						</td>
-						<td><RenderStyledText content={row.title_en} /></td>
-						<td>{row.school?.province}</td>
-						<td>
-							<ul>
-								{#each formatMembers(row.student_members) as p}
-									<li class="whitespace-nowrap">
-										{p.trim()}
-									</li>
-								{/each}
-							</ul>
-						</td>
-						<td>
-							<ul>
-								{#each formatMembers(row.teacher_advisor) as p}
-									<li class="whitespace-nowrap">
-										{p.trim()}
-									</li>
-								{/each}
-							</ul></td
-						>
-						<td>
-							<ul>
-								{#each formatMembers(row.special_advisor) as p}
-									<li class="whitespace-nowrap">
-										{p.trim()}
-									</li>
-								{:else}
-									-
-								{/each}
-							</ul>
-						</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
-	</div>
+								-
+							{/each}
+						</ul>
+					</td>
+				</tr>
+			{/each}
+		</tbody>
+	</table>
 </div>

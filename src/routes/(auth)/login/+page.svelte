@@ -128,6 +128,7 @@
 			data-context="signin"
 			data-ux_mode="popup"
 			data-callback="handleSignInWithGoogle"
+			data-auto_prompt={!data.session ? 'true' : 'false'}
 			data-itp_support="true"
 		/>
 

@@ -8,11 +8,15 @@ import {
 	type StudentMembers
 } from '$lib/formSchemas';
 import { message, superValidate } from 'sveltekit-superforms/server';
+import { featureFlags } from '$lib/featureFlags';
 export const ssr = false;
 
 export const load = (async ({ locals: { getSession, supabase } }) => {
 	const session = await getSession();
 	await supabase.auth.refreshSession();
+	if (session?.user?.user_metadata?.role !== 'student-team-contact')
+		throw redirect(303, '/dashboard');
+	if (!featureFlags.openForRegistrationAndEditProject) throw redirect(303, '/submission-closed');
 	if (!session) throw redirect(303, '/login?redirect=/my-project/edit/step-2-project-information');
 	const checkIfProjectExist = await supabase
 		.from('projects')
@@ -111,6 +115,9 @@ export const actions: Actions = {
 		const session = await getSession();
 		if (!session)
 			throw redirect(303, '/login?redirect=/my-project/edit/step-2-project-information');
+		if (session?.user?.user_metadata?.role !== 'student-team-contact')
+			throw redirect(303, '/dashboard');
+		if (!featureFlags.openForRegistrationAndEditProject) throw redirect(303, '/submission-closed');
 		const form = await superValidate(request, studentRegisterProjectFormSchema);
 		// console.log('POST', JSON.stringify(form.data, null, 2));
 		// console.log('POST', JSON.stringify(form.errors, null, 2));

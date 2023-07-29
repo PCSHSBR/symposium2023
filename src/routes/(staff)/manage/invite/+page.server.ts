@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { error, fail, redirect } from '@sveltejs/kit';
 import type { Roles } from '$lib/types';
 import { toThai } from '$lib/langUtils';
+import { featureFlags } from '$lib/featureFlags';
 
 const permittedAccessRoles = ['teacher', 'staff', 'school-contact'];
 
@@ -14,6 +15,7 @@ export const load = (async ({ locals: { role, getSession } }) => {
 
 export let actions = {
 	default: async ({ request, url, locals: { supabase, getSession } }) => {
+		if (featureFlags.disableInviteNewUser) throw error(403, 'ไม่สามารถเชิญผู้ใช้ใหม่ได้');
 		const session = await getSession();
 		if (!session) throw error(401, 'โปรดเข้าสู่ระบบ');
 		const role: Roles = session.user.user_metadata.role;

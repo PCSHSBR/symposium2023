@@ -1,25 +1,17 @@
-// import { get, type EdgeConfigValue } from '@vercel/edge-config';
-// import type { Roles } from './types';
+/**
+ * This is setting file for feature flags.
+ * Include all switchs for features and some other settings for website.
+ *
+ * ! CAUTION: TAKE CARE OF WHAT YOU ARE DOING.
+ * ! DO NOT CHANGE ANYTHING IF YOU ARE NOT SURE.
+ * ! DO NOT ACCEPT ANY PULL REQUESTS ABOUT THIS FILE.
+ */
 
-// // "mt-all": "",
-// // "mt-anon": "",
-// // "mt-logged-in": "",
-// // "mt-student": "",
-// // "mt-teacher": "",
-// // "mt-school-contact": ""
-
-// const maintainanceText: Record<Roles & ('all' | 'logged-in'), Promise<EdgeConfigValue | undefined>> = {
-//   'all': get('mt-all'),
-//   'anon': get('mt-anon'),
-//   'logged-in': get('mt-logged-in'),
-//   'student': get('mt-student'),
-//   'teacher': get('mt-teacher'),
-//   'school-contact': get('mt-school-contact')
-// }
-
-// export const getMaintainentMessage =  async (userRole: Roles & ('all' | 'logged-is')) => {
-//   if (userRole === 'all' || userRole === 'anon') {
-//     return await maintainanceText[userRole];
-//   }
-//   return await (maintainanceText[userRole]);
-// }
+export const featureFlags = {
+	// Switch for feature
+	openForLogin: true,
+	disableInviteNewUser: true,
+	openForRegistrationAndEditProject: false,
+	openForUploadAbstract: false,
+	openForUploadArticle: false
+};

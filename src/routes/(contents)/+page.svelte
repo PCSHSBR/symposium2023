@@ -14,6 +14,8 @@
 	import { notify } from '$lib/notify';
 	import { toThai } from '$lib/langUtils';
 	import type { PageData } from './$types';
+	import { goto } from '$app/navigation';
+	import { toast } from '$lib/toastStore';
 
 	export let data: PageData;
 
@@ -72,7 +74,7 @@
 			let scene1_1 = new ScrollMagic.Scene({
 				triggerElement: '.hero-sticky',
 				triggerHook: 0,
-				duration: document.querySelector('.hero-sticky')?.clientHeight - window.innerHeight
+				duration: (document.querySelector('.hero-sticky')?.clientHeight ?? 0) - window.innerHeight
 			})
 				.on('enter', (e) => {
 					tl1.play();
@@ -153,21 +155,27 @@
 	});
 
 	async function handleSignInWithGoogle(response) {
+		const _noti = notify({
+			message: 'กำลังเข้าสู่ระบบ...',
+			type: 'info'
+		});
 		const { data: _data, error } = await data.supabase.auth.signInWithIdToken({
 			token: response.credential,
 			provider: 'google'
 		});
+		toast.pop(_noti);
 		if (error && error.message !== 'Internal Server Error')
-			notify({
+			return notify({
 				message: toThai(error.message),
 				type: 'error'
 			});
 		if (error && error.message === 'Internal Server Error' && !_data.user) {
-			notify({
+			return notify({
 				message: 'ไม่พบคุณในระบบ คุณต้องได้รับคำเชิญก่อนจึงสามารถเข้าใช้งานระบบได้',
 				initial: 0
 			});
 		}
+		goto('/dashboard');
 	}
 
 	onMount(() => {
@@ -233,7 +241,7 @@
 				<div class="date-range flex flex-row flex-wrap items-center">
 					<span>PCSHSBR</span>
 					<span class="divider mx-8 h-1 w-16 rounded-sm bg-base-content" />
-					<span>4 กันยายน - 6 กันยายน 2566</span>
+					<span>4 กันยายน – 6 กันยายน 2566</span>
 				</div>
 				<h1 class="main-title text-4xl font-black leading-none md:text-6xl">
 					<span class="text-[128px]">3</span><sup class="align-top text-xl">rd</sup> PCSHS Science Symposium
@@ -418,9 +426,11 @@
 	data-context="signin"
 	data-callback="handleSignInWithGoogle"
 	data-itp_support="true"
+	data-auto_prompt={data.session ? 'false' : 'true'}
+	data-login_uri="https://3rdpss2023.pcshsbr.ac.th/login"
 />
 
-<style lang="postcss">
+<style lang="scss">
 	.circle {
 		@apply absolute z-0 h-20 w-20 rounded-full bg-primary/50 blur-xl transition-opacity duration-500;
 	}
