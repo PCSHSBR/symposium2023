@@ -52,7 +52,7 @@
 			} = data.supabase.storage
 				.from('teamImages')
 				.getPublicUrl(`${data.session?.user.id}/${teamImageResult.data[0].name}`, {});
-			projectData.data.teamImageUrl = publicUrl + '?width=400&height=300';
+			projectData.data.teamImageUrl = publicUrl;
 			stepData.step2.isDone = true;
 		}
 	}
@@ -71,11 +71,11 @@
 			field: d.field.name,
 			presentation_type: d.presentation_type.type,
 			school: `วิทยาศาสตร์จุฬาภรณราชวิทยาลัย ${d.school.province}`,
-			project_title_en: d.title_en,
-			project_title_th: d.title_th,
+			project_title_en: d.title_en || '',
+			project_title_th: d.title_th || '',
 			members: d.student_members.map(getName),
 			teachers: d.teacher_advisor.map(getName),
-			special_advisors: d.special_advisor.map(getName),
+			special_advisors: d.special_advisor ? d.special_advisor.map(getName) : [],
 			abstract: d.abstract
 		};
 		stepData.step3.text = d.abstract;
