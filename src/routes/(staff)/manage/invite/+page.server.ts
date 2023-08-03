@@ -10,7 +10,7 @@ const permittedAccessRoles = ['teacher', 'staff', 'school-contact'];
 export const load = (async ({ locals: { role, getSession } }) => {
 	const session = await getSession();
 	if (!permittedAccessRoles.includes(session?.user.user_metadata.role))
-		throw redirect(303, 'login?redirect=/auth');
+		throw redirect(303, '/login?redirect=/auth');
 }) satisfies PageServerLoad;
 
 export let actions = {

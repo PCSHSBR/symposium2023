@@ -87,6 +87,18 @@
 			return `${studentMember.title_th}${studentMember.firstname_th} ${studentMember.lastname_th}`;
 		});
 	}
+
+	function onClickToCopy(e: MouseEvent) {
+		const el = e.target;
+		const text = el.textContent;
+		const input = document.createElement('input');
+		input.value = text;
+		document.body.appendChild(input);
+		input.select();
+		document.execCommand('copy');
+		document.body.removeChild(input);
+		notify({ message: 'คัดลอกข้อความเรียบร้อยแล้ว', type: 'success' });
+	}
 </script>
 
 <svelte:head>
@@ -122,7 +134,7 @@
 			</span> = ยังไม่ได้จัดรหัสโครงงาน
 		</div>
 	</div>
-	<label class="swap-rotate swap btn-primary btn-circle btn absolute bottom-0 right-0 shadow-2xl">
+	<label class="swap btn-primary swap-rotate btn-circle btn absolute bottom-0 right-0 shadow-2xl">
 		<input type="checkbox" bind:checked={isInfoToggle} />
 		<Icon icon="mdi:close" class="swap-on text-2xl" />
 		<Icon icon="mdi:info" class="swap-off text-2xl" />
@@ -188,7 +200,13 @@
 				{/if}
 			</div>
 			<div class="stat-desc">
-				เป็น {Math.floor((studentCount * 100) / (12 * 144))}% ของนักเรียน ม.6 ปี 2566
+				เป็น
+				{#if isLoading}
+					<span class="loading loading-spinner h-2 w-2" />
+				{:else}
+					{Math.floor((studentCount * 1000) / (10 * 12 * 144))}%
+				{/if}
+				ของนักเรียน ม.6 ปี 2566
 			</div>
 		</div>
 	</div>
@@ -215,13 +233,18 @@
 			<!-- <pre>{JSON.stringify(tableData, null, 2)}</pre> -->
 			{#each tableData as row}
 				<tr>
-					<td class="flex items-center justify-center text-center align-middle"
+					<td class=""
 						>{#if row.code == null}
-							<Icon
+							<!-- <Icon
 								icon="mdi:help-rhombus"
 								class="h-5 w-5 opacity-30"
 								title="ยังไม่ได้จัดรหัสโครงงาน"
-							/>
+							/> -->
+							<button
+								class="btn-sm btn cursor-pointer font-mono"
+								title="กดเพื่อคัดลอก"
+								on:click|preventDefault={onClickToCopy}>asdasd</button
+							>
 						{:else}
 							{row.code}
 						{/if}</td
@@ -253,7 +276,7 @@
 					>
 					<td>
 						<ul>
-							{#each formatMembers(row.special_advisor) as p}
+							{#each formatMembers(row.special_advisor || []) as p}
 								<li class="whitespace-nowrap">
 									{p.trim()}
 								</li>
