@@ -10,8 +10,8 @@
 export const featureFlags = {
 	// Switch for feature
 	openForLogin: true,
-	disableInviteNewUser: false,
-	openForRegistrationAndEditProject: true,
-	openForUploadAbstract: true,
-	openForUploadArticle: true
+	disableInviteNewUser: true,
+	openForRegistrationAndEditProject: false,
+	openForUploadAbstract: false,
+	openForUploadArticle: false
 };
