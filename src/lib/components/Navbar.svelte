@@ -105,8 +105,21 @@
 				</details>
 			</li>
 			<li>
-				<a href="/" use:closeMenu>ช่องทางติดต่อ</a>
+				<details>
+					<summary>โครงงาน</summary>
+					<ul>
+						<li>
+							<a href="/projects" use:closeMenu>โครงงานพร้อมรหัสโครงงาน</a>
+						</li>
+						<li>
+							<a href="/schedule" use:closeMenu>เวลานำเสนอโครงงาน</a>
+						</li>
+					</ul>
+				</details>
 			</li>
+			<!-- <li>
+				<a href="/" use:closeMenu>ช่องทางติดต่อ</a>
+			</li> -->
 		</ul>
 	</div>
 	<div class="gap-4">
@@ -226,8 +239,21 @@
 					</details>
 				</li>
 				<li>
-					<a href="/" use:closeMenu>ช่องทางติดต่อ</a>
+					<details>
+						<summary>โครงงาน</summary>
+						<ul>
+							<li>
+								<a href="/projects" use:closeMenu>โครงงานพร้อมรหัสโครงงาน</a>
+							</li>
+							<li>
+								<a href="/schedule" use:closeMenu>เวลานำเสนอโครงงาน</a>
+							</li>
+						</ul>
+					</details>
 				</li>
+				<!-- <li>
+					<a href="/" use:closeMenu>ช่องทางติดต่อ</a>
+				</li> -->
 			</ul>
 		</div>
 	</div>

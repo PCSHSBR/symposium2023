@@ -3,19 +3,18 @@
 	import Icon from '@iconify/svelte';
 	import animejs from 'animejs';
 	import LoadingPage from '$lib/components/LoadingPage.svelte';
-	import Speaker from '$lib/assets/images/Speaker.png';
 	import { calendarData } from '$lib/calendarData';
 	import Banner from '$lib/components/Banner.svelte';
 	import Calendar from '$lib/components/Calendar.svelte';
 	import FieldTrip from '$lib/components/FieldTrip.svelte';
 	import FieldSchedule from '$lib/components/FieldSchedule.svelte';
 	import SpeakerPatentImage from '$lib/assets/images/SpeakerPatent.jpg';
-	import SchoolImage from '$lib/assets/images/SchoolMap.png';
 	import { notify } from '$lib/notify';
 	import { toThai } from '$lib/langUtils';
 	import type { PageData } from './$types';
 	import { goto } from '$app/navigation';
 	import { toast } from '$lib/toastStore';
+	import CdnImage from '$lib/components/CDNImage.svelte';
 
 	export let data: PageData;
 
@@ -326,7 +325,7 @@
 		</div>
 	</section>
 	<section id="school-map" class="school-map p-10">
-		<a href="/map">
+		<a href="/map" target="_blank">
 			<div
 				class="main-c-1 relative mx-auto h-[30rem] max-w-[60rem] overflow-hidden rounded-3xl transition-all duration-500"
 			>
@@ -339,10 +338,10 @@
 					</div>
 				</div>
 				<span class="transition-all duration-500" />
-				<img
-					src={SchoolImage}
-					alt=""
+				<CdnImage
 					class="z-[100] h-full w-full object-cover transition-all duration-500"
+					alt="ภาพแผนที่โรงเรียนแบบคร่าว ๆ"
+					file="sym2023/school-map.png"
 				/>
 			</div>
 		</a>
@@ -368,13 +367,17 @@
 			<div class="my-4 grid grid-cols-1 text-center md:grid-cols-2 md:text-left">
 				<div class="relative mx-auto max-w-sm overflow-hidden rounded-lg md:mx-0">
 					<a href={SpeakerPatentImage} title="สิทธิบัตร"
-						><img
-							class="absolute bottom-[6px] right-[6px] mx-auto h-auto max-w-[25%] rounded-md shadow-lg"
-							src={SpeakerPatentImage}
+						><CdnImage
+							class="absolute bottom-2 right-2 mx-auto h-auto max-w-[25%] rounded-md shadow-lg"
+							file="sym2023/speaker-patent.jpg"
 							alt=""
 						/></a
 					>
-					<img src={Speaker} class="h-full w-full object-cover" alt="Speaker" />
+					<CdnImage
+						file="sym2023/speaker-updated.png"
+						class="h-full w-full object-cover"
+						alt="วิทยากร"
+					/>
 				</div>
 				<div class="p-6">
 					<h3 class="mb-6 text-2xl font-bold">ดร.สุพรรณ ยอดยิ่งยง</h3>
@@ -427,7 +430,6 @@
 	data-callback="handleSignInWithGoogle"
 	data-itp_support="true"
 	data-auto_prompt={data.session ? 'false' : 'true'}
-	data-login_uri="https://3rdpss2023.pcshsbr.ac.th/login"
 />
 
 <style lang="scss">
@@ -441,7 +443,7 @@
 				@apply absolute z-[101] h-full w-full bg-black/0;
 			}
 			&:hover {
-				img {
+				:global(img) {
 					@apply scale-110;
 				}
 				.text-c-1 {

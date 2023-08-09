@@ -1,14 +1,20 @@
 <script>
 	import Icon from '@iconify/svelte';
+	import CdnImage from './CDNImage.svelte';
 </script>
 
 <div class="trip-container">
 	<div class="item">
 		<div class="d-image">
-			<img
-				alt="ภาพด้านหน้าปราสาทเขาพนมรุ้ง"
-				srcset="https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=100 100w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=116 116w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=134 134w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=156 156w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=182 182w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=210 210w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=244 244w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=282 282w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=328 328w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=380 380w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=442 442w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=512 512w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=594 594w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=688 688w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=798 798w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=926 926w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=1074 1074w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=1246 1246w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=1446 1446w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=1678 1678w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=1946 1946w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=2258 2258w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=2618 2618w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=3038 3038w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=3524 3524w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=4088 4088w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=4742 4742w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=5500 5500w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=6380 6380w, https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?auto=format,compress&w=7400 7400w"
-				src="https://pcshsbr-assets.imgix.net/sym2023/panomrung.jpg?ixembed=1689153740783&auto=format,compress"
+			<CdnImage
+				options={{
+					ar: '4:3',
+					fit: 'fill'
+				}}
+				class="aspect-[4/3] h-full w-full rounded-xl object-cover"
+				title="สิทธิพงษ์ อินทะนิน, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"
+				file="sym2023/panomrung.jpg"
+				alt="ภาพด้านหน้าปราสาทเขาพนมรุ้ง มีพระอาทิตย์ส่องลอดตรงกลางภาพ ถ่ายโดยสิทธิพงษ์ อินทะนิน"
 			/>
 		</div>
 		<div class="d-info">
@@ -22,16 +28,21 @@
 			</p>
 			<a
 				href="https://th.wikipedia.org/wiki/%E0%B8%AD%E0%B8%B8%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%99%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%A7%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%95%E0%B8%A3%E0%B9%8C%E0%B8%9E%E0%B8%99%E0%B8%A1%E0%B8%A3%E0%B8%B8%E0%B9%89%E0%B8%87"
-				class="btn-primary btn mt-4"><Icon icon="mdi:open-in-new" />อ่านต่อ</a
+				class="btn-primary btn mt-4">อ่านต่อ<Icon icon="mdi:open-in-new" /></a
 			>
 		</div>
 	</div>
 	<div class="item">
 		<div class="d-image">
-			<img
-				srcset="https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=100 100w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=116 116w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=134 134w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=156 156w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=182 182w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=210 210w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=244 244w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=282 282w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=328 328w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=380 380w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=442 442w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=512 512w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=594 594w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=688 688w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=798 798w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=926 926w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=1074 1074w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=1246 1246w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=1446 1446w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=1678 1678w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=1946 1946w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=2258 2258w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=2618 2618w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=3038 3038w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=3524 3524w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=4088 4088w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=4742 4742w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=5500 5500w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=6380 6380w, https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?auto=format,compress&w=7400 7400w"
-				src="https://pcshsbr-assets.imgix.net/sym2023/ChangArean.jpg?ixembed=1689152828202&auto=format,compress"
-				alt=""
+			<CdnImage
+				options={{
+					ar: '4:3',
+					fit: 'fill'
+				}}
+				class="aspect-[4/3] h-full w-full rounded-xl object-cover"
+				title="::::=UT=::::, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons"
+				file="sym2023/ChangArean.jpg"
+				alt="ภาพถ่ายภายในสนามช้างอารีนา แสดงสนามหญ้าแท้และแสตน"
 			/>
 		</div>
 		<div class="d-info">
@@ -51,10 +62,13 @@
 			</p>
 			<a
 				href="https://th.wikipedia.org/wiki/%E0%B8%8A%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%AD%E0%B8%B2%E0%B8%A3%E0%B8%B5%E0%B8%99%E0%B8%B2"
-				class="btn-primary btn mt-4"><Icon icon="mdi:open-in-new" />อ่านต่อ</a
+				class="btn-primary btn mt-4">อ่านต่อ<Icon icon="mdi:open-in-new" /></a
 			>
 		</div>
 	</div>
+	<a href="https://facebook.com/BuriramRoute" class="btn m-auto flex md:float-right">
+		สถานที่ท่องเที่ยวอื่น ๆ ในจังหวัดบุรีรัมย์ <Icon icon="mdi:open-in-new" />
+	</a>
 </div>
 
 <style lang="scss">
@@ -67,9 +81,6 @@
 				}
 				.d-image {
 					@apply flex flex-col items-center justify-center;
-					img {
-						@apply h-full w-full rounded-xl object-cover;
-					}
 				}
 				.d-info {
 					@apply my-auto bg-base-100/70 p-6 text-left;

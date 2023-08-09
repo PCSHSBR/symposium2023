@@ -140,17 +140,29 @@
 </script>
 
 <div class="relative">
-	<div class="absolute left-[16px] top-[16px]">
+	<div class="absolute left-4 top-4">
 		<div class="flex gap-1">
 			<a href="/#school-map">
-				<button class="btn-primary btn"><Icon icon="mdi:home" />กลับไปหน้าหลัก</button>
+				<button class="btn"
+					><Icon icon="mdi:home" class="h-6 w-6 sm:h-4 sm:w-4" />
+					<span class="hidden sm:inline"> กลับไปหน้าหลัก </span>
+				</button>
 			</a>
 			<a href="https://goo.gl/maps/hrtCinUXAnTnRN1FA">
-				<button class="btn-primary btn"><Icon icon="mdi:location" /></button>
+				<button class="btn-primary btn"
+					><Icon icon="mdi:google-maps" class="h-6 w-6 sm:h-4 sm:w-4" /><span
+						class="hidden sm:inline"
+					>
+						ดูบน Google Maps
+					</span></button
+				>
 			</a>
 		</div>
-		<div class="my-2 rounded-2xl bg-base-100 p-4">
-			<p class="flex">ใข้ <Icon icon="material-symbols:pinch" /> เพื่อเลื่อนและขยาย</p>
+		<div class="my-2 rounded-lg bg-base-100 p-4">
+			<p class="flex">
+				ใช้<span class="sr-only">นิ้วบีบหรือกางบนหน้าจอ</span>
+				<Icon icon="material-symbols:pinch" class="mx-3 h-4 w-4" /> เพื่อเลื่อนและขยาย
+			</p>
 		</div>
 	</div>
 	<div class="three-canvas h-[100vh-4rem] w-screen" bind:this={threeCanvas} />
