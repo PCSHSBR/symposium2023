@@ -1,15 +1,36 @@
 <script lang="ts">
-	import img1 from '$lib/assets/images/shop/shirt/IMG_0001.jpg';
-	import img2 from '$lib/assets/images/shop/shirt/IMG_0002.jpg';
-	import img3 from '$lib/assets/images/shop/shirt/IMG_0003.jpg';
-	import img4 from '$lib/assets/images/shop/shirt/IMG_0004.jpg';
-	import img5 from '$lib/assets/images/shop/shirt/IMG_0005.jpg';
-	import img6 from '$lib/assets/images/shop/shirt/IMG_0006.jpg';
-	import img7 from '$lib/assets/images/shop/shirt/IMG_0007.jpg';
-	import img8 from '$lib/assets/images/shop/shirt/IMG_0008.jpg';
 	import { onMount } from 'svelte';
 
-	let img_list = [img1, img2, img3, img4, img5, img6, img7, img8];
+	let img_list = `https://i.ibb.co/zJ4dn9t/IMG-0022.jpg
+https://i.ibb.co/pbJqTCJ/IMG-0023.jpg
+https://i.ibb.co/ScypPjB/IMG-0024.jpg
+https://i.ibb.co/jLPcsnq/IMG-0025.jpg
+https://i.ibb.co/ydV7ntP/IMG-0026.jpg
+https://i.ibb.co/t3dzmQc/IMG-0027.jpg
+https://i.ibb.co/QYgj2zN/IMG-0029.jpg
+https://i.ibb.co/pwNQQM9/IMG-0030.jpg
+https://i.ibb.co/7W4671M/IMG-0031.jpg
+https://i.ibb.co/DkbNfNx/IMG-0033.jpg
+https://i.ibb.co/LCdJXjs/IMG-0034.jpg
+https://i.ibb.co/tDjS2Mp/IMG-0035.jpg
+https://i.ibb.co/BLgZnFj/IMG-0036.jpg
+https://i.ibb.co/hcyPy1B/IMG-0037.jpg
+https://i.ibb.co/JymWCYz/IMG-0001.jpg
+https://i.ibb.co/0KdG0ph/IMG-0002.jpg
+https://i.ibb.co/mGSqn4n/IMG-0003.jpg
+https://i.ibb.co/7S0YVM5/IMG-0004.jpg
+https://i.ibb.co/4VZMrFs/IMG-0005.jpg
+https://i.ibb.co/dkf1MZc/IMG-0006.jpg
+https://i.ibb.co/swsxyVb/IMG-0007.jpg
+https://i.ibb.co/526YPCS/IMG-0008.jpg
+https://i.ibb.co/wMN1mjX/IMG-0009.jpg
+https://i.ibb.co/nLvWy3P/IMG-0011.jpg
+https://i.ibb.co/BrG5wLB/IMG-0012.jpg
+https://i.ibb.co/YtZDbnW/IMG-0013.jpg
+https://i.ibb.co/NpQVk9d/IMG-0018.jpg
+https://i.ibb.co/pZBBh1f/IMG-0019.jpg
+https://i.ibb.co/VCdtV1h/IMG-0020.jpg
+https://i.ibb.co/G3B4DNf/IMG-0021.jpg`.split('\n');
 	let img_select_container: HTMLElement;
 	let img_preview_container: HTMLElement;
 	onMount(() => {
@@ -28,7 +49,7 @@
 				bind:this={img_preview_container}
 				class="h-[600px] w-full max-w-[600px] overflow-hidden rounded-3xl bg-base-300"
 			>
-				<img src={img1} class="h-full w-full object-scale-down" alt="shirt" />
+				<img src={img_list[0]} class="h-full w-full object-scale-down" alt="shirt" />
 			</div>
 			<div
 				bind:this={img_select_container}
