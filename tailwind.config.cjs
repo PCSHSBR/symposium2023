@@ -1,5 +1,6 @@
 const daisyui = require('daisyui');
 const neasting = require('postcss-nesting');
+const gridAreas = require('@savvywombat/tailwindcss-grid-areas');
 
 /** @type {import('tailwindcss').Config}*/
 const config = {

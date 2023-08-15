@@ -126,3 +126,8 @@ main a:hover {
 code {
 	@apply rounded-md bg-base-300 p-1 font-mono;
 }
+
+[data-scrollbar='false']::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}

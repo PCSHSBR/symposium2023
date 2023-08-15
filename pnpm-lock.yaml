@@ -64,6 +64,9 @@ devDependencies:
   '@iconify/svelte':
     specifier: ^3.1.4
     version: 3.1.4(svelte@4.0.0)
+  '@savvywombat/tailwindcss-grid-areas':
+    specifier: ^3.1.0
+    version: 3.1.0(tailwindcss@3.3.2)
   '@sentry/vite-plugin':
     specifier: ^2.4.0
     version: 2.4.0
@@ -775,6 +778,16 @@ packages:
     dependencies:
       estree-walker: 2.0.2
       picomatch: 2.3.1
+    dev: true
+
+  /@savvywombat/tailwindcss-grid-areas@3.1.0(tailwindcss@3.3.2):
+    resolution: {integrity: sha512-CaNoCS7Zr3OeDDhCSXXU7dnqYjehdjNmDy6NdFxkLAyDcxA8YTI3rjPm6X+bTWyYINHXr+RONG3UKWrSv2UYSw==}
+    engines: {node: '>=14.18.2'}
+    peerDependencies:
+      tailwindcss: ^3.0.1
+    dependencies:
+      lodash: 4.17.21
+      tailwindcss: 3.3.2
     dev: true
 
   /@sentry-internal/tracing@7.53.1:
@@ -3037,6 +3050,10 @@ packages:
 
   /lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
+    dev: true
+
+  /lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: true
 
   /log-update@4.0.0:

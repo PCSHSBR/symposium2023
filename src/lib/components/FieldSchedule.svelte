@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
+	import { cubicOut } from 'svelte/easing';
+	import { fade, slide } from 'svelte/transition';
 
 	let classes = '';
 	export { classes as class };
@@ -36,7 +37,21 @@
 	</div>
 
 	{#if tab == 0}
-		<div class="items-container flex flex-col">
+		<div
+			in:slide={{
+				axis: 'y',
+				delay: 0,
+				duration: 300,
+				easing: cubicOut
+			}}
+			out:slide={{
+				axis: 'y',
+				delay: 0,
+				duration: 300,
+				easing: cubicOut
+			}}
+			class="items-container flex flex-col"
+		>
 			<span class="head-span w-full rounded-xl bg-base-content p-4 text-2xl text-base-300 shadow-lg"
 				>3 กันยายน 2566</span
 			>
@@ -44,7 +59,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">13:00 น. - 18:00 น.</span>
+						<span class="child-span">13:00 น. – 18:00 น.</span>
 						<h2 class="text-3xl">ลงทะเบียน/เข้าที่พัก ติดตั้งโปสเตอร์และนำส่งไฟล์นำเสนอ</h2>
 					</div>
 					<div class="info">
@@ -61,7 +76,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">18:00 น. - 19:00 น.</span>
+						<span class="child-span">18:00 น. – 19:00 น.</span>
 						<h2 class="text-3xl">รับประทานอาหารเย็น</h2>
 					</div>
 					<div class="info">
@@ -76,7 +91,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">19:00 น. - 20:00 น.</span>
+						<span class="child-span">19:00 น. – 20:00 น.</span>
 						<h2 class="text-3xl">ชี้แจงกิจกรรม</h2>
 					</div>
 					<div class="info">
@@ -91,14 +106,29 @@
 	{/if}
 
 	{#if tab == 1}
-		<div class="items-container flex flex-col">
-			<span class="head-span w-full bg-base-content p-4 text-2xl text-base-300">4 กันยายน 2566</span
+		<div
+			in:slide={{
+				axis: 'y',
+				delay: 0,
+				duration: 300,
+				easing: cubicOut
+			}}
+			out:slide={{
+				axis: 'y',
+				delay: 0,
+				duration: 300,
+				easing: cubicOut
+			}}
+			class="items-container flex flex-col"
+		>
+			<span class="head-span w-full rounded-xl bg-base-content p-4 text-2xl text-base-300 shadow-lg"
+				>4 กันยายน 2566</span
 			>
 			<span class="divider" />
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">7:00 น. - 8:00 น.</span>
+						<span class="child-span">7:00 น. – 8:00 น.</span>
 						<h2 class="text-3xl">รับประทานอาหารเช้า</h2>
 					</div>
 					<div class="info">
@@ -115,7 +145,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">8:00 น. - 10:20 น.</span>
+						<span class="child-span">8:00 น. – 10:20 น.</span>
 						<h2 class="text-3xl">พิธีเปิด</h2>
 						<ul class="list-inside list-disc">
 							<li>การแสดงพิธีเปิด</li>
@@ -136,7 +166,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">10:30 น. - 10:45 น.</span>
+						<span class="child-span">10:30 น. – 10:45 น.</span>
 						<h2 class="text-3xl">รับประทานอาหารว่าง</h2>
 					</div>
 					<div class="info">
@@ -153,7 +183,7 @@
 			<div class="item">
 				<div class="sub-item-full">
 					<div class="title">
-						<span class="child-span">10:45 น. - 12:00 น.</span>
+						<span class="child-span">10:45 น. – 12:00 น.</span>
 						<h2 class="text-3xl">นำเสนอโครงงาน</h2>
 						<div>
 							<p>นำเสนอโครงงานแบบปากเปล่า</p>
@@ -251,7 +281,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">12:00 น. - 13:00 น.</span>
+						<span class="child-span">12:00 น. – 13:00 น.</span>
 						<h2 class="text-3xl">รับประทานอาหาร</h2>
 					</div>
 					<div class="info">
@@ -268,7 +298,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">13:00 น. - 16:30 น.</span>
+						<span class="child-span">13:00 น. – 16:30 น.</span>
 						<h2 class="text-3xl">นักเรียนนำเสนอผลงานโครงงาน (ต่อ)</h2>
 					</div>
 					<div class="info">
@@ -285,7 +315,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">17:00 น. - 18:00 น.</span>
+						<span class="child-span">17:00 น. – 18:00 น.</span>
 						<h2 class="text-3xl">พักผ่อนตามอัธยาศัย</h2>
 					</div>
 					<!-- <div class="info">
@@ -302,7 +332,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">18:00 น. - 21:00 น.</span>
+						<span class="child-span">18:00 น. – 21:00 น.</span>
 						<h2 class="text-3xl">กิจกรรมกลุ่มสัมพันธ์</h2>
 					</div>
 					<div class="info">
@@ -317,14 +347,29 @@
 	{/if}
 
 	{#if tab === 2}
-		<div class="items-container flex flex-col">
-			<span class="head-span w-full bg-base-content p-4 text-2xl text-base-300">5 กันยายน 2566</span
+		<div
+			in:slide={{
+				axis: 'y',
+				delay: 0,
+				duration: 300,
+				easing: cubicOut
+			}}
+			out:slide={{
+				axis: 'y',
+				delay: 0,
+				duration: 300,
+				easing: cubicOut
+			}}
+			class="items-container flex flex-col"
+		>
+			<span class="head-span w-full rounded-xl bg-base-content p-4 text-2xl text-base-300 shadow-lg"
+				>5 กันยายน 2566</span
 			>
 			<span class="divider" />
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">7:00 น. - 8:30 น.</span>
+						<span class="child-span">7:00 น. – 8:30 น.</span>
 						<h2 class="text-3xl">รับประทานอาหารเช้า</h2>
 					</div>
 					<div class="info">
@@ -341,7 +386,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">8:30 น. - 12:00 น.</span>
+						<span class="child-span">8:30 น. – 12:00 น.</span>
 						<h2 class="text-3xl">กิจกรรมทัศนศึกษาแหล่งเรียนรู้นอกสถานที่</h2>
 					</div>
 					<div class="info">
@@ -358,7 +403,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">12:00 น. - 13:00 น.</span>
+						<span class="child-span">12:00 น. – 13:00 น.</span>
 						<h2 class="text-3xl">รับประทานอาหาร</h2>
 					</div>
 					<div class="info">
@@ -375,7 +420,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">13:00 น. - 16:00 น.</span>
+						<span class="child-span">13:00 น. – 16:00 น.</span>
 						<h2 class="text-3xl">กิจกรรมทัศนศึกษาแหล่งเรียนรู้นอกสถานที่ (ต่อ)</h2>
 					</div>
 					<div class="info">
@@ -392,7 +437,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">16:00 น. - 17:00 น.</span>
+						<span class="child-span">16:00 น. – 17:00 น.</span>
 						<h2 class="text-3xl">จัดเตรียมการแสดงแลกเปลี่ยนทางวัฒนธรรม</h2>
 					</div>
 					<div class="info">
@@ -408,7 +453,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">17:00 น. - 18:00 น.</span>
+						<span class="child-span">17:00 น. – 18:00 น.</span>
 						<h2 class="text-3xl">รับประทานอาหารเย็น</h2>
 					</div>
 					<div class="info">
@@ -424,7 +469,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">18:00 น. - 22:00 น.</span>
+						<span class="child-span">18:00 น. – 22:00 น.</span>
 						<h2 class="text-3xl">แลกเปลี่ยนทางวัฒนธรรมการแสดงของทั้ง 12 จ.ภ.</h2>
 					</div>
 					<div class="info">
@@ -439,14 +484,29 @@
 	{/if}
 
 	{#if tab === 3}
-		<div class="items-container flex flex-col">
-			<span class="head-span w-full bg-base-content p-4 text-2xl text-base-300">6 กันยายน 2566</span
+		<div
+			in:slide={{
+				axis: 'y',
+				delay: 0,
+				duration: 300,
+				easing: cubicOut
+			}}
+			out:slide={{
+				axis: 'y',
+				delay: 0,
+				duration: 300,
+				easing: cubicOut
+			}}
+			class="items-container flex flex-col"
+		>
+			<span class="head-span w-full rounded-xl bg-base-content p-4 text-2xl text-base-300 shadow-lg"
+				>6 กันยายน 2566</span
 			>
 			<span class="divider" />
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">7:00 น. - 8:00 น.</span>
+						<span class="child-span">7:00 น. – 8:00 น.</span>
 						<h2 class="text-3xl">รับประทานอาหารเช้า</h2>
 					</div>
 					<div class="info">
@@ -463,7 +523,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">8:30 น. - 10:00 น.</span>
+						<span class="child-span">8:30 น. – 10:00 น.</span>
 						<h2 class="text-3xl">
 							นักเรียนและครูเข้ารับฟังสรุปภาพรวมของโครงงานสาขาต่าง ๆ โดยผู้ทรงคุณวุฒิ
 						</h2>
@@ -480,7 +540,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">10:00 น. - 10:30 น.</span>
+						<span class="child-span">10:00 น. – 10:30 น.</span>
 						<h2 class="text-3xl">กล่าวสรุปงานประมวลภาพกิจกรรม</h2>
 					</div>
 					<div class="info">
@@ -495,7 +555,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">10:30 น. - 12:00 น.</span>
+						<span class="child-span">10:30 น. – 12:00 น.</span>
 						<h2 class="text-3xl">พิธีปิดและประกาศผลนำเสนอโครงงาน มอบโล่ รางวัล พร้อมเกียรติบัตร</h2>
 					</div>
 					<div class="info">
@@ -510,7 +570,7 @@
 			<div class="item">
 				<div class="sub-item">
 					<div class="title">
-						<span class="child-span">12:30 น. - 13:00 น.</span>
+						<span class="child-span">12:30 น. – 13:00 น.</span>
 						<h2 class="text-3xl">รับประทานอาหารและเดินทางกลับโดยสวัสดิภาพ</h2>
 					</div>
 					<div class="info">

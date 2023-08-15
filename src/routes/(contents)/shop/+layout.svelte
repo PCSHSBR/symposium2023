@@ -7,7 +7,7 @@
 
 	function updateRoute() {
 		real_route = $page.route.id?.split('/').splice(3, 5) ?? [];
-		console.log(real_route);
+		// console.log(real_route);
 	}
 </script>
 
