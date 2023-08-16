@@ -65,7 +65,7 @@
 					<div class="info">
 						<div>
 							<span>สถานที่</span>
-							<span>หอประชุมแคแสด</span>
+							<span>อาคารหอสมุดและแหล่งเรียนรู้</span>
 						</div>
 					</div>
 				</div>

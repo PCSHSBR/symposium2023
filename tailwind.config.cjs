@@ -8,6 +8,10 @@ const config = {
 
 	theme: {
 		extend: {
+			fontSize: {
+				sm: ['0.875rem', { lineHeight: '1.5rem' }],
+				base: ['1rem', { lineHeight: '1.6rem' }],
+			},
 			fontFamily: {
 				display: ['Anuphan', 'sans-serif']
 			},

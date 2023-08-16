@@ -45,3 +45,16 @@
 	{alt}
 	{...$$restProps}
 />
+
+<style lang="scss">
+	img {
+		background-image: repeating-linear-gradient(
+			135deg,
+			theme('backgroundColor.base-300') 0,
+			theme('backgroundColor.base-300') 4px,
+			theme('backgroundColor.transparent') 4px,
+			theme('backgroundColor.transparent') 8px
+		);
+		@apply inline-block overflow-hidden text-ellipsis whitespace-pre-wrap text-center;
+	}
+</style>
