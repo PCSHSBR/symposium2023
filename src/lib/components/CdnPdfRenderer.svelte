@@ -13,11 +13,13 @@
 	}
 	if (text) text = base64encode(text);
 	let isLoaded = false;
+	let classes = '';
+	export { classes as class };
 </script>
 
 <a
 	{...$$restProps}
-	class="relative aspect-[210/297] w-full overflow-y-hidden border border-base-300 bg-base-200 shadow-lg"
+	class="relative aspect-[210/297] w-full overflow-y-hidden border border-base-300 bg-base-200 shadow-lg {classes}"
 	data-strip-background-moving={!isLoaded}
 	href="https://pcshsbr-assets.imgix.net/{file}?fm=png&page={page}&invert=false&w=1200"
 	title="กดเพื่อเปิดภาพนี้ขนาดใหญ่ขึ้นในแท็บใหม่ (หน้า {page})"
@@ -25,7 +27,7 @@
 	<span class="absolute bottom-0 left-0 right-0 z-0 block p-2 text-right text-xs"
 		>กำลังโหลดหน้า {page}</span
 	>
-	<picture class="relative z-20">
+	<picture class="relative z-20 h-full w-full">
 		<source
 			srcset={`https://pcshsbr-assets.imgix.net/${file}?auto=format,compress&page=${page}&invert=true&w=100 100w,` +
 				`https://pcshsbr-assets.imgix.net/${file}?auto=format,compress&page=${page}&invert=true&w=116 116w, ` +
@@ -79,6 +81,7 @@
 				`https://pcshsbr-assets.imgix.net/${file}?auto=format,compress&page=${page}&invert=false&w=2618 2618w, `}
 			{alt}
 			src={`https://pcshsbr-assets.imgix.net/${file}?auto=format,compress&page=${page}&invert=false`}
+			class="h-full w-full object-cover object-center"
 		/>
 	</picture>
 </a>

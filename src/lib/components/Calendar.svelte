@@ -34,7 +34,7 @@
 
 <div class={`main-container ${clazz || ''}`}>
 	<div class="collapse-arrow collapse mb-4 bg-base-200/70 shadow-sm">
-		<input type="radio" name="my-accordion-2" checked={true} />
+		<input type="checkbox" />
 		<div class="collapse-title text-xl font-medium">การนำเสนอ ONSITE</div>
 		<div class="collapse-content">
 			<div class="item">
@@ -73,7 +73,7 @@
 		</div>
 	</div>
 	<div class="collapse-arrow collapse bg-base-200/70 shadow-sm">
-		<input type="radio" name="my-accordion-2" />
+		<input type="checkbox" />
 		<div class="collapse-title text-xl font-medium">การนำเสนอ ONLINE</div>
 		<div class="collapse-content">
 			<div class="item">

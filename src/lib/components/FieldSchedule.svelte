@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Icon from '@iconify/svelte';
+	import { onMount } from 'svelte';
 	import { cubicOut } from 'svelte/easing';
 	import { fade, slide } from 'svelte/transition';
 
@@ -6,33 +8,46 @@
 	export { classes as class };
 
 	let tab = 0;
+
+	const autoTabOpenOn: Record<string, number> = {
+		'September 3, 2023': 0,
+		'September 4, 2023': 1,
+		'September 5, 2023': 2,
+		'September 6, 2023': 3
+	};
+
+	const date = new Date();
+	const dateString = date.toDateString();
+	if (dateString in autoTabOpenOn) {
+		tab = autoTabOpenOn[dateString];
+	}
+
+	function switchToTab(tabID: 0 | 1 | 2 | 3) {
+		tab = tabID;
+		localStorage.setItem('tab', tabID.toString());
+	}
+
+	onMount(() => {
+		const tabID = localStorage.getItem('tab');
+		if (tabID) {
+			tab = parseInt(tabID);
+		}
+	});
 </script>
 
 <div class="main-container flex flex-col {classes}">
 	<div class="date-select my-4 justify-center">
-		<button
-			on:click={() => {
-				tab = 0;
-			}}
-			class="btn {tab == 0 ? 'btn-primary' : ''}">3 กันยายน</button
+		<button on:click={() => switchToTab(0)} class="btn {tab == 0 ? 'btn-accent' : ''}"
+			>3 กันยายน</button
 		>
-		<button
-			on:click={() => {
-				tab = 1;
-			}}
-			class="btn {tab == 1 ? 'btn-primary' : ''}">4 กันยายน</button
+		<button on:click={() => switchToTab(1)} class="btn {tab == 1 ? 'btn-accent' : ''}"
+			>4 กันยายน</button
 		>
-		<button
-			on:click={() => {
-				tab = 2;
-			}}
-			class="btn {tab == 2 ? 'btn-primary' : ''}">5 กันยายน</button
+		<button on:click={() => switchToTab(2)} class="btn {tab == 2 ? 'btn-accent' : ''}"
+			>5 กันยายน</button
 		>
-		<button
-			on:click={() => {
-				tab = 3;
-			}}
-			class="btn {tab == 3 ? 'btn-primary' : ''}">6 กันยายน</button
+		<button on:click={() => switchToTab(3)} class="btn {tab == 3 ? 'btn-accent' : ''}"
+			>6 กันยายน</button
 		>
 	</div>
 
@@ -186,13 +201,15 @@
 						<span class="child-span">10:45 น. – 12:00 น.</span>
 						<h2 class="text-3xl">นำเสนอโครงงาน</h2>
 						<div>
-							<p>นำเสนอโครงงานแบบปากเปล่า</p>
+							<a href="/schedule" class="btn-outline btn-sm btn">ดูรายละเอียดเพิ่มเติม</a>
+							<p class="my-3">นำเสนอโครงงานแบบปากเปล่า</p>
 							<table class="table">
 								<!-- head -->
 								<thead>
 									<tr>
 										<th>สาขา</th>
 										<th>สถานที่</th>
+										<th>ลำดับนำเสนอ</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -204,6 +221,9 @@
 												<li>ห้องฟิสิกส์ 1 (Oral Eng) (223)</li>
 												<li>ห้องฟิสิกส์ 2 (Oral Thai) (212)</li>
 											</ul>
+										</td>
+										<td>
+											<a href="/schedule#MATS-OE" class="btn-link btn"> ดูรายละเอียด </a>
 										</td>
 									</tr>
 									<!-- row 2 -->
@@ -556,7 +576,9 @@
 				<div class="sub-item">
 					<div class="title">
 						<span class="child-span">10:30 น. – 12:00 น.</span>
-						<h2 class="text-3xl">พิธีปิดและประกาศผลนำเสนอโครงงาน มอบโล่ รางวัล พร้อมเกียรติบัตร</h2>
+						<h2 class="text-3xl">
+							พิธีปิดและประกาศผลนำเสนอโครงงาน มอบโล่รางวัล รางวัล พร้อมเกียรติบัตร
+						</h2>
 					</div>
 					<div class="info">
 						<div>

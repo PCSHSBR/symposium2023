@@ -50,6 +50,9 @@ dependencies:
   svelte-exmarkdown:
     specifier: ^2.1.0
     version: 2.1.0(svelte@4.0.0)
+  svelte-lazy-loader:
+    specifier: ^1.0.0
+    version: 1.0.0
   svelte-legos:
     specifier: ^0.2.1
     version: 0.2.1(svelte@4.0.0)
@@ -4561,6 +4564,10 @@ packages:
       svelte: ^3.19.0 || ^4.0.0-next.0
     dependencies:
       svelte: 4.0.0
+
+  /svelte-lazy-loader@1.0.0:
+    resolution: {integrity: sha512-AZD6R60vksyojn21FgXLglmBiBB9K5Dkdu0hdGrLbCaRCYT68IsWkZfRUqKhMx1IfzqWcZQ8X9y/f+Ih0oNQkQ==}
+    dev: false
 
   /svelte-legos@0.2.1(svelte@4.0.0):
     resolution: {integrity: sha512-M7IncWP2e8FaHzQN1DSzxLSoq/6aQYWZ93REZam9bYlvLEjdPGWLAYdpPNnnZtXlHco+o3zrgYTdwsyyS9beUQ==}

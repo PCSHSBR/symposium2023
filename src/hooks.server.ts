@@ -8,6 +8,7 @@ import { dev } from '$app/environment';
 
 Sentry.init({
 	dsn: PUBLIC_SENTRY_DSN,
+	telemetry: false,
 	// Performance Monitoring
 	tracesSampleRate: 1.0 // Capture 100% of the transactions. Adjust this value in production as necessary.
 });

@@ -7,7 +7,7 @@
 	import Banner from '$lib/components/Banner.svelte';
 	import Calendar from '$lib/components/Calendar.svelte';
 	import FieldTrip from '$lib/components/FieldTrip.svelte';
-	import FieldSchedule from '$lib/components/FieldSchedule.svelte';
+	import Schedule from '$lib/components/FieldSchedule.svelte';
 	import SpeakerPatentImage from '$lib/assets/images/SpeakerPatent.jpg';
 	import { notify } from '$lib/notify';
 	import { toThai } from '$lib/langUtils';
@@ -32,6 +32,32 @@
 		now = new Date();
 		remaining = new Date(eventdate.getTime() - now.getTime());
 	}, 1000);
+
+	function interactiveEvent() {
+		const event_calendar = document.querySelectorAll('.hover-effect');
+
+		event_calendar.forEach((item, _) => {
+			let background = item.querySelector('.background');
+			let interactiveCircle: HTMLElement | null | undefined =
+				background?.querySelector('.interactive');
+			window.addEventListener('mousemove', (e) => {
+				let event_calendar_rect = item?.getBoundingClientRect();
+				if (!interactiveCircle) return;
+				if (
+					e.clientY - event_calendar_rect.top < item?.clientHeight &&
+					e.clientY - event_calendar_rect?.top > 0
+				) {
+					interactiveCircle.style.opacity = '1';
+					interactiveCircle.style.left = `${e.clientX - event_calendar_rect.left}px`;
+					interactiveCircle.style.top = `${e.clientY - event_calendar_rect.top}px`;
+					interactiveCircle.style.transform = `translate(-50%,-50%)`;
+					// console.log(e.clientX - event_calendar_rect.left,e.clientY - event_calendar_rect.top);
+				} else {
+					interactiveCircle.style.opacity = '0';
+				}
+			});
+		});
+	}
 
 	onMount(async () => {
 		const ScrollMagic = (await import('scrollmagic')).default;
@@ -124,31 +150,6 @@
 				})
 				.addTo(control);
 		}
-
-		function interactiveEvent() {
-			let event_calendar = document.querySelectorAll('.hover-effect');
-
-			event_calendar.forEach((item, index) => {
-				let background = item.querySelector('.background');
-				let interactiveCircle = background?.querySelector('.interactive');
-
-				window.addEventListener('mousemove', (e) => {
-					let event_calendar_rect = item?.getBoundingClientRect();
-					if (
-						e.clientY - event_calendar_rect.top < item?.clientHeight &&
-						e.clientY - event_calendar_rect?.top > 0
-					) {
-						interactiveCircle.style.opacity = '1';
-						interactiveCircle.style.left = `${e.clientX - event_calendar_rect.left}px`;
-						interactiveCircle.style.top = `${e.clientY - event_calendar_rect.top}px`;
-						interactiveCircle.style.transform = `translate(-50%,-50%)`;
-						// console.log(e.clientX - event_calendar_rect.left,e.clientY - event_calendar_rect.top);
-					} else {
-						interactiveCircle.style.opacity = '0';
-					}
-				});
-			});
-		}
 		interactiveEvent();
 		animation();
 	});
@@ -235,7 +236,7 @@
 		</div>
 		<div>
 			<div
-				class="title absolute top-[15%] px-16 mix-blend-difference invert dark:mix-blend-difference dark:invert-0 md:px-32"
+				class="title absolute top-[15%] px-16 font-display mix-blend-difference invert dark:invert-0 md:px-32"
 			>
 				<div class="date-range flex flex-row flex-wrap items-center">
 					<span>PCSHSBR</span>
@@ -243,9 +244,13 @@
 					<span>4 กันยายน – 6 กันยายน 2566</span>
 				</div>
 				<h1 class="main-title text-4xl font-black leading-none md:text-6xl">
-					<span class="text-[128px]">3</span><sup class="align-top text-xl">rd</sup> PCSHS Science Symposium
+					<span class="sr-only">The</span> <span class="text-[120px]">3</span><sup
+						class="translate-y-[-0.5em] text-[72px]">rd</sup
+					> PCSHS Science Symposium
 				</h1>
-				<p class="sub-title text-xl">พัฒนาโลกสู่ความยั่งยืนด้วยนวัตกรรมและโครงงาน</p>
+				<p class="sub-title text-xl">
+					Improving a Sustainable World through Innovation and Projects
+				</p>
 			</div>
 			<div class="absolute bottom-0 flex h-16 w-full flex-col items-center">
 				<Icon icon="mdi:menu-down" />
@@ -270,7 +275,7 @@
 				<Icon icon="mdi:square" />
 			</div>
 		</div>
-		<div class="h-40 overflow-hidden rounded-3xl">
+		<div class="relative h-40 overflow-hidden rounded-3xl">
 			<img
 				srcset="https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=100 100w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=116 116w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=134 134w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=156 156w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=182 182w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=210 210w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=244 244w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=282 282w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=328 328w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=380 380w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=442 442w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=512 512w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=594 594w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=688 688w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=798 798w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=926 926w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1074 1074w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1246 1246w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1446 1446w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1678 1678w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1946 1946w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=2258 2258w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=2618 2618w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=3038 3038w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=3524 3524w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=4088 4088w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=4742 4742w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=5500 5500w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=6380 6380w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=7400 7400w"
 				src="https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?ixembed=1689152679867&auto=format,compress"
@@ -278,7 +283,7 @@
 				alt="ภาพถ่ายบรรยายกาศการนำเสนอโครงงาน"
 			/>
 		</div>
-		<div class="info-paragrpah">
+		<div class="info-paragrpah relative">
 			<h1
 				class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-6xl font-bold text-transparent"
 			>
@@ -310,18 +315,34 @@
 	>
 		<span class="target-anchor" id="event-schedule" />
 		<div class="background">
-			<span class="circle interactive" />
-			<span class="circle left-10 top-0 scale-[5]" />
-			<span class="circle right-0 top-20 scale-[3]" />
+			<span class="circle interactive bg-primary/50" />
+			<span class="circle left-10 top-0 scale-[5] bg-primary/50" />
+			<span class="circle right-0 top-20 scale-[3] bg-primary/50" />
 		</div>
 		<div class="calendar-info relative mx-auto max-w-6xl p-10">
 			<div class="pb-4">
 				<h2 class="m-0 flex items-center text-6xl font-bold">
-					<Icon icon="mdi:calendar" class="pr-4" /> <span>กำหนดการ</span>
+					<span>ปฏิทิน</span>
 				</h2>
 			</div>
 			<Calendar class="" calenderData={calendarData} />
-			<FieldSchedule />
+		</div>
+	</section>
+
+	<section id="event-schedule" class="hover-effect relative mx-auto overflow-hidden bg-base-300">
+		<span class="target-anchor" id="event-schedule" />
+		<div class="background">
+			<span class="circle interactive bg-accent/50" />
+			<span class="circle left-10 top-11 scale-[4] bg-accent/70" />
+			<span class="circle right-5 top-[70%] scale-[3] bg-accent/70" />
+		</div>
+		<div class="calendar-info relative mx-auto max-w-6xl p-10">
+			<div class="pb-4">
+				<h2 class="m-0 flex items-center text-6xl font-bold">
+					<span>กำหนดการณ์และลำดับนำเสนอ</span>
+				</h2>
+			</div>
+			<Schedule />
 		</div>
 	</section>
 	<section id="school-map" class="school-map p-10">
@@ -351,7 +372,7 @@
 		<div class="mx-auto max-w-6xl p-10">
 			<div class="relative z-10">
 				<h2 class="m-0 flex items-center text-6xl font-bold">
-					<Icon icon="mdi:location" class="pr-4" /> <span>ทัศนศึกษา</span>
+					<span>ทัศนศึกษา</span>
 				</h2>
 			</div>
 			<FieldTrip />
@@ -361,7 +382,7 @@
 		<div class="mx-auto max-w-6xl p-10">
 			<div class="relative z-10">
 				<h2 class="m-0 flex items-center text-6xl font-bold">
-					<Icon icon="mdi:person" class="pr-4" /> <span>วิทยากร</span>
+					<span>วิทยากร</span>
 				</h2>
 			</div>
 			<div class="my-4 grid grid-cols-1 text-center md:grid-cols-2 md:text-left">
@@ -396,7 +417,7 @@
 		<div class="mx-auto max-w-6xl p-10">
 			<div class="relative z-10">
 				<h2 class="m-0 flex items-center text-6xl font-bold">
-					<Icon icon="mdi:document" class="pr-4" /> <span>เอกสารต่าง ๆ</span>
+					<span>เอกสารต่าง ๆ</span>
 				</h2>
 				<div class="carousel flex flex-row py-10">
 					<div class="card card-compact w-64 bg-base-200 text-base-content shadow-xl">
@@ -434,7 +455,7 @@
 
 <style lang="scss">
 	.circle {
-		@apply absolute z-0 h-20 w-20 rounded-full bg-primary/50 blur-xl transition-opacity duration-500;
+		@apply absolute z-0 h-20 w-20 rounded-full blur-xl transition-opacity duration-500;
 	}
 	.school-map {
 		.main-c-1 {
