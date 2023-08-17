@@ -202,95 +202,134 @@
 						<h2 class="text-3xl">นำเสนอโครงงาน</h2>
 						<div>
 							<a href="/schedule" class="btn-outline btn-sm btn">ดูรายละเอียดเพิ่มเติม</a>
-							<p class="my-3">นำเสนอโครงงานแบบปากเปล่า</p>
-							<table class="table">
-								<!-- head -->
-								<thead>
-									<tr>
-										<th>สาขา</th>
-										<th>สถานที่</th>
-										<th>ลำดับนำเสนอ</th>
-									</tr>
-								</thead>
-								<tbody>
-									<!-- row 1 -->
-									<tr>
-										<td>ฟิสิกส์และดาราศาสตร์</td>
-										<td>
-											<ul>
-												<li>ห้องฟิสิกส์ 1 (Oral Eng) (223)</li>
-												<li>ห้องฟิสิกส์ 2 (Oral Thai) (212)</li>
-											</ul>
-										</td>
-										<td>
-											<a href="/schedule#MATS-OE" class="btn-link btn"> ดูรายละเอียด </a>
-										</td>
-									</tr>
-									<!-- row 2 -->
-									<tr>
-										<td>เคมีและวัสดุศาสตร์</td>
-										<td>
-											<ul>
-												<li>ห้องเคมี 1 (Oral Eng) (224)</li>
-												<li>ห้องเคมี 2 (Oral Thai) (213)</li>
-											</ul>
-										</td>
-									</tr>
-									<tr>
-										<td>ชีววิทยา และสิ่งแวดล้อม</td>
-										<td>
-											<ul>
-												<li>ห้องชีววิทยา 1 (Oral Eng) (225)</li>
-												<li>ห้องชีววิทยา 2 (Oral Thai) (214)</li>
-											</ul>
-										</td>
-									</tr>
-									<tr>
-										<td>คณิตศาสตร์</td>
-										<td>
-											<ul>
-												<li>ห้องคณิตศาสตร์ 1 (Oral Eng) (226)</li>
-												<li>ห้องคณิตศาสตร์ 2 (Oral Thai) (216)</li>
-											</ul>
-										</td>
-									</tr>
-									<tr>
-										<td>คอมพิวเตอร์</td>
-										<td>
-											<ul>
-												<li>ห้องคอมพิวเตอร์ 1 (Oral Eng) (227)</li>
-												<li>ห้องคอมพิวเตอร์ 2 (Oral Thai) (217)</li>
-											</ul>
-										</td>
-									</tr>
-									<tr>
-										<td>วิศวกรรมศาสตร์</td>
-										<td>
-											<ul>
-												<li>ห้องวิศวกรรม 1 (Oral Eng) (228)</li>
-												<li>ห้องวิศวกรรม 2 (Oral Thai) (218)</li>
-											</ul>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-							<p>นำเสนอโครงงานแบบโปสเตอร์</p>
-							<table class="table">
-								<!-- head -->
-								<thead>
-									<tr>
-										<th>สาขา</th>
-										<th>สถานที่</th>
-									</tr>
-								</thead>
-								<tbody>
-									<!-- row 1 -->
-									<tr>
-										<td>ทุกสาขา</td>
-										<td>ลานกิจกรรมห้องสมุด</td>
-									</tr>
-								</tbody>
-							</table>
+							<div class="collapse-arrow collapse mt-5 rounded-b-none bg-base-200/60 p-3 shadow-md">
+								<input type="checkbox" id="collapse-oral" />
+								<h3 class="collapse-title p-2">นำเสนอโครงงานแบบปากเปล่า</h3>
+								<table class="collapse-content table dark:[&_tr]:border-white/20">
+									<!-- head -->
+									<thead>
+										<tr>
+											<th>สาขา</th>
+											<th>สถานที่</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- row 1 -->
+										<tr>
+											<td>ฟิสิกส์และดาราศาสตร์</td>
+											<td>
+												<ul>
+													<li>
+														ห้องฟิสิกส์ 1 (Oral Eng) (223)
+														<a href="/schedule#PHYS-OE">ตาราง</a>
+													</li>
+													<li>
+														ห้องฟิสิกส์ 2 (Oral Thai) (212)
+
+														<a href="/schedule#PHYS-OT">ตาราง</a>
+													</li>
+												</ul>
+											</td>
+										</tr>
+										<!-- row 2 -->
+										<tr>
+											<td>เคมีและวัสดุศาสตร์</td>
+											<td>
+												<ul>
+													<li>
+														ห้องเคมี 1 (Oral Eng) (224)
+														<a href="/schedule#CHEM-OE">ตาราง</a>
+													</li>
+													<li>
+														ห้องเคมี 2 (Oral Thai) (213)
+														<a href="/schedule#CHEM-OT">ตาราง</a>
+													</li>
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>ชีววิทยา และสิ่งแวดล้อม</td>
+											<td>
+												<ul>
+													<li>
+														ห้องชีววิทยา 1 (Oral Eng) (225)
+														<a href="/schedule#BIOL-OE">ตาราง</a>
+													</li>
+													<li>
+														ห้องชีววิทยา 2 (Oral Thai) (214)
+														<a href="/schedule#BIOL-OT">ตาราง</a>
+													</li>
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>คณิตศาสตร์</td>
+											<td>
+												<ul>
+													<li>
+														ห้องคณิตศาสตร์ 1 (Oral Eng) (226)
+														<a href="/schedule#MATS-OE">ตาราง</a>
+													</li>
+													<li>
+														ห้องคณิตศาสตร์ 2 (Oral Thai) (216)
+														<a href="/schedule#MATS-OT">ตาราง</a>
+													</li>
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>คอมพิวเตอร์</td>
+											<td>
+												<ul>
+													<li>
+														ห้องคอมพิวเตอร์ 1 (Oral Eng) (227)
+														<a href="/schedule#COMP-OE">ตาราง</a>
+													</li>
+													<li>
+														ห้องคอมพิวเตอร์ 2 (Oral Thai) (217)
+														<a href="/schedule#COMP-OT">ตาราง</a>
+													</li>
+												</ul>
+											</td>
+										</tr>
+										<tr>
+											<td>วิศวกรรมศาสตร์</td>
+											<td>
+												<ul>
+													<li>
+														ห้องวิศวกรรม 1 (Oral Eng) (228)
+														<a href="/schedule#ENGI-OE">ตาราง</a>
+													</li>
+													<li>
+														ห้องวิศวกรรม 2 (Oral Thai) (218)
+														<a href="/schedule#ENGI-OT">ตาราง</a>
+													</li>
+												</ul>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="collapse-arrow collapse rounded-t-none bg-base-200/60 p-3 shadow-md">
+								<input type="checkbox" id="collapse-poster" />
+								<h3 class="collapse-title p-2">นำเสนอโครงงานแบบโปสเตอร์</h3>
+								<table class="collapse-content table dark:[&_tr]:border-white/20">
+									<thead>
+										<tr>
+											<th>สาขา</th>
+											<th>สถานที่</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- row 1 -->
+										<tr>
+											<td>ทุกสาขา</td>
+											<td>ลานกิจกรรมห้องสมุด</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
