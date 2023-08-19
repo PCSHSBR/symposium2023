@@ -24,7 +24,8 @@ const config = {
 	},
 	preprocess: [
 		preprocess({
-			sourceMap: true
+			sourceMap: true,
+			preserve: ['partytown']
 		}),
 		vitePreprocess({})
 	]

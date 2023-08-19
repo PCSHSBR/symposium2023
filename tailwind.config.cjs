@@ -1,6 +1,7 @@
 const daisyui = require('daisyui');
 const neasting = require('postcss-nesting');
 const gridAreas = require('@savvywombat/tailwindcss-grid-areas');
+const tailwindDefault = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config}*/
 const config = {
@@ -13,7 +14,7 @@ const config = {
 				base: ['1rem', { lineHeight: '1.6rem' }],
 			},
 			fontFamily: {
-				display: ['Anuphan', 'sans-serif']
+				display: ['Anuphan', ...tailwindDefault.fontFamily.sans]
 			},
 			screens: {
 				xs: '400px'

@@ -38,6 +38,7 @@
 		"@sveltejs/adapter-vercel": "^3.0.2",
 		"@sveltejs/kit": "^1.20.4",
 		"@types/animejs": "^3.1.7",
+		"@types/d3-fetch": "^3.0.2",
 		"@types/sanitize-html": "^2.9.0",
 		"@types/scrollmagic": "^2.0.3",
 		"@types/three": "^0.152.1",
@@ -73,6 +74,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@builder.io/partytown": "^0.8.0",
 		"@fontsource-variable/anuphan": "^5.0.3",
 		"@prisma/client": "5.0.0",
 		"@sentry/sveltekit": "^7.57.0",
@@ -80,6 +82,7 @@
 		"@supabase/supabase-js": "^2.26.0",
 		"@vercel/edge-config": "^0.2.1",
 		"animejs": "^3.2.1",
+		"d3-fetch": "^3.0.1",
 		"dotenv-vault-core": "^0.7.1",
 		"husky": "^8.0.3",
 		"isomorphic-dompurify": "^1.6.0",

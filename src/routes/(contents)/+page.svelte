@@ -15,6 +15,7 @@
 	import { goto } from '$app/navigation';
 	import { toast } from '$lib/toastStore';
 	import CdnImage from '$lib/components/CDNImage.svelte';
+	import DownloadDocuments from '$lib/components/DownloadDocuments/DownloadDocuments.svelte';
 
 	export let data: PageData;
 
@@ -157,7 +158,7 @@
 	async function handleSignInWithGoogle(response) {
 		const _noti = notify({
 			message: 'กำลังเข้าสู่ระบบ...',
-			type: 'info'
+			type: 'default'
 		});
 		const { data: _data, error } = await data.supabase.auth.signInWithIdToken({
 			token: response.credential,
@@ -166,7 +167,7 @@
 		toast.pop(_noti);
 		if (error && error.message !== 'Internal Server Error')
 			return notify({
-				message: toThai(error.message),
+				message: toThai(error.message) || 'ข้อผิดพลาดที่ไม่ทราบสาเหตุ',
 				type: 'error'
 			});
 		if (error && error.message === 'Internal Server Error' && !_data.user) {
@@ -238,7 +239,7 @@
 			<div
 				class="title absolute top-[15%] px-16 font-display mix-blend-difference invert dark:invert-0 md:px-32"
 			>
-				<div class="date-range flex flex-row flex-wrap items-center">
+				<div class="date-range flex flex-row flex-wrap items-center font-display">
 					<span>PCSHSBR</span>
 					<span class="divider mx-8 h-1 w-16 rounded-sm bg-base-content" />
 					<span>4 กันยายน – 6 กันยายน 2566</span>
@@ -248,9 +249,17 @@
 						class="translate-y-[-0.5em] text-[72px]">rd</sup
 					> PCSHS Science Symposium
 				</h1>
-				<p class="sub-title text-xl">
+				<p class="sub-title font-display text-xl">
 					Improving a Sustainable World through Innovation and Projects
 				</p>
+				<div class="documents mt-4 flex flex-col flex-wrap items-start gap-1">
+					<a class="btn-sm btn" href="/#event-document">
+						<Icon icon="mdi:file-pdf" /> บทคัดย่อและบทความวิชาการเผยแพร่
+					</a>
+					<a class="btn-sm btn" href="/schedule">
+						<Icon icon="mdi:bullhorn" /> ลำดับการนำเสนอ
+					</a>
+				</div>
 			</div>
 			<div class="absolute bottom-0 flex h-16 w-full flex-col items-center">
 				<Icon icon="mdi:menu-down" />
@@ -417,29 +426,9 @@
 		<div class="mx-auto max-w-6xl p-10">
 			<div class="relative z-10">
 				<h2 class="m-0 flex items-center text-6xl font-bold">
-					<span>เอกสารต่าง ๆ</span>
+					<span>ดาวน์โหลดเอกสาร</span>
 				</h2>
-				<div class="carousel flex flex-row py-10">
-					<div class="card card-compact w-64 bg-base-200 text-base-content shadow-xl">
-						<figure class="px-10 pt-10">
-							<Icon icon="mdi:download" class="h-9 w-9" />
-						</figure>
-						<div class="card-body items-center text-center">
-							<h2 class="card-title">แม่แบบต่าง ๆ</h2>
-							<p>
-								แนวทางการเขียนบทคัดย่อและบทความวิชาการ แม่แบบเอกสาร
-								และแม่แบบโปสเตอร์ในรูปแบบไฟล์ต่าง ๆ
-							</p>
-							<div class="card-actions">
-								<a
-									href="https://drive.google.com/drive/folders/1P1nfoJ9mBKbJOENBbHmm_Om46doDjJHZ"
-									target="_blank"
-									class="btn-primary btn">เอกสาร</a
-								>
-							</div>
-						</div>
-					</div>
-				</div>
+				<DownloadDocuments />
 			</div>
 		</div>
 	</section>

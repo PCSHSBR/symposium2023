@@ -1,6 +1,8 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
+import { partytownVite } from '@builder.io/partytown/utils';
+import { join } from 'path';
 
 export default defineConfig({
 	plugins: [
@@ -13,6 +15,9 @@ export default defineConfig({
 			// Auth tokens can be obtained from https://sentry.io/settings/account/api/auth-tokens/
 			// and need `project:releases` and `org:read` scopes
 			authToken: process.env.SENTRY_AUTH_TOKEN
+		}),
+		partytownVite({
+			dest: join(process.cwd(), '.svelte-kit/output/client/~partytown')
 		})
 	],
 

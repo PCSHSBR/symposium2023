@@ -112,7 +112,7 @@
 							<a href="/projects" use:closeMenu>โครงงานพร้อมรหัสโครงงาน</a>
 						</li>
 						<li>
-							<a href="/schedule" use:closeMenu>เวลานำเสนอโครงงาน</a>
+							<a href="/schedule" use:closeMenu>ลำดับการนำเสนอโครงงาน</a>
 						</li>
 					</ul>
 				</details>
@@ -188,7 +188,7 @@
 						<li>
 							<a
 								href="/logout"
-								class="g_id_signout btn-error btn-outline"
+								class="g_id_signout btn-outline btn-error"
 								on:click|preventDefault={handleSignOut}
 							>
 								<Icon icon="mdi:logout" class="h-5 w-5" />
@@ -215,6 +215,9 @@
 			<ul class="menu w-full px-1">
 				<li>
 					<a href="/" use:closeMenu>หน้าแรก</a>
+				</li>
+				<li>
+					<a href="/#event-document" use:closeMenu>ดาวน์โหลดเอกสาร</a>
 				</li>
 				<li>
 					<details>
@@ -246,7 +249,7 @@
 								<a href="/projects" use:closeMenu>โครงงานพร้อมรหัสโครงงาน</a>
 							</li>
 							<li>
-								<a href="/schedule" use:closeMenu>เวลานำเสนอโครงงาน</a>
+								<a href="/schedule" use:closeMenu>ลำดับการนำเสนอโครงงาน</a>
 							</li>
 						</ul>
 					</details>
