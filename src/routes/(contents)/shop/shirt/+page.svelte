@@ -148,7 +148,7 @@ IMG_0021.png
 				</p>
 			{/if}
 			<h1 class="text-2xl font-bold">เสื้อ The 3<sup>rd</sup> PCSHS Science Symposium 2023</h1>
-			<p class="font-bold"><span class="text-4xl">250 บาท</span></p>
+			<p class="font-bold"><span class="text-4xl">350 บาท</span></p>
 		</div>
 		<div class="grid-in-[desc] flex h-full w-full flex-col md:w-full">
 			<p class="">

@@ -15,7 +15,7 @@
 				</div>
 				<div class="p-4">
 					<h2 class="text-xl font-bold">เสื้อ Symposium</h2>
-					<p>250 บาท</p>
+					<p>350 บาท</p>
 				</div>
 			</div>
 		</a>
