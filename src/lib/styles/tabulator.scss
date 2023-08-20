@@ -1,0 +1,49 @@
+// import 'tabulator-tables/dist/css/tabulator.css'
+@import 'tabulator-tables/dist/css/tabulator.css';
+/* Variables and mixins declared here will be available in all other SCSS files */
+
+$backgroundColor: theme('colors.base-100');
+$headerBackgroundColor: theme('colors.base-100');
+$rowBackgroundColor: theme('colors.base-100');
+$rowAltBackgroundColor: theme('colors.base-100');
+
+.tabulator {
+	@apply m-5 border-none bg-base-100;
+
+	.tabulator-header {
+		@apply border-none bg-base-100;
+
+		.tabulator-col {
+			@apply border-none bg-base-100 text-base-content;
+
+			.tabulator-col-title {
+				@apply text-base-content;
+			}
+		}
+
+		.tabulator-col-content {
+			@apply text-base-content;
+		}
+	}
+
+	.tabulator-table {
+		@apply bg-base-100;
+
+		.tabulator-row {
+			@apply border-none bg-base-100 text-base-content;
+
+			.tabulator-cell {
+				@apply border-none text-base-content;
+
+				&[tabulator-field='code'] {
+					font-family: monospace;
+					@apply text-center;
+				}
+			}
+		}
+
+		.tabulator-cell {
+			@apply text-base-content;
+		}
+	}
+}

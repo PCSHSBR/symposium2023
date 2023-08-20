@@ -16,21 +16,21 @@
 		'September 6, 2023': 3
 	};
 
-	const date = new Date();
-	const dateString = date.toDateString();
-	if (dateString in autoTabOpenOn) {
-		tab = autoTabOpenOn[dateString];
-	}
-
 	function switchToTab(tabID: 0 | 1 | 2 | 3) {
 		tab = tabID;
 		localStorage.setItem('tab', tabID.toString());
 	}
 
 	onMount(() => {
-		const tabID = localStorage.getItem('tab');
-		if (tabID) {
-			tab = parseInt(tabID);
+		const date = new Date();
+		const dateString = date.toDateString();
+		if (dateString in autoTabOpenOn) {
+			tab = autoTabOpenOn[dateString];
+		} else {
+			const tabID = localStorage.getItem('tab');
+			if (tabID) {
+				tab = parseInt(tabID);
+			}
 		}
 	});
 </script>

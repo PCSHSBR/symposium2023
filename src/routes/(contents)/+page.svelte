@@ -21,18 +21,8 @@
 
 	let isLoading = true;
 	let isBannerHovered = false;
-	var isSafari: boolean;
-	let eventdate = new Date('2023-09-03');
-	let now = new Date();
-	let remaining = new Date(eventdate.getTime() - now.getTime());
-
 	let hero_sticky: HTMLDivElement;
 	let hero_section_percent: number;
-
-	setInterval(() => {
-		now = new Date();
-		remaining = new Date(eventdate.getTime() - now.getTime());
-	}, 1000);
 
 	function interactiveEvent() {
 		const event_calendar = document.querySelectorAll('.hover-effect');
@@ -91,6 +81,11 @@
 				delay: 100
 			});
 			let s1am3 = tl1.add({
+				targets: '.documents',
+				opacity: [0, 1],
+				delay: 50
+			});
+			let s1am4 = tl1.add({
 				targets: '.date-range',
 				opacity: [0, 1],
 				delay: 0
@@ -122,18 +117,19 @@
 				targets: '.event-info .info-paragrpah',
 				opacity: [0, 1]
 			});
-			let s2am3 = tl2.add({
-				targets: ' .event-info .event-poem',
-				opacity: [0, 1]
-			});
 
-			let s2am4 = animejs({
+			let s2am4_1 = animejs({
 				targets: '.event-info .background span,.event-info .background svg',
 				translateY: [100, 0],
 				opacity: [0, 1],
 				delay: (el, i) => 200 * i,
 				duration: 1000,
 				easing: 'easeOutExpo'
+			});
+
+			let s2am3_2 = tl2.add({
+				targets: ' .event-info .event-poem',
+				opacity: [0, 1]
 			});
 
 			let scene2 = new ScrollMagic.Scene({
