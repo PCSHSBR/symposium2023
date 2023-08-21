@@ -147,69 +147,69 @@
 		}
 	};
 
-	// (async () => {
-	// 	await data.supabase.storage
-	// 		.from('abstracts')
-	// 		.list(data.session?.user.id, {
-	// 			limit: 2,
-	// 			sortBy: {
-	// 				column: 'updated_at',
-	// 				order: 'desc'
-	// 			}
-	// 		})
-	// 		.then(async (result) => {
-	// 			if (result.error) {
-	// 				notify({
-	// 					message: `${result.error.message}`,
-	// 					type: 'error'
-	// 				});
-	// 				return;
-	// 			}
-	// 			if (result.data?.length !== 0) {
-	// 				const abstract = result.data[0];
-	// 				const {
-	// 					data: { publicUrl }
-	// 				} = data.supabase.storage
-	// 					.from('abstracts')
-	// 					.getPublicUrl(`${data.session?.user.id}/${abstract.name}`, {});
-	// 				stepData.step3.docUrl = publicUrl;
-	// 				stepData.step3.pdfUrl = publicUrl.replace('.docx', '.pdf');
-	// 				stepData.step3.isDone = true;
-	// 			}
-	// 		});
-	// })();
+	(async () => {
+		await data.supabase.storage
+			.from('abstracts')
+			.list(data.session?.user.id, {
+				limit: 2,
+				sortBy: {
+					column: 'updated_at',
+					order: 'desc'
+				}
+			})
+			.then(async (result) => {
+				if (result.error) {
+					notify({
+						message: `${result.error.message}`,
+						type: 'error'
+					});
+					return;
+				}
+				if (result.data?.length !== 0) {
+					const abstract = result.data[0];
+					const {
+						data: { publicUrl }
+					} = data.supabase.storage
+						.from('abstracts')
+						.getPublicUrl(`${data.session?.user.id}/${abstract.name}`, {});
+					stepData.step3.docUrl = publicUrl;
+					stepData.step3.pdfUrl = publicUrl.replace('.docx', '.pdf');
+					stepData.step3.isDone = true;
+				}
+			});
+	})();
 
-	// (async () => {
-	// 	await data.supabase.storage
-	// 		.from('articles')
-	// 		.list(data.session?.user.id, {
-	// 			limit: 2,
-	// 			sortBy: {
-	// 				column: 'updated_at',
-	// 				order: 'desc'
-	// 			}
-	// 		})
-	// 		.then(async (result) => {
-	// 			if (result.error) {
-	// 				notify({
-	// 					message: `${result.error.message}`,
-	// 					type: 'error'
-	// 				});
-	// 				return;
-	// 			}
-	// 			if (result.data?.length !== 0) {
-	// 				const _article = result.data[0];
-	// 				const {
-	// 					data: { publicUrl }
-	// 				} = data.supabase.storage
-	// 					.from('articles')
-	// 					.getPublicUrl(`${data.session?.user.id}/${_article.name}`, {});
-	// 				stepData.step4.docUrl = publicUrl;
-	// 				stepData.step4.pdfUrl = publicUrl.replace('.docx', '.pdf');
-	// 				stepData.step4.isDone = true;
-	// 			}
-	// 		});
-	// })();
+	(async () => {
+		await data.supabase.storage
+			.from('articles')
+			.list(data.session?.user.id, {
+				limit: 2,
+				sortBy: {
+					column: 'updated_at',
+					order: 'desc'
+				}
+			})
+			.then(async (result) => {
+				if (result.error) {
+					notify({
+						message: `${result.error.message}`,
+						type: 'error'
+					});
+					return;
+				}
+				if (result.data?.length !== 0) {
+					const _article = result.data[0];
+					const {
+						data: { publicUrl }
+					} = data.supabase.storage
+						.from('articles')
+						.getPublicUrl(`${data.session?.user.id}/${_article.name}`, {});
+					stepData.step4.docUrl = publicUrl;
+					stepData.step4.pdfUrl = publicUrl.replace('.docx', '.pdf');
+					stepData.step4.isDone = true;
+				}
+			});
+	})();
 </script>
 
 <svelte:head>
@@ -412,6 +412,9 @@
 					>
 				{/if}
 			</div>
+			{#if !featureFlags.openForUploadAbstract}
+				<small>หากคุณแจ้งแก้ไขไฟล์กับผู้ประสานงานแล้ว ไฟล์นี้อาจไม่ได้ถูกอัปเดตด้วย อย่าตกใจ</small>
+			{/if}
 			{#if stepData.step2.isDone}
 				{#if featureFlags.openForUploadAbstract}
 					<a href="/my-project/edit/step-3-abstract">
@@ -466,6 +469,9 @@
 					>
 				{/if}
 			</div>
+			{#if !featureFlags.openForUploadArticle}
+				<small>หากคุณแจ้งแก้ไขไฟล์กับผู้ประสานงานแล้ว ไฟล์นี้อาจไม่ได้ถูกอัปเดตด้วย อย่าตกใจ</small>
+			{/if}
 			{#if stepData.step3.isDone}
 				{#if featureFlags.openForUploadArticle}
 					<a href="/my-project/edit/step-4-article">
