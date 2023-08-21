@@ -142,7 +142,7 @@
 				.on('enter', (e) => {
 					if (!is_hero_showed) {
 						tl2.play();
-						s2am4_1.play();
+						s2am4.play();
 						is_hero_showed = true;
 					}
 				})
@@ -256,6 +256,9 @@
 					<a class="btn-sm btn" href="/schedule">
 						<Icon icon="mdi:bullhorn" /> ลำดับการนำเสนอ
 					</a>
+					<a href="#shop" class="btn-sm btn bg-gradient-to-l from-primary to-secondary"
+						>ซื้อเสื้อ Symposium</a
+					>
 				</div>
 			</div>
 			<div class="absolute bottom-0 flex h-16 w-full flex-col items-center">
