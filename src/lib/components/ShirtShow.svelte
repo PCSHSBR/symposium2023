@@ -14,7 +14,7 @@
 							ซื้อเสื้อ Symposium ได้เลยตอนนี้
 						</h3>
 						<p>ราคา 350 ต่อชิ้น</p>
-						<button class="btn w-full bg-white text-black">ซื้อ</button>
+						<!-- <button class="btn w-full bg-white text-black"></button> -->
 					</div>
 				</div>
 				<div class="left-0 z-[999]">
