@@ -14,7 +14,7 @@ const config = {
 				base: ['1rem', { lineHeight: '1.6rem' }],
 			},
 			fontFamily: {
-				display: ['Anuphan', ...tailwindDefault.fontFamily.sans]
+				display: ['Anuphan Variable', ...tailwindDefault.fontFamily.sans]
 			},
 			screens: {
 				xs: '400px'
