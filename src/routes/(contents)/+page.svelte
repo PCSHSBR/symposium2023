@@ -10,6 +10,7 @@
 	import Schedule from '$lib/components/FieldSchedule.svelte';
 	import SpeakerPatentImage from '$lib/assets/images/SpeakerPatent.jpg';
 	import { notify } from '$lib/notify';
+	import ShirtShow from '$lib/components/ShirtShow.svelte';
 	import { toThai } from '$lib/langUtils';
 	import type { PageData } from './$types';
 	import { goto } from '$app/navigation';
@@ -141,7 +142,7 @@
 				.on('enter', (e) => {
 					if (!is_hero_showed) {
 						tl2.play();
-						s2am4.play();
+						s2am4_1.play();
 						is_hero_showed = true;
 					}
 				})
@@ -350,6 +351,7 @@
 			<Schedule />
 		</div>
 	</section>
+	<ShirtShow />
 	<section id="school-map" class="school-map p-10">
 		<a href="/map" target="_blank">
 			<div
