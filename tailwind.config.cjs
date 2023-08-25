@@ -6,7 +6,6 @@ const tailwindDefault = require('tailwindcss/defaultTheme')
 /** @type {import('tailwindcss').Config}*/
 const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
-
 	theme: {
 		extend: {
 			fontSize: {
@@ -14,6 +13,7 @@ const config = {
 				base: ['1rem', { lineHeight: '1.6rem' }],
 			},
 			fontFamily: {
+				mono: ['iA Writer Mono', ...tailwindDefault.fontFamily.mono],
 				display: ['Anuphan Variable', ...tailwindDefault.fontFamily.sans]
 			},
 			screens: {

@@ -8,6 +8,7 @@ import type { UserMetadata } from '@supabase/supabase-js';
 declare global {
 	interface Window {
 		handleSignInWithGoogle: (response) => void;
+		gtag: (...args: any[]) => void;
 	}
 	namespace App {
 		interface Locals {

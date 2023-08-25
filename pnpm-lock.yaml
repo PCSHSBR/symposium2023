@@ -11,6 +11,9 @@ dependencies:
   '@fontsource-variable/anuphan':
     specifier: ^5.0.8
     version: 5.0.8
+  '@fontsource/ia-writer-mono':
+    specifier: ^5.0.7
+    version: 5.0.7
   '@prisma/client':
     specifier: 5.0.0
     version: 5.0.0(prisma@5.0.0)
@@ -668,6 +671,10 @@ packages:
 
   /@fontsource-variable/anuphan@5.0.8:
     resolution: {integrity: sha512-h6eyW9OVY8mejA9PCdIDAXKXdthPnr5T6mqjdYyJ/JJigqf6YIWw2zyB/965Vht+mo8RlHO3OoFcQKF5qQhSKg==}
+    dev: false
+
+  /@fontsource/ia-writer-mono@5.0.7:
+    resolution: {integrity: sha512-dfOitIIZDlvXeeJHl7cKtWP9/nZ1Zj+9MQ/MPlcnPn7Yt/WRWHNK5rA1w5Wnyx4QZ+vDvOnznbj1agLH4kQA4w==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.10:

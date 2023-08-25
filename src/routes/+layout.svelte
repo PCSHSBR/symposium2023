@@ -4,6 +4,7 @@
 	import { goto, invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import '@fontsource-variable/anuphan';
+	import '@fontsource/ia-writer-mono';
 	import { page } from '$app/stores';
 	import ToastWrapper from '$lib/components/ToastWrapper.svelte';
 	import Icon from '@iconify/svelte';

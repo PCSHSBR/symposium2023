@@ -5,7 +5,7 @@
 
 <footer class="footer rounded bg-base-300 p-10 text-base-content">
 	<div class="text-left">
-		<a class="btn-ghost btn -mx-5" href="/">
+		<a class="btn btn-ghost -mx-5" href="/">
 			<LogoWithText class="h-12 w-auto" />
 		</a>
 		<strong class="font-display text-lg">The 3<sup>rd</sup> PCSHS Science Symposium 2023 </strong>
@@ -16,11 +16,12 @@
 		</p>
 		<small>
 			<a
-				class="btn-ghost btn-sm btn tooltip tooltip-right"
+				class="btn btn-ghost tooltip btn-sm tooltip-right"
 				data-tip="PCSHSBR/symposium2023"
 				href="https://github.com/PCSHSBR/symposium2023"
 			>
 				<Icon icon="mdi:github" class="h-6 w-6" />
+				<span class="sr-only">กิตฮับ</span>
 			</a>
 		</small>
 	</div>
@@ -66,13 +67,19 @@
 		<div>
 			<h3 class="footer-title">ติดต่อ</h3>
 			<div class="grid grid-flow-col gap-4">
-				<!-- <a href="/facebook" class="flex"><Icon icon="ic:baseline-facebook" class="h-6 w-6" /></a> -->
-				<a href="tel:0637700077" class="btn-ghost btn-square btn-sm btn flex"
-					><Icon icon="mdi:phone" class="h-6 w-6" /></a
+				<a
+					href="https://facebook.com/pcshs.symposium2023"
+					class="btn btn-square btn-ghost btn-sm flex"
+					><Icon icon="ic:baseline-facebook" class="h-6 w-6" /></a
 				>
-				<a href="mailto:sym2023@pcshsbr.ac.th" class="btn-ghost btn-square btn-sm btn flex"
-					><Icon icon="mdi:email" class="h-6 w-6" /></a
-				>
+				<a href="tel:0637700077" class="btn btn-square btn-ghost btn-sm flex"
+					><Icon icon="mdi:phone" class="h-6 w-6" />
+					<span class="sr-only">โทร 063-770-0077</span>
+				</a>
+				<a href="mailto:sym2023@pcshsbr.ac.th" class="btn btn-square btn-ghost btn-sm flex"
+					><Icon icon="mdi:email" class="h-6 w-6" />
+					<span class="sr-only">อีเมล</span>
+				</a>
 			</div>
 		</div>
 	</div>
