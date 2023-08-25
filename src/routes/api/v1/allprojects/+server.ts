@@ -1,13 +1,15 @@
 import { error, type ServerLoad } from '@sveltejs/kit';
 import prisma from '$lib/prisma';
 import { DB_ACCESS_API_KEY } from '$env/static/private';
+import { timeSafeCompare } from '$lib/utils';
 
+// @ts-ignore
 BigInt.prototype.toJSON = function () {
 	return this.toString();
 };
 
 export const GET: ServerLoad = async ({ url }) => {
-	if (url.searchParams.get('key') !== DB_ACCESS_API_KEY) {
+	if (timeSafeCompare(url.searchParams.get('key'), DB_ACCESS_API_KEY)) {
 		throw error(401, 'Unauthorized');
 	}
 	let query = url.searchParams.get('query');

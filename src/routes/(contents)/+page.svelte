@@ -119,7 +119,7 @@
 				opacity: [0, 1]
 			});
 
-			let s2am4_1 = animejs({
+			let s2am4 = animejs({
 				targets: '.event-info .background span,.event-info .background svg',
 				translateY: [100, 0],
 				opacity: [0, 1],

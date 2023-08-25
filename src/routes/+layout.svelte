@@ -70,13 +70,6 @@ ${"                       `=---='"}
 	<meta name="msapplication-navbutton-color" content="#374250" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="#374250" />
-	<script>
-		// Forward the necessary functions to the web worker layer
-		partytown = {
-			forward: ['dataLayer.push']
-		};
-	</script>
-	{@html '<script>' + partytownSnippet() + '</script>'}
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-VPF67T58QS"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
@@ -86,6 +79,13 @@ ${"                       `=---='"}
 		gtag('js', new Date());
 		gtag('config', 'G-VPF67T58QS');
 	</script>
+	<script>
+		// Forward the necessary functions to the web worker layer
+		partytown = {
+			forward: ['dataLayer.push']
+		};
+	</script>
+	{@html '<script>' + partytownSnippet() + '</script>'}
 </svelte:head>
 <ToastWrapper />
 <slot />
