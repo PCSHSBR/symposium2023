@@ -19,12 +19,9 @@ const config = {
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter()
 	},
-	compilerOptions: {
-		enableSourcemap: true
-	},
+	compilerOptions: {},
 	preprocess: [
 		preprocess({
-			sourceMap: true,
 			preserve: ['partytown']
 		}),
 		vitePreprocess({})

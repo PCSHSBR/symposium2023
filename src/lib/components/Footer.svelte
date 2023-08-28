@@ -29,7 +29,7 @@
 		<div class="flex flex-col">
 			<h3 class="footer-title">ข้อมูล</h3>
 			<a class="link-hover link" href="/projects">รายการโครงงาน</a>
-			<a class="link-hover link" href="/schedule">กำหนดการณ์นำเสนอรูปแบบบรรยายและโปสเตอร์</a>
+			<a class="link-hover link" href="/schedule">กำหนดการนำเสนอรูปแบบบรรยายและโปสเตอร์</a>
 			<a class="link-hover link" href="https://www.pcshsbr.ac.th/pcshs_symposium2023_vdo/"
 				>การแข่งขันรูปแบบออนไลน์</a
 			>

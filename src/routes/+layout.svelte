@@ -15,13 +15,6 @@
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
 
-	// <!-- http://localhost:3000/
-	// #access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjg3OTc5NzU1LCJpYXQiOjE2ODc5NzYxNTUsInN1YiI6ImFhNjE2NmFhLWE4Y2MtNDc0Ny1hMmI1LTc4OTc5OTA2MDBlYSIsImVtYWlsIjoibWFucGF0c2Fnb3JueStzdGFmZkBnbWFpbC5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7Imludml0ZWRfYnkiOiJtYW5wYXRzYWdvcm55QGdtYWlsLmNvbSIsInJvbGUiOiJzdGFmZiJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6Im90cCIsInRpbWVzdGFtcCI6MTY4Nzk3NjE1NX1dLCJzZXNzaW9uX2lkIjoiNTZmZjkyNjUtMjFhNy00MzRiLWE2MDMtMzIwNjYxNmNlYTFiIn0.p_jPoD0TfyTIY-Yra5Az7xn-YFQKmyegn7nGqkTrJ3o
-	// &expires_in=3600
-	// &refresh_token=uIAHeXoC_Ras21VZUAhJvA
-	// &token_type=bearer
-	// &type=invite -->
-
 	onMount(() => {
 		const {
 			data: { subscription }
@@ -71,6 +64,12 @@ ${"                       `=---='"}
 	<meta name="msapplication-navbutton-color" content="#374250" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="#374250" />
+	<script>
+		partytown = {
+			forward: ['dataLayer.push']
+		};
+	</script>
+	{@html '<script>' + partytownSnippet() + '</script>'}
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-VPF67T58QS"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
@@ -80,13 +79,6 @@ ${"                       `=---='"}
 		gtag('js', new Date());
 		gtag('config', 'G-VPF67T58QS');
 	</script>
-	<script>
-		// Forward the necessary functions to the web worker layer
-		partytown = {
-			forward: ['dataLayer.push']
-		};
-	</script>
-	{@html '<script>' + partytownSnippet() + '</script>'}
 </svelte:head>
 <ToastWrapper />
 <slot />

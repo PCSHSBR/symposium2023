@@ -250,13 +250,13 @@
 					Improving a Sustainable World through Innovation and Projects
 				</p>
 				<div class="documents mt-4 flex flex-col flex-wrap items-start gap-1">
-					<a class="btn-sm btn" href="/#event-document">
+					<a class="btn btn-sm" href="/#event-document">
 						<Icon icon="mdi:file-pdf" /> บทคัดย่อและบทความวิชาการเผยแพร่
 					</a>
-					<a class="btn-sm btn" href="/schedule">
+					<a class="btn btn-sm" href="/schedule">
 						<Icon icon="mdi:bullhorn" /> ลำดับการนำเสนอ
 					</a>
-					<a href="#shop" class="btn-sm btn bg-gradient-to-l from-primary to-secondary"
+					<a href="#shop" class="btn btn-sm bg-gradient-to-l from-primary to-secondary"
 						>ซื้อเสื้อ Symposium</a
 					>
 				</div>
@@ -348,7 +348,7 @@
 		<div class="calendar-info relative mx-auto max-w-6xl p-10">
 			<div class="pb-4">
 				<h2 class="m-0 flex items-center text-6xl font-bold">
-					<span>กำหนดการณ์และลำดับนำเสนอ</span>
+					<span>กำหนดการและลำดับนำเสนอ</span>
 				</h2>
 			</div>
 			<Schedule />
