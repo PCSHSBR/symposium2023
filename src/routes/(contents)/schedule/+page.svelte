@@ -8,20 +8,51 @@
 
 <svelte:head>
 	<title>ตารางเวลานำเสนอโครงงาน</title>
+	<meta
+		name="description"
+		content="ตารางเวลานำเสนอโครงงาน ภาคบรรยายภาษาไทย ภาคบรรยายภาษาอังกฤษ และโปสเตอร์"
+	/>
+	<meta property="og:title" content="ตารางเวลานำเสนอโครงงาน" />
+	<meta
+		property="og:description"
+		content="ตารางเวลานำเสนอโครงงาน ภาคบรรยายภาษาไทย ภาคบรรยายภาษาอังกฤษ และโปสเตอร์"
+	/>
+	<meta
+		property="og:image"
+		content="https://termtem-cdn.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress"
+	/>
+	<meta property="og:url" content="https://3rdpss2023.pcshsbr.ac.th/schedule" />
+	<meta
+		property="og:site_name"
+		content="การนำเสนอผลงานนักเรียนกลุ่มโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย ครั้งที่ 3"
+	/>
+	<meta property="og:type" content="website" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta property="twitter:domain" content="3rdpss2023.pcshsbr.ac.th" />
+	<meta property="twitter:url" content="https://3rdpss2023.pcshsbr.ac.th/schedule" />
+	<meta property="twitter:title" content="ตารางเวลานำเสนอโครงงาน" />
+	<meta
+		name="twitter:description"
+		content="การนำเสนอผลงานนักเรียนกลุ่มโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย ครั้งที่ 3"
+	/>
+	<meta
+		name="twitter:image"
+		content="https://termtem-cdn.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress"
+	/>
 </svelte:head>
 
 <article class="prose relative p-10">
 	<span id="toc" class="absolute -top-20" />
 	<h1>ตารางเวลานำเสนอโครงงาน</h1>
 	<a
-		class="btn-outline btn-md btn mb-1 h-auto p-2 sm:btn-sm"
+		class="btn btn-outline btn-md mb-1 h-auto p-2 sm:btn-sm"
 		href="https://pcshsbr-assets.imgix.net/sym2023/oral-presentation-schedule.pdf?dl=ตารางนำเสนอโครงงาน-oral-science-symposium-2023-(รวมทุกสาขา).pdf"
 	>
 		<Icon icon="mdi:download" class="mr-2 h-6 w-6 sm:h-4 sm:w-4" />
 		ตารางนำเสนอโครงงาน (รวมทุกสาขา) ภาคบรรยายไทยและอังกฤษ
 	</a>
 	<a
-		class="btn-outline btn-md btn mt-1 h-auto p-2 sm:btn-sm"
+		class="btn btn-outline btn-md mt-1 h-auto p-2 sm:btn-sm"
 		href="https://pcshsbr-assets.imgix.net/sym2023/poster-presentation-schedule.pdf?dl=ตารางนำเสนอโครงงาน-poster-science-symposium-2023-(รวมทุกสาขา).pdf"
 	>
 		<Icon icon="mdi:download" class="mr-2 h-6 w-6 sm:h-4 sm:w-4" />
@@ -32,30 +63,30 @@
 		<ul class="ml-5 list-disc">
 			<li>
 				บรรยายภาษาไทย:
-				<a href="#MATS-OT" class="btn-sm btn">คณิตศาสตร์</a>
-				<a href="#PHYS-OT" class="btn-sm btn">ฟิสิกส์และดาราศาสตร์</a>
-				<a href="#CHEM-OT" class="btn-sm btn">เคมีและวัสดุศาสตร์</a>
-				<a href="#BIOL-OT" class="btn-sm btn">ชีววิทยาและสิ่งแวดล้อม</a>
-				<a href="#COMP-OT" class="btn-sm btn">คอมพิวเตอร์</a>
-				<a href="#ENGR-OT" class="btn-sm btn">วิศวกรรมศาสตร์</a>
+				<a href="#MATS-OT" class="btn btn-sm">คณิตศาสตร์</a>
+				<a href="#PHYS-OT" class="btn btn-sm">ฟิสิกส์และดาราศาสตร์</a>
+				<a href="#CHEM-OT" class="btn btn-sm">เคมีและวัสดุศาสตร์</a>
+				<a href="#BIOL-OT" class="btn btn-sm">ชีววิทยาและสิ่งแวดล้อม</a>
+				<a href="#COMP-OT" class="btn btn-sm">คอมพิวเตอร์</a>
+				<a href="#ENGR-OT" class="btn btn-sm">วิศวกรรมศาสตร์</a>
 			</li>
 			<li>
 				บรรยายภาษาอังกฤษ:
-				<a href="#MATS-OE" class="btn-sm btn">คณิตศาสตร์</a>
-				<a href="#PHYS-OE" class="btn-sm btn">ฟิสิกส์และดาราศาสตร์</a>
-				<a href="#CHEM-OE" class="btn-sm btn">เคมีและวัสดุศาสตร์</a>
-				<a href="#BIOL-OE" class="btn-sm btn">ชีววิทยาและสิ่งแวดล้อม</a>
-				<a href="#COMP-OE" class="btn-sm btn">คอมพิวเตอร์</a>
-				<a href="#ENGR-OE" class="btn-sm btn">วิศวกรรมศาสตร์</a>
+				<a href="#MATS-OE" class="btn btn-sm">คณิตศาสตร์</a>
+				<a href="#PHYS-OE" class="btn btn-sm">ฟิสิกส์และดาราศาสตร์</a>
+				<a href="#CHEM-OE" class="btn btn-sm">เคมีและวัสดุศาสตร์</a>
+				<a href="#BIOL-OE" class="btn btn-sm">ชีววิทยาและสิ่งแวดล้อม</a>
+				<a href="#COMP-OE" class="btn btn-sm">คอมพิวเตอร์</a>
+				<a href="#ENGR-OE" class="btn btn-sm">วิศวกรรมศาสตร์</a>
 			</li>
 			<li>
 				โปสเตอร์:
-				<a href="#MATS-PT" class="btn-sm btn">คณิตศาสตร์</a>
-				<a href="#PHYS-PT" class="btn-sm btn">ฟิสิกส์และดาราศาสตร์</a>
-				<a href="#CHEM-PT" class="btn-sm btn">เคมีและวัสดุศาสตร์</a>
-				<a href="#BIOL-PT" class="btn-sm btn">ชีววิทยาและสิ่งแวดล้อม</a>
-				<a href="#COMP-PT" class="btn-sm btn">คอมพิวเตอร์</a>
-				<a href="#ENGR-PT" class="btn-sm btn">วิศวกรรมศาสตร์</a>
+				<a href="#MATS-PT" class="btn btn-sm">คณิตศาสตร์</a>
+				<a href="#PHYS-PT" class="btn btn-sm">ฟิสิกส์และดาราศาสตร์</a>
+				<a href="#CHEM-PT" class="btn btn-sm">เคมีและวัสดุศาสตร์</a>
+				<a href="#BIOL-PT" class="btn btn-sm">ชีววิทยาและสิ่งแวดล้อม</a>
+				<a href="#COMP-PT" class="btn btn-sm">คอมพิวเตอร์</a>
+				<a href="#ENGR-PT" class="btn btn-sm">วิศวกรรมศาสตร์</a>
 			</li>
 		</ul>
 	</section>
@@ -63,7 +94,7 @@
 	<a
 		href="#toc"
 		data-tip="กลับด้านบนของหน้า"
-		class="btn-outline btn tooltip tooltip-left fixed bottom-5 right-5 z-40 mx-auto flex bg-base-100/80 max-md:btn-square md:btn-sm"
+		class="btn btn-outline tooltip tooltip-left fixed bottom-5 right-5 z-40 mx-auto flex bg-base-100/80 max-md:btn-square md:btn-sm"
 		><Icon icon="mdi:arrow-up" class="h-6 w-6 md:h-5 md:w-5" />
 		<span class="hidden md:inline-block">กลับด้านบน</span>
 	</a>
@@ -207,7 +238,7 @@
 		</div>
 	</article>
 
-	<a href="#toc" class="btn-link btn-outline btn mx-auto my-7">
+	<a href="#toc" class="btn btn-link btn-outline mx-auto my-7">
 		<Icon icon="mdi:arrow-up" class="mr-2 h-6 w-6 sm:h-4 sm:w-4" />
 		กลับสู่ด้านบน
 	</a>
