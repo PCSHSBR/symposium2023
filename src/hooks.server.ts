@@ -8,13 +8,9 @@ import { dev } from '$app/environment';
 
 Sentry.init({
 	dsn: PUBLIC_SENTRY_DSN,
+	telemetry: false,
 	// Performance Monitoring
-	tracesSampleRate: 1.0, // Sampling rate of traces
-	profilesSampleRate: 1.0, // Profiling sample rate is relative to tracesSampleRate
-	integrations: [
-		// Add profiling integration to list of integrations
-		new Sentry.BrowserProfilingIntegration()
-	]
+	tracesSampleRate: 1.0 // Capture 100% of the transactions. Adjust this value in production as necessary.
 });
 
 export const handle: Handle = async ({ event, resolve }) => {
