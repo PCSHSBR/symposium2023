@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	export let alt = '';
 	export let file = '';
 	export let page = 1;
@@ -15,13 +17,19 @@
 	let isLoaded = false;
 	let classes = '';
 	export { classes as class };
+	let isStandTV = true;
+	onMount(() => {
+		isStandTV = localStorage.getItem('standtv') === '1';
+	});
 </script>
 
 <a
 	{...$$restProps}
 	class="relative aspect-[210/297] w-full overflow-y-hidden border border-base-300 bg-base-200 shadow-lg {classes}"
 	data-strip-background-moving={!isLoaded}
-	href="https://pcshsbr-assets.imgix.net/{file}?fm=png&page={page}&invert=false&w=1200"
+	href={isStandTV
+		? '#'
+		: `https://pcshsbr-assets.imgix.net/${file}?fm=png&page=${page}&invert=false&w=1200`}
 	title="กดเพื่อเปิดภาพนี้ขนาดใหญ่ขึ้นในแท็บใหม่ (หน้า {page})"
 >
 	<span class="absolute bottom-0 left-0 right-0 z-0 block p-2 text-right text-xs"

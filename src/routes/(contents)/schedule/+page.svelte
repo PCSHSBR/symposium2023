@@ -1,9 +1,15 @@
-<script>
+<script lang="ts">
 	import CdnPdfRenderer from '$lib/components/CdnPdfRenderer.svelte';
 	import Icon from '@iconify/svelte';
 	import PresentationSection from './PresentationSection.svelte';
 	import H2PresentationSection from './H2PresentationSection.svelte';
+	import { onMount } from 'svelte';
 	let filters = {};
+	let isStandTV: boolean = false;
+
+	onMount(() => {
+		isStandTV = localStorage.getItem('standtv') === '1' ? true : false;
+	});
 </script>
 
 <svelte:head>
@@ -42,6 +48,9 @@
 </svelte:head>
 
 <article class="prose relative p-10">
+	{#if isStandTV}<a href="/" title="กลับไปหน้าหลัก"
+			><button class="btn btn-lg"><Icon icon="mdi:home" />กลับไปหน้าหลัก</button></a
+		>{/if}
 	<span id="toc" class="absolute -top-20" />
 	<h1>ตารางเวลานำเสนอโครงงาน</h1>
 	<a
@@ -101,7 +110,7 @@
 
 	<article class="my-5 flex flex-col gap-2">
 		<div class="flex flex-col gap-2">
-			<H2PresentationSection>ภาคบรรยายภาษาไทย</H2PresentationSection>
+			<H2PresentationSection {isStandTV}>ภาคบรรยายภาษาไทย</H2PresentationSection>
 			<PresentationSection
 				name="สาขาคณิตศาสตร์"
 				pages={[2, 3]}
@@ -147,7 +156,7 @@
 			/>
 		</div>
 		<div class="flex flex-col gap-2">
-			<H2PresentationSection>English Session</H2PresentationSection>
+			<H2PresentationSection {isStandTV}>English Session</H2PresentationSection>
 			<PresentationSection
 				name="Mathematics"
 				pages={[20, 21]}
@@ -192,7 +201,7 @@
 			/>
 		</div>
 		<div class="flex flex-col gap-2">
-			<H2PresentationSection>รูปแบบโปสเตอร์</H2PresentationSection>
+			<H2PresentationSection {isStandTV}>รูปแบบโปสเตอร์</H2PresentationSection>
 			<PresentationSection
 				name="สาขาคณิตศาสตร์"
 				type="poster"

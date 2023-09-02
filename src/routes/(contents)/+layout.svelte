@@ -8,8 +8,10 @@
 	import { toThai } from '$lib/langUtils';
 
 	export let data: LayoutData;
+	let isStandTV: boolean = false;
 
 	onMount(() => {
+		isStandTV = localStorage.getItem('standtv') === '1' ? true : false;
 		if (!window.location.hash) return;
 		const hash = new Map(
 			window.location.hash
@@ -40,8 +42,12 @@
 	/>
 </svelte:head>
 
-<Navbar {data} />
-<main class={$page.url.pathname == '/' ? '' : 'pt-16'}>
+{#if !isStandTV}
+	<Navbar {data} />
+{/if}
+<main class={$page.url.pathname == '/' ? '' : isStandTV ? '' : 'pt-16'}>
 	<slot />
 </main>
-<Footer />
+{#if !isStandTV}
+	<Footer />
+{/if}

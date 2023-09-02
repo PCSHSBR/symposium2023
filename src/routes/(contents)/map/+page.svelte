@@ -3,8 +3,10 @@
 	import Icon from '@iconify/svelte';
 	import maplibre from 'maplibre-gl';
 	import { onDestroy, onMount } from 'svelte';
+	let isStandTV: boolean = false;
 	let map: HTMLDivElement;
 	onMount(() => {
+		isStandTV = localStorage.getItem('standtv') === '1' ? true : false;
 		const map1 = new maplibre.Map({
 			container: map,
 			style:
@@ -59,24 +61,26 @@
 </script>
 
 <div class="relative">
-	<div class="map h-[calc(100vh-5rem)]" id="map" bind:this={map} />
+	<div class="map {isStandTV ? 'h-screen' : 'h-[calc(100vh-5rem)]'}" id="map" bind:this={map} />
 	<div class="absolute left-4 top-4">
 		<div class="flex gap-1">
-			<a href="/#school-map">
+			<a href={isStandTV ? '/' : '/#school-map'}>
 				<button class="btn"
 					><Icon icon="mdi:home" class="h-6 w-6 sm:h-4 sm:w-4" />
 					<span class="hidden sm:inline"> กลับไปหน้าหลัก </span>
 				</button>
 			</a>
-			<a href="https://goo.gl/maps/hrtCinUXAnTnRN1FA">
-				<button class="btn btn-primary"
-					><Icon icon="mdi:google-maps" class="h-6 w-6 sm:h-4 sm:w-4" /><span
-						class="hidden sm:inline"
+			{#if !isStandTV}
+				<a href="https://goo.gl/maps/hrtCinUXAnTnRN1FA">
+					<button class="btn btn-primary"
+						><Icon icon="mdi:google-maps" class="h-6 w-6 sm:h-4 sm:w-4" /><span
+							class="hidden sm:inline"
+						>
+							ดูบน Google Maps
+						</span></button
 					>
-						ดูบน Google Maps
-					</span></button
-				>
-			</a>
+				</a>
+			{/if}
 		</div>
 		<div class="my-2 rounded-lg bg-base-100 p-4">
 			<p class="flex">

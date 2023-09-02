@@ -14,6 +14,7 @@
 	import { toThai } from '$lib/langUtils';
 	import type { PageData } from './$types';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { toast } from '$lib/toastStore';
 	import CdnImage from '$lib/components/CDNImage.svelte';
 	import DownloadDocuments from '$lib/components/DownloadDocuments/DownloadDocuments.svelte';
@@ -24,6 +25,7 @@
 	let isBannerHovered = false;
 	let hero_sticky: HTMLDivElement;
 	let hero_section_percent: number;
+	let isStandTV: boolean = false;
 
 	function interactiveEvent() {
 		const event_calendar = document.querySelectorAll('.hover-effect');
@@ -178,6 +180,10 @@
 
 	onMount(() => {
 		window.handleSignInWithGoogle = handleSignInWithGoogle;
+		if ($page.url.searchParams.get('standtv'))
+			localStorage.setItem('standtv', $page.url.searchParams.get('standtv') ?? '0');
+		isStandTV = localStorage.getItem('standtv') === '1' ? true : false;
+		// console.log(isStandTV);
 	});
 </script>
 
@@ -234,7 +240,9 @@
 		</div>
 		<div>
 			<div
-				class="title absolute top-[15%] px-16 font-display mix-blend-difference invert dark:invert-0 md:px-32"
+				class="title absolute top-[15%] px-16 font-display {isStandTV
+					? ''
+					: 'mix-blend-difference invert'} dark:invert-0 md:px-32"
 			>
 				<div class="date-range flex flex-row flex-wrap items-center font-display">
 					<span>PCSHSBR</span>
@@ -250,15 +258,30 @@
 					Improving a Sustainable World through Innovation and Projects
 				</p>
 				<div class="documents mt-4 flex flex-col flex-wrap items-start gap-1">
-					<a class="btn btn-sm" href="/#event-document">
-						<Icon icon="mdi:file-pdf" /> บทคัดย่อและบทความวิชาการเผยแพร่
-					</a>
-					<a class="btn btn-sm" href="/schedule">
-						<Icon icon="mdi:bullhorn" /> ลำดับการนำเสนอ
-					</a>
-					<a href="#shop" class="btn btn-sm bg-gradient-to-l from-primary to-secondary"
-						>ซื้อเสื้อ Symposium</a
-					>
+					{#if !isStandTV}
+						<a class="btn btn-sm" href="/#event-document">
+							<Icon icon="mdi:file-pdf" /> บทคัดย่อและบทความวิชาการเผยแพร่
+						</a>
+						<a class="btn btn-sm" href="/schedule">
+							<Icon icon="mdi:bullhorn" /> ลำดับการนำเสนอ
+						</a>
+						<a href="#shop" class="btn btn-sm bg-gradient-to-l from-primary to-secondary"
+							>ซื้อเสื้อ Symposium</a
+						>
+					{:else}
+						<a class="btn btn-lg h-20 w-full justify-start" href="/schedule">
+							<Icon icon="mdi:schedule" /> ดูตารางการนำเสนอ
+						</a>
+						<a class="btn btn-lg h-20 w-full justify-start" href="/#event-schedule">
+							<Icon icon="mdi:calendar" /> กำหนดการและลำดับนำเสนอ
+						</a>
+						<a class="btn btn-lg h-20 w-full justify-start" href="/map">
+							<Icon icon="mdi:map" /> แผ่นที่โรงเรียน
+						</a>
+						<a class="btn btn-ghost btn-lg h-20 w-full justify-start" href="/#event-calendar">
+							<Icon icon="mdi:arrow-down" /> เลื่อนลงเพื่อดูข้อมูลเพิ่มเติม
+						</a>
+					{/if}
 				</div>
 			</div>
 			<div class="absolute bottom-0 flex h-16 w-full flex-col items-center">
@@ -270,74 +293,77 @@
 </div>
 
 <div class="info-container relative w-full overflow-hidden" id="info">
-	<section class="event-info relative mx-auto max-w-4xl px-10 py-40">
-		<div
-			class="background absolute -left-10 top-5 flex rotate-90 flex-col text-8xl text-base-content/50 blur-md"
-		>
-			<span class="">WE</span>
-			<span class="">BUILD</span>
-			<span class="">FUTURE</span>
-			<span class="">TOGETER</span>
-			<div class="my-2 mr-2 flex">
-				<Icon icon="material-symbols:circle" />
-				<Icon icon="mdi:triangle" />
-				<Icon icon="mdi:square" />
-			</div>
-		</div>
-		<div class="relative h-40 overflow-hidden rounded-3xl">
-			<img
-				srcset="https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=100 100w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=116 116w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=134 134w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=156 156w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=182 182w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=210 210w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=244 244w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=282 282w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=328 328w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=380 380w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=442 442w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=512 512w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=594 594w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=688 688w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=798 798w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=926 926w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1074 1074w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1246 1246w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1446 1446w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1678 1678w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1946 1946w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=2258 2258w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=2618 2618w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=3038 3038w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=3524 3524w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=4088 4088w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=4742 4742w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=5500 5500w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=6380 6380w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=7400 7400w"
-				src="https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?ixembed=1689152679867&auto=format,compress"
-				class="info-img h-full w-full object-cover"
-				alt="ภาพถ่ายบรรยายกาศการนำเสนอโครงงาน"
-			/>
-		</div>
-		<div class="info-paragrpah relative">
-			<h1
-				class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-6xl font-bold text-transparent"
+	{#if !isStandTV}
+		<section class="event-info relative mx-auto max-w-4xl px-10 py-40">
+			<div
+				class="background absolute -left-10 top-5 flex rotate-90 flex-col text-8xl text-base-content/50 blur-md"
 			>
-				PCSHS SCIENCE SYMPOSIUM
-			</h1>
-			<p class="">
-				<span
-					class="bg-gradient-to-r from-primary to-secondary bg-clip-text font-bold text-transparent"
-					>PCSHS Science Symposium</span
-				> มีเป้าหมายเพื่อส่งเสริมการพัฒนาและเผยแพร่โครงงานวิทยาศาสตร์และเทคโนโลยีของนักเรียนภายในกลุ่มโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย
-				(PCSHS) ทั้ง 12 แห่ง โดยจัดเป็นการนำเสนอผลงานโครงงานของนักเรียนระดับชั้นมัธยมศึกษาปีที่ 6 ณ โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัยเจ้าภาพ
-				โดยนอกจากเป็นการแสดงผลงานของนักเรียนแล้ว ยังเป็นการเผยแพร่วัฒนธรรมและวิถีชีวิตของคนในท้องถิ่น
-				เพื่อการพัฒนานักเรียนให้มีศักยภาพสอดรับกับความต้องการของประเทศ และนำองค์ความรู้มาพัฒนาประเทศในด้านต่าง
-				ๆ ต่อไปในอนาคต
-			</p>
-		</div>
-		<div class="event-poem flex flex-row flex-wrap items-center pt-10">
-			<div class="my-2 mr-2 flex">
-				<Icon icon="material-symbols:circle" />
-				<Icon icon="mdi:triangle" />
-				<Icon icon="mdi:square" />
+				<span class="">WE</span>
+				<span class="">BUILD</span>
+				<span class="">FUTURE</span>
+				<span class="">TOGETER</span>
+				<div class="my-2 mr-2 flex">
+					<Icon icon="material-symbols:circle" />
+					<Icon icon="mdi:triangle" />
+					<Icon icon="mdi:square" />
+				</div>
 			</div>
-			<span class="text-sm">Improving a Sustainable World through Innovation and Projects</span>
-		</div>
-	</section>
-	<section
-		id="event-calendar"
-		class="event-calendar hover-effect relative mx-auto overflow-hidden bg-base-300"
-	>
-		<span class="target-anchor" id="event-schedule" />
-		<div class="background">
-			<span class="circle interactive bg-primary/50" />
-			<span class="circle left-10 top-0 scale-[5] bg-primary/50" />
-			<span class="circle right-0 top-20 scale-[3] bg-primary/50" />
-		</div>
-		<div class="calendar-info relative mx-auto max-w-6xl p-10">
-			<div class="pb-4">
-				<h2 class="m-0 flex items-center text-6xl font-bold">
-					<span>ปฏิทิน</span>
-				</h2>
+			<div class="relative h-40 overflow-hidden rounded-3xl">
+				<img
+					srcset="https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=100 100w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=116 116w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=134 134w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=156 156w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=182 182w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=210 210w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=244 244w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=282 282w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=328 328w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=380 380w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=442 442w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=512 512w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=594 594w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=688 688w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=798 798w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=926 926w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1074 1074w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1246 1246w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1446 1446w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1678 1678w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=1946 1946w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=2258 2258w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=2618 2618w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=3038 3038w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=3524 3524w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=4088 4088w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=4742 4742w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=5500 5500w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=6380 6380w, https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?auto=format,compress&w=7400 7400w"
+					src="https://pcshsbr-assets.imgix.net/sym2023/HeroPic1.jpg?ixembed=1689152679867&auto=format,compress"
+					class="info-img h-full w-full object-cover"
+					alt="ภาพถ่ายบรรยายกาศการนำเสนอโครงงาน"
+				/>
 			</div>
-			<Calendar class="" calenderData={calendarData} />
-		</div>
-	</section>
-
+			<div class="info-paragrpah relative">
+				<h1
+					class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-6xl font-bold text-transparent"
+				>
+					PCSHS SCIENCE SYMPOSIUM
+				</h1>
+				<p class="">
+					<span
+						class="bg-gradient-to-r from-primary to-secondary bg-clip-text font-bold text-transparent"
+						>PCSHS Science Symposium</span
+					> มีเป้าหมายเพื่อส่งเสริมการพัฒนาและเผยแพร่โครงงานวิทยาศาสตร์และเทคโนโลยีของนักเรียนภายในกลุ่มโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย
+					(PCSHS) ทั้ง 12 แห่ง โดยจัดเป็นการนำเสนอผลงานโครงงานของนักเรียนระดับชั้นมัธยมศึกษาปีที่ 6 ณ
+					โรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัยเจ้าภาพ โดยนอกจากเป็นการแสดงผลงานของนักเรียนแล้ว ยังเป็นการเผยแพร่วัฒนธรรมและวิถีชีวิตของคนในท้องถิ่น
+					เพื่อการพัฒนานักเรียนให้มีศักยภาพสอดรับกับความต้องการของประเทศ และนำองค์ความรู้มาพัฒนาประเทศในด้านต่าง
+					ๆ ต่อไปในอนาคต
+				</p>
+			</div>
+			<div class="event-poem flex flex-row flex-wrap items-center pt-10">
+				<div class="my-2 mr-2 flex">
+					<Icon icon="material-symbols:circle" />
+					<Icon icon="mdi:triangle" />
+					<Icon icon="mdi:square" />
+				</div>
+				<span class="text-sm">Improving a Sustainable World through Innovation and Projects</span>
+			</div>
+		</section>
+	{/if}
+	{#if !isStandTV}
+		<section
+			id="event-calendar"
+			class="event-calendar hover-effect relative mx-auto overflow-hidden bg-base-300"
+		>
+			<span class="target-anchor" id="event-schedule" />
+			<div class="background">
+				<span class="circle interactive bg-primary/50" />
+				<span class="circle left-10 top-0 scale-[5] bg-primary/50" />
+				<span class="circle right-0 top-20 scale-[3] bg-primary/50" />
+			</div>
+			<div class="calendar-info relative mx-auto max-w-6xl p-10">
+				<div class="pb-4">
+					<h2 class="m-0 flex items-center text-6xl font-bold">
+						<span>ปฏิทิน</span>
+					</h2>
+				</div>
+				<Calendar class="" calenderData={calendarData} />
+			</div>
+		</section>
+	{/if}
 	<section id="event-schedule" class="hover-effect relative mx-auto overflow-hidden bg-base-300">
 		<span class="target-anchor" id="event-schedule" />
 		<div class="background">
@@ -354,85 +380,97 @@
 			<Schedule />
 		</div>
 	</section>
-	<ShirtShow />
-	<section id="school-map" class="school-map p-10">
-		<a href="/map" target="_blank">
-			<div
-				class="main-c-1 relative mx-auto h-[30rem] max-w-[60rem] overflow-hidden rounded-3xl transition-all duration-500"
-			>
-				<div>
-					<div class="text-c-1 absolute -bottom-[100%] left-0 z-[1000] transition-all duration-500">
-						<div class="text-c-2 p-8 transition-all duration-500">
-							<h3 class="text-4xl font-bold">แผนที่โรงเรียน</h3>
-							<p>คลิกที่นี่เพื่อดูแผนที่โรงเรียน</p>
+	{#if !isStandTV}
+		<ShirtShow />
+	{/if}
+	{#if !isStandTV}
+		<section id="school-map" class="school-map p-10">
+			<a href="/map" target="_blank">
+				<div
+					class="main-c-1 relative mx-auto h-[30rem] max-w-[60rem] overflow-hidden rounded-3xl transition-all duration-500"
+				>
+					<div>
+						<div
+							class="text-c-1 absolute -bottom-[100%] left-0 z-[1000] transition-all duration-500"
+						>
+							<div class="text-c-2 p-8 transition-all duration-500">
+								<h3 class="text-4xl font-bold">แผนที่โรงเรียน</h3>
+								<p>คลิกที่นี่เพื่อดูแผนที่โรงเรียน</p>
+							</div>
 						</div>
 					</div>
-				</div>
-				<span class="transition-all duration-500" />
-				<CdnImage
-					class="z-[100] h-full w-full object-cover transition-all duration-500"
-					alt="ภาพแผนที่โรงเรียนแบบคร่าว ๆ"
-					file="sym2023/school-map.png"
-				/>
-			</div>
-		</a>
-	</section>
-
-	<section id="event-trip" class="event-trip relative mx-auto overflow-hidden">
-		<div class="mx-auto max-w-6xl p-10">
-			<div class="relative z-10">
-				<h2 class="m-0 flex items-center text-6xl font-bold">
-					<span>ทัศนศึกษา</span>
-				</h2>
-			</div>
-			<FieldTrip />
-		</div>
-	</section>
-	<section id="event-speaker" class="event-speaker relative mx-auto overflow-hidden">
-		<div class="mx-auto max-w-6xl p-10">
-			<div class="relative z-10">
-				<h2 class="m-0 flex items-center text-6xl font-bold">
-					<span>วิทยากร</span>
-				</h2>
-			</div>
-			<div class="my-4 grid grid-cols-1 text-center md:grid-cols-2 md:text-left">
-				<div class="relative mx-auto max-w-sm overflow-hidden rounded-lg md:mx-0">
-					<a href={SpeakerPatentImage} title="สิทธิบัตร"
-						><CdnImage
-							class="absolute bottom-2 right-2 mx-auto h-auto max-w-[25%] rounded-md shadow-lg"
-							file="sym2023/speaker-patent.jpg"
-							alt=""
-						/></a
-					>
+					<span class="transition-all duration-500" />
 					<CdnImage
-						file="sym2023/speaker-updated.png"
-						class="h-full w-full object-cover"
-						alt="วิทยากร"
+						class="z-[100] h-full w-full object-cover transition-all duration-500"
+						alt="ภาพแผนที่โรงเรียนแบบคร่าว ๆ"
+						file="sym2023/school-map.png"
 					/>
 				</div>
-				<div class="p-6">
-					<h3 class="mb-6 text-2xl font-bold">ดร.สุพรรณ ยอดยิ่งยง</h3>
-					<p>
-						คว้ารางวัล Special Prize (On stage) จากผลงาน
-						"กระบวนการสังเคราะห์ซิลิกาแอโรเจลต้นทุนต่ำด้วยการทำแห้งที่ความดันบรรยากาศ" จาก
-						INDONESIAN INVENTION AND INNOVATION PROMOTION ASSOCIATION (INNOPA) ประเทศอินโดนีเซีย
-						ในงาน Bitgaram International Exposition of Electric Power Technology (BIXPO 2015)
-						ซึ่งจัดขึ้นระหว่างวันที่ 12 - 14
-					</p>
+			</a>
+		</section>
+	{/if}
+
+	{#if !isStandTV}
+		<section id="event-trip" class="event-trip relative mx-auto overflow-hidden">
+			<div class="mx-auto max-w-6xl p-10">
+				<div class="relative z-10">
+					<h2 class="m-0 flex items-center text-6xl font-bold">
+						<span>ทัศนศึกษา</span>
+					</h2>
+				</div>
+				<FieldTrip />
+			</div>
+		</section>
+	{/if}
+	{#if !isStandTV}
+		<section id="event-speaker" class="event-speaker relative mx-auto overflow-hidden">
+			<div class="mx-auto max-w-6xl p-10">
+				<div class="relative z-10">
+					<h2 class="m-0 flex items-center text-6xl font-bold">
+						<span>วิทยากร</span>
+					</h2>
+				</div>
+				<div class="my-4 grid grid-cols-1 text-center md:grid-cols-2 md:text-left">
+					<div class="relative mx-auto max-w-sm overflow-hidden rounded-lg md:mx-0">
+						<a href={SpeakerPatentImage} title="สิทธิบัตร"
+							><CdnImage
+								class="absolute bottom-2 right-2 mx-auto h-auto max-w-[25%] rounded-md shadow-lg"
+								file="sym2023/speaker-patent.jpg"
+								alt=""
+							/></a
+						>
+						<CdnImage
+							file="sym2023/speaker-updated.png"
+							class="h-full w-full object-cover"
+							alt="วิทยากร"
+						/>
+					</div>
+					<div class="p-6">
+						<h3 class="mb-6 text-2xl font-bold">ดร.สุพรรณ ยอดยิ่งยง</h3>
+						<p>
+							คว้ารางวัล Special Prize (On stage) จากผลงาน
+							"กระบวนการสังเคราะห์ซิลิกาแอโรเจลต้นทุนต่ำด้วยการทำแห้งที่ความดันบรรยากาศ" จาก
+							INDONESIAN INVENTION AND INNOVATION PROMOTION ASSOCIATION (INNOPA) ประเทศอินโดนีเซีย
+							ในงาน Bitgaram International Exposition of Electric Power Technology (BIXPO 2015)
+							ซึ่งจัดขึ้นระหว่างวันที่ 12 - 14
+						</p>
+					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-	<section id="event-document" class="event-document relative mx-auto overflow-hidden">
-		<div class="mx-auto max-w-6xl p-10">
-			<div class="relative z-10">
-				<h2 class="m-0 flex items-center text-6xl font-bold">
-					<span>ดาวน์โหลดเอกสาร</span>
-				</h2>
-				<DownloadDocuments />
+		</section>
+	{/if}
+	{#if !isStandTV}
+		<section id="event-document" class="event-document relative mx-auto overflow-hidden">
+			<div class="mx-auto max-w-6xl p-10">
+				<div class="relative z-10">
+					<h2 class="m-0 flex items-center text-6xl font-bold">
+						<span>ดาวน์โหลดเอกสาร</span>
+					</h2>
+					<DownloadDocuments />
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+	{/if}
 </div>
 <div
 	id="g_id_onload"
