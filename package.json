@@ -88,6 +88,7 @@
 		"dotenv-vault-core": "^0.7.1",
 		"husky": "^8.0.3",
 		"isomorphic-dompurify": "^1.8.0",
+		"maplibre-gl": "^3.3.1",
 		"marked": "^5.1.2",
 		"remark-squeeze-paragraphs": "^5.0.1",
 		"remark-strip-html": "^1.0.2",
