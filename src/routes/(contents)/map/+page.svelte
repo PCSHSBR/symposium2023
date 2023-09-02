@@ -11,12 +11,24 @@
 				'https://api.maptiler.com/maps/5aa5e922-4fbe-4207-bb97-01a9e837c6ab/style.json?key=tX3B0e0L23CmIJmoim13',
 			center: [103.3041, 15.30784],
 			zoom: 18,
+			antialias: true,
+			attributionControl: false,
 			maxBounds: [
-				[103.3016, 15.30684],
-				[103.308, 15.30884]
+				[103.299, 15.30484],
+				[103.31, 15.31084]
 			]
 		});
-		map1.addControl(new maplibre.NavigationControl());
+		map1.addControl(
+			new maplibre.AttributionControl({
+				compact: true,
+				customAttribution: '@patsagorn , @Phubest Srikoon'
+			})
+		);
+		map1.addControl(
+			new maplibre.NavigationControl({
+				visualizePitch: true
+			})
+		);
 		map1.addControl(
 			new maplibre.GeolocateControl({
 				positionOptions: {
