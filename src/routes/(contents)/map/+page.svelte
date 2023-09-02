@@ -12,11 +12,31 @@
 			center: [103.3041, 15.30784],
 			zoom: 18,
 			maxBounds: [
-				[103.313, 15.304],
-				[103.309, 15.31]
+				[103.3016, 15.30684],
+				[103.308, 15.30884]
 			]
 		});
 		map1.addControl(new maplibre.NavigationControl());
+		map1.addControl(
+			new maplibre.GeolocateControl({
+				positionOptions: {
+					enableHighAccuracy: true
+				},
+				trackUserLocation: true,
+				showAccuracyCircle: false
+			})
+		);
+		map1.addControl(
+			new maplibre.ScaleControl({
+				maxWidth: 80,
+				unit: 'metric'
+			})
+		);
+		map1.addControl(
+			new maplibre.FullscreenControl({
+				container: map
+			})
+		);
 		//tilted the map to make it look 3D
 		map1.setPitch(60);
 	});
