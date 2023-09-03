@@ -16,6 +16,8 @@
 	import { notify } from '$lib/notify';
 	import { toThai } from '$lib/langUtils';
 
+	let isStandTV: boolean = false;
+
 	function calculate3DRotation(maxX: any, maxY: any, clientX: any, clientY: any, intensity: any) {
 		let x = Math.sin((maxX - clientX * 2) / maxX) * intensity;
 		let z = Math.sin((maxY - clientY * 2) / maxY) * intensity;
@@ -30,6 +32,7 @@
 	let animationFrameID: number;
 
 	onMount(async () => {
+		isStandTV = localStorage.getItem('standtv') === '1' ? true : false;
 		function detectMob() {
 			const toMatch = [
 				/Android/i,
@@ -99,7 +102,8 @@
 		let pointLight = new THREE.PointLight(0xffffff, 1, 5000);
 		let pointLightHelper = new THREE.PointLightHelper(pointLight, 100);
 		pointLight.position.set(-200, -200, 0);
-		pointLight.castShadow = !isMobile;
+		pointLight.castShadow = false;
+		// pointLight.castShadow = !isMobile;
 		pointLight.shadow.mapSize.width = 512;
 		pointLight.shadow.mapSize.height = 512;
 		pointLight.shadow.camera.near = 0.5;

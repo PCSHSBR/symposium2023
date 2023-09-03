@@ -221,7 +221,7 @@
 
 <LoadingPage />
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="hero-sticky h-[200vh]" bind:this={hero_sticky}>
+<div class="hero-sticky h-[200vh]" id="hero-sticky" bind:this={hero_sticky}>
 	<section
 		class="banner sticky top-0"
 		on:mouseenter={() => {
@@ -374,6 +374,9 @@
 		<div class="calendar-info {isStandTV ? 'min-h-[100vh]' : ''} relative mx-auto max-w-6xl p-10">
 			<div class="pb-4">
 				<h2 class="m-0 flex items-center text-6xl font-bold">
+					{#if isStandTV}
+						<a href="/#hero-sticky" class="btn btn-accent mr-4"><Icon icon="mdi:home" /></a>
+					{/if}
 					<span>กำหนดการและลำดับนำเสนอ</span>
 				</h2>
 			</div>
