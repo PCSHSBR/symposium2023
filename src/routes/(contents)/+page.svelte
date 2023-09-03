@@ -276,7 +276,7 @@
 							<Icon icon="mdi:calendar" /> กำหนดการและลำดับนำเสนอ
 						</a>
 						<a class="btn btn-lg h-20 w-full justify-start" href="/map">
-							<Icon icon="mdi:map" /> แผ่นที่โรงเรียน
+							<Icon icon="mdi:map" /> แผนที่โรงเรียน
 						</a>
 						<a class="btn btn-ghost btn-lg h-20 w-full justify-start" href="/#event-calendar">
 							<Icon icon="mdi:arrow-down" /> เลื่อนลงเพื่อดูข้อมูลเพิ่มเติม
@@ -371,7 +371,7 @@
 			<span class="circle left-10 top-11 scale-[4] bg-accent/70" />
 			<span class="circle right-5 top-[70%] scale-[3] bg-accent/70" />
 		</div>
-		<div class="calendar-info relative mx-auto max-w-6xl p-10">
+		<div class="calendar-info {isStandTV ? 'min-h-[100vh]' : ''} relative mx-auto max-w-6xl p-10">
 			<div class="pb-4">
 				<h2 class="m-0 flex items-center text-6xl font-bold">
 					<span>กำหนดการและลำดับนำเสนอ</span>
