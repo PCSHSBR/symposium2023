@@ -1,4 +1,23 @@
 {
   "projectName": "symposium2023",
-  "projectOwner": "PCSHSBR"
+  "projectOwner": "PCSHSBR",
+  "files": [
+    "README.md"
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributorsPerLine": 7,
+  "contributors": [
+    {
+      "login": "ptsgrn",
+      "name": "Patsagorn Y.",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49602385?v=4",
+      "profile": "http://ptsgrn.dev",
+      "contributions": [
+        "code",
+        "content",
+        "infra"
+      ]
+    }
+  ]
 }
