@@ -77,6 +77,13 @@ Edit [HERE](<https://tree.nathanfriend.io/?s=(%27options!(%27fancy!true~fullPath
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://ptsgrn.dev"><img src="https://avatars.githubusercontent.com/u/49602385?v=4?s=100" width="100px;" alt="Patsagorn Y."/><br /><sub><b>Patsagorn Y.</b></sub></a><br /><a href="#code-ptsgrn" title="Code">💻</a> <a href="#content-ptsgrn" title="Content">🖋</a> <a href="#infra-ptsgrn" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
