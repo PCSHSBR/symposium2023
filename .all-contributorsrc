@@ -29,6 +29,15 @@
         "content",
         "infra"
       ]
+    },
+    {
+      "login": "ongsalt",
+      "name": "Siraphop",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58396464?v=4",
+      "profile": "https://github.com/ongsalt",
+      "contributions": [
+        "content"
+      ]
     }
   ]
 }
