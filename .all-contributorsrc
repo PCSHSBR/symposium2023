@@ -9,6 +9,17 @@
   "contributorsPerLine": 7,
   "contributors": [
     {
+      "login": "PhubestSrikooon",
+      "name": "PhubestSrikoon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/86614284?v=4",
+      "profile": "http://phu.best",
+      "contributions": [
+        "code",
+        "design",
+        "ideas"
+      ]
+    },
+    {
       "login": "ptsgrn",
       "name": "Patsagorn Y.",
       "avatar_url": "https://avatars.githubusercontent.com/u/49602385?v=4",
