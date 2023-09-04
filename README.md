@@ -72,10 +72,16 @@ https://3rdpss2023.pcshsbr.ac.th/
 
 Edit [HERE](<https://tree.nathanfriend.io/?s=(%27options!(%27fancy!true~fullPath!false~trailingSlash!true~rootDot!false)~E(%27E%27https%3A%2F%2F3rdpss2023.pcshsbr.ac.th%2F6auth8account*authCcallbackCliG-of-inviFdCset-newA5verify*dashboardHinHout*resetAwelcomeCdone6conFnts8legalCprivacy-and-Frms%20%7BWIP89s6Gaff8manageCinviF6Gudent-Fam-contact8my-9Cedit72-9-information73-abGract74-articleBapi*v1%27)~version!%271%27)*B55%20%206B%7B7C5sFp-8%7D*9projectA-password*B%5Cn5C*5Esource!FteGstH*log%01HGFECBA98765*>)
 
-## Contributer
+## Contributors
 
-- Patsagorn Yuenyong ([ptsgrn](https://github.com/ptsgrn)) - Project Manager, Backend Developer
-- Phubest Srikoon ([PhubestSrikooon](https://github.com/PhubestSrikooon)) - Frontend Developer, Designer
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## License
 
