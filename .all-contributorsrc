@@ -1,4 +1,23 @@
 {
   "projectName": "symposium2023",
-  "projectOwner": "PCSHSBR"
+  "projectOwner": "PCSHSBR",
+  "files": [
+    "README.md"
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributorsPerLine": 7,
+  "contributors": [
+    {
+      "login": "PhubestSrikooon",
+      "name": "PhubestSrikoon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/86614284?v=4",
+      "profile": "http://phu.best",
+      "contributions": [
+        "code",
+        "design",
+        "ideas"
+      ]
+    }
+  ]
 }
