@@ -259,15 +259,15 @@
 				</p>
 				<div class="documents mt-4 flex flex-col flex-wrap items-start gap-1">
 					{#if !isStandTV}
+						<a
+							class="btn btn-primary btn-lg"
+							href="https://drive.google.com/file/d/13fM_To8-eoHN07U4Nho6wAFIBkyxYaED/view"
+						>
+							<Icon icon="mdi:bullhorn" class="h-7 w-7" /> ผลการแข่งขัน และสรุปเหรียญรางวัล
+						</a>
 						<a class="btn btn-sm" href="/#event-document">
 							<Icon icon="mdi:file-pdf" /> บทคัดย่อและบทความวิชาการเผยแพร่
 						</a>
-						<a class="btn btn-sm" href="/schedule">
-							<Icon icon="mdi:bullhorn" /> ลำดับการนำเสนอ
-						</a>
-						<a href="#shop" class="btn btn-sm bg-gradient-to-l from-primary to-secondary"
-							>ซื้อเสื้อ Symposium</a
-						>
 					{:else}
 						<a class="btn btn-lg h-20 w-full justify-start" href="/schedule">
 							<Icon icon="mdi:schedule" /> ดูตารางการนำเสนอ
