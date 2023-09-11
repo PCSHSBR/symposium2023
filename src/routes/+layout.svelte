@@ -70,8 +70,12 @@ ${"                       `=---='"}
 		};
 	</script>
 	{@html '<script>' + partytownSnippet() + '</script>'}
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-VPF67T58QS"></script>
-	<script>
+	<script
+		async
+		type="text/partytown"
+		src="https://www.googletagmanager.com/gtag/js?id=G-VPF67T58QS"
+	></script>
+	<script type="text/partytown">
 		window.dataLayer = window.dataLayer || [];
 		function gtag() {
 			dataLayer.push(arguments);
