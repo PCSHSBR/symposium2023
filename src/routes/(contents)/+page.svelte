@@ -383,9 +383,9 @@
 			<Schedule />
 		</div>
 	</section>
-	{#if !isStandTV}
+	<!-- {#if !isStandTV}
 		<ShirtShow />
-	{/if}
+	{/if} -->
 	{#if !isStandTV}
 		<section id="school-map" class="school-map p-10">
 			<a href="/map" target="_blank">
@@ -475,14 +475,6 @@
 		</section>
 	{/if}
 </div>
-<div
-	id="g_id_onload"
-	data-client_id="430296940905-hs3h8t91t4q9k5aj5uu6q7it9gdnj70t.apps.googleusercontent.com"
-	data-context="signin"
-	data-callback="handleSignInWithGoogle"
-	data-itp_support="true"
-	data-auto_prompt={data.session ? 'false' : 'true'}
-/>
 
 <style lang="scss">
 	.circle {
