@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /auth/
+Disallow: /manage/
+
+Sitemap: https://3rdpss2023.pcshsbr.ac.th/sitemap.xml
