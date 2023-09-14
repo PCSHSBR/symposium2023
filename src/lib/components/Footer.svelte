@@ -28,11 +28,18 @@
 	<div class="grid w-full grid-cols-1 gap-5 sm:grid-cols-2">
 		<div class="flex flex-col">
 			<h3 class="footer-title">ข้อมูล</h3>
-			<a class="link-hover link" href="/projects">รายการโครงงาน</a>
-			<a class="link-hover link" href="/schedule">กำหนดการนำเสนอรูปแบบบรรยายและโปสเตอร์</a>
 			<a class="link-hover link" href="https://www.pcshsbr.ac.th/pcshs_symposium2023_vdo/"
 				>การแข่งขันรูปแบบออนไลน์</a
 			>
+			<a class="link-hover link" href="/projects">รายการโครงงาน</a>
+			<a class="link-hover link" href="/schedule">กำหนดการนำเสนอรูปแบบบรรยายและโปสเตอร์</a>
+			<a
+				class="link-hover link"
+				href="https://drive.google.com/file/d/13fM_To8-eoHN07U4Nho6wAFIBkyxYaED/view"
+			>
+				ผลการแข่งขัน
+			</a>
+			<a class="link-hover link" href="/certs"> ดาวโหลดเกียรติบัตร </a>
 		</div>
 		<div class="flex flex-col">
 			<h3 class="footer-title">การแข่งขันครั้งก่อนหน้า</h3>

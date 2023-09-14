@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { featureFlags } from '$lib/featureFlags';
 	import { toThai } from '$lib/langUtils';
 	import type { LayoutData } from './$types';
 	interface LocalErrorMessage {
@@ -12,7 +13,7 @@
 		400: 'คุณส่งอะไรมาเนีย!',
 		401: 'คุณไม่มีสิทธิ์เข้าถึงหน้านี้',
 		403: 'เขตหวงห้ามเด้อ',
-		404: 'ไม่พบหน้าที่คุณต้องการ อาจจะเป็นเพราะคุณพิมพ์ผิดหรือเว็บแต่ไม่น่าใช่ได้',
+		404: 'ไม่พบหน้าที่คุณต้องการ อาจจะเป็นเพราะคุณพิมพ์ผิดหรือเว็บล่มแต่ไม่น่าใช่',
 		405: 'ไม่รับครับ',
 		406: 'รับไม่ได้!',
 		408: 'เกินเวลา',
@@ -48,15 +49,17 @@
 					{errmsg_locals[Math.floor(Math.random() * errmsg_locals.length)]}
 				</h2>
 				<h2>{locals[$page.status] ?? $page.error?.message}</h2>
-				<div>
-					{#if data.session}
-						<span>เข้าสู่ระบบในฐานะ<i>{toThai(data.role)}</i></span>
-						<a href="/auth" class="link">กลับไปหน้าแดชบอร์ด</a>
-					{:else}
-						<span>หรืออาจจะเป็นเพราะคุณยังไม่ได้เข้าสู่ระบบ?</span>
-						<a href="/login" class="link">เข้าสู่ระบบ</a>
-					{/if}
-				</div>
+				{#if featureFlags.openForLogin}
+					<div>
+						{#if data.session}
+							<span>เข้าสู่ระบบในฐานะ<i>{toThai(data.role)}</i></span>
+							<a href="/auth" class="link">กลับไปหน้าแดชบอร์ด</a>
+						{:else}
+							<span>หรืออาจจะเป็นเพราะคุณยังไม่ได้เข้าสู่ระบบ?</span>
+							<a href="/login" class="link">เข้าสู่ระบบ</a>
+						{/if}
+					</div>
+				{/if}
 				<pre class="mt-3">{$page.error?.message}</pre>
 			</div>
 		</div>

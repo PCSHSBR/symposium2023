@@ -202,7 +202,7 @@
 	/>
 	<meta
 		property="og:image"
-		content="https://termtem-cdn.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress"
+		content="https://pcshsbr-assets.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress"
 	/>
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta property="twitter:domain" content="3rdpss2023.pcshsbr.ac.th" />
@@ -214,9 +214,40 @@
 	/>
 	<meta
 		name="twitter:image"
-		content="https://termtem-cdn.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress"
+		content="https://pcshsbr-assets.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress"
 	/>
 	<script src="https://accounts.google.com/gsi/client" async></script>
+	<script type="application/ld+json">
+		{
+			'@context': 'https://schema.org',
+			'@type': 'Event',
+			name: 'The 3rd PCSHS Sciensce Symposium 2023',
+			startDate: '2023-09-04T08:00:00+07:00',
+			endDate: '2023-09-06T17:00:00+07:00',
+			eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
+			eventStatus: 'https://schema.org/EventScheduled',
+			location: {
+				'@type': 'Place',
+				name: 'Princess Chulabhorn Science High School Buriram',
+				geo: {
+					'@type': 'GeoCoordinates',
+					latitude: 15.3077745,
+					longitude: 103.3009612
+				},
+				url: 'https://pcshsbr.ac.th'
+			},
+			image: [
+				'https://pcshsbr-assets.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress'
+			],
+			organizer: {
+				'@type': 'Organization',
+				name: 'Princess Chulabhorn Science High School Buriram',
+				url: 'https://pcshsbr.ac.th'
+			},
+			description:
+				'การนำเสนอผลงานนักเรียนกลุ่มโรงเรียนวิทยาศาสตร์จุฬาภรณราชวิทยาลัย ครั้งที่ 3'
+		}
+	</script>
 </svelte:head>
 
 <LoadingPage />
@@ -254,19 +285,26 @@
 						class="translate-y-[-0.5em] text-[72px]">rd</sup
 					> PCSHS Science Symposium
 				</h1>
-				<p class="sub-title font-display text-xl">
+				<p class="sub-title hidden font-display text-xl sm:block">
 					Improving a Sustainable World through Innovation and Projects
 				</p>
-				<div class="documents mt-4 flex flex-col flex-wrap items-start gap-1">
+				<div
+					class="documents mt-4 flex flex-col flex-wrap items-start gap-1 !mix-blend-normal !invert-0"
+				>
 					{#if !isStandTV}
-						<a
-							class="btn btn-primary btn-lg"
-							href="https://drive.google.com/file/d/13fM_To8-eoHN07U4Nho6wAFIBkyxYaED/view"
-						>
-							<Icon icon="mdi:bullhorn" class="h-7 w-7" /> ผลการแข่งขัน และสรุปเหรียญรางวัล
-						</a>
-						<a class="btn btn-sm" href="/#event-document">
-							<Icon icon="mdi:file-pdf" /> บทคัดย่อและบทความวิชาการเผยแพร่
+						<div class="flex flex-col gap-1 max-xs:w-full xs:flex-row">
+							<a
+								class="btn justify-start max-xs:btn-block"
+								href="https://drive.google.com/file/d/13fM_To8-eoHN07U4Nho6wAFIBkyxYaED/view"
+							>
+								<Icon icon="mdi:bullhorn" class="h-5 w-5" /> ผลการแข่งขัน
+							</a>
+							<a class="btn justify-start max-xs:btn-block" href="/certs">
+								<Icon icon="mdi:file-certificate" class="h-5 w-5" /> เกียรติบัตร
+							</a>
+						</div>
+						<a class="btn justify-start max-xs:btn-block xs:btn-sm" href="/#event-document">
+							<Icon icon="mdi:file-pdf" class="xs:h-5 xs:w-5" /> เอกสารเผยแพร่
 						</a>
 					{:else}
 						<a class="btn btn-lg h-20 w-full justify-start" href="/schedule">
@@ -284,7 +322,7 @@
 					{/if}
 				</div>
 			</div>
-			<div class="absolute bottom-0 flex h-16 w-full flex-col items-center">
+			<div class="absolute bottom-0 hidden h-16 w-full flex-col items-center xs:flex">
 				<Icon icon="mdi:menu-down" />
 				<span>ข้อมูลงาน</span>
 			</div>

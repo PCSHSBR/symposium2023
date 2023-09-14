@@ -25,7 +25,7 @@
 	/>
 	<meta
 		property="og:image"
-		content="https://termtem-cdn.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress"
+		content="https://pcshsbr-assets.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress"
 	/>
 	<meta property="og:url" content="https://3rdpss2023.pcshsbr.ac.th/schedule" />
 	<meta
@@ -43,7 +43,7 @@
 	/>
 	<meta
 		name="twitter:image"
-		content="https://termtem-cdn.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress"
+		content="https://pcshsbr-assets.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress"
 	/>
 </svelte:head>
 

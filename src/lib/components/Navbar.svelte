@@ -78,20 +78,18 @@
 		: 'bg-base-100/70'} backdrop-blur-sm"
 >
 	<div>
-		<label>
-			<button
-				aria-label="เปิด/ปิดเมนู"
-				type="button"
-				class="btn btn-square btn-ghost swap swap-rotate md:hidden"
-				on:click={() => {
-					isMenuOpen = !isMenuOpen;
-				}}
-			>
-				<input class="hidden" type="checkbox" bind:checked={isMenuOpen} />
-				<Icon icon="mdi:menu" class="swap-off text-2xl" />
-				<Icon icon="mdi:close" class="swap-on text-2xl" />
-			</button>
-		</label>
+		<button
+			aria-label="เปิด/ปิดเมนู"
+			type="button"
+			class="btn btn-square btn-ghost swap swap-rotate md:hidden"
+			on:click={() => {
+				isMenuOpen = !isMenuOpen;
+			}}
+		>
+			<input class="hidden" type="checkbox" bind:checked={isMenuOpen} />
+			<Icon icon="mdi:menu" class="swap-off text-2xl" />
+			<Icon icon="mdi:close" class="swap-on text-2xl" />
+		</button>
 		<a class="btn btn-ghost text-xl normal-case" href="/">
 			<LogoWithText class="hidden h-full w-full md:block" />
 			<Logo class="block h-5/6 w-full md:hidden" />

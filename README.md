@@ -1,11 +1,12 @@
 # The 3rd PCSHS Science Symposium 2023 Official Website
 
-![Banner Image](https://termtem-cdn.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress)
+![Banner Image](https://pcshsbr-assets.imgix.net/sym2023/og-image.png?w=1200&h=630&fit=crop&auto=compress)
+
 > https://3rdpss2023.pcshsbr.ac.th
 
 ![GitHub last commit (by committer)](https://img.shields.io/badge/PCSHSBR-Student_project-3f1092?style=flat-square) ![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/pcshsbr/symposium2023?style=flat-square) ![GitHub repo size](https://img.shields.io/github/repo-size/pcshsbr/symposium2023?style=flat-square) ![GitHub](https://img.shields.io/github/license/pcshsbr/symposium2023?style=flat-square) ![GitHub top language](https://img.shields.io/github/languages/top/pcshsbr/symposium2023?style=flat-square) ![GitHub language count](https://img.shields.io/github/languages/count/pcshsbr/symposium2023?style=flat-square) ![GitHub contributors](https://img.shields.io/github/contributors/pcshsbr/symposium2023?style=flat-square&color=1800a1) ![GitHub issues](https://img.shields.io/github/issues/pcshsbr/symposium2023?style=flat-square) ![GitHub pull requests](https://img.shields.io/github/issues-pr/pcshsbr/symposium2023?style=flat-square) ![GitHub forks](https://img.shields.io/github/forks/pcshsbr/symposium2023?style=social) ![GitHub Repo stars](https://img.shields.io/github/stars/pcshsbr/symposium2023?style=social)
 
-This work is commissioned and owned by the school. 
+This work is commissioned and owned by the school.
 
 All source code except for all assets files in this repo (for example but not limited to, any image, logo, and trademark.) are free to use under MIT License. All other source code from third party is up to their their license.
 
