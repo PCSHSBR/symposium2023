@@ -63,8 +63,8 @@
 		title="2. เกียรติบัตรนักเรียนที่ร่วมนำเสนอ Oral Presentation"
 		folderId="1-_vBcnP6AMMe3lH1Ejixsoe4cru1Awwc"
 	/>
-	<span id="section-3" class="translate-y-[-4rem] sm:mt-[-4rem] sm:translate-y-0 sm:pt-[-4rem]" />
 	<CertSection
+		id="section-3"
 		title="3. ครูที่ปรึกษาโครงงานที่ร่วมนำเสนอ Oral Presentation"
 		folderId="1LKbYmuRh8JlYPjboFJjmDsJR_Y23Fx6L"
 	/>
@@ -75,5 +75,10 @@
 	<CertSection
 		title="5. เกียรติบัตรครูที่ปรึกษาโครงงานนักเรียนที่ส่งโครงงานแบบวิดีโอออนไลน์"
 		folderId="1-W9cEou8p4J1eqTxvK4p5h81yVlxeCcY"
+	/>
+	<CertSection
+		id="section-6"
+		title="6. เกียรติบัตรที่ได้รับการแก้ไขแล้ว"
+		folderId="1dpUpiZeO-K173IUs2IVytWzeqQERmU1u"
 	/>
 </article>
