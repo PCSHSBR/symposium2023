@@ -9,7 +9,7 @@ BigInt.prototype.toJSON = function () {
 };
 
 export const GET: ServerLoad = async ({ url }) => {
-	if (timeSafeCompare(url.searchParams.get('key'), DB_ACCESS_API_KEY)) {
+	if (!timeSafeCompare(url.searchParams.get('key'), DB_ACCESS_API_KEY)) {
 		throw error(401, 'Unauthorized');
 	}
 	let query = url.searchParams.get('query');
